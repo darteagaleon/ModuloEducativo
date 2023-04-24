@@ -1,0 +1,30 @@
+{% extends 'Layout/base.html' %}
+{% block content %}
+<br>
+<div class="caja">
+    <div  id="cajitas">
+        <h4>INGRESO</h4>
+        <div >
+            <form enctype="multipart/form-data" action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                <div class="row" id="cajita">
+                    <div >
+                        <label>Correo</label>
+                        <input type="email" class="form-control" name="email" id="correo" >
+                    </div>
+                    <div  id="contra1">
+                        <label >Contraseña</label>
+                        <input type="password" class="form-control" name="password" id="contra" >
+                    </div>
+                    <div  id="cajaboton">
+                        <button class="btn5" >
+                            <span>Submit</span>
+                            <i class="fa-solid fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
