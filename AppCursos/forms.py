@@ -10,9 +10,10 @@ class crear_cursos(forms.ModelForm):
             'descripcion_curso': 'Descripcion del curso',
             'estado_curso': 'Estado del curso',
             'duracion_curso': 'Duracion del curso',
-            'iconoCurso': 'Icono del curso',
+            'iconoCurso': 'Iconos del curso',
         }
         widgets = {
+            
             'nombre_curso': forms.TextInput(attrs={'class':'form-control'}),
             'descripcion_curso': forms.TextInput(attrs={'class':'form-control'}),
             'estado_curso': forms.CheckboxInput(attrs={'class':'form-check-input'}),
