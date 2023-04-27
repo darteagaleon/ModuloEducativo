@@ -1,7 +1,7 @@
 from django import forms 
 from .models import Cursos, Modulos, Clases
 
-class Crear_cursos(forms.ModelForm):
+class crear_cursos(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso' ]
@@ -17,4 +17,5 @@ class Crear_cursos(forms.ModelForm):
             'descripcion_curso': forms.TextInput(attrs={'class':'form-control'}),
             'estado_curso': forms.CheckboxInput(attrs={'class':'form-check-input'}),
             'duracion_curso': forms.NumberInput(attrs={'class':'form-control'}),
+            'iconoCurso': forms.FileInput(attrs={'class':'form-control'}),
         }

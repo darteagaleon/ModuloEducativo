@@ -3,7 +3,7 @@ from .models import *
 # Register your models here.
 #Se crea el modelo de la tabla Cursos de la empresa
 class regCursos(admin.ModelAdmin):
-     list_display=['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso']
+     list_display=['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso']
 admin.site.register(Cursos,regCursos)
 
 # Se crea el modelo de la tabla Modulos de la empresa

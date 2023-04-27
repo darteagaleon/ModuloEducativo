@@ -6,7 +6,7 @@ from .models import *
 #vista para crear los cursos
 class Crear_cursos (CreateView):
     model = Cursos
-    fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', ]
+    fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso']
     template_name = 'Cursos/crear_cursos.html'
     success_url = 'crear_curso/'
 

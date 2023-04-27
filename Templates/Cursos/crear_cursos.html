@@ -2,57 +2,20 @@
 {% block content %} 
 <div class="container-fluid">
 	<div class="row">
-		<div class="col-md-6">
-			<form role="form">
-				<div class="form-group">
-					 
-					<label for="Nombredecurso">
-						Nombre de curso
-					</label>
-					<input type="text" class="form-control" id="Nombredecurso" />
-				</div>
-				<div class="form-group">
-					 
-					<label for="DescripcionCurso">
-						Descripcion
-					</label>
-					<input type="text" class="form-control" id="DescripcionCurso" />
-                </br>
-				</div>
-                <div class="form-group">
-                    <label for="EstadoCurso">
-						Estado de curso
-					</label>
-                </br>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="EstadoCurso" id="EstadoCurso" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Activo</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="EstadoCurso" id="EstadoCurso" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Inactivo</label>
-                </div>
-                </br>
-		
-                <div class="form-group">
-                    <label for="DuracionCurso">
-						Duracion de curso
-					</label>
-					<input type="input" class="form-control" id="Duracioncurso" />Horas
-				</div>
-				<div class="mb-3">
-                    <label for="formFileSm" class="form-label">Seleccionar icono del curso</label>
-                    <input class="form-control form-control-sm" id="IconosCurso" type="file">
-                </div>
-					
-				
-				<button type="submit" class="btn btn-primary">
-					Submit
-				</button>
-			</form>
-		</div>
-		
+		<div class="col-md-8">
+			<h1>Crear curso </h1>
+			<div class="form">    
+				<form method="post">
+				    {% csrf_token %}
+				    <div class="form-group">
+					   {{ form }}
+				    </div>
+				    <button type="submit" class="btn btn-primary">Guardar</button>
+				</form>
+			</div>
+		</div>			
 	</div>
+		
 </div>
+
 {% endblock %}

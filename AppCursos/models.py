@@ -14,7 +14,7 @@ from django.db import models
 class Cursos(models.Model):
      nombre_curso=models.CharField(max_length=100)
      descripcion_curso = models.CharField(max_length=500)
-     estado_curso= models.BooleanField(default=False)
+     estado_curso= models.BooleanField(blank=False, default=False)
      duracion_curso = models.IntegerField(blank=True, null=True)
      iconoCurso = models.ImageField(upload_to='IconosCurso', null=True) 
      #Se crea la relacion
