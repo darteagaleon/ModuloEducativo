@@ -24,6 +24,10 @@ class Crear_clases (CreateView):
     template_name = 'crear_clases.html'
     success_url = '/clases'
 
+class Listar_cursos (ListView):
+    model = Cursos
+    template_name = 'listar_cursos.html'
+
 
 
 
