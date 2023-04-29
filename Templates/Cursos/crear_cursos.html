@@ -1,26 +1,34 @@
 {% extends 'Layout/Base.html' %}
 {% load static %}
-{% block content %} 
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8">
-			<h1>Crear curso </h1>
-			<div class="form">    
-				<form method="post" enctype="multipart/form-data">
-				    {% csrf_token %} 
-				    
-					{% load widget_tweaks %}
-				    <div class="form-group">
-						
-						
-				    </div>
-				    {{ form.as_p }}
-				    <button type="submit" class="btn btn-primary">Guardar</button>
-				</form>
-			</div>
-		</div>			
-	</div>
-		
-</div>
+{% block content %}
 
+<body>
+	<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+	<div class="home_content"> <!--1 -->
+		<div class="text"><!--2 -->
+			<div class="container-fluid">
+				<div class="row" id="tabla">
+					<div>
+						<h1>Crear curso </h1>
+						<div class="form">
+							<form method="post" enctype="multipart/form-data">
+								{% csrf_token %}
+
+								{% load widget_tweaks %}
+								<div class="form-group">
+
+
+								</div>
+								{{ form.as_p }}
+								<button type="submit" >Guardar</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+</body>
 {% endblock %}

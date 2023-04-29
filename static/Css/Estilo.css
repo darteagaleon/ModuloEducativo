@@ -17,6 +17,7 @@ body{
 
 .sidebar {
     position: fixed;
+    z-index: 1;
     top: 0;
     left: 0;
     height: 100%;
@@ -25,6 +26,7 @@ body{
     padding: 6px 14px;
     transition: all 0.5s ease;
 }
+
 .sidebar.active{
     width: 240px;
 }
@@ -46,7 +48,7 @@ body{
 #iconCyres{
     position: relative;
     top: 30px;  /*posicion del logo*/
-    height: 120px;
+    height: 100px;
     width: 160px;
     left: 7%;
 }
