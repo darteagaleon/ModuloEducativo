@@ -9,6 +9,7 @@ class Crear_cursos (CreateView):
     fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso']
     template_name = 'Cursos/crear_cursos.html'
     success_url = 'crear_curso/'
+    
 
 #vista para crear los modulos
 class Crear_modulos (CreateView):

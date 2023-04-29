@@ -7,7 +7,7 @@ class crear_cursos(forms.ModelForm):
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso' ]
         labels = {
             'nombre_curso': 'Nombre del curso',
-            'descripcion_curso': 'Descripcion del curso',
+            'descripcion_curso': 'Descripcion del curso', 
             'estado_curso': 'Estado del curso',
             'duracion_curso': 'Duracion del curso',
             'iconoCurso': 'Iconos del curso',
