@@ -84,6 +84,11 @@ body{
 .sidebar.active #btn{
     left: 90%;
 }
+.sidebar ul i{
+    position: relative;
+    left: -35px;
+
+}
 /* editar las litas ul li */
 .sidebar ul{
     margin-top:80px;
@@ -101,7 +106,7 @@ body{
     position: absolute;
     left: 122px;
     top: 0;
-    transform: translate(-50%, -50%);
+    transform: translate(-65%, -65%);
     border-radius: 6px;
     height: 35px;
     width: 122px;
@@ -133,8 +138,8 @@ body{
 }
 
 .sidebar ul li a:hover{
-    color: #11101d;
-    background: white;
+    color: #51a8b1;
+    transform:translateY(-10px);
 }
 .sidebar ul li i{
     height: 50px;
@@ -151,6 +156,8 @@ body{
 .sidebar.active .links_name{
     opacity: 1;
     pointer-events: auto;
+    position: relative;
+    left: -25px;
 }
 /* editar el perfil junto con su foto */
 .sidebar .profile_content{
@@ -216,25 +223,4 @@ body{
 .sidebar.active .profile #log_out{
     left: 90%;
     background: none;
-}
-
-
- /* editar parte de la adicion del contenido */
-.home_content{
-    position: absolute;
-    height: 100%;
-    width: calc(100% - 78px);
-    left: 78px;
-    transition: all 0.5s ease;
-}
-.home_content .text{
-    font-size: 25px;
-    font-weight: 500;
-    color: #1d1b31;
-    margin: 12px;
-
-}
-.sidebar.active ~ .home_content{
-    width: calc(100 - 240px);
-    left: 240px;
 }
