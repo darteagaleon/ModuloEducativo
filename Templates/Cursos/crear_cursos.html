@@ -1,4 +1,5 @@
 {% extends 'Layout/Base.html' %}
+{% load static %}
 {% block content %} 
 <div class="container-fluid">
 	<div class="row">
@@ -6,9 +7,15 @@
 			<h1>Crear curso </h1>
 			<div class="form">    
 				<form method="post">
-				    {% csrf_token %}
+				    {% csrf_token %} 
+					
+					{% load widget_tweaks %}
 				    <div class="form-group">
-					   {{ form }}
+					   {% for field in form %}
+					   <label for ="{{field.id_for_label}}">{{field.label}}</label>
+
+					   {% render_field field class="form-control" %}
+					   {% endfor %}
 				    </div>
 				    <button type="submit" class="btn btn-primary">Guardar</button>
 				</form>
