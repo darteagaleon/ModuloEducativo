@@ -6,17 +6,15 @@
 		<div class="col-md-8">
 			<h1>Crear curso </h1>
 			<div class="form">    
-				<form method="post">
+				<form method="post" enctype="multipart/form-data">
 				    {% csrf_token %} 
+				    
 					{% load widget_tweaks %}
 				    <div class="form-group">
-						{{ form }}
-					   <!-- {% for field in form %}
-					   <label for ="{{field.id_for_label}}">{{field.label}}</label>
-
-					   {% render_field field class="form-control"%}
-					   {% endfor %} -->
+						
+						
 				    </div>
+				    {{ form.as_p }}
 				    <button type="submit" class="btn btn-primary">Guardar</button>
 				</form>
 			</div>

@@ -1,19 +1,29 @@
 from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormView
 from .models import *
+from django.urls import reverse_lazy
+from .forms import crear_cursos
 # Create your views here.
 
 #vista para crear los cursos
 class Crear_cursos (CreateView):
     model = Cursos
-    fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso']
+    form_class = crear_cursos
     template_name = 'Cursos/crear_cursos.html'
-    success_url = 'crear_curso/'
-    def form_valid(self, form):
-        form.instance.crear_cursos = self.request.user
-        return super().form_valid(form)
-    
-    
+    success_url = reverse_lazy('appcursos:crear_cursos')
+
+    def post(self, request, *args, **kwargs):
+        # image=request.FILES.get('iconoCurso')
+        estatus=request.POST.get('estado_curso')
+        if estatus == 'on':
+            estatus = True
+        else:
+            estatus = False
+        curso= Cursos.objects.create(nombre_curso=request.POST['nombre_curso'],descripcion_curso=request.POST['descripcion_curso'],estado_curso=estatus,duracion_curso=request.POST['duracion_curso'],iconoCurso=request.FILES['iconoCurso'])
+        
+        return super().post(request, *args, **kwargs)
+
 
 #vista para crear los modulos
 class Crear_modulos (CreateView):
