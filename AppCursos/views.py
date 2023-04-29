@@ -9,6 +9,9 @@ class Crear_cursos (CreateView):
     fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso','iconoCurso']
     template_name = 'Cursos/crear_cursos.html'
     success_url = 'crear_curso/'
+    def form_valid(self, form):
+        form.instance.usuario = self.request.user
+        return super().form_valid(form)
     
 
 #vista para crear los modulos
