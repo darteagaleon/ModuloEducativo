@@ -13,15 +13,18 @@ class Crear_cursos (CreateView):
     template_name = 'Cursos/crear_cursos.html'
     success_url = reverse_lazy('appcursos:crear_cursos')
 
+#Metodo para guardar los datos del formulario, se sobreescribe el metodo post
     def post(self, request, *args, **kwargs):
-        # image=request.FILES.get('iconoCurso')
+       #validando el estado del curso
         estatus=request.POST.get('estado_curso')
+        #validando si el estado del curso esta activo o inactivo
         if estatus == 'on':
             estatus = True
         else:
             estatus = False
+        #guardando los datos del formulario
         curso= Cursos.objects.create(nombre_curso=request.POST['nombre_curso'],descripcion_curso=request.POST['descripcion_curso'],estado_curso=estatus,duracion_curso=request.POST['duracion_curso'],iconoCurso=request.FILES['iconoCurso'])
-        
+        #super para llamar al metodo post de la clase padre
         return super().post(request, *args, **kwargs)
 
 

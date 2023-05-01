@@ -1,15 +1,5 @@
 from django.db import models
 
-# Create your models here.
-#Se crea el modelo de la tabla intermedia Curso-Usuario de la empresa
-# class Curso_Usuario(models.Model):
-#      nombre_usuario=models.CharField(max_length=100)
-#      apellido_usuario=models.CharField(max_length=100)
-
-#      def __str__(self):
-#           return self.nombre_usuario
-
-
 # Se crea el modelo de la tabla Cursos de la empresa
 class Cursos(models.Model):
      nombre_curso=models.CharField(max_length=100)
