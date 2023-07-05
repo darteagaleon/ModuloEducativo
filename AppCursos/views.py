@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
-from .forms import crear_cursos
+from .forms import crear_cursos,CursosForm
+from django.contrib import messages
 # Create your views here.
 
 #vista para crear los cursos
@@ -15,7 +16,7 @@ class Crear_cursos (CreateView):
 
 #Metodo para guardar los datos del formulario, se sobreescribe el metodo post
     def post(self, request, *args, **kwargs):
-       #validando el estado del curso
+    #validando el estado del curso
         estatus=request.POST.get('estado_curso')
         #validando si el estado del curso esta activo o inactivo
         if estatus == 'on':
@@ -42,11 +43,29 @@ class Crear_clases (CreateView):
     template_name = 'crear_clases.html'
     success_url = '/clases'
 
-class Listar_cursos (ListView):
-    model = Cursos
-    template_name = 'listar_cursos.html'
+# class Listar_cursos (ListView):
+#     model = Cursos
+#     template_name = 'listar_cursos.html'
+
+def Listar_cursos(request):
+    listarc = Cursos.objects.all()
+    context = {'listarc':listarc}
+    return render(request,'Cursos/listar_cursos.html',context)
 
 
+#vista ára editar un cursito
 
-
+def update(request, curso_id):
+    editar = Cursos.objects.get(id=curso_id)
+    if request.method == "POST":
+        form = CursosForm(request.POST, instance=editar)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_cursos")
+    else:
+        form = CursosForm(instance=editar)
     
+    context = {"form": form}
+    return render(request, 'Cursos/editar_cursos.html', context)
+

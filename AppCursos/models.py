@@ -6,7 +6,7 @@ class Cursos(models.Model):
      descripcion_curso = models.CharField(max_length=500)
      estado_curso= models.BooleanField(default=False)
      duracion_curso = models.IntegerField(blank=True, null=True)
-     iconoCurso = models.ImageField(upload_to='IconosCurso', null=True) 
+     iconoCurso = models.ImageField(upload_to='IconosCurso', null=True,blank=True) 
      #Se crea la relacion
      # nombre_usuario= models.ForeignKey(Curso_Usuario, on_delete=models.CASCADE,null=False)
      def __str__(self):
