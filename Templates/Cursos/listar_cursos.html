@@ -5,6 +5,14 @@
 	<div class="home_content"> <!--1 -->
 		<div class="text"><!--2 -->            
             <h1> Listado de cursos </h1>
+            <br>
+            <form class="search" action="{% url 'filtrar' %}" method="GET">
+                <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
+                <input type="submit" class="btn search-btn" value="Buscar">
+            </form>
+            
+            <br>
+            <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
             <div class="table-responsive" >
                 <table class="table " id="tablam">
                     <thead>
@@ -31,7 +39,6 @@
                                 <th scope="row">{{curso.duracion_curso}}</th>
                                 <td>
                                     <button class="editar"><a href="{% url 'editar_curso' curso.id %}">Editar</a></button>
-                                    <button class="eliminar"><a  href="#">Eliminar</a></button>
                                     
                                 </td>
                             </tr>
