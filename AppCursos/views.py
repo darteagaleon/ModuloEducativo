@@ -47,13 +47,29 @@ class Crear_clases (CreateView):
 #     model = Cursos
 #     template_name = 'listar_cursos.html'
 
+
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
+# def Listar_cursos(request):
+#     search_query = request.GET.get('search', '')
+#     if search_query:
+#         cursos = Cursos.objects.filter(nombre_curso__contains=search_query)
+#     else:
+#         cursos = Cursos.objects.all()
+#     context = {'listarc': cursos}
+#     return render(request, 'Cursos/listar_cursos.html', context)
 
 
-#vista ára editar un cursito
+#vista para fitrar cursos 
+def filtrar(request):
+    filtro = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
+    context = {'filtro':filtro}
+    return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
+
+
+#vista para editar un cursito
 
 def update(request, curso_id):
     editar = Cursos.objects.get(id=curso_id)
