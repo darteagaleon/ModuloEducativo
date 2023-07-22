@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #f2f0f0b4;
+    overflow-y: scroll;
 }
 
 /* codigo para organizar el espacio utilizable en los htmls */

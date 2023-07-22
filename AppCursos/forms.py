@@ -21,3 +21,7 @@ class crear_cursos(forms.ModelForm):
             'iconoCurso': forms.FileInput(attrs={'class':'form-control'}),
         }
 #
+class CursosForm(forms.ModelForm):
+    class Meta:
+        model = Cursos
+        fields = '__all__'
