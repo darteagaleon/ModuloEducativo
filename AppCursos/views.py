@@ -3,12 +3,17 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
+<<<<<<< HEAD
 from .forms import crear_cursos,CursosForm
 from django.contrib import messages 
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 
+=======
+from .forms import crear_cursos,CursosForm,EvaluacionForm
+from django.contrib import messages
+>>>>>>> 57e526c38f74ba9bdd6576fb5b7423aca7b7a236
 # Create your views here.
 
 #vista para crear los cursos
@@ -89,6 +94,7 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+<<<<<<< HEAD
 # Vista para ver y realizar las evaluaciones como Usuario
 def ver_evaluaciones(request, modulo_id):
 
@@ -121,3 +127,15 @@ def ver_evaluaciones(request, modulo_id):
 #     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
 
+=======
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_evaluacion')  
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
+>>>>>>> 57e526c38f74ba9bdd6576fb5b7423aca7b7a236
