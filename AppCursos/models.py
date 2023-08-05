@@ -67,7 +67,7 @@ class Preguntas(models.Model):
      opcion_d = models.CharField(max_length=100, null=True,blank=True)
      respuesta_correcta = models.CharField(max_length=1, choices=[('a', 'A'), ('b', 'B'), ('c', 'C'), ('d', 'D'),], null=True,blank=True)
     
-     #Se crea la relacion a modulos
+     #Se crea la relacion a Evaluaciones
      nombre_evaluacion= models.ForeignKey(Evaluaciones, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_pregunta

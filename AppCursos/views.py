@@ -4,7 +4,11 @@ from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
 from .forms import crear_cursos,CursosForm
-from django.contrib import messages
+from django.contrib import messages 
+from datetime import datetime, timedelta
+from django.shortcuts import render
+from django.http import HttpResponse
+
 # Create your views here.
 
 #vista para crear los cursos
@@ -84,4 +88,36 @@ def update(request, curso_id):
     
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
+
+# Vista para ver y realizar las evaluaciones como Usuario
+def ver_evaluaciones(request, modulo_id):
+
+    evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
+    context = {'evaluaciones':evaluaciones}
+    def iniciar_evaluacion(request, iniciar_evaluacion):
+        iniciar_evaluacion= request.POST.get('iniciar_evaluacion')
+        evaluacion = Evaluaciones.objects.get(id=iniciar_evaluacion)
+        context = {'evaluacion':evaluacion}
+        request.session['iniciar_evaluacion'] = datetime.now().timestamp()
+        return HttpResponse("Evaluación iniciada.")
+    def finalizar_evaluacion(request):
+        inicio_evaluacion = datetime.fromtimestamp(request.session.get('inicio_evaluacion', 0))
+        if inicio_evaluacion:
+            tiempo_transcurrido = datetime.now() - inicio_evaluacion
+            tiempo_limite = timedelta(minutes=5)
+
+            if tiempo_transcurrido < tiempo_limite:
+                return HttpResponse("Evaluación completada a tiempo.")
+
+
+
+
+      
+
+    return render(request, 'Evaluaciones/ver_evaluaciones.html', context)
+
+# def crear_evaluaciones(request):
+
+#     return render(request, 'Evaluaciones/crear_evaluaciones.html')
+
 

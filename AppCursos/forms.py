@@ -25,3 +25,20 @@ class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = '__all__'
+
+class crear_modulos(forms.ModelForm):
+    class Meta:
+        model = Modulos
+        fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
+        labels = {
+            'nombre_curso': 'Nombre del curso',
+            'nombre_modulo': 'Nombre del módulo', 
+            'estado_modulo': 'Activo/Inactivo',
+        }
+        widgets = {
+            'nombre_curso': forms.Select(attrs={'class':'form-control'}),
+            'nombre_modulo': forms.TextInput(attrs={'class':'form-control'}),
+            'estado_modulo': forms.CheckboxInput(attrs={'class':'form-check-input value="False"'}),
+        }
+# class crear_evaluaciones(forms.ModelForm):
+#     class Meta:
