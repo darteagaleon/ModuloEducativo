@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f2f0f0b4;
+    overflow-y: scroll;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+
+/* tabla de crear curso */
+.container-fluid {
+    position: relative;
+    height: 100vh;
+    width: 80vw;
+}
+
+#tabla {
+    width: 100%;
+    padding: 20px;
+    background-color: #ff0000;
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .container-fluid {
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+    }
+    body{
+        overflow: auto;
+    }
+}
+
+/* nombres de la tabla */
+label {
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+
+
+button{
+    width: 50%;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #58acb4;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:active{
+    background-color: rgb(37, 150, 190);
+}
+input[type="checkbox"]:checked {
+    background-color: #58acb4;
+    border-color: #58acb4;
+    color: #fff;
+    transform: scale(1.2);
+}
+
+input[type="text"],
+#id_duracion_evaluacion_admin,
+#id_iconoCurso,#id_nombre_modulo {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px; /* Espacio entre el input y el siguiente label */
+
+}
+
+input[type="number"]:focus{
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+#id_numero_intentos:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+input[type="text"]:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+#id_duracion_curso:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+#id_numero_intentos{
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    
+}
+    
+

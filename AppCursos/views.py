@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
-from .forms import crear_cursos,CursosForm
+from .forms import crear_cursos,CursosForm,EvaluacionForm
 from django.contrib import messages
 # Create your views here.
 
@@ -85,3 +85,13 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_evaluacion')  
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
