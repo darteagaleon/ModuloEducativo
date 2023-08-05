@@ -94,7 +94,6 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
-<<<<<<< HEAD
 # Vista para ver y realizar las evaluaciones como Usuario
 def ver_evaluaciones(request, modulo_id):
 
@@ -114,20 +113,14 @@ def ver_evaluaciones(request, modulo_id):
 
             if tiempo_transcurrido < tiempo_limite:
                 return HttpResponse("Evaluación completada a tiempo.")
-
-
-
-
-      
-
+            else:
+                return HttpResponse("Evaluación completada fuera de tiempo.")
     return render(request, 'Evaluaciones/ver_evaluaciones.html', context)
 
 # def crear_evaluaciones(request):
 
 #     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
-
-=======
 def crear_evaluacion(request):
     if request.method == 'POST':
         form = EvaluacionForm(request.POST)
@@ -138,4 +131,3 @@ def crear_evaluacion(request):
         form = EvaluacionForm()
 
     return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
->>>>>>> 57e526c38f74ba9bdd6576fb5b7423aca7b7a236

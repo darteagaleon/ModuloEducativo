@@ -25,3 +25,4 @@ class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = '__all__'
+        
