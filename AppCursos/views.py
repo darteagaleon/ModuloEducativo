@@ -3,7 +3,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
-from .forms import crear_cursos,CursosForm,EvaluacionForm
+from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
 from django.contrib import messages
 # Create your views here.
 
@@ -85,6 +85,27 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+def crear_clases(request):
+    if request.method=="POST" :
+        form = ClasesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_clases')
+    else:
+        form = ClasesForm
+    return render(request,'Clases/crear_clases.html',{'form':form})
+            
+
+def crear_modulos(request):
+    if request.method=='POST' :
+        form = ModulosForm (request.POST )
+        if form.is_valid ():
+            form.save ()
+            return redirect ('crear_modulo')
+    else:
+        form = ModulosForm
+    return render(request,'Modulos/crear_modulos.html',{'form':form})
+
 def crear_evaluacion(request):
     if request.method == 'POST':
         form = EvaluacionForm(request.POST)
@@ -94,4 +115,15 @@ def crear_evaluacion(request):
     else:
         form = EvaluacionForm()
 
-    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
+def crear_pregunta(request):
+    if request.method == 'POST':
+        form = PreguntasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_preguntas')
+    else:
+        form = PreguntasForm()
+
+    return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
+
