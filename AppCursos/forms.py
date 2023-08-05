@@ -46,3 +46,4 @@ class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas
         fields = '__all__'
+        

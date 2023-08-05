@@ -4,7 +4,15 @@ from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
+from .forms import crear_cursos,CursosForm
+from django.contrib import messages 
+from datetime import datetime, timedelta
+from django.shortcuts import render
+from django.http import HttpResponse
+
+from .forms import crear_cursos,CursosForm,EvaluacionForm
 from django.contrib import messages
+
 # Create your views here.
 
 #vista para crear los cursos
@@ -85,6 +93,7 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+
 def crear_clases(request):
     if request.method=="POST" :
         form = ClasesForm(request.POST)
@@ -105,6 +114,33 @@ def crear_modulos(request):
     else:
         form = ModulosForm
     return render(request,'Modulos/crear_modulos.html',{'form':form})
+
+# Vista para ver y realizar las evaluaciones como Usuario
+def ver_evaluaciones(request, modulo_id):
+
+    evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
+    context = {'evaluaciones':evaluaciones}
+    def iniciar_evaluacion(request, iniciar_evaluacion):
+        iniciar_evaluacion= request.POST.get('iniciar_evaluacion')
+        evaluacion = Evaluaciones.objects.get(id=iniciar_evaluacion)
+        context = {'evaluacion':evaluacion}
+        request.session['iniciar_evaluacion'] = datetime.now().timestamp()
+        return HttpResponse("Evaluación iniciada.")
+    def finalizar_evaluacion(request):
+        inicio_evaluacion = datetime.fromtimestamp(request.session.get('inicio_evaluacion', 0))
+        if inicio_evaluacion:
+            tiempo_transcurrido = datetime.now() - inicio_evaluacion
+            tiempo_limite = timedelta(minutes=5)
+
+            if tiempo_transcurrido < tiempo_limite:
+                return HttpResponse("Evaluación completada a tiempo.")
+            else:
+                return HttpResponse("Evaluación completada fuera de tiempo.")
+    return render(request, 'Evaluaciones/ver_evaluaciones.html', context)
+
+# def crear_evaluaciones(request):
+
+#     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
 def crear_evaluacion(request):
     if request.method == 'POST':
@@ -127,3 +163,4 @@ def crear_pregunta(request):
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
 
+    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
