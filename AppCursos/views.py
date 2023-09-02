@@ -163,4 +163,3 @@ def crear_pregunta(request):
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
 
-    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
