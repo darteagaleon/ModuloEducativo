@@ -12,4 +12,6 @@ urlpatterns = [
      path('crear_pregunta/', views.crear_pregunta, name='crear_pregunta'),
      path('crear_modulos/', views.crear_modulos, name='crear_modulos'),
      path('crear_clases/', views.crear_clases, name='crear_clases'),
+     path('evaluacion/', views.gestion_evaluacion, name='evaluacion'),
+     path('ver_evaluacion/', views.ver_evaluacion, name='ver_evaluacion'),
 ]

@@ -9,8 +9,8 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Evaluaciones
 
-from .forms import crear_cursos,CursosForm,EvaluacionForm
 from django.contrib import messages
 
 # Create your views here.
@@ -37,37 +37,28 @@ class Crear_cursos (CreateView):
         return super().post(request, *args, **kwargs)
 
 
-#vista para crear los modulos
-class Crear_modulos (CreateView):
-    model = Modulos
-    fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
-    template_name = 'crear_modulos.html'
-    success_url = '/modulos'
+# #vista para crear los modulos
+# class Crear_modulos (CreateView):
+#     model = Modulos
+#     fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
+#     template_name = 'crear_modulos.html'
+#     success_url = '/modulos'
 
-#vista para crear las clases
-class Crear_clases (CreateView):
-    model = Clases
-    fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-    template_name = 'crear_clases.html'
-    success_url = '/clases'
+# #vista para crear las clases
+# class Crear_clases (CreateView):
+#     model = Clases
+#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
+#     template_name = 'crear_clases.html'
+#     success_url = '/clases'
 
-# class Listar_cursos (ListView):
-#     model = Cursos
-#     template_name = 'listar_cursos.html'
+
 
 
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
-# def Listar_cursos(request):
-#     search_query = request.GET.get('search', '')
-#     if search_query:
-#         cursos = Cursos.objects.filter(nombre_curso__contains=search_query)
-#     else:
-#         cursos = Cursos.objects.all()
-#     context = {'listarc': cursos}
-#     return render(request, 'Cursos/listar_cursos.html', context)
+
 
 
 #vista para fitrar cursos 
@@ -110,35 +101,12 @@ def crear_modulos(request):
         form = ModulosForm (request.POST )
         if form.is_valid ():
             form.save ()
-            return redirect ('crear_modulo')
+            return redirect ('crear_modulos')
     else:
         form = ModulosForm
     return render(request,'Modulos/crear_modulos.html',{'form':form})
 
 # Vista para ver y realizar las evaluaciones como Usuario
-def ver_evaluaciones(request, modulo_id):
-
-    evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
-    context = {'evaluaciones':evaluaciones}
-    def iniciar_evaluacion(request, iniciar_evaluacion):
-        iniciar_evaluacion= request.POST.get('iniciar_evaluacion')
-        evaluacion = Evaluaciones.objects.get(id=iniciar_evaluacion)
-        context = {'evaluacion':evaluacion}
-        request.session['iniciar_evaluacion'] = datetime.now().timestamp()
-        return HttpResponse("Evaluación iniciada.")
-    def finalizar_evaluacion(request):
-        inicio_evaluacion = datetime.fromtimestamp(request.session.get('inicio_evaluacion', 0))
-        if inicio_evaluacion:
-            tiempo_transcurrido = datetime.now() - inicio_evaluacion
-            tiempo_limite = timedelta(minutes=5)
-
-            if tiempo_transcurrido < tiempo_limite:
-                return HttpResponse("Evaluación completada a tiempo.")
-            else:
-                return HttpResponse("Evaluación completada fuera de tiempo.")
-    return render(request, 'Evaluaciones/ver_evaluaciones.html', context)
-
-# def crear_evaluaciones(request):
 
 #     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
@@ -163,3 +131,11 @@ def crear_pregunta(request):
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
 
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+
+def ver_evaluacion(request):
+    return render(request, 'Evaluaciones/ver_evaluacion.html')
+def ver_evaluacion(request):
+    evaluaciones = Evaluaciones.objects.all()
+    return render(request, 'Evaluaciones/ver_evaluacion.html', {'evaluaciones': evaluaciones})

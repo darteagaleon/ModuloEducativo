@@ -37,20 +37,7 @@
             </a>
             <span class="tooltip">Crear Clases</span>
         </li>
-        <li>
-            <a href="{% url 'crear_evaluacion' %}">
-                <i class='bx bx-edit'></i>
-                <span class="links_name">Crear Evaluaciones </span>
-            </a>
-            <span class="tooltip">Crear Evaluaciones</span>
-        </li>
-        <li>
-            <a href="{% url 'crear_pregunta' %}">
-                <i class='bx bx-question-mark'></i>
-                <span class="links_name">Crear Preguntas </span>
-            </a>
-            <span class="tooltip">Crear Preguntas</span>
-        </li>
+        
         <li>
             <a href="{% url 'listar_cursos' %}">
                 <i class='bx bx-doughnut-chart'></i>
@@ -60,11 +47,11 @@
         </li>
         <li>
             <a href=
-            "">
+            "{% url 'evaluacion' %}">
                 <i class='bx bx-file'></i>
                 <span class="links_name">Gestion Evaluación </span>
             </a>
-            <span class="tooltip">Evaluación</span>
+            <span class="tooltip">Gestion Evaluación</span>
         </li>
         <li>
             <a href="#">
