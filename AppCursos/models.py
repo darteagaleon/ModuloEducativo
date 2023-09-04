@@ -34,7 +34,7 @@ class Clases(models.Model):
      nombre_clase=models.CharField(max_length=100)
      duracion_clase = models.IntegerField(blank=True, null=True)
      contenido_clase = models.URLField(max_length=200)
-     descripcion_clase = models.CharField(max_length=500)
+     descripcion_clase = models.TextField(max_length=500)
      estado_clase= models.BooleanField(default=False)
      #Se crea la relacion a modulos
      nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)

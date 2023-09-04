@@ -9,7 +9,7 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Evaluaciones
+from .models import Evaluaciones,Modulos
 
 from django.contrib import messages
 
@@ -135,7 +135,26 @@ def gestion_evaluacion(request):
     return render(request, 'Evaluaciones/evaluacion.html')
 
 def ver_evaluacion(request):
-    return render(request, 'Evaluaciones/ver_evaluacion.html')
-def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
     return render(request, 'Evaluaciones/ver_evaluacion.html', {'evaluaciones': evaluaciones})
+def Listar_evaluaciones(request):
+    listare = Evaluaciones.objects.all()
+    context = {'listare':listare}
+    return render(request,'Evaluaciones/listar_evaluaciones.html',context)
+def All_Modulos(request):
+    modulos = Modulos.objects.all()
+    return render(request, 'Modulos/modulos.html', {'modulos': modulos})
+def Listar_modulos(request):
+    listarm = Modulos.objects.all()
+    context = {'listarm':listarm}
+    return render(request,'Modulos/listar_modulos.html',context)
+def All_cursos(request):
+    cursos = Cursos.objects.all()
+    return render(request, 'Cursos/cursos.html', {'cursos': cursos})
+def All_clases(request):
+    clases = Clases.objects.all()
+    return render(request, 'Clases/clases.html', {'clases': clases})
+def Listar_clases(request):
+    listarclases = Clases.objects.all()
+    context = {'listarclases':listarclases}
+    return render(request,'Clases/listar_clases.html',context)

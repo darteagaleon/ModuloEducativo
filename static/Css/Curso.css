@@ -145,3 +145,31 @@ input[type="text"]:focus {
     color: #fff;
     transform: scale(1.1);
 }
+.back {
+    position: absolute;
+    top: 20px;
+    right:5%;
+    width: 15vw;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+.back a {
+    color: #00072D;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #111344;
+    transition: .5s;
+    transform: scale(1.2);
+}
+.back:hover a {
+    color: white;
+  }

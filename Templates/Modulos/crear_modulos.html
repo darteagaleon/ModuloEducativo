@@ -1,7 +1,7 @@
 {% extends 'Layout/Base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
     <div class="home_content"> <!--1 -->
@@ -27,5 +27,8 @@
             </div>
         </div>
     </div>
+    <div id="back2">
+		<button  class="back"><a href="{% url 'modulos' %}">Regresar</a></button>
+	</div>
 </body>
 {% endblock %}
