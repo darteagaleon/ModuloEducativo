@@ -3,17 +3,12 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
-<<<<<<< HEAD
 from .forms import crear_cursos,CursosForm
 from django.contrib import messages 
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
-
-=======
-from .forms import crear_cursos,CursosForm,EvaluacionForm
-from django.contrib import messages
->>>>>>> 57e526c38f74ba9bdd6576fb5b7423aca7b7a236
+from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
 # Create your views here.
 
 #vista para crear los cursos
@@ -39,18 +34,18 @@ class Crear_cursos (CreateView):
 
 
 #vista para crear los modulos
-class Crear_modulos (CreateView):
-    model = Modulos
-    fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
-    template_name = 'crear_modulos.html'
-    success_url = '/modulos'
+# class Crear_modulos (CreateView):
+#     model = Modulos
+#     fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
+#     template_name = 'crear_modulos.html'
+#     success_url = '/modulos'
 
-#vista para crear las clases
-class Crear_clases (CreateView):
-    model = Clases
-    fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-    template_name = 'crear_clases.html'
-    success_url = '/clases'
+# #vista para crear las clases
+# class Crear_clases (CreateView):
+#     model = Clases
+#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
+#     template_name = 'crear_clases.html'
+#     success_url = '/clases'
 
 # class Listar_cursos (ListView):
 #     model = Cursos
@@ -61,14 +56,6 @@ def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
-# def Listar_cursos(request):
-#     search_query = request.GET.get('search', '')
-#     if search_query:
-#         cursos = Cursos.objects.filter(nombre_curso__contains=search_query)
-#     else:
-#         cursos = Cursos.objects.all()
-#     context = {'listarc': cursos}
-#     return render(request, 'Cursos/listar_cursos.html', context)
 
 
 #vista para fitrar cursos 
@@ -94,32 +81,29 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+def crear_clases(request):
+    if request.method=="POST" :
+        form = ClasesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_clases')
+    else:
+        form = ClasesForm
+    return render(request,'Clases/crear_clases.html',{'form':form})
+            
+
+def crear_modulos(request):
+    if request.method=='POST' :
+        form = ModulosForm (request.POST )
+        if form.is_valid ():
+            form.save ()
+            return redirect ('crear_modulos')
+    else:
+        form = ModulosForm
+    return render(request,'Modulos/crear_modulos.html',{'form':form})
+
 # Vista para ver y realizar las evaluaciones como Usuario
-def ver_evaluaciones(request, modulo_id):
 
-    evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
-    context = {'evaluaciones':evaluaciones}
-    def iniciar_evaluacion(request, iniciar_evaluacion):
-        iniciar_evaluacion= request.POST.get('iniciar_evaluacion')
-        evaluacion = Evaluaciones.objects.get(id=iniciar_evaluacion)
-        context = {'evaluacion':evaluacion}
-        request.session['iniciar_evaluacion'] = datetime.now().timestamp()
-        return HttpResponse("Evaluación iniciada.")
-    def finalizar_evaluacion(request):
-        inicio_evaluacion = datetime.fromtimestamp(request.session.get('inicio_evaluacion', 0))
-        if inicio_evaluacion:
-            tiempo_transcurrido = datetime.now() - inicio_evaluacion
-            tiempo_limite = timedelta(minutes=5)
-
-            if tiempo_transcurrido < tiempo_limite:
-                return HttpResponse("Evaluación completada a tiempo.")
-            else:
-                return HttpResponse("Evaluación completada fuera de tiempo.")
-    return render(request, 'Evaluaciones/ver_evaluaciones.html', context)
-
-# def crear_evaluaciones(request):
-
-#     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
 def crear_evaluacion(request):
     if request.method == 'POST':
@@ -130,4 +114,40 @@ def crear_evaluacion(request):
     else:
         form = EvaluacionForm()
 
-    return render(request, 'Cursos/Evaluaciones/crear_evaluacion.html', {'form': form})
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
+def crear_pregunta(request):
+    if request.method == 'POST':
+        form = PreguntasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_preguntas')
+    else:
+        form = PreguntasForm()
+
+    return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
+
+# Vista para ver y realizar las evaluaciones como Usuario
+def ver_evaluaciones(request, modulo_id):
+
+    evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
+    
+    if request.method == 'POST':
+
+        evaluaciones.finalizada = True
+        evaluaciones.save()
+        return redirect('ver_evaluaciones')
+
+    context = {'evaluaciones':evaluaciones}
+    return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
+
+
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_evaluacion')  
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})

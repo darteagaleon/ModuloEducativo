@@ -50,7 +50,7 @@ class Evaluaciones(models.Model):
      descripcion_evaluacion = models.CharField(max_length=500, null=True,blank=True)
      instrucciones_evaluacion = models.TextField(max_length=500, null=True,blank=True)
      duracion_evaluacion_admin = models.IntegerField(default=30)
-     # finalizada = models.BooleanField(default=False)
+     finalizada = models.BooleanField(default=False)
      #Se crea la relacion a modulos
      nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):

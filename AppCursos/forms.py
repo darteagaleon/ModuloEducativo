@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Cursos, Modulos, Clases,Evaluaciones
+from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas
 
 class crear_cursos(forms.ModelForm):
     class Meta:
@@ -21,8 +21,28 @@ class crear_cursos(forms.ModelForm):
             'iconoCurso': forms.FileInput(attrs={'class':'form-control'}),
         }
 #
+class ClasesForm(forms.ModelForm):
+    class Meta:
+        model =Clases
+        fields = '__all__'
+        exclude =[]
+        
+class ModulosForm(forms.ModelForm):
+    class Meta:
+        model =Modulos
+        fields ='__all__'
+        
 class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = '__all__'
+
+class EvaluacionForm(forms.ModelForm):
+    class Meta:
+        model = Evaluaciones
+        fields = '__all__'
         
+class PreguntasForm(forms.ModelForm):
+    class Meta:
+        model= Preguntas
+        fields = '__all__'
