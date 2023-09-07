@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Se crea el modelo de la tabla Cursos de la empresa
 class Cursos(models.Model):

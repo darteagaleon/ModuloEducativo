@@ -3,8 +3,6 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
-from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
-from .forms import crear_cursos,CursosForm
 from django.contrib import messages 
 from datetime import datetime, timedelta
 from django.shortcuts import render

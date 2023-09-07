@@ -19,38 +19,11 @@
         <li>
             <a href="{% url 'cursos' %}">
                 <i class='bx bx-book'></i>
-                <span class="links_name">Crear Cursos </span>
                 <span class="links_name">Gestion Cursos </span>
             </a>
             <span class="tooltip">Gestion Cursos</span>
         </li>
         <li>
-            <a href="{% url 'crear_modulos' %}">
-                <i class='bx bx-calendar-plus'></i>
-                <span class="links_name">Crear Modulos </span>
-            </a>
-            <span class="tooltip">Crear Modulos</span>
-        </li>
-        <li>
-            <a href="{% url 'crear_clases' %}">
-                <i class='bx bx-book-add'></i>
-                <span class="links_name">Crear Clases </span>
-            </a>
-            <span class="tooltip">Crear Clases</span>
-        </li>
-        <li>
-            <a href="{% url 'crear_evaluacion' %}">
-                <i class='bx bx-edit'></i>
-                <span class="links_name">Crear Evaluaciones </span>
-            </a>
-            <span class="tooltip">Crear Evaluaciones</span>
-        </li>
-        <li>
-            <a href="{% url 'crear_pregunta' %}">
-                <i class='bx bx-question-mark'></i>
-                <span class="links_name">Crear Preguntas </span>
-            </a>
-            <span class="tooltip">Crear Preguntas</span>
             <a href="{% url 'modulos' %}">
                 <i class='bx bx-calendar-plus'></i>
                 <span class="links_name">Gestion Modulos </span>
@@ -62,16 +35,10 @@
                 <i class='bx bx-book-add'></i>
                 <span class="links_name">Gestion Clases </span>
             </a>
-            <span class="tooltip">Ver Cursos</span>
-        </li>
-        <li>
-            <a href=
-            "#">
             <span class="tooltip">Gestion Clases</span>
         </li>
         <li>
-            <a href=
-            "{% url 'evaluacion' %}">
+            <a href="{% url 'evaluacion' %}">
                 <i class='bx bx-file'></i>
                 <span class="links_name">Gestion Evaluación </span>
             </a>
@@ -98,9 +65,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="home_content">
-    <div class="text">Home Content</div>
-</div> -->
 
 <script>
     let btn = document.querySelector("#btn");

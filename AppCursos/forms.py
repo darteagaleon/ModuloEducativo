@@ -35,5 +35,16 @@ class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas
         fields = '__all__'
+
+class ModulosForm(forms.ModelForm):
+    class Meta:
+        model = Modulos
+        fields = '__all__'
+
+class ClasesForm(forms.ModelForm):
+    class Meta:
+        model = Clases
+        fields = '__all__'
+
         
         
