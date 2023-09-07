@@ -1,0 +1,54 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->            
+        <h1> Listado de Clases</h1>
+        <br><form class="search" action="{% url 'filtrar' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
+            <input type="submit" class="btn search-btn" value="Buscar">
+        </form>
+        
+        <br>
+        <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
+        <div class="table-responsive" >
+            <table class="table " id="tablam">
+                <thead>
+                    <tr>
+                        <th scope="col">Clase</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Duracion</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col"></th>
+                        <th scope="col">Editar / Visualziar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for clase in listarclases %}
+                        <tr>
+                            <th scope="row">{{clase.nombre_clase}}</th>
+                            <th scope="row">{{clase.descripcion_clase}}</th>
+                            <th scope="row">{{clase.duracion_clase}}</th>
+                            {% if clase.estado_clase %}
+                            <th scope="row">Activo</th>
+                            {% else %}
+                            <th scope="row">Inactivo</th>
+                            {% endif %}
+                            <th scope="row">{{clase.duracion_clase_admin}}</th>
+                            <td>
+                                <button class="editar"><a href="#">Editar</a></button>
+                                
+                            </td>
+                        </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<div id="back2">
+    <button  class="back"><a href="{% url 'clase' %}">Regresar</a></button>
+</div>
+{% endblock %}

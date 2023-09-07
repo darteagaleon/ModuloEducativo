@@ -3,12 +3,17 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
 from django.urls import reverse_lazy
+from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
 from .forms import crear_cursos,CursosForm
 from django.contrib import messages 
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
+from .models import Evaluaciones,Modulos
+
+from django.contrib import messages
+
 # Create your views here.
 
 #vista para crear los cursos
@@ -34,6 +39,7 @@ class Crear_cursos (CreateView):
 
 
 #vista para crear los modulos
+# #vista para crear los modulos
 # class Crear_modulos (CreateView):
 #     model = Modulos
 #     fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
@@ -47,15 +53,21 @@ class Crear_cursos (CreateView):
 #     template_name = 'crear_clases.html'
 #     success_url = '/clases'
 
-# class Listar_cursos (ListView):
-#     model = Cursos
-#     template_name = 'listar_cursos.html'
+# #vista para crear las clases
+# class Crear_clases (CreateView):
+#     model = Clases
+#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
+#     template_name = 'crear_clases.html'
+#     success_url = '/clases'
+
+
 
 
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
+
 
 
 #vista para fitrar cursos 
@@ -81,6 +93,7 @@ def update(request, curso_id):
     context = {"form": form}
     return render(request, 'Cursos/editar_cursos.html', context)
 
+
 def crear_clases(request):
     if request.method=="POST" :
         form = ClasesForm(request.POST)
@@ -104,6 +117,7 @@ def crear_modulos(request):
 
 # Vista para ver y realizar las evaluaciones como Usuario
 
+#     return render(request, 'Evaluaciones/crear_evaluaciones.html')
 
 def crear_evaluacion(request):
     if request.method == 'POST':
@@ -151,3 +165,30 @@ def crear_evaluacion(request):
         form = EvaluacionForm()
 
     return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+
+def ver_evaluacion(request):
+    evaluaciones = Evaluaciones.objects.all()
+    return render(request, 'Evaluaciones/ver_evaluacion.html', {'evaluaciones': evaluaciones})
+def Listar_evaluaciones(request):
+    listare = Evaluaciones.objects.all()
+    context = {'listare':listare}
+    return render(request,'Evaluaciones/listar_evaluaciones.html',context)
+def All_Modulos(request):
+    modulos = Modulos.objects.all()
+    return render(request, 'Modulos/modulos.html', {'modulos': modulos})
+def Listar_modulos(request):
+    listarm = Modulos.objects.all()
+    context = {'listarm':listarm}
+    return render(request,'Modulos/listar_modulos.html',context)
+def All_cursos(request):
+    cursos = Cursos.objects.all()
+    return render(request, 'Cursos/cursos.html', {'cursos': cursos})
+def All_clases(request):
+    clases = Clases.objects.all()
+    return render(request, 'Clases/clases.html', {'clases': clases})
+def Listar_clases(request):
+    listarclases = Clases.objects.all()
+    context = {'listarclases':listarclases}
+    return render(request,'Clases/listar_clases.html',context)

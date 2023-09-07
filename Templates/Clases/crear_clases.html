@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
     <div class="home_content"> <!--1 -->
@@ -19,6 +20,7 @@
 
 								</div>
                                 {{ form.as_p }}
+                                
 								<button type="submit" >Guardar</button>
 							</form>
 						</div>
@@ -27,5 +29,8 @@
             </div>
         </div>
     </div>
+    <div id="back2">
+		<button  class="back"><a href="{% url 'clase' %}">Regresar</a></button>
+	</div>
 </body>
 {% endblock %}

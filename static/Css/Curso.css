@@ -40,7 +40,7 @@ body {
     max-width: 500px;
     width: 100%;
     padding: 20px;
-    background-color: #fff;
+    background-color: #e7b1b1;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
     transition: all 0.3s ease;
@@ -115,7 +115,7 @@ input[type="text"],
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
-    box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
     outline: none;
     padding: 10px;
     transition: all 0.3s ease;
@@ -145,3 +145,31 @@ input[type="text"]:focus {
     color: #fff;
     transform: scale(1.1);
 }
+.back {
+    position: absolute;
+    top: 20px;
+    right:5%;
+    width: 15vw;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+.back a {
+    color: #00072D;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #111344;
+    transition: .5s;
+    transform: scale(1.2);
+}
+.back:hover a {
+    color: white;
+  }

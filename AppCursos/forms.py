@@ -21,17 +21,6 @@ class crear_cursos(forms.ModelForm):
             'iconoCurso': forms.FileInput(attrs={'class':'form-control'}),
         }
 #
-class ClasesForm(forms.ModelForm):
-    class Meta:
-        model =Clases
-        fields = '__all__'
-        exclude =[]
-        
-class ModulosForm(forms.ModelForm):
-    class Meta:
-        model =Modulos
-        fields ='__all__'
-        
 class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
@@ -46,3 +35,5 @@ class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas
         fields = '__all__'
+        
+        

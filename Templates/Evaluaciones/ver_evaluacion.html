@@ -1,0 +1,47 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>EVALUACIONES</title>
+</head>
+
+<body>
+     <div class="home_content"> <!--1 -->
+          <div class="text"><!--2 -->
+               <div class="container-fluid">
+                    <div class="row" id="tabla">
+                         <div>
+                              <form>
+                                   <h1 style="text-align:center;">Evaluación</h1>
+                                   <button id="btn_iniciar_evaluacion" type="submit"
+                                        id="iniciar_evaluacion">Iniciar</button>
+                                   <button id="btn_finalizar_evaluacion" type="submit"
+                                        id="finalizar_evaluacion">Finalizar</button>
+                              </form>
+                              <h2 style="text-align:center;">Info</h2>
+                              {% for evaluacion in evaluaciones %}
+                              <li>
+                                   <h2>{{ evaluacion.nombre_evaluacion }}</h2>
+                                   <p>Nombre: {{ evaluacion.nombre_evaluacion }}</p>
+                                   <p>Numero de intentos: {{ evaluacion.numero_intentos }}</p>
+                                   <p>Descripción: {{ evaluacion.descripcion_evaluacion }}</p>
+                                   <p>Intrucciones: {{ evaluacion.instrucciones_evaluacion }}</p>
+                                   <p>Duracion: {{ evaluacion.duracion_evaluacion_admin }}</p>
+                                   <p>Nombre de Modulo: {{ evaluacion.nombre_modulo }}</p>
+                              </li>
+                              {% endfor %}
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+        <div id="back2">
+        <button  class="back"><a href="{% url 'evaluacion' %}">Regresar</a></button>
+    </div>
+</body>
+
+{% endblock %}

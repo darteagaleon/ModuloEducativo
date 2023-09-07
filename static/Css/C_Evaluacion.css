@@ -32,13 +32,18 @@ body {
 .container-fluid {
     position: relative;
     height: 100vh;
-    width: 80vw;
+    width: 30vw;
+}
+
+h1 {
+    color: #00072D;
+    /* color: #13293D; */
 }
 
 #tabla {
     width: 100%;
     padding: 20px;
-    background-color: #ff0000;
+    background-color: #0E6BA8;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
     transition: all 0.3s ease;
@@ -60,7 +65,8 @@ body {
         height: 100%;
         font-size: 20px;
     }
-    body{
+
+    body {
         overflow: auto;
     }
 }
@@ -71,24 +77,59 @@ label {
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
+    color: #d9d9d9;
 }
 
 
+.back {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15vw;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
-button{
+}
+.back a {
+    color: #00072D;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #111344;
+    transition: .5s;
+    transform: scale(1.2);
+}
+.back:hover a {
+    color: white;
+  }
+button {
     width: 50%;
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #58acb4;
-    color: #fff;
+    background-color: #92dce5;
+    color: #00072D;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+
 }
-button:active{
-    background-color: rgb(37, 150, 190);
+
+button:hover {
+    background-color: #111344;
+    color: white;
+    transition: .5s;
+    transform: scale(1.2);
 }
+
 input[type="checkbox"]:checked {
     background-color: #58acb4;
     border-color: #58acb4;
@@ -98,7 +139,8 @@ input[type="checkbox"]:checked {
 
 input[type="text"],
 #id_duracion_evaluacion_admin,
-#id_iconoCurso,#id_nombre_modulo {
+#id_iconoCurso,
+#id_nombre_modulo,#id_duracion_clase,#id_contenido_clase,#id_duracion_curso ,#id_nombre_curso{
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
@@ -109,33 +151,54 @@ input[type="text"],
     font-size: 20px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 5px; /* Espacio entre el input y el siguiente label */
+    margin-bottom: 5px;
+    /* Espacio entre el input y el siguiente label */
+    width: 24vw;
 
 }
-
-input[type="number"]:focus{
+#id_nombre_curso:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 }
+input[type="number"]:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
 #id_numero_intentos:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 }
+
 input[type="text"]:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 }
 
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s ease;
+}
 #id_duracion_curso:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 }
 
-#id_numero_intentos{
+#id_numero_intentos {
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
@@ -146,7 +209,80 @@ input[type="text"]:focus {
     font-size: 20px;
     font-weight: bold;
     color: #333;
-    
+
 }
-    
+
+#id_nombre_pregunta ,#id_descripcion_clase{
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    width: 24vw;
+    height: 10vh;
+}
+#id_descripcion_clase:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+#id_nombre_pregunta:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+#id_respuesta_correcta {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    width: 24vw;
+}
+
+#id_respuesta_correcta:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+
+}
+
+#id_nombre_evaluacion,#id_instrucciones_evaluacion {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    width: 24vw;
+}
+
+#id_nombre_evaluacion:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+
+}
+#id_instrucciones_evaluacion:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+
+}
+
 
