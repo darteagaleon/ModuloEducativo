@@ -17,7 +17,7 @@ class regClases(admin.ModelAdmin):
 admin.site.register(Clases,regClases)
 
 class regEvaluaciones(admin.ModelAdmin):
-     list_display=['nombre_modulo','nombre_evaluacion','duracion_evaluacion_admin','numero_intentos','descripcion_evaluacion','instrucciones_evaluacion']
+     list_display=['nombre_modulo','nombre_evaluacion','duracion_evaluacion_admin','numero_intentos','descripcion_evaluacion','instrucciones_evaluacion','finalizada']
 admin.site.register(Evaluaciones,regEvaluaciones)
 
 class regPreguntas(admin.ModelAdmin):
