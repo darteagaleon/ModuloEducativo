@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
 from .models import *
@@ -118,7 +118,7 @@ def crear_pregunta(request):
         form = PreguntasForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('crear_preguntas')
+            return redirect('crear_pregunta')
     else:
         form = PreguntasForm()
 
@@ -159,6 +159,11 @@ def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
     return render(request,'Evaluaciones/listar_evaluaciones.html',context)
+def Listar_preguntas(request):
+    listar_p= Preguntas.objects.all()
+    context = {'listar_p':listar_p}
+    return render(request,'Evaluaciones/listar_preguntas.html',context)
+
 def All_Modulos(request):
     modulos = Modulos.objects.all()
     return render(request, 'Modulos/modulos.html', {'modulos': modulos})
@@ -180,4 +185,65 @@ def Listar_clases(request):
 #  apartado se hace el llamado a detalle de cada Evaluacion
 def ver_evaluacion_detalle(request, evaluacion_id):
     evaluacion = Evaluaciones.objects.get(pk=evaluacion_id)
-    return render(request, 'Evaluaciones/ver_evaluacion_detalle.html', {'evaluacion': evaluacion})
+    return render(request, 'Evaluaciones/Visualizacion/ver_evaluacion_detalle.html', {'evaluacion': evaluacion})
+
+def ver_preguntas_detalle(request,evaluacion_id):
+    evaluacion = get_object_or_404(Evaluaciones, pk=evaluacion_id)
+    preguntas = Preguntas.objects.filter(nombre_evaluacion=evaluacion).order_by('id')
+    return render(request, 'Evaluaciones/Visualizacion/ver_preguntas_detalle.html', {'evaluacion': evaluacion, 'preguntas': preguntas})
+
+
+def update_evaluacion(request, evaluacion_id):
+    editar_e = Evaluaciones.objects.get(id=evaluacion_id)
+    if request.method == "POST":
+        form = EvaluacionForm(request.POST, instance=editar_e)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_evaluacion")
+    else:
+        form = EvaluacionForm(instance=editar_e)
+    
+    context = {"form": form}
+    return render(request, 'Evaluaciones/editar_evaluacion.html', context)
+
+def update_pregunta(request, pregunta_id):
+    editar_p = Preguntas.objects.get(id=pregunta_id)
+    if request.method == "POST":
+        form = PreguntasForm(request.POST, instance=editar_p)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_evaluacion")
+    else:
+        form = PreguntasForm(instance=editar_p)
+    context = {"form": form}
+    return render(request, 'Evaluaciones/editar_pregunta.html', context)
+
+# def update_modulo(request, modulo_id):
+#     editar_m = Modulos.objects.get(id=modulo_id) 
+#     if request.method == "POST":
+#         form = ModulosForm(request.POST, instance=editar_m)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Editado con éxito')
+#             return redirect("listar_modulos")
+#     else:
+#         form = ModulosForm(instance=editar_m)
+#     context = {"form": form}
+#     return render(request, 'Modulos/editar_modulos.html', context)
+
+# def update_clase(request, clase_id):
+#     editar_c = Clases.objects.get(id=clase_id)
+#     if request.method == "POST":
+#         form = ClasesForm(request.POST, instance=editar_c)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Editado con éxito')
+#             return redirect("listar_clases")
+#     else:
+#         form = ClasesForm(instance=editar_c)
+#     context = {"form": form}
+#     return render(request, 'Clases/editar_clases.html', context)
+
+
