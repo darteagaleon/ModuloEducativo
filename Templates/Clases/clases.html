@@ -1,6 +1,6 @@
-{% extends 'Layout/Base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %} <!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
 
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
 
@@ -14,12 +14,12 @@
                     <div>
                         <h1 style="text-align:center;">Gestion Clases</h1>
                         <div class="folder-container">
-                            <a href="{% url 'crear_clases' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                            <a href="{% url 'crear_clases' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i><!--se esta enlazando la url de 'crear_clases'-->
                             <div >
                                 <p>Crear Clases</p>
                             </div>
                         </a>
-                            <a href="{% url 'listar_clases' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                            <a href="{% url 'listar_clases' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i><!--se esta enlazando la url de 'listar_clase' -->
                             <div >
                                 <p>Listar Clases</p>
                             </div>
