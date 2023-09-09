@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
 
 # Se crea el modelo de la tabla Cursos de la empresa
 class Cursos(models.Model):
@@ -35,7 +34,7 @@ class Clases(models.Model):
      nombre_clase=models.CharField(max_length=100)
      duracion_clase = models.IntegerField(blank=True, null=True)
      contenido_clase = models.URLField(max_length=200)
-     descripcion_clase = models.TextField(max_length=500)
+     descripcion_clase = models.TextField(max_length=300)
      estado_clase= models.BooleanField(default=False)
      #Se crea la relacion a modulos
      nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
@@ -48,10 +47,10 @@ class Clases(models.Model):
 class Evaluaciones(models.Model):
      nombre_evaluacion=models.CharField(max_length=100)
      numero_intentos = models.IntegerField(default=2)
-     descripcion_evaluacion = models.CharField(max_length=500, null=True,blank=True)
-     instrucciones_evaluacion = models.TextField(max_length=500, null=True,blank=True)
+     descripcion_evaluacion = models.CharField(max_length=300, null=True,blank=True)
+     instrucciones_evaluacion = models.TextField(max_length=300, null=True,blank=True)
      duracion_evaluacion_admin = models.IntegerField(default=30)
-     finalizada = models.BooleanField(default=False)
+     # finalizada = models.BooleanField(default=False)
      #Se crea la relacion a modulos
      nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):

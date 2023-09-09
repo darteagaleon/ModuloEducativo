@@ -1,14 +1,14 @@
 {% extends 'Layout/Base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'Css/Curso.css' %}"> {% endcomment %}
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
     <div class="home_content"> <!--1 -->
         <div class="text"><!--2 -->
-            <div class="container-fluid">
-                <div class="row" id="tabla">
+            <div class="all">
+                <div id="tabla">
                     <div>
                         <h1>Crear Clases </h1>
                         <div class="form">
@@ -29,8 +29,10 @@
             </div>
         </div>
     </div>
-    <div id="back2">
-		<button  class="back"><a href="{% url 'clase' %}">Regresar</a></button>
+    <a href="{% url 'clase' %}" id="back2">
+    <div >
+		<button  class="back">Regresar</button>
 	</div>
+    </a>
 </body>
 {% endblock %}

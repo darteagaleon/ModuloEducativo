@@ -6,8 +6,8 @@
 <body>
     <div class="home_content"> <!--1 -->
         <div class="text"><!--2 -->
-            <div class="container-fluid">
-                <div class="row" id="tabla">
+            <div class="all">
+                <div id="tabla">
                     <div>
                         <h1>Crear Preguntas </h1>
                         <div class="form">
@@ -28,8 +28,10 @@
             </div>
         </div>
     </div>
-    <div id="back2">
-        <button  class="back"><a href="{% url 'evaluacion' %}">Regresar</a></button>
-    </div>
+    <a href="{% url 'evaluacion' %}" id="back2">
+        <div >
+            <button  class="back">Regresar</button>
+        </div>
+        </a>
 </body>
 {% endblock %}

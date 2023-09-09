@@ -28,27 +28,27 @@
                 <tbody>
                     {% for evaluacion in listare %}
                         <tr>
-                            <th scope="row">{{evaluacion.nombre_evaluacion}}</th>
-                            <th scope="row">{{evaluacion.descripcion_evaluacion}}</th>
-                            <th scope="row">{{evaluacion.duracion_evaluacion_admin}}</th>
+                            <td scope="row">{{ evaluacion.nombre_evaluacion }}</td>
+                            <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
+                            <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
                             {% if evaluacion.estado_evaluacion %}
-                            <th scope="row">Activo</th>
+                            <td scope="row">Activo</td>
                             {% else %}
-                            <th scope="row">Inactivo</th>
+                            <td scope="row">Inactivo</td>
                             {% endif %}
-                            <th scope="row">{{evaluacion.duracion_evaluacion_admin}}</th>
+                            <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
                             <td>
-                                <button class="editar"><a href="#">Editar</a></button>
-                                
+                                <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">Editar</a>
                             </td>
                         </tr>
-                </tbody>
-                {% endfor %}
-            </table>
+                    {% endfor %}
+                </tbody>         </table>
         </div>
     </div>
 </div>
-<div id="back2">
-    <button  class="back"><a href="{% url 'evaluacion' %}">Regresar</a></button>
-</div>
+<a href="{% url 'evaluacion' %}" id="back2">
+    <div >
+        <button  class="back">Regresar</button>
+    </div>
+    </a>
 {% endblock %}

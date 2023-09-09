@@ -14,32 +14,24 @@
                     <div>
                         <h1 style="text-align:center;">Gestion evaluacion</h1>
                         <div class="folder-container">
-                            <div class="folder-box">
-                                <a href="{% url 'crear_evaluacion' %}"> <i class="bx bx-folder folder-icon"></i>
-                                <p>Crear Evaluación</p>
-                                    </a>
-                            </div>
-                            <div class="folder-box">
-                                <a href="{% url 'crear_pregunta' %}">
+                            <a href="{% url 'crear_evaluacion' %}" class="folder-box"> <i
+                                    class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Crear Evaluación</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'crear_pregunta' %}" class="folder-box">
+                                <div>
                                     <i class="bx bx-folder folder-icon"></i>
-                                <p>Crear Preguntas</p>
-                                    </a>
-                            </div>
-                            <div class="folder-box">
-                                <a href="#"> <i class="bx bx-folder folder-icon"></i>
-                                <p>Editar Evaluación</p>
-                                    </a>
-                            </div>
-                            <div class="folder-box">
-                                <a href="{% url 'ver_evaluacion' %}"> <i class="bx bx-folder folder-icon"></i>
-                                <p>Visualizar Evaluación</p>
-                                    </a>
-                            </div>
-                            <div class="folder-box">
-                                <a href="{% url 'listar_evaluacion' %}"> <i class="bx bx-folder folder-icon"></i>
-                                <p>Listar Evaluaciones</p>
-                                    </a>
-                            </div>
+                                    <p>Crear Preguntas</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'listar_evaluacion' %}" class="folder-box"> <i
+                                    class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Listar Evaluaciones</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -47,4 +39,4 @@
         </div>
     </div>
 
-{% endblock %}
+    {% endblock %}
