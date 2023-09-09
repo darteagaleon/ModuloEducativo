@@ -32,6 +32,7 @@ class EvaluacionForm(forms.ModelForm):
         model = Evaluaciones
         fields = '__all__'
         
+        
 class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas

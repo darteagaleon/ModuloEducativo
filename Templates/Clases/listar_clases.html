@@ -12,7 +12,7 @@
         </form>
         
         <br>
-        <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
+        <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span><!--esta linea nos dirije a la página que lista todos los cursos-->
         <div class="table-responsive" >
             <table class="table " id="tablam">
                 <thead>
@@ -26,12 +26,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for clase in listarclases %}
+                    {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
                         <tr>
+                            <!-- Esta líneas definen las celdas de datos de la tabla-->
                             <th scope="row">{{clase.nombre_clase}}</th>
                             <th scope="row">{{clase.descripcion_clase}}</th>
                             <th scope="row">{{clase.duracion_clase}}</th>
-                            {% if clase.estado_clase %}
+                            {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
                             <th scope="row">Activo</th>
                             {% else %}
                             <th scope="row">Inactivo</th>
