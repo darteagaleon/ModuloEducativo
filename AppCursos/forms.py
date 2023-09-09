@@ -1,6 +1,7 @@
 from django import forms 
 from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas
 
+
 class crear_cursos(forms.ModelForm):
     class Meta:
         model = Cursos
@@ -30,6 +31,7 @@ class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = Evaluaciones
         fields = '__all__'
+        
         
 class PreguntasForm(forms.ModelForm):
     class Meta:

@@ -1,0 +1,57 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/ver_preguntas_detalle.css' %}">
+
+<body>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="all">
+                <div class="tabla">
+                    <div class="titulo">
+                        <h1>{{ evaluacion.nombre_evaluacion }}</h1>
+                    </div>
+                    {% for pregunta in preguntas %}
+
+                    <div class="pregunta">
+                        <h2>{{ pregunta.nombre_pregunta }}</h2>
+                    </div>
+                    <!-- respuestas-------------------- -->
+                    <div class="respuesta_a {% if pregunta.respuesta_correcta == 'a' %}correct{% endif %}">
+                        <p>a. {{ pregunta.opcion_a }}</p>
+                    </div>
+                    <div class="respuesta_b {% if pregunta.respuesta_correcta == 'b' %}correct{% endif %}">
+                        <p>b. {{ pregunta.opcion_b }}</p>
+                    </div>
+                    <div class="respuesta_c {% if pregunta.respuesta_correcta == 'c' %}correct{% endif %}">
+                        <p>c. {{ pregunta.opcion_c }}</p>
+                    </div>
+                    <div class="respuesta_d {% if pregunta.respuesta_correcta == 'd' %}correct{% endif %}">
+                        <p>d. {{ pregunta.opcion_d }}</p>
+                    </div>
+                    <div class="button">
+                        <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
+                                class="start">Atras</button></a>
+                        <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
+                                class="start">Siguiente</button></a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+    <a href="#" id="back2">
+        <div>
+            <button class="back1">Editar</button>
+        </div>
+    </a>
+</body>
+{% endblock %}

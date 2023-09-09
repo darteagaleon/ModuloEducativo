@@ -2,18 +2,20 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
-    <div class="text"><!--2 -->            
-        <h1> Listado de Evaluación </h1>
-        <br><form class="search" action="{% url 'filtrar' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
+    <div class="text"><!--2 -->
+        <h1> Listado de Evaluaciones </h1>
+        <br>
+        <form class="search" action="{% url 'filtrar' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
             <input type="submit" class="btn search-btn" value="Buscar">
         </form>
-        
+
         <br>
         <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
-        <div class="table-responsive" >
+        <div class="table-responsive">
             <table class="table " id="tablam">
                 <thead>
                     <tr>
@@ -22,33 +24,46 @@
                         <th scope="col">Duracion</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Duracion Curso</a></th>
-                        <th scope="col">Editar / Visualziar</th>
+                        <th scope="col">Finalizada</a></th>
+
+
+                        <th scope="col">Visualizar</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     {% for evaluacion in listare %}
-                        <tr>
-                            <td scope="row">{{ evaluacion.nombre_evaluacion }}</td>
-                            <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
-                            <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
-                            {% if evaluacion.estado_evaluacion %}
-                            <td scope="row">Activo</td>
+                    <tr>
+                        <td scope="row">{{ evaluacion.nombre_evaluacion }}</td>
+                        <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
+                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
+                        {% if evaluacion.estado_evaluacion %}
+                        <td scope="row">Activo</td>
+                        {% else %}
+                        <td scope="row">Inactivo</td>
+                        {% endif %}
+                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
+                        <td scope="row">
+                            {% if evaluacion.finalizada %}
+                                Sí
                             {% else %}
-                            <td scope="row">Inactivo</td>
+                                No
                             {% endif %}
-                            <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
-                            <td>
-                                <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">Editar</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>         </table>
+                        </td>
+                        <td>
+                            <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-<a href="{% url 'evaluacion' %}" id="back2">
-    <div >
-        <button  class="back">Regresar</button>
++<a href="{% url 'evaluacion' %}" id="back2">
+    <div>
+        <button class="back">Regresar</button>
     </div>
-    </a>
+</a>
 {% endblock %}

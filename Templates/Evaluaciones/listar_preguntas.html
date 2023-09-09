@@ -1,0 +1,47 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->
+        <h1> Listado de Preguntas </h1>
+        <br>
+        <form class="search" action="{% url 'filtrar' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
+            <input type="submit" class="btn search-btn" value="Buscar">
+        </form>
+
+        <br>
+        <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
+        <div class="table-responsive">
+            <table class="table " id="tablam">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col"></th>
+                        <th scope="col">Editar / Visualziar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pregunta in listar_p %}
+                    <tr>
+                        <td scope="row">{{ pregunta.nombre_pregunta }}</td>                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
+                        <td>
+                            <a href="{% url 'editar_pregunta' pregunta.id%}">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
++<a href="{% url 'listar_evaluacion' %}" id="back2">
+    <div>
+        <button class="back">Regresar</button>
+    </div>
+</a>
+{% endblock %}
