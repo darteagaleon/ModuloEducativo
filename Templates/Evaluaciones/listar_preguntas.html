@@ -6,7 +6,7 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
-        <h1> Listado de Evaluaciones </h1>
+        <h1> Listado de Preguntas </h1>
         <br>
         <form class="search" action="{% url 'filtrar' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
@@ -19,28 +19,17 @@
             <table class="table " id="tablam">
                 <thead>
                     <tr>
-                        <th scope="col">Evaluación</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Duracion</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Duracion Curso</a></th>
-                        <th scope="col">Visualizar</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col"></th>
+                        <th scope="col">Editar / Visualziar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for evaluacion in listare %}
+                    {% for pregunta in listar_p %}
                     <tr>
-                        <td scope="row">{{ evaluacion.nombre_evaluacion }}</td>
-                        <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
-                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
-                        {% if evaluacion.estado_evaluacion %}
-                        <td scope="row">Activo</td>
-                        {% else %}
-                        <td scope="row">Inactivo</td>
-                        {% endif %}
-                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
+                        <td scope="row">{{ pregunta.nombre_pregunta }}</td>                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
                         <td>
-                            <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">Editar</a>
+                            <a href="{% url 'editar_pregunta' pregunta.id%}">Editar</a>
                         </td>
                     </tr>
                 </tbody>
@@ -50,7 +39,7 @@
         </div>
     </div>
 </div>
-+<a href="{% url 'evaluacion' %}" id="back2">
++<a href="{% url 'listar_evaluacion' %}" id="back2">
     <div>
         <button class="back">Regresar</button>
     </div>
