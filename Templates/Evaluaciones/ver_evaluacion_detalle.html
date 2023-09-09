@@ -1,0 +1,43 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<body>
+    <div class="home_content">
+        <div class="text">
+            <div class="all">
+                <div class="tabla">
+                    <div class="titulo">
+                        <h1>{{ evaluacion.nombre_evaluacion }}</h1>
+                    </div>
+                    <div class="descripcion">
+                        <p>{{ evaluacion.descripcion_evaluacion }}</p>
+                    </div>
+                    <div class="instrucciones">
+                        <h2>Instrucciones</h2>
+                        <div class="instrucciones2">
+                            <p id="parrafo">{{ evaluacion.instrucciones_evaluacion }}</p>
+                        </div>
+                    </div>
+                    <div class="duracion">
+                        <p>Duración: {{ evaluacion.duracion_evaluacion_admin }} minutos</p>
+                    </div>
+                    <div class="numIntentos">
+                        <p>Número de intentos: {{ evaluacion.numero_intentos }}</p>
+                    </div>
+                    <div class="button">
+                        <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
+                                class="start">Comenzar</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'evaluacion' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+</body>
+{% endblock %}

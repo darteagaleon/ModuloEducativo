@@ -29,34 +29,38 @@ body {
 }
 
 /* tabla de crear curso */
-.container-fluid {
+.all {
+    margin: 0 auto;
     position: relative;
-    height: 100vh;
-    width: 30vw;
+    width: 50vw;
+    color: #f7ece1;
+
 }
 
 h1 {
     color: #00072D;
     /* color: #13293D; */
+    text-align: center;
 }
 
 #tabla {
-    width: 100%;
-    padding: 20px;
     background-color: #0E6BA8;
+    padding: 20px;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
     transition: all 0.3s ease;
     box-sizing: border-box;
     margin: 50px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
     font-size: 30px;
     font-weight: bold;
-    color: #333;
-
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    /* Añadido para centrar el contenido de la tabla */
+    overflow: auto;
+    /* Agregar barra de desplazamiento si es necesario */
+    height: auto;
+    /* Permitir que la altura se ajuste automáticamente */
 }
 
 @media only screen and (max-width: 600px) {
@@ -81,17 +85,22 @@ label {
 }
 
 
+
 .back {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
     width: 15vw;
+    /* Ancho del botón */
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
+
 .back a {
     color: #00072D;
     text-decoration: none;
@@ -106,9 +115,11 @@ label {
     transition: .5s;
     transform: scale(1.2);
 }
+
 .back:hover a {
     color: white;
-  }
+}
+
 button {
     width: 50%;
     padding: 10px;
@@ -140,11 +151,15 @@ input[type="checkbox"]:checked {
 input[type="text"],
 #id_duracion_evaluacion_admin,
 #id_iconoCurso,
-#id_nombre_modulo,#id_duracion_clase,#id_contenido_clase,#id_duracion_curso ,#id_nombre_curso{
+#id_duracion_clase,
+#id_contenido_clase,
+#id_duracion_curso,
+#id_nombre_curso ,
+#id_nombre_evaluacion,#id_numero_intentos,
+#id_nombre_modulo{
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
     outline: none;
     padding: 10px;
     transition: all 0.3s ease;
@@ -152,31 +167,9 @@ input[type="text"],
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
-    /* Espacio entre el input y el siguiente label */
-    width: 24vw;
+    transition: all 0.3s ease;
+    width: 90%;
 
-}
-#id_nombre_curso:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-input[type="number"]:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-
-#id_numero_intentos:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-
-input[type="text"]:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
 }
 
 input[type="checkbox"] {
@@ -192,49 +185,26 @@ input[type="checkbox"] {
     left: 5px;
     transition: all 0.3s ease;
 }
-#id_duracion_curso:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
 
-#id_numero_intentos {
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
-    outline: none;
+
+
+#id_descripcion_evaluacion {
+    position: relative;
+    width: 90%;
+    text-align: left;
+    display: inline-block;
     padding: 10px;
-    transition: all 0.3s ease;
     font-size: 20px;
-    font-weight: bold;
-    color: #333;
-
-}
-
-#id_nombre_pregunta ,#id_descripcion_clase{
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
-    outline: none;
-    padding: 10px;
+    /* Tamaño de fuente deseado */
+    text-align: left;
+    overflow: auto;
+    /* Agregar barra de desplazamiento si es necesario */
+    height: auto;
+    /* Permitir que la altura se ajuste automáticamente */
     transition: all 0.3s ease;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    width: 24vw;
-    height: 10vh;
-}
-#id_descripcion_clase:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-#id_nombre_pregunta:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
+    border-radius: 5px;
+
+
 }
 
 #id_respuesta_correcta {
@@ -248,8 +218,77 @@ input[type="checkbox"] {
     font-size: 20px;
     font-weight: bold;
     color: #333;
-    width: 24vw;
 }
+
+
+#id_instrucciones_evaluacion,#id_nombre_pregunta,#id_descripcion_clase{
+    background-color: #eeeeee;
+    padding: .5em;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: inline-block;
+    padding: 10px;
+    overflow: auto;
+    /* Agregar barra de desplazamiento si es necesario */
+    height: auto;
+    /* Permitir que la altura se ajuste automáticamente */
+    font-size: 20px;
+    font-weight: bold;
+    color: #00072D;
+    transition: all 0.3s ease;
+    width: 90%;
+
+}
+/* focus---------------- */
+
+#id_nombre_curso:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+input[type="number"]:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+#id_numero_intentos:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+input[type="text"]:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+#id_duracion_curso:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+#id_descripcion_clase:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+
+#id_nombre_pregunta:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
 
 #id_respuesta_correcta:focus {
     background-color: #c2c2c2;
@@ -258,31 +297,16 @@ input[type="checkbox"] {
 
 }
 
-#id_nombre_evaluacion,#id_instrucciones_evaluacion {
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
-    outline: none;
-    padding: 10px;
-    transition: all 0.3s ease;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-    width: 24vw;
-}
-
 #id_nombre_evaluacion:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 
 }
+
 #id_instrucciones_evaluacion:focus {
     background-color: #c2c2c2;
     color: #fff;
     transform: scale(1.1);
 
 }
-
-

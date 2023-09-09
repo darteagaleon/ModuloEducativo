@@ -154,7 +154,7 @@ def gestion_evaluacion(request):
 
 def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
-    return render(request, 'Evaluaciones/ver_evaluacion.html', {'evaluaciones': evaluaciones})
+    return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
 def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
@@ -176,3 +176,8 @@ def Listar_clases(request):
     listarclases = Clases.objects.all()
     context = {'listarclases':listarclases}
     return render(request,'Clases/listar_clases.html',context)
+
+#  apartado se hace el llamado a detalle de cada Evaluacion
+def ver_evaluacion_detalle(request, evaluacion_id):
+    evaluacion = Evaluaciones.objects.get(pk=evaluacion_id)
+    return render(request, 'Evaluaciones/ver_evaluacion_detalle.html', {'evaluacion': evaluacion})
