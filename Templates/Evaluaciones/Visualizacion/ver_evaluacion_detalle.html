@@ -28,8 +28,11 @@
                         <p>Número de intentos: {{ evaluacion.numero_intentos }}</p>
                     </div>
                     <div class="button">
-                        <a href="{% url 'listar_preguntas' %}"> <button type="button" class="start">Ver Preguntas</button></a>
+                        <a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}">
+                            <button type="button" class="start">Ver Preguntas</button>
+                        </a>
                     </div>
+                    
                     
                 </div>
             </div>

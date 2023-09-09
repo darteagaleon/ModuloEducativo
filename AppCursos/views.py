@@ -131,8 +131,8 @@ def ver_evaluaciones(request, modulo_id):
     
     if request.method == 'POST':
 
-        evaluaciones.finalizada = True
-        evaluaciones.save()
+        evaluaciones.finalizada = True # type: ignore
+        evaluaciones.save() # type: ignore
         return redirect('ver_evaluaciones')
 
     context = {'evaluaciones':evaluaciones}

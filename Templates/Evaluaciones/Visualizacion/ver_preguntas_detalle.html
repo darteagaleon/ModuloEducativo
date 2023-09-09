@@ -33,8 +33,6 @@
                     <div class="button">
                         <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
                                 class="start">Atras</button></a>
-                        <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
-                                class="start">Siguiente</button></a>
                     </div>
                     {% endfor %}
                 </div>
@@ -48,9 +46,9 @@
             <button class="back">Regresar</button>
         </div>
     </a>
-    <a href="#" id="back2">
+    <a href="{% url 'listar_preguntas' %}" id="back2">
         <div>
-            <button class="back1">Editar</button>
+            <button class="back1">Listar Preguntas</button>
         </div>
     </a>
 </body>

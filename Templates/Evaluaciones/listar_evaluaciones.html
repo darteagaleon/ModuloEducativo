@@ -24,6 +24,7 @@
                         <th scope="col">Duracion</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Duracion Curso</a></th>
+                        <th scope="col">Finalizada</th>
                         <th scope="col">Visualizar</th>
                     </tr>
                 </thead>
@@ -39,6 +40,13 @@
                         <td scope="row">Inactivo</td>
                         {% endif %}
                         <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
+                        <td scope="row">
+                            {% if evaluacion.finalizada %}
+                            Sí
+                            {% else %}
+                            No
+                            {% endif %}
+                        </td>
                         <td>
                             <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">Editar</a>
                         </td>
@@ -52,7 +60,13 @@
 </div>
 +<a href="{% url 'evaluacion' %}" id="back2">
     <div>
-        <button class="back">Regresar</button>
+        <button class="back">Regresar</button><td scope="row">
+    {% if evaluacion.finalizada %}
+        Sí
+    {% else %}
+        No
+    {% endif %}
+</td>
     </div>
 </a>
 {% endblock %}
