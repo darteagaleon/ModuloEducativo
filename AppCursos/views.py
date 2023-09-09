@@ -113,20 +113,6 @@ def crear_modulos(request):
         form = ModulosForm
     return render(request,'Modulos/crear_modulos.html',{'form':form})
 
-# Vista para ver y realizar las evaluaciones como Usuario
-
-#     return render(request, 'Evaluaciones/crear_evaluaciones.html')
-
-def crear_evaluacion(request):
-    if request.method == 'POST':
-        form = EvaluacionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('crear_evaluacion')  
-    else:
-        form = EvaluacionForm()
-
-    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
 def crear_pregunta(request):
     if request.method == 'POST':
         form = PreguntasForm(request.POST)
