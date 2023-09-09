@@ -3,6 +3,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+
 <body>
     <div class="home_content">
         <div class="text">
@@ -27,16 +28,21 @@
                         <p>Número de intentos: {{ evaluacion.numero_intentos }}</p>
                     </div>
                     <div class="button">
-                        <a href="https://youtu.be/Ve-CfLuq5QM?si=lRvT_pjpA9ZlYx6N"> <button type="button"
-                                class="start">Comenzar</button></a>
+                        <a href="{% url 'listar_preguntas' %}"> <button type="button" class="start">Ver Preguntas</button></a>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
-    <a href="{% url 'evaluacion' %}" id="back2">
+    <a href="{% url 'listar_evaluacion' %}" id="back2">
         <div>
             <button class="back">Regresar</button>
+        </div>
+    </a>
+    <a href="{% url 'update_evaluacion' evaluacion_id=evaluacion.id %}" id="back2">
+        <div>
+            <button class="back1">Editar</button>
         </div>
     </a>
 </body>
