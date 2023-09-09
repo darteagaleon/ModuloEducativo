@@ -65,8 +65,7 @@ body{
 .instrucciones,
 h2 {
     position: relative;
-    width: 100%;
-
+    width: 95%;
     font-size: 30px;
     display: flex;
     flex-direction: column;
@@ -81,6 +80,7 @@ h2 {
 
 }
 
+
 .instrucciones2 {
     background-color: #eeeeee;
     padding: .5em;
@@ -94,8 +94,8 @@ h2 {
     /* Agregar barra de desplazamiento si es necesario */
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
+    width:100%;
 }
-
 button {
     width: auto;
     padding: 10px;

@@ -24,7 +24,7 @@ urlpatterns = [
      # evaluación detallada
      path('ver_evaluacion_detalle/<int:evaluacion_id>/',
           views.ver_evaluacion_detalle, name='ver_evaluacion_detalle'),
-     path('ver_preguntas_detalle/<int:evaluacion_id>/', views.ver_preguntas_detalle, name='ver_preguntas_detalle'),
+path('ver_preguntas_detalle/<int:evaluacion_id>/', views.ver_preguntas_detalle, name='ver_preguntas_detalle'),
      path('editar/<int:curso_id>/', views.update, name='editar_curso'),
      path('update_evaluacion/<int:evaluacion_id>/',
           views.update_evaluacion, name='update_evaluacion'),
