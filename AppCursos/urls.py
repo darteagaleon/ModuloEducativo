@@ -31,7 +31,7 @@ path('ver_preguntas_detalle/<int:evaluacion_id>/', views.ver_preguntas_detalle, 
      path('listar_preguntas', views.Listar_preguntas, name='listar_preguntas'),
 
      path('editar_pregunta/<int:pregunta_id>/', views.update_pregunta, name='editar_pregunta'),
-# path('update_modulo/<int:modulo_id>/', views.update_modulo, name='update_modulo')
+    path('editar_modulo/<int:modulo_id>/', views.editar_modulo, name='editar_modulo'),
 
      # path('editar_clases/<int:clase_id>/',
      #      views.update_clases, name='editar_clases'),
