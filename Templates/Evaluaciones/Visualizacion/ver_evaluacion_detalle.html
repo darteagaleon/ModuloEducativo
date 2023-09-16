@@ -1,7 +1,7 @@
-{% extends 'Layout/Base.html' %}
-{% load static %}
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
 
-{% block content %}
+{% block content %}<!--es un bloqueo de contenido -->
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 
 <body>
@@ -10,20 +10,24 @@
             <div class="all">
                 <div class="tabla">
                     <div class="titulo">
-                        <h1>{{ evaluacion.nombre_evaluacion }}</h1>
+                        <h1>{{ evaluacion.nombre_evaluacion }}</h1><!--En resumen, esta línea de código se utiliza para mostrar el título o nombre de una evaluación específica en una página web.-->
                     </div>
+                    <!-- se utiliza para mostrar la descripción de una evaluación en una página web. -->
                     <div class="descripcion">
                         <p>{{ evaluacion.descripcion_evaluacion }}</p>
                     </div>
+                    <!--se utiliza para mostrar las instrucciones de una evaluación en una página web de manera estructurada-->
                     <div class="instrucciones">
                         <h2>Instrucciones</h2>
                         <div class="instrucciones2">
                             <p id="parrafo">{{ evaluacion.instrucciones_evaluacion }}</p>
                         </div>
                     </div>
+                    <!--se utiliza para mostrar la duración de una evaluación en una página web de manera estructurada y formateada.-->
                     <div class="duracion">
                         <p>Duración: {{ evaluacion.duracion_evaluacion_admin }} minutos</p>
                     </div>
+                    <!--se utiliza para mostrar los numeros de intentos de una evalucion en la pagina wed -->
                     <div class="numIntentos">
                         <p>Número de intentos: {{ evaluacion.numero_intentos }}</p>
                     </div>

@@ -124,6 +124,16 @@ def crear_pregunta(request):
         form = PreguntasForm()
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_evaluacion')  
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
 
 # Vista para ver y realizar las evaluaciones como Usuario
 def ver_evaluaciones(request, modulo_id):
@@ -139,23 +149,14 @@ def ver_evaluaciones(request, modulo_id):
     context = {'evaluaciones':evaluaciones}
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
-
-def crear_evaluacion(request):
-    if request.method == 'POST':
-        form = EvaluacionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('crear_evaluacion')  
-    else:
-        form = EvaluacionForm()
-
-    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
-def gestion_evaluacion(request):
-    return render(request, 'Evaluaciones/evaluacion.html')
-
 def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+
+
 def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
@@ -164,6 +165,10 @@ def Listar_preguntas(request):
     listar_p= Preguntas.objects.all()
     context = {'listar_p':listar_p}
     return render(request,'Evaluaciones/listar_preguntas.html',context)
+def Listar_clases(request):
+    listarclases = Clases.objects.all()
+    context = {'listarclases':listarclases}
+    return render(request,'Clases/listar_clases.html',context)
 
 def All_Modulos(request):
     modulos = Modulos.objects.all()
@@ -178,10 +183,7 @@ def All_cursos(request):
 def All_clases(request):
     clases = Clases.objects.all()
     return render(request, 'Clases/clases.html', {'clases': clases})
-def Listar_clases(request):
-    listarclases = Clases.objects.all()
-    context = {'listarclases':listarclases}
-    return render(request,'Clases/listar_clases.html',context)
+
 
 #  apartado se hace el llamado a detalle de cada Evaluacion
 def ver_evaluacion_detalle(request, evaluacion_id):
