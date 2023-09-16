@@ -1,7 +1,7 @@
-{% extends 'Layout/Base.html' %}
-{% load static %}
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
 
-{% block content %}
+{% block content %}<!--es un bloqueo de contenido -->
 <link rel="stylesheet" href="{% static 'Css/ver_preguntas_detalle.css' %}">
 
 <body>
@@ -10,7 +10,7 @@
             <div class="all">
                 <div class="tabla">
                     <div class="titulo">
-                        <h1>{{ evaluacion.nombre_evaluacion }}</h1>
+                        <h1>{{ evaluacion.nombre_evaluacion }}</h1><!--En resumen, esta línea de código se utiliza para mostrar el título o nombre de una evaluación específica en una página web.--
                     </div>
                     {% for pregunta in preguntas %}
 

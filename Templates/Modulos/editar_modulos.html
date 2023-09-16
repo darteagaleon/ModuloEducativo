@@ -1,6 +1,6 @@
-{% extends 'Layout/Base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
@@ -11,9 +11,9 @@
         <div class="all">
             <div class="tabla">
                 <h1>Editar Modulos </h1>
-                {% csrf_token %}
+                {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                 <form method="post">
-                    {% csrf_token %}
+                    {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                     <div class="form-group">
                         {{ form }}
                     </div>
@@ -23,7 +23,7 @@
         </div>
     </div>
 </div>
-<a href="{% url 'cursos' %}" id="back2">
+<a href="{% url 'cursos' %}" id="back2"><!--nos dirije  a la URL correspondiente a la vista llamada 'cursos' -->
 	<div >
 		<button  class="back">Regresar</button>
 	</div>
