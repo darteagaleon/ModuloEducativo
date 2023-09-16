@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
 from .models import Evaluaciones,Modulos
+from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 
 from django.contrib import messages
 
@@ -220,28 +221,38 @@ def update_pregunta(request, pregunta_id):
     context = {"form": form}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
-def editar_modulo(request, modulo_id):
-    modulo = get_object_or_404(Modulos, id=modulo_id)
+def editar_modulos(request, modulo_id):
+    editar_m = get_object_or_404(Modulos, id=modulo_id)
     if request.method == "POST":
-        form = ModulosForm(request.POST, instance=modulo)
+        form = ModulosForm(request.POST, instance=editar_m)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Editado con éxito')
             return redirect("listar_modulos")
     else:
-        form = ModulosForm(instance=modulo)
-    return render(request, 'Modulos/editar_modulo.html', {'form': form})
+        form = ModulosForm(instance=editar_m)
+    context = {"form": form}
+    return render(request, 'Modulos/Visualizacion/editar_modulos.html', context)
 
-# def update_clase(request, clase_id):
-#     editar_c = Clases.objects.get(id=clase_id)
-#     if request.method == "POST":
-#         form = ClasesForm(request.POST, instance=editar_c)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Editado con éxito')
-#             return redirect("listar_clases")
-#     else:
-#         form = ClasesForm(instance=editar_c)
-#     context = {"form": form}
-#     return render(request, 'Clases/editar_clases.html', context)
+def ver_clases(request, clase_id):
+    v_clases = get_object_or_404(Clases, id=clase_id)
+    return render(request, 'Clases/Visualizacion/ver_clases.html', {'v_clases': v_clases})
+
+def ver_modulos(request,modulo_id):
+    v_modulos = get_object_or_404(Modulos, id=modulo_id)
+    return render(request, 'Modulos/Visualizacion/ver_modulos.html', {'v_modulos': v_modulos})
+
+def editar_clases(request, clase_id):
+    editar_c = get_object_or_404(Clases, id=clase_id)
+    if request.method == "POST":
+        form = ClasesForm(request.POST, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_clases")
+    else:
+        form = ClasesForm(instance=editar_c)
+    context = {"form": form}
+    return render(request, 'Clases/Visualizacion/editar_clases.html', context)
 
 

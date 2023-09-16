@@ -30,10 +30,11 @@ path('ver_preguntas_detalle/<int:evaluacion_id>/', views.ver_preguntas_detalle, 
           views.update_evaluacion, name='update_evaluacion'),
      path('listar_preguntas', views.Listar_preguntas, name='listar_preguntas'),
 
-     path('editar_pregunta/<int:pregunta_id>/', views.update_pregunta, name='editar_pregunta'),
-    path('editar_modulo/<int:modulo_id>/', views.editar_modulo, name='editar_modulo'),
-
-     # path('editar_clases/<int:clase_id>/',
+     # path('editar_pregunta/<int:pregunta_id>/', views.update_pregunta, name='editar_pregunta'),
+     path('editar_modulos/<int:modulo_id>/', views.editar_modulos, name='editar_modulos'),
+path('ver_clases/<int:clase_id>/', views.ver_clases, name='ver_clases'),
+path('editar_clases/<int:clase_id>/', views.editar_clases, name='editar_clases'),
+path('ver_modulos/<int:modulo_id>/', views.ver_modulos, name="ver_modulos"),
      #      views.update_clases, name='editar_clases'),
      
           

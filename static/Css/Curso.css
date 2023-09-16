@@ -174,3 +174,24 @@ input[type="text"]:focus {
 .back:hover a {
     color: white;
 }
+
+button {
+    width: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #92dce5;
+    color: #00072D;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+button:hover {
+    background-color: #111344;
+    color: white;
+    transition: .5s;
+    transform: scale(1.2);
+}
