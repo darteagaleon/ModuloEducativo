@@ -220,18 +220,16 @@ def update_pregunta(request, pregunta_id):
     context = {"form": form}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
-# def update_modulo(request, modulo_id):
-#     editar_m = Modulos.objects.get(id=modulo_id) 
-#     if request.method == "POST":
-#         form = ModulosForm(request.POST, instance=editar_m)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Editado con éxito')
-#             return redirect("listar_modulos")
-#     else:
-#         form = ModulosForm(instance=editar_m)
-#     context = {"form": form}
-#     return render(request, 'Modulos/editar_modulos.html', context)
+def editar_modulo(request, modulo_id):
+    modulo = get_object_or_404(Modulos, id=modulo_id)
+    if request.method == "POST":
+        form = ModulosForm(request.POST, instance=modulo)
+        if form.is_valid():
+            form.save()
+            return redirect("listar_modulos")
+    else:
+        form = ModulosForm(instance=modulo)
+    return render(request, 'Modulos/editar_modulo.html', {'form': form})
 
 # def update_clase(request, clase_id):
 #     editar_c = Clases.objects.get(id=clase_id)
