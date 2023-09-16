@@ -12,8 +12,8 @@
                         <h1>Crear Evaluacion </h1>
                         <div class="form">
 							<form method="post">
-                                {% csrf_token %}
-								{% load widget_tweaks %}
+                                {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+								{% load widget_tweaks %}<!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
 								<div class="form-group">
 
 
