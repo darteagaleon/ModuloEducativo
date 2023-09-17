@@ -10,22 +10,25 @@
     <div class="text"><!--2 -->
         <div class="all">
             <div class="tabla">
-                <h1>Editar CURSO </h1>
-                {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
-                <form method="post">
-                    {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                <h1>Editar CURSO</h1>
+                {% csrf_token %}
+                <form method="post" enctype="multipart/form-data">#enctype="multipart/form-data" Esto es esencial para que los archivos, como las imágenes, se puedan cargar correctamente.
+                    {% csrf_token %}
                     <div class="form-group">
-                        {{ form }}
+                        {{ form.as_p }}
+                        {% if icono_url %}
+                            <img src="{{ icono_url }}" width="700vw" height="550vh" alt="Curso Image">
+                        {% endif %}
                     </div>
-                    <button type="submit" >Editar</button>
+                    <button type="submit">Editar</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <a href="{% url 'cursos' %}" id="back2"> <!--nos dirije  a la URL correspondiente a la vista llamada 'cursos' -->
-	<div >
-		<button  class="back">Regresar</button>
-	</div>
+    <div>
+        <button class="back">Regresar</button>
+    </div>
 </a>
 {% endblock %}

@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -118,16 +118,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Configuración para archivos estáticos (CSS, JS, imágenes de estilo, etc.)
+# el os.path.join(BASE_DIR) es una forma segura y portátil de construir rutas de directorios en proyectos de Django.
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = '/static/'  # Debe comenzar con una barra diagonal
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # BASE_DIR es una variable de ruta, por lo que debe usarse una barra en lugar de una barra inclinada
-]
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Usar BASE_DIR para definir la ruta completa
+# Configuración para archivos multimedia (imágenes cargadas por los usuarios, etc.)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # Usar BASE_DIR para definir la ruta completa
-
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# Default primary key field type
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

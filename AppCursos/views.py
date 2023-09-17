@@ -248,16 +248,20 @@ def ver_cursos(request,curso_id):
     v_cursos = get_object_or_404(Cursos, id=curso_id)
     return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
 
-# def update(request, curso_id):
-#     editar = Cursos.objects.get(id=curso_id)
-#     if request.method == "POST":
-#         form = CursosForm(request.POST, instance=editar)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Editado con éxito')
-#             return redirect("listar_cursos")
-#     else:
-#         form = CursosForm(instance=editar)
-    
-#     context = {"form": form}
-#     return render(request, 'Cursos/editar_cursos.html', context)
+def editar_cursos(request, curso_id):
+    editar_c = get_object_or_404(Cursos, id=curso_id)
+
+    if request.method == "POST":
+        form = CursosForm(request.POST, request.FILES, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_cursos")
+    else:
+        form = CursosForm(instance=editar_c)
+
+    # con esta linea de codigo se obtiene la url del apartado de iconoCurso
+    icono_url = editar_c.iconoCurso.url if editar_c.iconoCurso else None
+
+    context = {"form": form, "icono_url": icono_url}
+    return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)

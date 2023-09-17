@@ -27,7 +27,7 @@ class crear_cursos(forms.ModelForm):
 class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
-        fields = '__all__'
+        fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso']
 #este código define un formulario de Django llamado ModulosForm que se utiliza para interactuar con el modelo de modelos. 
 class ModulosForm(forms.ModelForm):
     class Meta:

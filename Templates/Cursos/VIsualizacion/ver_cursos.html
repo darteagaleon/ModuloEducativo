@@ -13,9 +13,7 @@
                         <h1>{{ v_cursos.nombre_curso }}</h1>
                     </div>
                     <div class="descripcion">
-                        {% comment %} <img src="{{ v_cursos.iconoCurso }}" alt="Icono del curso">                    {% endcomment %}
-                    {% comment %} <img src="{% static v_cursos.iconoCurso %}" alt="Icono del curso"> {% endcomment %}
-
+                        <img src="{{ v_cursos.iconoCurso.url }}" width="700vw" height="550vh" alt="Curso Image">
                     </div>  
                     <div class="instrucciones">
                         <h2>Descripción</h2>
@@ -26,15 +24,9 @@
                     <div class="duracion">
                         <p>Duración: {{ v_cursos.duracion_curso }} minutos</p>
                     </div>
-                    {% comment %} <div class="numIntentos">
-                        <p>Estado: {% if v_cursos.estado_clase %}
-                        Activo
-                    {% else %}
-                        Inactivo
-                    {% endif %}
-                    </p>
-                    </div> {% endcomment %}
+
                     <div class="button">
+                        <a href="{% url 'editar_cursos' v_cursos.id %}"> 
                             <button type="button" class="start">Editar</button>
                         </a>
                     </div>
