@@ -12,7 +12,7 @@
             <div class="tabla">
                 <h1>Editar CURSO</h1>
                 {% csrf_token %}
-                <form method="post" enctype="multipart/form-data">#enctype="multipart/form-data" Esto es esencial para que los archivos, como las imágenes, se puedan cargar correctamente.
+                <form method="post" enctype="multipart/form-data"><!--#enctype="multipart/form-data" Esto es esencial para que los archivos, como las imágenes, se puedan cargar correctamente.-->
                     {% csrf_token %}
                     <div class="form-group">
                         {{ form.as_p }}
