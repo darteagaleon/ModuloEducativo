@@ -13,12 +13,13 @@
                 <h1>Editar Clases</h1>
                 {% csrf_token %}
                 <form method="post">
+                    {% csrf_token %}
                     <div class="form-group">
                         {{ form.nombre_modulo.label_tag }}
-        {{ form.nombre_modulo }}
+                        {{ form.nombre_modulo }}
                         {{ form }}
                     </div>
-                    <button type="submit" >Editar</button>
+                    <button type="submit">Editar</button>
                 </form>
             </div>
         </div>
