@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
 from .models import Evaluaciones,Modulos
+from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 
 from django.contrib import messages
 
@@ -77,19 +78,6 @@ def filtrar(request):
 
 #vista para editar un cursito
 
-def update(request, curso_id):
-    editar = Cursos.objects.get(id=curso_id)
-    if request.method == "POST":
-        form = CursosForm(request.POST, instance=editar)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Editado con éxito')
-            return redirect("listar_cursos")
-    else:
-        form = CursosForm(instance=editar)
-    
-    context = {"form": form}
-    return render(request, 'Cursos/editar_cursos.html', context)
 
 
 def crear_clases(request):
@@ -123,6 +111,16 @@ def crear_pregunta(request):
         form = PreguntasForm()
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('crear_evaluacion')  
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
 
 # Vista para ver y realizar las evaluaciones como Usuario
 def ver_evaluaciones(request, modulo_id):
@@ -138,23 +136,14 @@ def ver_evaluaciones(request, modulo_id):
     context = {'evaluaciones':evaluaciones}
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
-
-def crear_evaluacion(request):
-    if request.method == 'POST':
-        form = EvaluacionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('crear_evaluacion')  
-    else:
-        form = EvaluacionForm()
-
-    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
-def gestion_evaluacion(request):
-    return render(request, 'Evaluaciones/evaluacion.html')
-
 def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+
+
 def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
@@ -163,6 +152,10 @@ def Listar_preguntas(request):
     listar_p= Preguntas.objects.all()
     context = {'listar_p':listar_p}
     return render(request,'Evaluaciones/listar_preguntas.html',context)
+def Listar_clases(request):
+    listarclases = Clases.objects.all()
+    context = {'listarclases':listarclases}
+    return render(request,'Clases/listar_clases.html',context)
 
 def All_Modulos(request):
     modulos = Modulos.objects.all()
@@ -177,10 +170,7 @@ def All_cursos(request):
 def All_clases(request):
     clases = Clases.objects.all()
     return render(request, 'Clases/clases.html', {'clases': clases})
-def Listar_clases(request):
-    listarclases = Clases.objects.all()
-    context = {'listarclases':listarclases}
-    return render(request,'Clases/listar_clases.html',context)
+
 
 #  apartado se hace el llamado a detalle de cada Evaluacion
 def ver_evaluacion_detalle(request, evaluacion_id):
@@ -220,28 +210,58 @@ def update_pregunta(request, pregunta_id):
     context = {"form": form}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
-def editar_modulo(request, modulo_id):
-    modulo = get_object_or_404(Modulos, id=modulo_id)
+def editar_modulos(request, modulo_id):
+    editar_m = get_object_or_404(Modulos, id=modulo_id)
     if request.method == "POST":
-        form = ModulosForm(request.POST, instance=modulo)
+        form = ModulosForm(request.POST, instance=editar_m)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Editado con éxito')
             return redirect("listar_modulos")
     else:
-        form = ModulosForm(instance=modulo)
-    return render(request, 'Modulos/editar_modulo.html', {'form': form})
+        form = ModulosForm(instance=editar_m)
+    context = {"form": form}
+    return render(request, 'Modulos/Visualizacion/editar_modulos.html', context)
 
-# def update_clase(request, clase_id):
-#     editar_c = Clases.objects.get(id=clase_id)
-#     if request.method == "POST":
-#         form = ClasesForm(request.POST, instance=editar_c)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Editado con éxito')
-#             return redirect("listar_clases")
-#     else:
-#         form = ClasesForm(instance=editar_c)
-#     context = {"form": form}
-#     return render(request, 'Clases/editar_clases.html', context)
+def ver_clases(request, clase_id):
+    v_clases = get_object_or_404(Clases, id=clase_id)
+    return render(request, 'Clases/Visualizacion/ver_clases.html', {'v_clases': v_clases})
 
+def ver_modulos(request,modulo_id):
+    v_modulos = get_object_or_404(Modulos, id=modulo_id)
+    return render(request, 'Modulos/Visualizacion/ver_modulos.html', {'v_modulos': v_modulos})
 
+def editar_clases(request, clase_id):
+    editar_c = get_object_or_404(Clases, id=clase_id)
+    if request.method == "POST":
+        form = ClasesForm(request.POST, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_clases")
+    else:
+        form = ClasesForm(instance=editar_c)
+    context = {"form": form}
+    return render(request, 'Clases/Visualizacion/editar_clases.html', context)
+
+def ver_cursos(request,curso_id):
+    v_cursos = get_object_or_404(Cursos, id=curso_id)
+    return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
+
+def editar_cursos(request, curso_id):
+    editar_c = get_object_or_404(Cursos, id=curso_id)
+
+    if request.method == "POST":
+        form = CursosForm(request.POST, request.FILES, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("listar_cursos")
+    else:
+        form = CursosForm(instance=editar_c)
+
+    # con esta linea de codigo se obtiene la url del apartado de iconoCurso
+    icono_url = editar_c.iconoCurso.url if editar_c.iconoCurso else None
+
+    context = {"form": form, "icono_url": icono_url}
+    return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)

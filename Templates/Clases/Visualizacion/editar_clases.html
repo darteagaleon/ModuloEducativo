@@ -10,11 +10,12 @@
     <div class="text"><!--2 -->
         <div class="all">
             <div class="tabla">
-                <h1>Editar CURSO </h1>
-                {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                <h1>Editar Clases</h1>
+                {% csrf_token %}
                 <form method="post">
-                    {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                     <div class="form-group">
+                        {{ form.nombre_modulo.label_tag }}
+        {{ form.nombre_modulo }}
                         {{ form }}
                     </div>
                     <button type="submit" >Editar</button>
@@ -23,9 +24,10 @@
         </div>
     </div>
 </div>
-<a href="{% url 'cursos' %}" id="back2"> <!--nos dirije  a la URL correspondiente a la vista llamada 'cursos' -->
-	<div >
-		<button  class="back">Regresar</button>
-	</div>
+{% comment %} <a href="{% url 'ver_clases' v_clases.id %}" id="back2"> {% endcomment %}
+    <button class="back">Regresar a Ver Clases</button>
 </a>
-{% endblock %}
+
+
+
+{% endblock %} 

@@ -1,6 +1,6 @@
-{% load static %}
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
 
-
+<!-- crea una barra lateral en una página web que incluye un logotipo y un posible botón de menú representado por un icono.-->
 <div class="sidebar">
     <div class="logo_content">
         <div class="logo">
@@ -9,6 +9,7 @@
         <i class='bx bx-menu' id="btn"></i>
     </div>
     <ul class="nav_list">
+        <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
         <li>
             <a href="{% url 'home' %}">
                 <i class='bx bx-home'></i>
@@ -16,6 +17,7 @@
             </a>
             <span class="tooltip">Inicio</span>
         </li>
+        <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
         <li>
             <a href="{% url 'cursos' %}">
                 <i class='bx bx-book'></i>
@@ -23,6 +25,8 @@
             </a>
             <span class="tooltip">Gestion Cursos</span>
         </li>
+        
+        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
         <li>
             <a href="{% url 'modulos' %}">
                 <i class='bx bx-calendar-plus'></i>
@@ -30,6 +34,7 @@
             </a>
             <span class="tooltip">Gestion Modulos</span>
         </li>
+        <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
         <li>
             <a href="{% url 'clase' %}">
                 <i class='bx bx-book-add'></i>
@@ -37,6 +42,7 @@
             </a>
             <span class="tooltip">Gestion Clases</span>
         </li>
+        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de evalucion en el sitio web. -->
         <li>
             <a href="{% url 'evaluacion' %}">
                 <i class='bx bx-file'></i>
@@ -44,6 +50,7 @@
             </a>
             <span class="tooltip">Gestion Evaluación</span>
         </li>
+        <!--representa un elemento de menú en un menú de navegación que no enlaza a una página específica-->
         <li>
             <a href="#">
                 <i class='bx bx-badge-check'></i>

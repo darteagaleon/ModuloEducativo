@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +20,8 @@
 <body>
     {% include 'includes/nav.html' %}
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}<!--es un bloqueo de contenido -->
+        {% endblock %}<!--para indicar un bloqueo definido previamente. Esto permite la reutilización y extensión de plantillas en aplicaciones web-->
     </main>
 </body>
 </html>

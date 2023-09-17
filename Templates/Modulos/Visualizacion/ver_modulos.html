@@ -1,0 +1,52 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+
+<body>
+    <div class="home_content">
+        <div class="text">
+            <div class="all">
+                <div class="tabla">
+                    <div class="titulo">
+                        <h1>{{ v_modulos.nombre_modulo }}</h1>
+                    </div>
+                    {% comment %} <div class="descripcion">
+                        <p>{{ v_clases.descripcion_clase }}</p>
+                    </div> {% endcomment %}
+                    {% comment %} <div class="instrucciones">
+                        <h2>Descripción</h2>
+                        <div class="instrucciones2">
+                            <p id="parrafo">{{ v_modulos.descripcion_clase }}</p>
+                        </div>
+                    </div>
+                    <div class="duracion">
+                        <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
+                    </div> {% endcomment %}
+                    <div class="numIntentos">
+                        <p>Estado: {% if v_modulos.estado_modulo %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                    </p>
+                    </div>
+                    <div class="button">
+                        <a href="{% url 'editar_modulos' v_modulos.id %}">
+                            <button type="button" class="start">Editar</button>
+                        </a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'listar_evaluacion' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+</body>
+{% endblock %}

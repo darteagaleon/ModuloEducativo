@@ -1,6 +1,6 @@
-{% extends 'Layout/Base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 
 	<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
@@ -14,7 +14,11 @@
             </form>
             
             <br>
-            <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span><!--esta linea nos dirije a la página que lista todos los cursos-->
+            <a href="{% url 'listar_cursos' %}"> 
+                <button>
+                vertodos
+            </button>
+            </a> <!--esta linea nos dirije a la página que lista todos los cursos-->
             <div class="table-responsive" >
                 <table class="table " id="tablam">
                     <thead>
@@ -24,7 +28,7 @@
                             <th scope="col">Duracion</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Duracion Curso</a></th>
-                            <th scope="col">Editar / Visualziar</th>
+                            <th scope="col">Visualizar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +45,9 @@
                                 {% endif %}
                                 <th scope="row">{{curso.duracion_curso}}</th>
                                 <td>
-                                    <button class="editar"><a href="{% url 'editar_curso' curso.id %}">Editar</a></button>
+                                        <a href="{% url 'ver_cursos' curso.id %}">
+                                        <button  class="back3">Visualizar</button>
+                                    </a>
                                     
                                 </td>
                             </tr>
