@@ -1,0 +1,53 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+
+<body>
+    <div class="home_content">
+        <div class="text">
+            <div class="all">
+                <div class="tabla">
+                    <div class="titulo">
+                        <h1>{{ v_cursos.nombre_curso }}</h1>
+                    </div>
+                    <div class="descripcion">
+                        {% comment %} <img src="{{ v_cursos.iconoCurso }}" alt="Icono del curso">                    {% endcomment %}
+                    {% comment %} <img src="{% static v_cursos.iconoCurso %}" alt="Icono del curso"> {% endcomment %}
+
+                    </div>  
+                    <div class="instrucciones">
+                        <h2>Descripción</h2>
+                        <div class="instrucciones2">
+                            <p id="parrafo">{{ v_cursos.descripcion_curso }}</p>
+                        </div>
+                    </div> 
+                    <div class="duracion">
+                        <p>Duración: {{ v_cursos.duracion_curso }} minutos</p>
+                    </div>
+                    {% comment %} <div class="numIntentos">
+                        <p>Estado: {% if v_cursos.estado_clase %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                    </p>
+                    </div> {% endcomment %}
+                    <div class="button">
+                            <button type="button" class="start">Editar</button>
+                        </a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'listar_evaluacion' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+</body>
+{% endblock %}

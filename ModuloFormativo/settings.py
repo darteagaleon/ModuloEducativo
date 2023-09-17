@@ -118,14 +118,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+
+STATIC_URL = '/static/'  # Debe comenzar con una barra diagonal
 STATICFILES_DIRS = [
-    BASE_DIR/'static',
-    'ModuloFormativo/static',
+    BASE_DIR / 'static',  # BASE_DIR es una variable de ruta, por lo que debe usarse una barra en lugar de una barra inclinada
 ]
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Usar BASE_DIR para definir la ruta completa
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_ROOT = BASE_DIR / 'media'  # Usar BASE_DIR para definir la ruta completa
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

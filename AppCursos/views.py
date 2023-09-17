@@ -78,19 +78,6 @@ def filtrar(request):
 
 #vista para editar un cursito
 
-def update(request, curso_id):
-    editar = Cursos.objects.get(id=curso_id)
-    if request.method == "POST":
-        form = CursosForm(request.POST, instance=editar)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Editado con éxito')
-            return redirect("listar_cursos")
-    else:
-        form = CursosForm(instance=editar)
-    
-    context = {"form": form}
-    return render(request, 'Cursos/editar_cursos.html', context)
 
 
 def crear_clases(request):
@@ -257,4 +244,20 @@ def editar_clases(request, clase_id):
     context = {"form": form}
     return render(request, 'Clases/Visualizacion/editar_clases.html', context)
 
+def ver_cursos(request,curso_id):
+    v_cursos = get_object_or_404(Cursos, id=curso_id)
+    return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
 
+# def update(request, curso_id):
+#     editar = Cursos.objects.get(id=curso_id)
+#     if request.method == "POST":
+#         form = CursosForm(request.POST, instance=editar)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Editado con éxito')
+#             return redirect("listar_cursos")
+#     else:
+#         form = CursosForm(instance=editar)
+    
+#     context = {"form": form}
+#     return render(request, 'Cursos/editar_cursos.html', context)
