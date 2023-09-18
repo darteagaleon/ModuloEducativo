@@ -23,4 +23,6 @@ admin.site.register(Evaluaciones,regEvaluaciones)
 class regPreguntas(admin.ModelAdmin):
      list_display=['nombre_evaluacion','nombre_pregunta','opcion_a','opcion_b','opcion_c','opcion_d','respuesta_correcta']
      list_filter = ('nombre_evaluacion',)#para busqueda en admin
+     ordering = ['id'] 
+
 admin.site.register(Preguntas,regPreguntas)
