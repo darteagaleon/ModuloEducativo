@@ -183,7 +183,7 @@ def ver_preguntas_detalle(request,evaluacion_id):
     return render(request, 'Evaluaciones/Visualizacion/ver_preguntas_detalle.html', {'evaluacion': evaluacion, 'preguntas': preguntas})
 
 
-def update_evaluacion(request, evaluacion_id):
+def editar_evaluaciones(request, evaluacion_id):
     editar_e = Evaluaciones.objects.get(id=evaluacion_id)
     if request.method == "POST":
         form = EvaluacionForm(request.POST, instance=editar_e)
@@ -197,7 +197,7 @@ def update_evaluacion(request, evaluacion_id):
     context = {"form": form}
     return render(request, 'Evaluaciones/editar_evaluacion.html', context)
 
-def update_pregunta(request, pregunta_id):
+def editar_preguntas(request, pregunta_id):
     editar_p = Preguntas.objects.get(id=pregunta_id)
     if request.method == "POST":
         form = PreguntasForm(request.POST, instance=editar_p)
