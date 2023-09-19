@@ -1,19 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+
+
 <head>
      <meta charset="UTF-8">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>VER EVALUACION</title>
-     <script src="/static/js/temporizador_evaluacion.js"></script>
+     <title>EVALUACIONES</title>
 </head>
+
 <body>
-     <h1>VER EVALUACION</h1>
-     <div id="cronometro">00:00</div>
-    <form id="formulario" action="ver_evaluaciones.html" method="post">
-        <!-- Aquí coloca los campos de tu formulario -->
-        <button id="iniciar" type="submit" onclick="iniciar()">Iniciar Examen</button>" 
-        <button id="terminar" type="submit" onclick="terminar()">Terminar Examen</button>"
-        
-     </form>
+     <div class="home_content"> <!--1 -->
+          <div class="text"><!--2 -->
+               <div class="container-fluid">
+                    <div class="row" id="tabla">
+                         <div>
+                              <form>
+                                   <h1 style="text-align:center;">Evaluación</h1>
+                                   <button id="btn_iniciar_evaluacion" type="submit"
+                                        id="iniciar_evaluacion">Iniciar</button>
+                                   <button id="btn_finalizar_evaluacion" type="submit"
+                                        id="finalizar_evaluacion">Finalizar</button>
+                              </form>
+                              <h2 style="text-align:center;">Info</h2>
+                              {% for evaluacion in evaluaciones %}
+                              <!--Este código se utiliza para generar una lista de detalles de
+                              evaluación en una página web utilizando información dinámica almacenada en 
+                              la variable evaluacion. -->
+                              <li>
+                                   <h2>{{ evaluacion.nombre_evaluacion }}</h2>
+                                   <p>Nombre: {{ evaluacion.nombre_evaluacion }}</p>
+                                   <p>Numero de intentos: {{ evaluacion.numero_intentos }}</p>
+                                   <p>Descripción: {{ evaluacion.descripcion_evaluacion }}</p>
+                                   <p>Intrucciones: {{ evaluacion.instrucciones_evaluacion }}</p>
+                                   <p>Duracion: {{ evaluacion.duracion_evaluacion_admin }}</p>
+                                   <p>Nombre de Modulo: {{ evaluacion.nombre_modulo }}</p>
+                              </li>
+                              {% endfor %}
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+        <div id="back2">
+        <button  class="back"><a href="{% url 'evaluacion' %}">Regresar</a></button>
+    </div>
 </body>
-</html>
+<script src="/static/js/temporizador_evaluacion.js"></script>
+
+
+{% endblock %}
