@@ -6,32 +6,33 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->            
         <h1> Listado de Clases</h1>
-        <br><form class="search" action="{% url 'filtrar' %}" method="GET">
+        <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
             <input type="submit" class="btn search-btn" value="Buscar">
         </form>
         
+        
         <br>
-        <a href="{% url 'listar_clases' %}"><button >vertodos</button></a> <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <a href="{% url 'listar_clases' %}"><button >Ver todos</button></a> <!--esta linea nos dirije a la página que lista todos los cursos-->
         <div class="table-responsive" >
-            <table class="table " id="tablam">
+            <table class="table table-hover " id="tablam">
                 <thead>
                     <tr>
                         <th scope="col">Clase</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Duracion</th>
+                        <th scope="col">Duración</th>
                         <th scope="col">Estado</th>
                         <th scope="col"></th>
-                        <th scope="col">Editar / Visualziar</th>
+                        <th scope="col">Visualizar</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
                         <tr>
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
                             <th scope="row">{{clase.nombre_clase}}</th>
                             <th scope="row">{{clase.descripcion_clase}}</th>
-                            <th scope="row">{{clase.duracion_clase}} xd </th>
+                            <th scope="row">{{clase.duracion_clase}} min </th>
                             {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
                             <th scope="row">Activo</th>
                             {% else %}

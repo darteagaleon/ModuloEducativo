@@ -37,29 +37,6 @@ class Crear_cursos (CreateView):
         return super().post(request, *args, **kwargs)
 
 
-#vista para crear los modulos
-# #vista para crear los modulos
-# class Crear_modulos (CreateView):
-#     model = Modulos
-#     fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
-#     template_name = 'crear_modulos.html'
-#     success_url = '/modulos'
-
-# #vista para crear las clases
-# class Crear_clases (CreateView):
-#     model = Clases
-#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-#     template_name = 'crear_clases.html'
-#     success_url = '/clases'
-
-# #vista para crear las clases
-# class Crear_clases (CreateView):
-#     model = Clases
-#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-#     template_name = 'crear_clases.html'
-#     success_url = '/clases'
-
-
 
 
 def Listar_cursos(request):
@@ -72,9 +49,34 @@ def Listar_cursos(request):
 #vista para fitrar cursos 
 def filtrar(request):
     filtro = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
+    
     context = {'filtro':filtro}
     return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
 
+# vista para filtrar modulos
+def filtrar_modulos(request):
+    filtro_m = Modulos.objects.filter(nombre_modulo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'Modulos/listar_modulos.html', {'listarm': filtro_m})
+# vista para filtrar clases
+def filtrar_clases(request):
+    filtro_c = Clases.objects.filter(nombre_clase__contains=request.GET.get('search',''))
+    
+    context = {'filtro_c':filtro_c}
+    return render(request, 'Clases/listar_clases.html', {'listarclases': filtro_c})
+# vista para filtrar evaluaciones 
+def filtrar_evaluaciones(request):
+    filtro_e = Evaluaciones.objects.filter(nombre_evaluacion__contains=request.GET.get('search',''))
+    
+    context = {'filtro_e':filtro_e}
+    return render(request, 'Evaluaciones/listar_evaluaciones.html', {'listare': filtro_e})
+# vista para filtrar preguntas
+def filtrar_preguntas(request):
+    filtro_p = Preguntas.objects.filter(nombre_pregunta__contains=request.GET.get('search',''))
+    
+    context = {'filtro_p':filtro_p}
+    return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
 
 #vista para editar un cursito
 
@@ -148,10 +150,7 @@ def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
     return render(request,'Evaluaciones/listar_evaluaciones.html',context)
-def Listar_preguntas(request):
-    listar_p= Preguntas.objects.all()
-    context = {'listar_p':listar_p}
-    return render(request,'Evaluaciones/listar_preguntas.html',context)
+
 def Listar_clases(request):
     listarclases = Clases.objects.all()
     context = {'listarclases':listarclases}
@@ -190,11 +189,11 @@ def editar_evaluaciones(request, evaluacion_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("listar_evaluacion")
+            return redirect("ver_evaluacion_detalle", evaluacion_id=evaluacion_id)
     else:
         form = EvaluacionForm(instance=editar_e)
     
-    context = {"form": form}
+    context = {"form": form,"evaluacion_id":evaluacion_id}
     return render(request, 'Evaluaciones/editar_evaluacion.html', context)
 
 def editar_preguntas(request, pregunta_id):
@@ -204,10 +203,10 @@ def editar_preguntas(request, pregunta_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("listar_evaluacion")
+            return redirect("ver_preguntas_detalle",pregunta_id=pregunta_id)
     else:
         form = PreguntasForm(instance=editar_p)
-    context = {"form": form}
+    context = {"form": form,"pregunta_id":pregunta_id}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
 def editar_modulos(request, modulo_id):
@@ -217,10 +216,11 @@ def editar_modulos(request, modulo_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("listar_modulos")
+            return redirect("ver_modulos" ,modulo_id=modulo_id )
     else:
+
         form = ModulosForm(instance=editar_m)
-    context = {"form": form}
+    context = {"form": form, "modulo_id":modulo_id}
     return render(request, 'Modulos/Visualizacion/editar_modulos.html', context)
 
 def ver_clases(request, clase_id):
@@ -238,10 +238,11 @@ def editar_clases(request, clase_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("listar_clases")
+            return redirect("ver_clases",clase_id=clase_id)
+
     else:
         form = ClasesForm(instance=editar_c)
-    context = {"form": form}
+    context = {"form": form,"clase_id":clase_id}
     return render(request, 'Clases/Visualizacion/editar_clases.html', context)
 
 def ver_cursos(request,curso_id):
@@ -256,12 +257,16 @@ def editar_cursos(request, curso_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("listar_cursos")
+            
+            # Redirigir al usuario a la vista 'ver_cursos' con el mismo 'curso_id' cuando se edite el curso
+            return redirect('ver_cursos', curso_id=curso_id)
+        
     else:
         form = CursosForm(instance=editar_c)
 
-    # con esta linea de codigo se obtiene la url del apartado de iconoCurso
-    icono_url = editar_c.iconoCurso.url if editar_c.iconoCurso else None
+    context = {"form": form, "curso_id": curso_id}
 
-    context = {"form": form, "icono_url": icono_url}
+    icono_url = editar_c.iconoCurso.url if editar_c.iconoCurso else None
+    context["icono_url"] = icono_url
+
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)

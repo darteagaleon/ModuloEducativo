@@ -13,7 +13,7 @@
                         <h1>{{ v_cursos.nombre_curso }}</h1>
                     </div>
                     <div class="descripcion">
-                        <img src="{{ v_cursos.iconoCurso.url }}" width="700vw" height="550vh" alt="Curso Image">
+                        <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
                     </div>  
                     <div class="instrucciones">
                         <h2>Descripción</h2>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <a href="{% url 'listar_evaluacion' %}" id="back2">
+    <a href="{% url 'listar_cursos' %}" id="back2">
         <div>
             <button class="back">Regresar</button>
         </div>

@@ -11,7 +11,9 @@ body{
     color: #f7ece1;
 
 }
-
+img {
+    width: 45vw;
+}
 .tabla {
     background-color: #0E6BA8;
     padding: 20px;
