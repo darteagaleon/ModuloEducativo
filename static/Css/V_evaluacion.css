@@ -179,3 +179,7 @@ button:hover {
 .back1:hover a {
     color: white;
 }
+h1 {
+    width: 35vw;
+    word-wrap:break-word;
+}

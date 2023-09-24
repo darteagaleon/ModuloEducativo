@@ -45,7 +45,10 @@ h2 {
     display: inline-block;
     font-size: 25px;
 }
-
+h1 {
+    width: 35vw;
+    word-wrap:break-word;
+}
 .tabla {
     min-width: 40vw;
 
