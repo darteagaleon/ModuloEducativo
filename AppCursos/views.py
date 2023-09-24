@@ -12,62 +12,22 @@ from .models import Evaluaciones,Modulos
 from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 
 from django.contrib import messages
-
+#Para el tema de las imagenes del Curso
+from PIL import Image
 # Create your views here.
 
 #vista para crear los cursos
-class Crear_cursos (CreateView):
+
+class Crear_cursos(CreateView):
     model = Cursos
     form_class = crear_cursos
     template_name = 'Cursos/crear_cursos.html'
-    success_url = reverse_lazy('appcursos:crear_cursos')
-
-#Metodo para guardar los datos del formulario, se sobreescribe el metodo post
-    def post(self, request, *args, **kwargs):
-    #validando el estado del curso
-        estatus=request.POST.get('estado_curso')
-        #validando si el estado del curso esta activo o inactivo
-        if estatus == 'on':
-            estatus = True
-        else:
-            estatus = False
-        #guardando los datos del formulario
-        curso= Cursos.objects.create(nombre_curso=request.POST['nombre_curso'],descripcion_curso=request.POST['descripcion_curso'],estado_curso=estatus,duracion_curso=request.POST['duracion_curso'],iconoCurso=request.FILES['iconoCurso'])
-        #super para llamar al metodo post de la clase padre
-        return super().post(request, *args, **kwargs)
-
-
-#vista para crear los modulos
-# #vista para crear los modulos
-# class Crear_modulos (CreateView):
-#     model = Modulos
-#     fields = ['nombre_curso','nombre_modulo', 'estado_modulo']
-#     template_name = 'crear_modulos.html'
-#     success_url = '/modulos'
-
-# #vista para crear las clases
-# class Crear_clases (CreateView):
-#     model = Clases
-#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-#     template_name = 'crear_clases.html'
-#     success_url = '/clases'
-
-# #vista para crear las clases
-# class Crear_clases (CreateView):
-#     model = Clases
-#     fields = ['nombre_modulo','nombre_clase', 'duracion_clase','contenido_clase','descripcion_clase','estado_clase']
-#     template_name = 'crear_clases.html'
-#     success_url = '/clases'
-
-
-
-
+    success_url=reverse_lazy('listar_cursos')
+    
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
-
-
 
 #vista para fitrar cursos 
 def filtrar(request):
@@ -75,10 +35,7 @@ def filtrar(request):
     context = {'filtro':filtro}
     return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
 
-
 #vista para editar un cursito
-
-
 
 def crear_clases(request):
     if request.method=="POST" :
