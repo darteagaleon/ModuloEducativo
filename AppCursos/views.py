@@ -36,6 +36,30 @@ def filtrar(request):
     context = {'filtro':filtro}
     return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
 
+# vista para filtrar modulos
+def filtrar_modulos(request):
+    filtro_m = Modulos.objects.filter(nombre_modulo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'Modulos/listar_modulos.html', {'listarm': filtro_m})
+# vista para filtrar clases
+def filtrar_clases(request):
+    filtro_c = Clases.objects.filter(nombre_clase__contains=request.GET.get('search',''))
+    
+    context = {'filtro_c':filtro_c}
+    return render(request, 'Clases/listar_clases.html', {'listarclases': filtro_c})
+# vista para filtrar evaluaciones 
+def filtrar_evaluaciones(request):
+    filtro_e = Evaluaciones.objects.filter(nombre_evaluacion__contains=request.GET.get('search',''))
+    
+    context = {'filtro_e':filtro_e}
+    return render(request, 'Evaluaciones/listar_evaluaciones.html', {'listare': filtro_e})
+# vista para filtrar preguntas
+def filtrar_preguntas(request):
+    filtro_p = Preguntas.objects.filter(nombre_pregunta__contains=request.GET.get('search',''))
+    
+    context = {'filtro_p':filtro_p}
+    return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
 #vista para editar un cursito
 
 def crear_clases(request):

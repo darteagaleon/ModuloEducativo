@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-app_name = "AppCursos"
 
 urlpatterns =[
      path("crear_curso/", views.Crear_cursos.as_view(), name="crear_curso"),
