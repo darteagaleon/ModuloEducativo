@@ -226,3 +226,4 @@ def editar_cursos(request, curso_id):
     context["icono_url"] = icono_url
 
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
+
