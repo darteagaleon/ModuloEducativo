@@ -3,6 +3,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+{% comment %} <script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
 
 
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
@@ -12,14 +13,14 @@
             <div class="tabla">
                 <h1>Editar Clases</h1>
                 {% csrf_token %}
-                <form method="post">
+                <form method="post" id="editarForm">
                     {% csrf_token %}
                     <div class="form-group">
                         {{ form.nombre_modulo.label_tag }}
                         {{ form.nombre_modulo }}
                         {{ form }}
                     </div>
-                    <button type="submit">Editar</button>
+                    <button type="submit" >Editar</button>
                 </form>
             </div>
         </div>
@@ -28,7 +29,6 @@
 <a href="{% url 'ver_clases' clase_id=clase_id %}" id="back2">
     <button class="back">Regresar a Ver Clases</button>
 </a>
-
 
 
 {% endblock %} 
