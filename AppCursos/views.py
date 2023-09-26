@@ -183,7 +183,7 @@ def editar_preguntas(request, pregunta_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("ver_preguntas_detalle",pregunta_id=pregunta_id)
+            return redirect("ver_preguntas_detalle", evaluacion_id=editar_p.nombre_evaluacion.id)
     else:
         form = PreguntasForm(instance=editar_p)
     context = {"form": form,"pregunta_id":pregunta_id}
@@ -217,7 +217,6 @@ def editar_clases(request, clase_id):
         form = ClasesForm(request.POST, instance=editar_c)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Editado con éxito')
             return redirect("ver_clases",clase_id=clase_id)
 
     else:
