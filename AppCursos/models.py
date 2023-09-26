@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils import timezone
+from AppUsuarios.models import Usuario_Cargo, Cargo
+
+
 
 # Se crea el modelo de la tabla Cursos de la empresa
 class Cursos(models.Model):
@@ -8,6 +11,9 @@ class Cursos(models.Model):
      estado_curso= models.BooleanField(default=False)
      duracion_curso = models.IntegerField(blank=True, null=True)
      iconoCurso = models.ImageField(upload_to='IconosCurso', null=True,blank=True) 
+     #Se crea la relacion a usuarios
+     id_cargo=models.ForeignKey(Cargo, on_delete=models.CASCADE,null=True)
+
      #Se crea la relacion
      # nombre_usuario= models.ForeignKey(Curso_Usuario, on_delete=models.CASCADE,null=False)
      def __str__(self):

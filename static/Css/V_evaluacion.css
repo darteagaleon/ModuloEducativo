@@ -184,3 +184,6 @@ h1 {
     word-wrap:break-word;
     text-align: center;
 }
+.swal-button-custom {
+    display: inline-block;
+}
