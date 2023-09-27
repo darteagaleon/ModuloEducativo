@@ -158,7 +158,7 @@ def ver_evaluacion_detalle(request, evaluacion_id):
 
 def ver_preguntas_detalle(request,evaluacion_id):
     evaluacion = get_object_or_404(Evaluaciones, pk=evaluacion_id)
-    preguntas = Preguntas.objects.filter(nombre_evaluacion=evaluacion).order_by('id')
+    preguntas = Preguntas.objects.filter(id_evaluacion=evaluacion).order_by('id')
     return render(request, 'Evaluaciones/Visualizacion/ver_preguntas_detalle.html', {'evaluacion': evaluacion, 'preguntas': preguntas})
 
 
@@ -183,7 +183,7 @@ def editar_preguntas(request, pregunta_id):
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect("ver_preguntas_detalle", evaluacion_id=editar_p.nombre_evaluacion.id)
+            return redirect("ver_preguntas_detalle", evaluacion_id=editar_p.id_evaluacion.id)
     else:
         form = PreguntasForm(instance=editar_p)
     context = {"form": form,"pregunta_id":pregunta_id}
