@@ -36,19 +36,6 @@
                 <tbody class="table-group-divider">
                     {% for evaluacion in listare %}<!--Esta linea codigo llama el estatic de django-->
                     <tr>
-<<<<<<< HEAD
-                        <th  scope="row">{{ evaluacion.nombre_evaluacion }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <th  scope="row">{{ evaluacion.descripcion_evaluacion }}</th ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "duracion_evaluacion_admin" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        {% if evaluacion.estado_evaluacion %}
-                        <th  scope="row">Activo</th  >
-                        {% else %}
-                        <th  scope="row">Inactivo</th    >
-                        {% endif %}
-                        <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  >
-                        <th  scope="row">
-                            {% if evaluacion.finalizada %}<!--El codigo entra a bloque y se ejecuta si la condicion es veradera-->
-=======
                         <th scope="row" >{{ evaluacion.nombre_evaluacion }}</th>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         <th scope="row">{{ evaluacion.descripcion_evaluacion }}</th>
@@ -61,28 +48,17 @@
                         <th scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</th>
                         <th scope="row">
                             {% if evaluacion.finalizada %}
->>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                             Sí
                             {% else %}
                             No
                             {% endif %}
-<<<<<<< HEAD
-                        </th    >
-                        <th >
-=======
                         </th>
                         <th>
->>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                             <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
                                 <button class="back3"> Visualizar
                                 </button>
-<<<<<<< HEAD
-                                </a>
-                        </th    >
-=======
                             </a>
                         </th>
->>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                     </tr>
                     {% endfor %}
                 </tbody>
