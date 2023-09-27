@@ -32,32 +32,28 @@
                 <tbody>
                     {% for evaluacion in listare %}<!--Esta linea codigo llama el estatic de django-->
                     <tr>
-                        <td scope="row">{{ evaluacion.nombre_evaluacion }}</td><!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td><!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td><!--se utiliza para mostrar dinámicamente el valor de la propiedad "duracion_evaluacion_admin" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                        <th  scope="row">{{ evaluacion.nombre_evaluacion }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                        <th  scope="row">{{ evaluacion.descripcion_evaluacion }}</th ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                        <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "duracion_evaluacion_admin" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         {% if evaluacion.estado_evaluacion %}
-                        <td scope="row">Activo</td>
+                        <th  scope="row">Activo</th  >
                         {% else %}
-                        <td scope="row">Inactivo</td>
+                        <th  scope="row">Inactivo</th    >
                         {% endif %}
-                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }}</td>
-                        <td scope="row">
-<<<<<<< HEAD
-                            {% if evaluacion.finalizada %}
-=======
+                        <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  >
+                        <th  scope="row">
                             {% if evaluacion.finalizada %}<!--El codigo entra a bloque y se ejecuta si la condicion es veradera-->
->>>>>>> 815493791207c49a363375dedf182f5d4c6dcb33
                             Sí
                             {% else %}
                             No
                             {% endif %}
-                        </td>
-                        <td>
+                        </th    >
+                        <th >
                             <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
                                 <button  class="back3"> Visualizar 
                                 </button>
                                 </a>
-                        </td>
+                        </th    >
                     </tr>
                 </tbody>
                 {% endfor %}
