@@ -4,7 +4,8 @@
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
 
 
-<form class="search" action="#" method="GET">
+<form class="search" action="{% url 'seleccionar_curso' %}" method="POST">
+     {% csrf_token %}<!--para evitar que se haga un ataque a la pagina web-->
      <select type="text" class="search-bar" name="curso">
           <option value="0">Seleccione un Curso</option>
           {% for curso in listacursos %}

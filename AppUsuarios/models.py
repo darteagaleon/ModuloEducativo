@@ -19,3 +19,15 @@ class Usuario_Cargo(models.Model):
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
      class Meta:
           verbose_name_plural = 'Usuario_Cargo'
+
+class Clase_Usuario(models.Model):
+     id_usuario_cargo=models.ForeignKey(Usuario_Cargo, on_delete=models.CASCADE, null=True)
+     id_modulo=models.ForeignKey('AppCursos.Modulos', on_delete=models.CASCADE, null=True)
+     id_clase=models.ForeignKey('AppCursos.Clases', on_delete=models.CASCADE, null=True)
+     visto=models.BooleanField(default=False)
+     def __str__(self):
+          return self.id_usuario_cargo.id_usuario.username+" - "+self.id_modulo.nombre_modulo+" - "+self.id_clase.nombre_clase
+
+     class Meta:
+          verbose_name_plural = 'Clase_Usuario'
+

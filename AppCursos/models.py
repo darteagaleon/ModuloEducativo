@@ -28,7 +28,7 @@ class Modulos(models.Model):
      nombre_modulo=models.CharField(max_length=100)
      estado_modulo= models.BooleanField(default=False)
      #Se crea la relacion a cursos
-     nombre_curso= models.ForeignKey(Cursos, on_delete=models.CASCADE,null=False)
+     id_curso= models.ForeignKey(Cursos, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_modulo
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
@@ -43,7 +43,7 @@ class Clases(models.Model):
      descripcion_clase = models.TextField(max_length=300)
      estado_clase= models.BooleanField(default=False)
      #Se crea la relacion a modulos
-     nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
+     id_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_clase
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
@@ -58,7 +58,7 @@ class Evaluaciones(models.Model):
      duracion_evaluacion_admin = models.IntegerField(default=30)
      finalizada = models.BooleanField(default=False)
      #Se crea la relacion a modulos
-     nombre_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
+     id_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_evaluacion
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
@@ -74,7 +74,7 @@ class Preguntas(models.Model):
      respuesta_correcta = models.CharField(max_length=1, choices=[('a', 'A'), ('b', 'B'), ('c', 'C'), ('d', 'D'),], null=True,blank=True)
 
      #Se crea la relacion a modulos
-     nombre_evaluacion= models.ForeignKey(Evaluaciones, on_delete=models.CASCADE,null=False)
+     id_evaluacion= models.ForeignKey(Evaluaciones, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_pregunta
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
