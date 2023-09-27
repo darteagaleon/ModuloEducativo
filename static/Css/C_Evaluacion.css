@@ -38,10 +38,12 @@ body {
 }
 
 h1 {
-    color: #00072D;
-    /* color: #13293D; */
-    text-align: center;
+    color: #f7ece1;
+    width: 35vw;
+    word-wrap: break-word;
+    margin: 0 auto; /* Esto centrará horizontalmente el elemento */
 }
+
 
 #tabla {
     background-color: #0E6BA8;

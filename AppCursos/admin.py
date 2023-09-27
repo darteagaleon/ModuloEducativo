@@ -20,7 +20,10 @@ admin.site.register(Clases,regClases)
 
 class regEvaluaciones(admin.ModelAdmin):
      list_display=['nombre_modulo','nombre_evaluacion','duracion_evaluacion_admin','numero_intentos','descripcion_evaluacion','instrucciones_evaluacion','finalizada']
+     list_filter = ('nombre_evaluacion',)#para busqueda en admin
+     ordering = ['id'] 
 admin.site.register(Evaluaciones,regEvaluaciones)
+
 
 class regPreguntas(admin.ModelAdmin):
      list_display=['nombre_evaluacion','nombre_pregunta','opcion_a','opcion_b','opcion_c','opcion_d','respuesta_correcta']

@@ -1,37 +1,42 @@
 {% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% load static %}<!--para cargar los archivos estaticos en la platilla-->
 {% block content %}<!--es un bloqueo de contenido -->
-<link rel="stylesheet" href="{% static 'Css/Curso.css' %}"><!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
 
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <h1> Listado de Evaluaciones </h1>
         <br>
-        <form class="search" action="{% url 'filtrar' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
+        <form class="search" action="{% url 'filtrar_evaluacion' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
             <input type="submit" class="btn search-btn" value="Buscar">
         </form>
 
         <br>
-        <span class="aux-btns"><a href="{% url 'listar_cursos' %}">vertodos</a> </span>
+        <a href="{% url 'listar_evaluacion' %}">
+            <button>
+                Ver todos
+            </button>
+        </a> 
         <div class="table-responsive">
-            <table class="table " id="tablam">
+            <table class="table table-hover " id="tablam">
                 <thead>
                     <tr>
                         <th scope="col">Evaluación</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Duracion</th>
                         <th scope="col">Estado</th>
-                        <th scope="col">Duracion Curso</a></th>
+                        <th scope="col">Duración</th>
                         <th scope="col">Finalizada</th>
                         <th scope="col">Visualizar</th>
 
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                     {% for evaluacion in listare %}<!--Esta linea codigo llama el estatic de django-->
                     <tr>
+<<<<<<< HEAD
                         <th  scope="row">{{ evaluacion.nombre_evaluacion }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         <th  scope="row">{{ evaluacion.descripcion_evaluacion }}</th ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  ><!--se utiliza para mostrar dinámicamente el valor de la propiedad "duracion_evaluacion_admin" de un objeto "evaluacion" en una celda de una tabla HTML.-->
@@ -43,20 +48,43 @@
                         <th  scope="row">{{ evaluacion.duracion_evaluacion_admin }}</th  >
                         <th  scope="row">
                             {% if evaluacion.finalizada %}<!--El codigo entra a bloque y se ejecuta si la condicion es veradera-->
+=======
+                        <th scope="row" >{{ evaluacion.nombre_evaluacion }}</th>
+                        <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                        <th scope="row">{{ evaluacion.descripcion_evaluacion }}</th>
+                        <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                        {% if evaluacion.estado_evaluacion %}
+                        <th scope="row">Activo</th>
+                        {% else %}
+                        <th scope="row">Inactivo</th>
+                        {% endif %}
+                        <th scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</th>
+                        <th scope="row">
+                            {% if evaluacion.finalizada %}
+>>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                             Sí
                             {% else %}
                             No
                             {% endif %}
+<<<<<<< HEAD
                         </th    >
                         <th >
+=======
+                        </th>
+                        <th>
+>>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                             <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
-                                <button  class="back3"> Visualizar 
+                                <button class="back3"> Visualizar
                                 </button>
+<<<<<<< HEAD
                                 </a>
                         </th    >
+=======
+                            </a>
+                        </th>
+>>>>>>> 558b024a9bc508767c900efbb8a4a50940c58406
                     </tr>
-                </tbody>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -64,13 +92,13 @@
 </div>
 +<a href="{% url 'evaluacion' %}" id="back2">
     <div>
-        <button class="back">Regresar</button><td scope="row">
-    {% if evaluacion.finalizada %}
+        <button class="back">Regresar</button>
+        {% if evaluacion.finalizada %}
         Sí
-    {% else %}
+        {% else %}
         No
-    {% endif %}
-</td>
+        {% endif %}
+        </td>
     </div>
 </a>
 {% endblock %}

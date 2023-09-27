@@ -12,9 +12,6 @@
                     <div class="titulo">
                         <h1>{{ v_clases.nombre_clase }}</h1>
                     </div>
-                    {% comment %} <div class="descripcion">
-                        <p>{{ v_clases.descripcion_clase }}</p>
-                    </div> {% endcomment %}
                     <div class="instrucciones">
                         <h2>Descripción</h2>
                         <div class="instrucciones2">
@@ -43,7 +40,7 @@
             </div>
         </div>
     </div>
-    <a href="{% url 'listar_evaluacion' %}" id="back2">
+    <a href="{% url 'listar_clases' %}" id="back2">
         <div>
             <button class="back">Regresar</button>
         </div>

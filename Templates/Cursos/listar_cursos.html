@@ -16,34 +16,33 @@
             <br>
             <a href="{% url 'listar_cursos' %}"> 
                 <button>
-                vertodos
+                Ver todos
             </button>
             </a> <!--esta linea nos dirije a la página que lista todos los cursos-->
             <div class="table-responsive" >
-                <table class="table " id="tablam">
+                <table class="table table-hover " id="tablam">
                     <thead>
                         <tr>
                             <th scope="col">Curso</th>
                             <th scope="col">Descripción</th>
-                            <th scope="col">Duracion</th>
                             <th scope="col">Estado</th>
-                            <th scope="col">Duracion Curso</a></th>
+                            <th scope="col">Duración</th>
                             <th scope="col">Visualizar</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-group-divider">
                         {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
                             <tr>
                                 <!-- Esta líneas definen las celdas de datos de la tabla-->
                                 <th scope="row">{{curso.nombre_curso}}</th>
                                 <th scope="row">{{curso.descripcion_curso}}</th>
-                                <th scope="row">{{curso.duracion}}</th>
                                 {% if curso.estado_curso %}<!--Estas líneas verifican si el atributo -->
                                 <th scope="row">Activo</th>
                                 {% else %}
                                 <th scope="row">Inactivo</th>
                                 {% endif %}
-                                <th scope="row">{{curso.duracion_curso}}</th>
+                                <th scope="row">{{curso.duracion_curso}} min
+                                </th>
                                 <td>
                                         <a href="{% url 'ver_cursos' curso.id %}">
                                         <button  class="back3">Visualizar</button>

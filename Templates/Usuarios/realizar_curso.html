@@ -1,0 +1,20 @@
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
+<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+
+
+<form class="search" action="#" method="GET">
+     <select type="text" class="search-bar" name="curso">
+          <option value="0">Seleccione un Curso</option>
+          {% for curso in listacursos %}
+          <option value="{{curso.id}}">{{curso.nombre_curso}}</option>
+          {% endfor %}
+     </select>
+
+
+
+     <input type="submit" class="btn search-btn" value="Buscar">
+</form>
+
+{% endblock %}

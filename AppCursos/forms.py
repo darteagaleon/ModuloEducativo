@@ -1,6 +1,6 @@
 from django import forms 
 from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas
-
+from PIL import Image
 
 class crear_cursos(forms.ModelForm):
     #se utiliza para configurar un formulario en Django basado en el modelo Cursos. 
