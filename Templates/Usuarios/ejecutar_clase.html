@@ -1,0 +1,43 @@
+{% extends 'Layout/Base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+
+<body>
+    <div class="home_content">
+        <div class="text">
+            <div class="all">
+                <div class="tabla">
+                    <div class="titulo">
+                        <h1>{{ v_clases.nombre_clase }}</h1>
+                    </div>
+                    <div class="instrucciones">
+                        <h2>Descripción</h2>
+                        <div class="instrucciones2">
+                            <p id="parrafo">{{ v_clases.descripcion_clase }}</p>
+                        </div>
+                    </div>
+                    <div class="duracion">
+                        <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
+                    </div>
+                    <div class="numIntentos">
+                        <p>Estado: {% if v_clases.estado_clase %}
+                        Activo
+                    {% else %}
+                        Inactivo
+                    {% endif %}
+                    </p>
+                    </div>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'listar_clases' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+</body>
+{% endblock %}
