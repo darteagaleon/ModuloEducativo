@@ -1,0 +1,26 @@
+{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% load static %}<!--para cargar los archivos estaticos en la platilla-->
+{% block content %}<!--es un bloqueo de contenido -->
+<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+
+          <h1>{{nombre_curso}}</h1>
+          <ul>
+               {% for clase in listaclases %}
+               <li>
+                    {% if clase.tipo == 'modulo' %}
+                         {{ clase.titulo }}
+                    {% else %}
+                         {% if clase.disponible %}
+                         <a href="{% url 'ejecutar_clase.html' %}" class="">{{clase.titulo}} </a>
+                         {% else %}
+                         {{clase.titulo}}
+                         {% endif %}
+                    {% endif %}
+               </li>
+               
+               
+               {% endfor %}
+          </ul>
+     
+
+{% endblock %}
