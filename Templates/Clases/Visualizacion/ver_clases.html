@@ -1,6 +1,8 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
-
+<!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 
@@ -9,18 +11,22 @@
         <div class="text">
             <div class="all">
                 <div class="tabla">
+                    <!--este div se utiliza para mostrar el nombre de una clase en una página web. -->
                     <div class="titulo">
                         <h1>{{ v_clases.nombre_clase }}</h1>
                     </div>
+                    <!--esta es se utiliza para mostrar la descripción de una clase en una página web. -->
                     <div class="instrucciones">
                         <h2>Descripción</h2>
                         <div class="instrucciones2">
                             <p id="parrafo">{{ v_clases.descripcion_clase }}</p>
                         </div>
                     </div>
+                    <!--este div se utiliza para mostrar la duración de una clase en minutos en una página web.-->
                     <div class="duracion">
                         <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
                     </div>
+                    <!--este div con lenguaje de plantillas se utiliza para mostrar el estado de una clase en una página web-->
                     <div class="numIntentos">
                         <p>Estado: {% if v_clases.estado_clase %}
                         Activo

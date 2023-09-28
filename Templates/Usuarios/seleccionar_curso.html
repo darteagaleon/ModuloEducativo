@@ -1,11 +1,16 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
 
 
 <form class="search" action="{% url 'seleccionar_curso' %}" method="POST">
-     {% csrf_token %}<!--para evitar que se haga un ataque a la pagina web-->
+<!--para evitar que se haga un ataque a la pagina web-->
+     {% csrf_token %}
+     <!--este select crea un menú desplegable que permite al usuario seleccionar un curso de una lista de cursos-->
      <select type="text" class="search-bar" name="curso">
           <option value="0">Seleccione un Curso</option>
           {% for curso in listacursos %}

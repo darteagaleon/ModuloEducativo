@@ -21,8 +21,10 @@
 <body>
     {% include 'includes/nav.html' %}
     <main>
-        {% block content %}<!--es un bloqueo de contenido -->
-        {% endblock %}<!--para indicar un bloqueo definido previamente. Esto permite la reutilización y extensión de plantillas en aplicaciones web-->
+        <!--es un bloqueo de contenido -->
+        {% block content %}
+        <!--para indicar un bloqueo definido previamente. Esto permite la reutilización y extensión de plantillas en aplicaciones web-->
+        {% endblock %}
     </main>
 </body>
 </html>

@@ -27,6 +27,7 @@ class Cursos(models.Model):
 class Modulos(models.Model):
      nombre_modulo=models.CharField(max_length=100)
      estado_modulo= models.BooleanField(default=False)
+     orden_modulo = models.IntegerField(blank=True, null=True)
      #Se crea la relacion a cursos
      id_curso= models.ForeignKey(Cursos, on_delete=models.CASCADE,null=False)
      def __str__(self):
@@ -42,6 +43,7 @@ class Clases(models.Model):
      contenido_clase = models.URLField(max_length=200)
      descripcion_clase = models.TextField(max_length=300)
      estado_clase= models.BooleanField(default=False)
+     orden_clase = models.IntegerField(blank=True, null=True)
      #Se crea la relacion a modulos
      id_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):
