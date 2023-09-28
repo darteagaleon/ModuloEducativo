@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
@@ -33,7 +36,8 @@
                     <tr>
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
                         <th scope="row">{{modulos.nombre_modulo}}</th>
-                        {% if modulos.estado_modulo %}<!--Estas líneas verifican si el atributo -->
+                        <!--Estas líneas verifican si el atributo -->
+                        {% if modulos.estado_modulo %}
                         <th scope="row">Activo</th>
                         {% else %}
                         <th scope="row">Inactivo</th>
