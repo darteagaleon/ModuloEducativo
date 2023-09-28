@@ -1,6 +1,8 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
-
+<!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 
@@ -9,18 +11,25 @@
         <div class="text">
             <div class="all">
                 <div class="tabla">
+                    <!--este div se utiliza para mostrar el nombre de un curso en una página web.-->
                     <div class="titulo">
                         <h1>{{ v_cursos.nombre_curso }}</h1>
                     </div>
+                    <!--este div se utiliza para mostrar la imagen asociada a un curso en una página web.-->
                     <div class="descripcion">
                         <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
                     </div>  
+                    <div class="descripcion">
+                        <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
+                    </div>  
+                    <!--este div se utiliza para mostrar la descripción de un curso en una página web.-->
                     <div class="instrucciones">
                         <h2>Descripción</h2>
                         <div class="instrucciones2">
                             <p id="parrafo">{{ v_cursos.descripcion_curso }}</p>
                         </div>
                     </div> 
+                    <!-- este div se utiliza para mostrar la duración de un curso en minutos en una página web.-->
                     <div class="duracion">
                         <p>Duración: {{ v_cursos.duracion_curso }} minutos</p>
                     </div>

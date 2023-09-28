@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
@@ -12,8 +15,10 @@
                         <h1>Crear Evaluacion </h1>
                         <div class="form">
 							<form method="post">
-                                {% csrf_token %}<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
-								{% load widget_tweaks %}<!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                                <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                                {% csrf_token %}
+                                <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+								{% load widget_tweaks %}
 								<div class="form-group">
 
 

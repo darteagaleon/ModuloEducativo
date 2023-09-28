@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
 
@@ -14,20 +17,24 @@
                     <div>
                         <h1 style="text-align:center;">Gestion evaluacion</h1>
                         <div class="folder-container">
-                            <a href="{% url 'crear_evaluacion' %}" class="folder-box"> <i
-                                    class="bx bx-folder folder-icon"></i><!--cuando se hace clic, llevará al usuario a la URL llamada 'crear_evaluacion'. -->
+                            <!--cuando se hace clic, llevará al usuario a la URL llamada 'crear_evaluacion'. -->
+                            <a href="{% url 'crear_evaluacion' %}" class="folder-box"> 
+                                
+                                <i class="bx bx-folder folder-icon"></i>
                                 <div>
                                     <p>Crear Evaluación</p>
                                 </div>
                             </a>
-                            <a href="{% url 'crear_pregunta' %}" class="folder-box"><!--ando se hace clic, llevará al usuario a la URL llamada 'crear_preguntas'. -->
+                            <!--cuando se hace clic, llevará al usuario a la URL llamada 'crear_preguntas'. -->
+                            <a href="{% url 'crear_pregunta' %}" class="folder-box">
                                 <div>
                                     <i class="bx bx-folder folder-icon"></i>
                                     <p>Crear Preguntas</p>
                                 </div>
                             </a>
+                            <!--ando se hace clic, llevará al usuario a la URL llamada 'listar_evaluacion'. -->
                             <a href="{% url 'listar_evaluacion' %}" class="folder-box"> <i
-                                    class="bx bx-folder folder-icon"></i><!--ando se hace clic, llevará al usuario a la URL llamada 'listar_evaluacion'. -->
+                                    class="bx bx-folder folder-icon"></i>
                                 <div>
                                     <p>Listar Evaluaciones</p>
                                 </div>

@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 <!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
 
@@ -21,7 +24,9 @@
             </button>
         </a> 
         <div class="table-responsive">
+            
             <table class="table table-hover " id="tablam">
+                <!-- crea una tabla que se utiliza para mostrar información relacionada con evaluaciones-->
                 <thead>
                     <tr>
                         <th scope="col">Evaluación</th>
@@ -34,7 +39,8 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    {% for evaluacion in listare %}<!--Esta linea codigo llama el estatic de django-->
+                    <!--Esta linea codigo llama el estatic de django-->
+                    {% for evaluacion in listare %}
                     <tr>
                         <th scope="row" >{{ evaluacion.nombre_evaluacion }}</th>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
@@ -46,6 +52,7 @@
                         <th scope="row">Inactivo</th>
                         {% endif %}
                         <th scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</th>
+                        <!--este <th> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
                         <th scope="row">
                             {% if evaluacion.finalizada %}
                             Sí
