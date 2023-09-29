@@ -31,3 +31,13 @@ class regPreguntas(admin.ModelAdmin):
      ordering = ['id'] 
 
 admin.site.register(Preguntas,regPreguntas)
+
+#Material de apoyo
+class regMaterialApoyo(admin.ModelAdmin):
+     list_display=['NombreMaterialApoyo', 'DescripcionMaterialApoyo', 'Archivo']
+     list_filter = ('NombreMaterialApoyo',)  # para búsqueda en admin
+     ordering = ['id']
+admin.site.register(MaterialApoyo, regMaterialApoyo)
+
+
+
