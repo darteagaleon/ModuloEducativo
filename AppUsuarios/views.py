@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -70,10 +70,12 @@ def seleccionar_curso(request):
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
             }
-        return render (request,'Usuarios/ejecutar_clase.html', context)
+        
 
         #Redireccionar a la ejecucion del Curso
         return render (request,'Usuarios/ejecutar_curso.html', context)
+        
+        
     else:
 
         #Consultar listado de Cursos para el Usuario y sus Cargos
@@ -88,3 +90,9 @@ def seleccionar_curso(request):
         #Retornar el template con el contexto
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
    
+def ejecutar_clase(request, clase_id):
+    clase = get_object_or_404(Clases, pk=clase_id)
+    context = {
+        'v_clases': clase,
+    }
+    return render(request, 'Usuarios/ejecutar_clase.html', context)
