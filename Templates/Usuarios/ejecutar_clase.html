@@ -26,24 +26,16 @@
                     <div class="duracion">
                         <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
                     </div>
-                    <!-- este div se utiliza para mostrar el estado de una clase en una página web.-->
-                    <div class="numIntentos">
-                        <p>Estado: {% if v_clases.estado_clase %}
-                        Activo
-                    {% else %}
-                        Inactivo
-                    {% endif %}
-                    </p>
-                    </div>
+                    <div class="contenido">
+                        <h2>Contenido</h2>
+                        <div class="contenido2">
+                            <a href="{{ v_clases.contenido_clase }}" target="_blank">{{ v_clases.contenido_clase }}</a>
+                        </div>
         
                 </div>
             </div>
         </div>
     </div>
-    <a href="{% url 'listar_clases' %}" id="back2">
-        <div>
-            <button class="back">Regresar</button>
-        </div>
-    </a>
+    
 </body>
 {% endblock %}
