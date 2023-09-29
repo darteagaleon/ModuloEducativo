@@ -82,4 +82,12 @@ class Preguntas(models.Model):
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
      class Meta:
           verbose_name_plural = 'Preguntas'
-          
+
+
+#Modelo de material de apoyo
+class MaterialApoyo(models.Model):
+     idmaterial = models.IntegerField()
+     NombreMaterialApoyo = models.CharField(max_length=255)
+     DescripcionMaterialApoyo = models.TextField()
+     Archivo = models.URLField()  # Para almacenar la URL del archivo en Google Drive
+

@@ -8,8 +8,9 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
-from .models import Evaluaciones,Modulos
+from .models import Evaluaciones,Modulos, MaterialApoyo
 from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
+from django.views import View
 
 from django.contrib import messages
 #Para el tema de las imagenes del Curso
@@ -249,4 +250,16 @@ def editar_cursos(request, curso_id):
     context["icono_url"] = icono_url
 
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
+
+
+#Vista de material de apoyo
+class MaterialApoyoListView(View):
+    def get(self, request):
+        materiales = MaterialApoyo.objects.all()
+        return render(request, 'material_apoyo/list.html', {'materiales': materiales})
+
+class MaterialApoyoDetailView(View):
+    def get(self, request, pk):
+        material = get_object_or_404(MaterialApoyo, pk=pk)
+        return render(request, 'material_apoyo/detail.html', {'material': material})
 
