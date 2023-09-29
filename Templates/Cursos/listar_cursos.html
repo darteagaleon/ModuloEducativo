@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 
 	<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
@@ -14,11 +17,13 @@
             </form>
             
             <br>
+            <!--esta linea nos dirije a la página que lista todos los cursos-->
             <a href="{% url 'listar_cursos' %}"> 
                 <button>
                 Ver todos
             </button>
-            </a> <!--esta linea nos dirije a la página que lista todos los cursos-->
+            </a> 
+            
             <div class="table-responsive" >
                 <table class="table table-hover " id="tablam">
                     <thead>
@@ -36,7 +41,8 @@
                                 <!-- Esta líneas definen las celdas de datos de la tabla-->
                                 <th scope="row">{{curso.nombre_curso}}</th>
                                 <th scope="row">{{curso.descripcion_curso}}</th>
-                                {% if curso.estado_curso %}<!--Estas líneas verifican si el atributo -->
+                                <!--Estas líneas verifican si el atributo -->
+                                {% if curso.estado_curso %}
                                 <th scope="row">Activo</th>
                                 {% else %}
                                 <th scope="row">Inactivo</th>

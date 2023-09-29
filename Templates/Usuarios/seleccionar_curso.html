@@ -10,6 +10,7 @@
 <form class="search" action="{% url 'seleccionar_curso' %}" method="POST">
 <!--para evitar que se haga un ataque a la pagina web-->
      {% csrf_token %}
+     <!--este select crea un menú desplegable que permite al usuario seleccionar un curso de una lista de cursos-->
      <select type="text" class="search-bar" name="curso">
           <option value="0">Seleccione un Curso</option>
           {% for curso in listacursos %}

@@ -1,5 +1,8 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
+<!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
@@ -13,7 +16,8 @@
         
         
         <br>
-        <a href="{% url 'listar_clases' %}"><button >Ver todos</button></a> <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <a href="{% url 'listar_clases' %}"><button >Ver todos</button></a> 
         <div class="table-responsive" >
             <table class="table table-hover " id="tablam">
                 <thead>

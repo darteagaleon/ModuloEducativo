@@ -1,6 +1,9 @@
-{% extends 'Layout/Base.html' %}<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% load static %}<!--para cargar los archivos estaticos en la platilla-->
-{% block content %}<!--es un bloqueo de contenido -->
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
 
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
 
@@ -14,18 +17,21 @@
                     <div>
                         <h1 style="text-align:center;">Gestion Curso</h1>
                         <div class="folder-container">
-                            <a href="{% url 'crear_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i><!--se esta enlazando la url de 'crear_curso'-->
+                            <!--se esta enlazando la url de 'crear_curso'-->
+                            <a href="{% url 'crear_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                                 <div  >
                                 <p>Crear Curso</p>
                             </div>
                         </a>
-                            <a href="{% url 'listar_cursos' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i><!--se esta enlazando la url de 'listar_cursos'-->
+                        <!--se esta enlazando la url de 'listar_cursos'-->
+                            <a href="{% url 'listar_cursos' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                                 <div  >
                                 <p>Listar Cursos</p>
 
                             </div>
                         </a>
-                        <a href="{% url 'seleccionar_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i><!--se esta enlazando la url de 'listar_cursos'-->
+                        <!--se esta enlazando la url de 'listar_cursos'-->
+                        <a href="{% url 'seleccionar_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                             <div  >
                             <p>Realizar Curso</p>
                             
