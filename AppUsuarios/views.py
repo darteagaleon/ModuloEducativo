@@ -42,12 +42,17 @@ def seleccionar_curso(request):
 
         #Consultar las clases del Curso
         #Listar los id de las clases del Curso
-        listaPkClases=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase')
-        listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
         listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
+        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
+
+
+        # listaPkClases=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase')
+        listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
         listafilas=[]
         #Recorrer la lista de clases para ensamblar el contexto
         nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
+        visto=True #Para saber si la clase ya fue vista
+
         for clase in listaClases:
             reg={}
             if nuevoModulo != clase['id_modulo__nombre_modulo']:
@@ -64,6 +69,17 @@ def seleccionar_curso(request):
                 'disponible': True
             }
             #PENDIENTE REVISAR SI LA CLASE YA FUE VISTA
+            if  not visto:
+                reg['disponible']=False
+
+            #Buscar si la clase ya fue vista/Encuentra el id de la clase
+            for claseUsuario in listaClasesUsuario:
+                if claseUsuario['id_clase'] == clase['id']:
+                    if claseUsuario['visto']==False:
+                        visto=False
+                        break
+                        
+
             listafilas.append(reg)
 
         context= {
@@ -91,7 +107,9 @@ def seleccionar_curso(request):
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
    
 def ejecutar_clase(request, clase_id):
+    #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
+    #Marcar el registro como visto
     context = {
         'v_clases': clase,
     }
