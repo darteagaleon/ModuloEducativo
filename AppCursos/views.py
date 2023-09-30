@@ -19,6 +19,39 @@ from PIL import Image
 
 #vista para crear los cursos
 
+
+
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
+# Create your views here.
+def home(request):
+    return render(request, 'home.html')
+
+@login_required
+# antes de entrar a cualquiera de estas funciones le pide estar registrado
+def All_cursos(request):
+    cursos = Cursos.objects.all()
+    return render(request, 'Cursos/cursos.html', {'cursos': cursos})
+@login_required
+
+def All_clases(request):
+    clases = Clases.objects.all()
+    return render(request, 'Clases/clases.html', {'clases': clases})
+@login_required
+
+def All_Modulos(request):
+    modulos = Modulos.objects.all()
+    return render(request, 'Modulos/modulos.html', {'modulos': modulos})
+@login_required
+
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+
+# funcion para hacer logout
+def exit(request):
+    logout(request)
+    return redirect('home')
+
 class Crear_cursos(CreateView):
     model = Cursos
     form_class = crear_cursos
@@ -123,10 +156,6 @@ def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
 
-def gestion_evaluacion(request):
-    return render(request, 'Evaluaciones/evaluacion.html')
-
-
 def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
@@ -137,19 +166,12 @@ def Listar_clases(request):
     context = {'listarclases':listarclases}
     return render(request,'Clases/listar_clases.html',context)
 
-def All_Modulos(request):
-    modulos = Modulos.objects.all()
-    return render(request, 'Modulos/modulos.html', {'modulos': modulos})
+
 def Listar_modulos(request):
     listarm = Modulos.objects.all()
     context = {'listarm':listarm}
     return render(request,'Modulos/listar_modulos.html',context)
-def All_cursos(request):
-    cursos = Cursos.objects.all()
-    return render(request, 'Cursos/cursos.html', {'cursos': cursos})
-def All_clases(request):
-    clases = Clases.objects.all()
-    return render(request, 'Clases/clases.html', {'clases': clases})
+
 
 
 #  apartado se hace el llamado a detalle de cada Evaluacion

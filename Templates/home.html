@@ -7,14 +7,26 @@ y
 <!--es un bloqueo de contenido -->
 {% block content %}
 <!-- crea una sección de contenido que muestra un mensaje de bienvenida centrado en la página web.-->
-                         <div class="contenido">
-                              <div class="row">
-                                   <div class="col-6 offset-3 text-center "id="saludo">
-                                        <h1>ㅤㅤㅤHola Felipe, Bienvenido a Cyres de Colombia</h1>
-                                   </div>
-                              </div>
-                         </div>
+<div class="contenido">
+     <div class="row">
+          <div class="col-6 offset-3 text-center " id="saludo">
+               {% if request.user.is_authenticated %}
+               <hr>
+               <h1>
+                    Hola {{ user.username | upper }}.
+                    Bienvenido a Cyres Educativo
+               </h1>
+               {% else %}
+               <hr>
+               <h1>
+                    Hola.
+                    Bienvenido a Cyres Educativo
+               </h1>
+               {% endif %}
+          </div>
+     </div>
+</div>
 
-     
+
 
 {% endblock %}

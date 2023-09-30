@@ -208,6 +208,9 @@ body{
     font-size: 10px;
 }
 /* editar boton log out */
+#log_out{
+    color:white ;
+}
 .profile #log_out{
     position: absolute;
     bottom: 5px;
