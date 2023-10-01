@@ -1,0 +1,52 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
+
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->
+        <h1> Material de apoyo </h1>
+        <br>
+        <form class="search" action="{% url 'filtrar_material' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Material de apoyo...">
+            <input type="submit" class="btn search-btn" value="Buscar">
+        </form>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover" id="tablam">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Archivo</th>
+                        <th scope="col"></th>
+                        <th scope="col">Visualizar</th>
+                    </tr>
+                </thead>
+
+                <tbody class="table-group-divider">
+                    {% for material in materiales %}
+                    <tr>
+                        <td>{{ material.NombreMaterialApoyo }}</td>
+                        <td>{{ material.DescripcionMaterialApoyo }}</td>
+                        <td>{{ material.Archivo }}</td>
+                        <td>pk={{ material.pk }}</td>
+                        <td>
+                            <a href="{% url 'material_detalle' pk=material.pk %}">
+                                <button class="editar">
+                                    Visualizar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+{% endblock %}

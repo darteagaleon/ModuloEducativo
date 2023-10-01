@@ -1,7 +1,12 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+<<<<<<< HEAD
+from .views import MaterialApoyoListView, MaterialApoyoDetailView
+
+=======
 from .views import home,exit
+>>>>>>> 7c8d72b0f23d3332d19b73b8dac7a8cbccbd1a63
 
 
 urlpatterns =[
@@ -44,4 +49,8 @@ urlpatterns =[
      path('ver_cursos/<int:curso_id>/', views.ver_cursos, name='ver_cursos'),
      path('editar_cursos/<int:curso_id>/',
           views.editar_cursos, name='editar_cursos'),
+     path('MaterialApoyo/', MaterialApoyoListView.as_view(), name='material_list'),
+     path('MaterialApoyo/<int:pk>/', MaterialApoyoDetailView.as_view(), name='material_detalle'),
+     path('filtrar_material/',views.filtrar_material,name="filtrar_material"),
+     
      ]
