@@ -4,23 +4,23 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
+<div class="home_content"> <!--1 -->
+     <div class="text"><!--2 -->
+          <form class="search" action="{% url 'seleccionar_curso' %}" method="POST">
+               <!--para evitar que se haga un ataque a la pagina web-->
+               {% csrf_token %}
+               <!--este select crea un menú desplegable que permite al usuario seleccionar un curso de una lista de cursos-->
+               <select type="text" class="search-bar" name="curso">
+                    <option value="0">Seleccione un Curso</option>
+                    {% for curso in listacursos %}
+                    <option value="{{curso.id}}">{{curso.nombre_curso}}</option>
+                    {% endfor %}
+               </select>
+               <button style="width: auto;" >Buscar</button>
+          </form>
+     </div><!--2 -->
+</div><!--1 -->
 
-<form class="search" action="{% url 'seleccionar_curso' %}" method="POST">
-<!--para evitar que se haga un ataque a la pagina web-->
-     {% csrf_token %}
-     <!--este select crea un menú desplegable que permite al usuario seleccionar un curso de una lista de cursos-->
-     <select type="text" class="search-bar" name="curso">
-          <option value="0">Seleccione un Curso</option>
-          {% for curso in listacursos %}
-          <option value="{{curso.id}}">{{curso.nombre_curso}}</option>
-          {% endfor %}
-     </select>
-
-
-
-     <input type="submit" class="btn search-btn" value="Buscar">
-</form>
-
-{% endblock %}
+          {% endblock %}

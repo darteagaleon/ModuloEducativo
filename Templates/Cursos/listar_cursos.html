@@ -13,7 +13,7 @@
             <br>
             <form class="search" action="{% url 'filtrar' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-                <input type="submit" class="btn search-btn" value="Buscar">
+                <button style="width: auto;" >Buscar</button>
             </form>
             
             <br>
@@ -39,16 +39,16 @@
                         {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
                             <tr>
                                 <!-- Esta líneas definen las celdas de datos de la tabla-->
-                                <th scope="row">{{curso.nombre_curso}}</th>
-                                <th scope="row">{{curso.descripcion_curso}}</th>
+                                <td scope="row">{{curso.nombre_curso}}</td>
+                                <td scope="row">{{curso.descripcion_curso}}</td>
                                 <!--Estas líneas verifican si el atributo -->
                                 {% if curso.estado_curso %}
-                                <th scope="row">Activo</th>
+                                <td scope="row">Activo</td>
                                 {% else %}
-                                <th scope="row">Inactivo</th>
+                                <td scope="row">Inactivo</td>
                                 {% endif %}
-                                <th scope="row">{{curso.duracion_curso}} min
-                                </th>
+                                <td scope="row">{{curso.duracion_curso}} min
+                                </td>
                                 <td>
                                         <a href="{% url 'ver_cursos' curso.id %}">
                                         <button  class="back3">Visualizar</button>

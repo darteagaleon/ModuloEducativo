@@ -13,14 +13,16 @@ y
                {% if request.user.is_authenticated %}
                <hr>
                <h1>
-                    Hola {{ user.username | upper }}.
-                    Bienvenido a Cyres Educativo
+                    Hola {{ user.username | title }}.
+                    <br />
+                    Bienvenid@ a Cyres Educativo
                </h1>
                {% else %}
                <hr>
                <h1>
                     Hola.
-                    Bienvenido a Cyres Educativo
+                    <br />
+                    Bienvenid@ a Cyres Educativo
                </h1>
                {% endif %}
           </div>

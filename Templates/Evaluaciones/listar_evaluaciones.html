@@ -14,7 +14,7 @@
         <br>
         <form class="search" action="{% url 'filtrar_evaluacion' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
-            <input type="submit" class="btn search-btn" value="Buscar">
+            <button style="width: auto;" >Buscar</button>
         </form>
 
         <br>
@@ -42,24 +42,24 @@
                     <!--Esta linea codigo llama el estatic de django-->
                     {% for evaluacion in listare %}
                     <tr>
-                        <th scope="row" >{{ evaluacion.nombre_evaluacion }}</th>
+                        <td scope="row" >{{ evaluacion.nombre_evaluacion }}</td>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <th scope="row">{{ evaluacion.descripcion_evaluacion }}</th>
+                        <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         {% if evaluacion.estado_evaluacion %}
-                        <th scope="row">Activo</th>
+                        <td scope="row">Activo</td>
                         {% else %}
-                        <th scope="row">Inactivo</th>
+                        <td scope="row">Inactivo</td>
                         {% endif %}
-                        <th scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</th>
-                        <!--este <th> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
-                        <th scope="row">
+                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</td>
+                        <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
+                        <td scope="row">
                             {% if evaluacion.finalizada %}
                             Sí
                             {% else %}
                             No
                             {% endif %}
-                        </th>
+                        </td>
                         <th>
                             <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
                                 <button class="back3"> Visualizar

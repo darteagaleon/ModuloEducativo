@@ -34,7 +34,7 @@ body {
     position: relative;
     width: 50vw;
     color: #f7ece1;
-
+    padding-bottom: .5%; /* Agrega espacio en blanco en la parte inferior */
 }
 
 h1 {
@@ -158,7 +158,11 @@ input[type="text"],
 #id_duracion_curso,
 #id_nombre_curso ,
 #id_nombre_evaluacion,#id_numero_intentos,
-#id_nombre_modulo{
+#id_nombre_modulo,
+#id_orden_clase,
+#id_id_modulo,
+#id_id_curso,
+#id_orden_modulo{
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
@@ -242,6 +246,11 @@ input[type="checkbox"] {
 
 }
 /* focus---------------- */
+#id_orden_modulo:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
 
 #id_nombre_curso:focus {
     background-color: #c2c2c2;
@@ -249,7 +258,21 @@ input[type="checkbox"] {
     transform: scale(1.1);
 }
 
-
+#id_id_curso:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+#id_id_modulo:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+#id_orden_clase:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
 input[type="number"]:focus {
     background-color: #c2c2c2;
     color: #fff;

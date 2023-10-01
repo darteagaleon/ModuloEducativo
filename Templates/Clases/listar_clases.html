@@ -11,7 +11,7 @@
         <h1> Listado de Clases</h1>
         <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
-            <input type="submit" class="btn search-btn" value="Buscar">
+            <button style="width: auto;" >Buscar</button>
         </form>
         
         
@@ -34,15 +34,15 @@
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
                         <tr>
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <th scope="row">{{clase.nombre_clase}}</th>
-                            <th scope="row">{{clase.descripcion_clase}}</th>
-                            <th scope="row">{{clase.duracion_clase}} min </th>
+                            <td scope="row">{{clase.nombre_clase}}</td>
+                            <td scope="row">{{clase.descripcion_clase}}</td>
+                            <td scope="row">{{clase.duracion_clase}} min </td>
                             {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
-                            <th scope="row">Activo</th>
+                            <td scope="row">Activo</td>
                             {% else %}
-                            <th scope="row">Inactivo</th>
+                            <td scope="row">Inactivo</td>
                             {% endif %}
-                            <th scope="row">{{clase.duracion_clase_admin}}</th>
+                            <td scope="row">{{clase.duracion_clase_admin}}</td>
                             <td>
                                 <a href="{% url 'ver_clases' clase.id %}">
                                     <button class="editar">
