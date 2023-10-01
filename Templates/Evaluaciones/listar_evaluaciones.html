@@ -55,9 +55,9 @@
                         <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
                         <td scope="row">
                             {% if evaluacion.finalizada %}
-                            Sí
+                            <i class='bx bxs-check-circle' style="color:green; "></i>
                             {% else %}
-                            No
+                            <i class='bx bxs-x-circle' style="color:red;"></i>
                             {% endif %}
                         </td>
                         <th>
