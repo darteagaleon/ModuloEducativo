@@ -1,11 +1,17 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+<<<<<<< HEAD
 from .views import MaterialApoyoListView, MaterialApoyoDetailView
 
+=======
+from .views import home,exit
+>>>>>>> 7c8d72b0f23d3332d19b73b8dac7a8cbccbd1a63
 
 
 urlpatterns =[
+     path('',home, name='home'),
+     path('logout/',exit, name="exit"),
      path("crear_curso/", views.Crear_cursos.as_view(), name="crear_curso"),
      path('lista_de_cursos/', views.Listar_cursos, name='listar_cursos'),
      path('filtrar/', views.filtrar, name='filtrar'),

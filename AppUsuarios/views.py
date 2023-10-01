@@ -1,20 +1,12 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from AppCursos.models import *
 from .models import *
 
-@login_required
-
-def login(request):
-    
-    return render (request,'login.html',{})
-
 
 # Create your views here.
 #Vista para realizar un Curso
-@login_required
 
 def seleccionar_curso(request):
     if request.method == "POST":
