@@ -61,6 +61,12 @@ def filtrar_preguntas(request):
     
     context = {'filtro_p':filtro_p}
     return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
+# vista para filtrar material de apoyo
+def filtrar_material(request):
+    filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'material_apoyo/material_list.html', {'materiales': filtro_m})
 #vista para editar un cursito
 
 def crear_clases(request):
@@ -253,13 +259,15 @@ def editar_cursos(request, curso_id):
 
 
 #Vista de material de apoyo
+    #listar material
 class MaterialApoyoListView(View):
     def get(self, request):
         materiales = MaterialApoyo.objects.all()
-        return render(request, 'material_apoyo/list.html', {'materiales': materiales})
+        return render(request, 'material_apoyo/material_list.html', {'materiales': materiales})
 
+
+    #mostrar detalles
 class MaterialApoyoDetailView(View):
     def get(self, request, pk):
         material = get_object_or_404(MaterialApoyo, pk=pk)
-        return render(request, 'material_apoyo/detail.html', {'material': material})
-
+        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
