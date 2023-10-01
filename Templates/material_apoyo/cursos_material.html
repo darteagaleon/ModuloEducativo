@@ -11,14 +11,14 @@
 		<div class="text"><!--2 -->            
             <h1> Listado de Cursos </h1>
             <br>
-            <form class="search" action="{% url 'filtrar' %}" method="GET">
+            <form class="search" action="{% url 'filtrar_cursos_material' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-                <button style="width: auto;" >Buscar</button>
+                <input type="submit" class="btn search-btn" value="Buscar">
             </form>
             
             <br>
             <!--esta linea nos dirije a la página que lista todos los cursos-->
-            <a href="{% url 'listar_cursos' %}"> 
+            <a href="{% url 'Listar_cursos_material' %}"> 
                 <button>
                 Ver todos
             </button>
@@ -29,9 +29,6 @@
                     <thead>
                         <tr>
                             <th scope="col">Curso</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Duración</th>
                             <th scope="col">Visualizar</th>
                         </tr>
                     </thead>
@@ -39,19 +36,10 @@
                         {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
                             <tr>
                                 <!-- Esta líneas definen las celdas de datos de la tabla-->
-                                <td scope="row">{{curso.nombre_curso}}</td>
-                                <td scope="row">{{curso.descripcion_curso}}</td>
-                                <!--Estas líneas verifican si el atributo -->
-                                {% if curso.estado_curso %}
-                                <td scope="row">Activo</td>
-                                {% else %}
-                                <td scope="row">Inactivo</td>
-                                {% endif %}
-                                <td scope="row">{{curso.duracion_curso}} min
-                                </td>
+                                <th scope="row">{{curso.nombre_curso}}</th>
                                 <td>
-                                        <a href="{% url 'ver_cursos' curso.id %}">
-                                        <button  class="back3">Visualizar</button>
+                                        <a href="{% url 'material_list' curso_id=curso.pk %}">
+                                        <button  class="back3">Material de apoyo</button>
                                     </a>
                                     
                                 </td>
@@ -62,7 +50,7 @@
             </div>
         </div>
     </div>
-    <a href="{% url 'cursos' %}" id="back2">
+    <a href="{% url 'home' %}" id="back2">
 		<div>
 			<button class="back">Regresar</button>
 		</div>

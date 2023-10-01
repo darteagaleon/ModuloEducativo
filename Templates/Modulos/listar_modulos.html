@@ -13,7 +13,7 @@
         <!--rea un formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista-->
         <form class="search" action="{% url 'filtrar_modulos' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Modulos...">
-            <input type="submit" class="btn search-btn" value="Buscar">
+            <button style="width: auto;" >Buscar</button>
         </form>
 
         <br>
@@ -36,14 +36,14 @@
                     {% for modulos in listarm %}<!--indica que se va a iniciar un bucle-->
                     <tr>
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <th scope="row">{{modulos.nombre_modulo}}</th>
+                        <td scope="row">{{modulos.nombre_modulo}}</td>
                         <!--Estas líneas verifican si el atributo -->
                         {% if modulos.estado_modulo %}
-                        <th scope="row">Activo</th>
+                        <td scope="row">Activo</td>
                         {% else %}
-                        <th scope="row">Inactivo</th>
+                        <td scope="row">Inactivo</td>
                         {% endif %}
-                        <th scope="row">{{modulos.duracion_modulos_admin}}</th>
+                        <td scope="row">{{modulos.duracion_modulos_admin}}</td>
                         <td>
                             <a href="{% url 'ver_modulos' modulos.id %}">  
                                 <button class="back3">Visualizar</button>
