@@ -1,12 +1,9 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-<<<<<<< HEAD
 from .views import MaterialApoyoListView, MaterialApoyoDetailView
 
-=======
 from .views import home,exit
->>>>>>> 7c8d72b0f23d3332d19b73b8dac7a8cbccbd1a63
 
 
 urlpatterns =[
