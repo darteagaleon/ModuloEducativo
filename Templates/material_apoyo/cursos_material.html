@@ -1,0 +1,58 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+
+	<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+	<div class="home_content"> <!--1 -->
+		<div class="text"><!--2 -->            
+            <h1> Listado de Cursos </h1>
+            <br>
+            <form class="search" action="{% url 'filtrar_cursos_material' %}" method="GET">
+                <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
+                <input type="submit" class="btn search-btn" value="Buscar">
+            </form>
+            
+            <br>
+            <!--esta linea nos dirije a la página que lista todos los cursos-->
+            <a href="{% url 'Listar_cursos_material' %}"> 
+                <button>
+                Ver todos
+            </button>
+            </a> 
+            
+            <div class="table-responsive" >
+                <table class="table table-hover " id="tablam">
+                    <thead>
+                        <tr>
+                            <th scope="col">Curso</th>
+                            <th scope="col">Visualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
+                            <tr>
+                                <!-- Esta líneas definen las celdas de datos de la tabla-->
+                                <th scope="row">{{curso.nombre_curso}}</th>
+                                <td>
+                                        <a href="{% url 'material_list' curso_id=curso.pk %}">
+                                        <button  class="back3">Material de apoyo</button>
+                                    </a>
+                                    
+                                </td>
+                            </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <a href="{% url 'home' %}" id="back2">
+		<div>
+			<button class="back">Regresar</button>
+		</div>
+	</a>
+{% endblock %}

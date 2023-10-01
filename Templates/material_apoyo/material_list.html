@@ -24,29 +24,31 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Archivo</th>
-                        <th scope="col"></th>
                         <th scope="col">Visualizar</th>
                     </tr>
                 </thead>
 
                 <tbody class="table-group-divider">
+                    
                     {% for material in materiales %}
                     <tr>
                         <td>{{ material.NombreMaterialApoyo }}</td>
                         <td>{{ material.DescripcionMaterialApoyo }}</td>
-                        <td>{{ material.Archivo }}</td>
-                        <td>pk={{ material.pk }}</td>
                         <td>
-                            <a href="{% url 'material_detalle' pk=material.pk %}">
+                            <a href="{{ material.Archivo }}" target="_blank">
                                 <button class="editar">
                                     Visualizar
                                 </button>
-                            </a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+        <a href="{% url 'Listar_cursos_material' %}" id="back2">
+            <div>
+                <button class="back">Regresar</button>
+            </div>
+        </a>
+        
 {% endblock %}

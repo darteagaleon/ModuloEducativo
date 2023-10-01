@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
-from .models import Evaluaciones,Modulos, MaterialApoyo
+from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
 from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 from django.views import View
 
@@ -63,6 +63,7 @@ def Listar_cursos(request):
     context = {'listarc':listarc}
     return render(request,'Cursos/listar_cursos.html',context)
 
+
 #vista para fitrar cursos 
 def filtrar(request):
     filtro = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
@@ -94,6 +95,16 @@ def filtrar_preguntas(request):
     
     context = {'filtro_p':filtro_p}
     return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
+
+#vista para fitrar cursos de material de apoyo
+def filtrar_cursos_material(request):
+    filtrocm = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
+    
+    context = {'filtrocm':filtrocm}
+    return render(request, 'material_apoyo/cursos_material.html', {'listarc': filtrocm})
+
+
+
 # vista para filtrar material de apoyo
 def filtrar_material(request):
     filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
@@ -281,12 +292,18 @@ def editar_cursos(request, curso_id):
 
 
 #Vista de material de apoyo
+def Listar_cursos_material(request):
+    listarc = Cursos.objects.all()
+    context = {'listarc':listarc}
+    return render(request,'material_apoyo/cursos_material.html',context)
+
+
     #listar material
 class MaterialApoyoListView(View):
-    def get(self, request):
-        materiales = MaterialApoyo.objects.all()
-        return render(request, 'material_apoyo/material_list.html', {'materiales': materiales})
-
+    def get(self, request, curso_id):
+        curso = get_object_or_404(Cursos, pk=curso_id)
+        materiales = MaterialApoyo.objects.filter(id_curso=curso)
+        return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
 
     #mostrar detalles
 class MaterialApoyoDetailView(View):
