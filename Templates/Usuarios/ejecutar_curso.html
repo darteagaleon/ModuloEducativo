@@ -5,25 +5,32 @@
 <!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
-
+<div class="home_content"> <!--1 -->
+     <div class="text"><!--2 -->
           <h1>{{nombre_curso}}</h1>
-          <ul>
+          <ul style="margin-left: 50px;">
                {% for clase in listaclases %}
                <li>
-                    {% if clase.tipo == 'modulo' %}
-                         {{ clase.titulo }}
+                    {% if clase.tipo == 'evaluacion' %}
+                         <a href="#">{{ clase.titulo }}</a>        
                     {% else %}
-                         {% if clase.disponible %}
-                         <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>
-                         {% else %}
-                         {{clase.titulo}}
-                         {% endif %}
+                              {% if clase.tipo == 'modulo' %}
+                                   {{ clase.titulo }}
+                              {% else %}
+                                   {% if clase.disponible %}
+                                        <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>
+                                   {% else %}
+                                        {{ clase.titulo }}
+                                   {% endif %}
+                              {% endif %}
                     {% endif %}
                </li>
                
                
                {% endfor %}
           </ul>
+     </div><!--2 -->
+</div><!--1 -->
      
 
 {% endblock %}

@@ -37,7 +37,6 @@ def seleccionar_curso(request):
         listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
         listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
 
-
         # listaPkClases=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase')
         listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
         listafilas=[]
@@ -47,7 +46,18 @@ def seleccionar_curso(request):
 
         for clase in listaClases:
             reg={}
+          
+            #Si el modulo es diferente al anterior, agregarlo a la lista
             if nuevoModulo != clase['id_modulo__nombre_modulo']:
+                #Controlar Evaluacion
+                if nuevoModulo != '': #Si no es la primera vez
+                    reg['tipo']='evaluacion'
+                    reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
+                    reg['id']=clase['id_modulo']
+
+                    listafilas.append(reg)
+
+                reg={}
                 reg['tipo']='modulo'
                 reg['titulo']=clase['id_modulo__nombre_modulo']
                 reg['id']=clase['id_modulo']
@@ -64,21 +74,26 @@ def seleccionar_curso(request):
             if  not visto:
                 reg['disponible']=False
 
-            #Buscar si la clase ya fue vista/Encuentra el id de la clase
             for claseUsuario in listaClasesUsuario:
                 if claseUsuario['id_clase'] == clase['id']:
                     if claseUsuario['visto']==False:
                         visto=False
                         break
-                        
 
             listafilas.append(reg)
+
+        #Agregar la evaluacion del ultimo modulo
+        reg={}
+        reg['tipo']='evaluacion'
+        reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
+        reg['id']=clase['id_modulo']
+        listafilas.append(reg)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
             }
-        
+
 
         #Redireccionar a la ejecucion del Curso
         return render (request,'Usuarios/ejecutar_curso.html', context)
@@ -87,13 +102,17 @@ def seleccionar_curso(request):
     else:
 
         #Consultar listado de Cursos para el Usuario y sus Cargos
-    
-        regUsuario=User.objects.get(id=1)
-        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=regUsuario).values('id_cargo')
+     
+        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
         
-        #Ensamblar el contexto para el template
+        # regUsuario=User.objects.get(username=request.user)
+        user_id=request.user.id
+       
+        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
+            
+            #Ensamblar el contexto para el template
         listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
-        # print(listaUsuarioCargo)
+            # print(listaUsuarioCargo)
 
         #Retornar el template con el contexto
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
