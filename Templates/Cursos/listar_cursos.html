@@ -43,9 +43,9 @@
                                 <td scope="row">{{curso.descripcion_curso}}</td>
                                 <!--Estas líneas verifican si el atributo -->
                                 {% if curso.estado_curso %}
-                                <td scope="row">Activo</td>
+                                <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                                 {% else %}
-                                <td scope="row">Inactivo</td>
+                                <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                                 {% endif %}
                                 <td scope="row">{{curso.duracion_curso}} min
                                 </td>

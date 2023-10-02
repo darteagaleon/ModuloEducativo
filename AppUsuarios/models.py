@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from AppCursos.models import *
 
 # Create your models here.
 class Cargo(models.Model):

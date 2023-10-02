@@ -19,9 +19,6 @@
                     <div class="descripcion">
                         <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
                     </div>  
-                    <div class="descripcion">
-                        <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
-                    </div>  
                     <!--este div se utiliza para mostrar la descripción de un curso en una página web.-->
                     <div class="instrucciones">
                         <h2>Descripción</h2>
@@ -36,7 +33,7 @@
 
                     <div class="button">
                         <a href="{% url 'editar_cursos' v_cursos.id %}"> 
-                            <button type="button" class="start">Editar</button>
+                            <button type="button" class="subir">Editar</button>
                         </a>
                     </div>
                     
@@ -46,9 +43,7 @@
         </div>
     </div>
     <a href="{% url 'listar_cursos' %}" id="back2">
-        <div>
             <button class="back">Regresar</button>
-        </div>
     </a>
 </body>
 {% endblock %}

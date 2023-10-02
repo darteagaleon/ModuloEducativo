@@ -37,7 +37,7 @@
                     </div>
                     <div class="button">
                         <a href="{% url 'editar_clases' v_clases.id %}">
-                            <button type="button" class="start">Editar</button>
+                            <button type="submit" class="subir">Editar</button>
                         </a>
                     </div>
                     
@@ -47,9 +47,7 @@
         </div>
     </div>
     <a href="{% url 'listar_clases' %}" id="back2">
-        <div>
             <button class="back">Regresar</button>
-        </div>
     </a>
 </body>
 {% endblock %}

@@ -72,7 +72,12 @@
             <div class="profile_details">
                 <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
                 <div class="name_job">
+                
                     <div class="name">{{ user.username | title }}</div>
+
+                    <div class="cargo">{{ cargo.nombre_cargo }}</div>
+                   
+
                     <div class="job">{{ user.cargo }} 
                     </div>
                 </div>

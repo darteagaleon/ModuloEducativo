@@ -98,8 +98,8 @@ h2 {
     /* Permitir que la altura se ajuste automáticamente */
     width:100%;
 }
-button {
-    width: auto;
+.subir {
+    width: 15vw;
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -109,10 +109,10 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-
+    
 }
 
-button:hover {
+.subir:hover {
     background-color: #111344;
     color: white;
     transition: .5s;
@@ -124,6 +124,11 @@ button:hover {
     top: 5%; /* Distancia desde la parte superior en porcentaje */
     right: 5%; /* Distancia desde la derecha en porcentaje */
     width: 15vw; /* Ancho del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #92dce5;
+    color: #00072D;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -141,6 +146,7 @@ button:hover {
 
 .back:hover {
     background-color: #111344;
+    color: white;
     transition: .5s;
     transform: scale(1.2);
 }
@@ -154,11 +160,15 @@ button:hover {
     top: 15%; /* Distancia desde la parte superior en porcentaje */
     right: 5%; /* Distancia desde la derecha en porcentaje */
     width: 15vw; /* Ancho del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #92dce5;
+    color: #00072D;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-
 }
 
 .back1 a {
@@ -172,6 +182,7 @@ button:hover {
 
 .back1:hover {
     background-color: #111344;
+    color: white;
     transition: .5s;
     transform: scale(1.2);
 }

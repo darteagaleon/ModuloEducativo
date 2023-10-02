@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from AppUsuarios.models import Usuario_Cargo, Cargo
+from AppUsuarios.models import *
 
 
 

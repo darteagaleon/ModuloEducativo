@@ -1,8 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from AppCursos.models import *
+from AppUsuarios.models import *
 from .models import *
+from django.http import JsonResponse
+from django.http import HttpResponseNotFound
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -116,12 +120,27 @@ def seleccionar_curso(request):
 
         #Retornar el template con el contexto
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
-   
+
+
+
+
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
     #Marcar el registro como visto
+    
     context = {
         'v_clases': clase,
+        'user_id': request.user.id
     }
     return render(request, 'Usuarios/ejecutar_clase.html', context)
+
+def marcar_clase_como_vista(request, clase_id, user_id):
+    # Marcar la clase como vista
+    clase_usuario = Clase_Usuario.objects.get(id_clase=clase_id, id_usuario_cargo__id_usuario=user_id)
+    clase_usuario.visto = True
+    clase_usuario.save()
+    clase = get_object_or_404(Clases, pk=clase_id)
+
+    # Redirigir al usuario al contenido
+    return redirect(clase.contenido_clase)
