@@ -89,14 +89,15 @@ label {
 
 
 .back {
-    position: fixed;
-    /* Fija el botón en su posición */
-    top: 5%;
-    /* Distancia desde la parte superior en porcentaje */
-    right: 5%;
-    /* Distancia desde la derecha en porcentaje */
-    width: 15vw;
-    /* Ancho del botón */
+    position: fixed; /* Fija el botón en su posición */
+    top: 5%; /* Distancia desde la parte superior en porcentaje */
+    right: 5%; /* Distancia desde la derecha en porcentaje */
+    width: 15vw; /* Ancho del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #92dce5;
+    color: #00072D;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -114,6 +115,7 @@ label {
 
 .back:hover {
     background-color: #111344;
+    color: white;
     transition: .5s;
     transform: scale(1.2);
 }
@@ -122,8 +124,8 @@ label {
     color: white;
 }
 
-button {
-    width: 50%;
+.subir {
+    width:15vw;
     padding: 10px;
     border: none;
     border-radius: 10px;
@@ -136,7 +138,7 @@ button {
 
 }
 
-button:hover {
+.subir:hover {
     background-color: #111344;
     color: white;
     transition: .5s;

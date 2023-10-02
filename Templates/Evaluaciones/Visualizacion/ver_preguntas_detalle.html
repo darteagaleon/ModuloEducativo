@@ -35,7 +35,7 @@
                     </div>
                     <div class="button">
                         <a href="{% url 'editar_pregunta' pregunta.id%}"> <button type="button"
-                                class="start">Editar</button></a>
+                                class="subir">Editar</button></a>
                     </div>
                     {% endfor %}
                 </div>
@@ -45,9 +45,7 @@
     </div>
     </div>
     <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}" id="back2">
-        <div>
             <button class="back">Regresar</button>
-        </div>
     </a>
 
 </body>

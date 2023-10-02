@@ -47,17 +47,17 @@
                         <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         {% if evaluacion.estado_evaluacion %}
-                        <td scope="row">Activo</td>
+                        <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
-                        <td scope="row">Inactivo</td>
+                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
                         <td scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</td>
                         <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
                         <td scope="row">
                             {% if evaluacion.finalizada %}
-                            <i class='bx bxs-check-circle' style="color:green; "></i>
+                            Si
                             {% else %}
-                            <i class='bx bxs-x-circle' style="color:red;"></i>
+                            No
                             {% endif %}
                         </td>
                         <th>

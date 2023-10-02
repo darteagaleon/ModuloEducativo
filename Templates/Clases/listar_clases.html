@@ -38,10 +38,10 @@
                             <td scope="row">{{clase.descripcion_clase}}</td>
                             <td scope="row">{{clase.duracion_clase}} min </td>
                             {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
-                            <td scope="row">Activo</td>
-                            {% else %}
-                            <td scope="row">Inactivo</td>
-                            {% endif %}
+                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        {% else %}
+                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        {% endif %}
                             <td scope="row">{{clase.duracion_clase_admin}}</td>
                             <td>
                                 <a href="{% url 'ver_clases' clase.id %}">

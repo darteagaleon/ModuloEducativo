@@ -14,30 +14,30 @@
                     <div>
                         <h1>Crear Clases </h1>
                         <div class="form">
-							<form method="post">
+                            <form method="post">
                                 <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                                 {% csrf_token %}
-								<!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
-                                {% load widget_tweaks %} 
-								<div class="form-group">
+                                <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                                {% load widget_tweaks %}
+                                <div class="form-group">
 
 
-								</div>
+                                </div>
                                 {{ form.as_p }}
-                                
-								<button type="submit" >Guardar</button>
-							</form>
-						</div>
+
+                                <button type="submit" class="subir">Guardar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--nos dirije a la URL correspondiente a la vista llamada 'clase' -->
-    <a href="{% url 'clase' %}" id="back2">
-    <div >
-		<button  class="back">Regresar</button>
-	</div>
-    </a>
+    <button class="back">
+        <a href="{% url 'clase' %}">
+            Regresar
+        </a>
+    </button>
 </body>
 {% endblock %}

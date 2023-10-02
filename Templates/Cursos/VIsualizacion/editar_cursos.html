@@ -6,6 +6,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+<script src="{% static 'js/alertas.js' %}"></script>
 
 
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
@@ -16,7 +17,7 @@
                 <h1>Editar CURSO</h1>
                 {% csrf_token %}
                 <!--#enctype="multipart/form-data" Esto es esencial para que los archivos, como las imágenes, se puedan cargar correctamente.-->
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" id="editarForm">
                     {% csrf_token %}
                     <div class="form-group">
                         {{ form.as_p }}
@@ -24,16 +25,16 @@
                             <img src="{{ icono_url }}" width="700vw" height="550vh" alt="Curso Image">
                         {% endif %}
                     </div>
-                    <button type="submit">Editar</button>
+                    <button type="submit" class="subir">Editar</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 <!--nos dirije  a la URL correspondiente a la vista llamada 'cursos' -->
-<a href="{% url 'ver_cursos' curso_id=curso_id %}" id="back2"> 
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+<a href="{% url 'ver_cursos' curso_id=curso_id %}"> 
+    <button class="back">
+    Regresar
+</button>
 </a>
 {% endblock %}

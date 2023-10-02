@@ -35,7 +35,7 @@
                     </div>
                     <div class="button">
                         <a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}">
-                            <button type="button" class="start">Ver Preguntas</button>
+                            <button type="button" class="subir">Ver Preguntas</button>
                         </a>
                     </div>
                     
@@ -45,14 +45,11 @@
         </div>
     </div>
     <a href="{% url 'listar_evaluacion' %}" id="back2">
-        <div>
+        
             <button class="back">Regresar</button>
-        </div>
     </a>
     <a href="{% url 'editar_evaluacion' evaluacion_id=evaluacion.id %}" id="back2">
-        <div>
             <button class="back1">Editar</button>
-        </div>
     </a>
 </body>
 {% endblock %}
