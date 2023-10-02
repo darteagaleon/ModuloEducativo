@@ -19,6 +19,7 @@
                               {% else %}
                                    {% if clase.disponible %}
                                         <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>
+                                        
                                    {% else %}
                                         {{ clase.titulo }}
                                    {% endif %}

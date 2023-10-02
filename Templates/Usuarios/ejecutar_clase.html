@@ -29,7 +29,7 @@
                     <div class="contenido">
                         <h2>Contenido</h2>
                         <div class="contenido2">
-                            <a href="{{ v_clases.contenido_clase }}" target="_blank">{{ v_clases.contenido_clase }}</a>
+                            <a href="{% url 'marcar_clase_como_vista' v_clases.id user.id %}" target="_blank">Ver contenido y marcar como vista</a>
                         </div>
         
                 </div>
@@ -38,4 +38,5 @@
     </div>
     
 </body>
+
 {% endblock %}
