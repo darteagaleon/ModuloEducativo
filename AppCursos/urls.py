@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import MaterialApoyoListView, MaterialApoyoDetailView
+from .views import MaterialApoyoListView
 
 from .views import home,exit
 
@@ -46,10 +46,13 @@ urlpatterns =[
      path('ver_cursos/<int:curso_id>/', views.ver_cursos, name='ver_cursos'),
      path('editar_cursos/<int:curso_id>/',
           views.editar_cursos, name='editar_cursos'),
+     path('gestion_MaterialApoyo', views.gestion_MaterialApoyo, name='gestion_MaterialApoyo'),
      path('Listar_cursos_material/', views.Listar_cursos_material, name='Listar_cursos_material'),
      path('filtrar_cursos_material/', views.filtrar_cursos_material, name='filtrar_cursos_material'),
-     path('MaterialApoyo/<int:curso_id>/', MaterialApoyoListView.as_view(), name='material_list'),
-     path('MaterialApoyo/<int:pk>/', MaterialApoyoDetailView.as_view(), name='material_detalle'),
+     path('material_list/<int:curso_id>/', MaterialApoyoListView.as_view(), name='material_list'),
      path('filtrar_material/',views.filtrar_material,name="filtrar_material"),
+     path('agregar_material/', views.agregar_material_apoyo, name='agregar_material'),
+     path('editar_material/<int:pk>/', views.editar_material_apoyo, name='editar_material'),
+
      
      ]

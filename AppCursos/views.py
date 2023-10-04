@@ -7,10 +7,11 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm
+from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm, MaterialApoyoForm
 from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
 from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 from django.views import View
+from django.urls import reverse
 
 from django.contrib import messages
 #Para el tema de las imagenes del Curso
@@ -291,22 +292,54 @@ def editar_cursos(request, curso_id):
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
 
 
-#Vista de material de apoyo
+
+def gestion_MaterialApoyo(request):
+    return render(request, 'material_apoyo/MaterialApoyo.html')
+@login_required
+
+#Vista de listado de cursos del material de apoyo
 def Listar_cursos_material(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
 
-
-    #listar material
+#listar material
 class MaterialApoyoListView(View):
     def get(self, request, curso_id):
         curso = get_object_or_404(Cursos, pk=curso_id)
         materiales = MaterialApoyo.objects.filter(id_curso=curso)
         return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
 
-    #mostrar detalles
-class MaterialApoyoDetailView(View):
-    def get(self, request, pk):
-        material = get_object_or_404(MaterialApoyo, pk=pk)
-        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
+#agregar material de apoyo
+def agregar_material_apoyo(request):
+    if request.method == 'POST':
+        form = MaterialApoyoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('material_list') 
+    else:
+        form = MaterialApoyoForm()  
+
+    return render(request, 'material_apoyo/agregar_material.html', {'form': form})
+
+#editar material de apoyo
+def editar_material_apoyo(request, pk):
+    editar_material = MaterialApoyo.objects.get(pk=pk)
+    curso_id = editar_material.id_curso # Obtener el curso_id del material editado
+
+    if request.method == "POST":
+        form = MaterialApoyoForm(request.POST, instance=editar_material)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect('material_list', curso_id=curso_id)
+    
+    else:
+        form = MaterialApoyoForm(instance=editar_material)
+    context = {"form": form,"curso_id":curso_id}
+    
+    return render(request, 'material_apoyo/editar_material.html',context)
+    
+
+    # context = {"form": form,"evaluacion_id":evaluacion_id}
+    #return render(request, 'material_apoyo/material_list.html')

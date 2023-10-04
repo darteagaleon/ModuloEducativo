@@ -24,7 +24,7 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Descripción</th>
-                        <th scope="col">Visualizar</th>
+                        <th scope="col">Archivo</th>
                     </tr>
                 </thead>
 
@@ -40,6 +40,13 @@
                                     Visualizar
                                 </button>
                         </td>
+                        <td>
+                            <a href="{% url 'editar_material' pk=material.pk %}">
+                                <button class="editar">
+                                    Editar
+                                </button>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -50,5 +57,6 @@
                 <button class="back">Regresar</button>
             </div>
         </a>
+            
         
 {% endblock %}
