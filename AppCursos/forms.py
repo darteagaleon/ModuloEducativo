@@ -1,5 +1,5 @@
 from django import forms 
-from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas
+from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas, MaterialApoyo
 from PIL import Image
 
 class crear_cursos(forms.ModelForm):
@@ -49,6 +49,13 @@ class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas
         fields = '__all__'
+
+#este código define un formulario de Django llamado MaterialApoyoForm que se utiliza para interactuar con el modelo de Material de apoyo.        
+class MaterialApoyoForm(forms.ModelForm):
+    class Meta:
+        model = MaterialApoyo
+        fields = ['NombreMaterialApoyo', 'DescripcionMaterialApoyo', 'Archivo', 'id_curso']
+
 
 
 
