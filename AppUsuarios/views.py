@@ -12,6 +12,7 @@ from django.http import HttpResponse
 # Create your views here.
 #Vista para realizar un Curso
 
+@login_required
 def seleccionar_curso(request):
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -123,7 +124,7 @@ def seleccionar_curso(request):
 
 
 
-
+@login_required
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -135,6 +136,7 @@ def ejecutar_clase(request, clase_id):
     }
     return render(request, 'Usuarios/ejecutar_clase.html', context)
 
+@login_required
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
     clase_usuario = Clase_Usuario.objects.get(id_clase=clase_id, id_usuario_cargo__id_usuario=user_id)
