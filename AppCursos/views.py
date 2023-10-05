@@ -11,15 +11,12 @@ from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosF
 from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
 from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 from django.views import View
-from django.urls import reverse
+
 
 from django.contrib import messages
 #Para el tema de las imagenes del Curso
 from PIL import Image
 # Create your views here.
-
-#vista para crear los cursos
-
 
 
 from django.contrib.auth.decorators import login_required
@@ -63,14 +60,17 @@ def exit(request):
     logout(request)
     return redirect('home')
 
-@login_required
+# @login_required
+
+#Vista para crear los cursos
 class Crear_cursos(CreateView):
     model = Cursos
     form_class = crear_cursos
     template_name = 'Cursos/crear_cursos.html'
     success_url=reverse_lazy('listar_cursos')
-    
-@login_required
+
+
+# @login_required
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
@@ -333,11 +333,26 @@ def editar_cursos(request, curso_id):
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
 
 
+<<<<<<< HEAD
+=======
+
+def gestion_MaterialApoyo(request):
+    return render(request, 'material_apoyo/MaterialApoyo.html')
+@login_required
+
+#Vista de listado de cursos del material de apoyo
+def Listar_cursos_material(request):
+    listarc = Cursos.objects.all()
+    context = {'listarc':listarc}
+    return render(request,'material_apoyo/cursos_material.html',context)
+
+#listar material
+>>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
     #listar material
 
 
 class MaterialApoyoListView(View):
-    @login_required
+    # @login_required
     def get(self, request, curso_id):
         curso = get_object_or_404(Cursos, pk=curso_id)
         materiales = MaterialApoyo.objects.filter(id_curso=curso)
@@ -376,3 +391,14 @@ def editar_material_apoyo(request, pk):
 
     # context = {"form": form,"evaluacion_id":evaluacion_id}
     #return render(request, 'material_apoyo/material_list.html')
+<<<<<<< HEAD
+=======
+
+    #mostrar detalles
+
+class MaterialApoyoDetailView(View):
+    # @login_required
+    def get(self, request, pk):
+        material = get_object_or_404(MaterialApoyo, pk=pk)
+        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
+>>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999

@@ -1,7 +1,9 @@
 from django import forms 
-from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas, MaterialApoyo
+from .models import *
 from PIL import Image
 
+
+#este código define un formulario de Django llamado crear_cursos que se utiliza para interactuar con el modelo de Cursos.
 class crear_cursos(forms.ModelForm):
     #se utiliza para configurar un formulario en Django basado en el modelo Cursos. 
     class Meta:

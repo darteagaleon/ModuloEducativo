@@ -7,6 +7,7 @@ from .models import *
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
