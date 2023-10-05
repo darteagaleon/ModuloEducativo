@@ -2,16 +2,34 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from .views import MaterialApoyoListView
+from .views import Crear_cursos
 
 from .views import home,exit
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
+from django.contrib.auth import logout
+from django.urls import reverse_lazy
+from django.contrib.auth.views import LogoutView
+
+
 
 
 
 urlpatterns =[
      path('',home, name='home'),
      path('logout/',exit, name="exit"),
+     #CREAR
+
+     #FILTRAR
+
+     #EDITAR
+
+     #VER
+
+     #LISTAR
+
      path("crear_curso/", views.Crear_cursos.as_view(), name="crear_curso"),
-     path('lista_de_cursos/', views.Listar_cursos, name='listar_cursos'),
+     path('listar_cursos/', views.Listar_cursos, name='listar_cursos'),
      path('filtrar/', views.filtrar, name='filtrar'),
      path('filtrar_modulos/',views.filtrar_modulos,name="filtrar_modulos"),
      path('filtrar_clases/',views.filtrar_clases,name="filtrar_clases"),

@@ -11,11 +11,9 @@ class Cursos(models.Model):
      estado_curso= models.BooleanField(default=False)
      duracion_curso = models.IntegerField(blank=True, null=True)
      iconoCurso = models.ImageField(upload_to='IconosCurso', null=True,blank=True) 
-     #Se crea la relacion a usuarios
+     #Se crea la relacion a Cargos
      id_cargo=models.ForeignKey(Cargo, on_delete=models.CASCADE,null=True)
 
-     #Se crea la relacion
-     # nombre_usuario= models.ForeignKey(Curso_Usuario, on_delete=models.CASCADE,null=False)
      def __str__(self):
           return self.nombre_curso
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
@@ -52,6 +50,7 @@ class Clases(models.Model):
      class Meta:
           verbose_name_plural = 'Clases'
 
+#Se crea el modelo de la tabla Evaluaciones de la empresa
 class Evaluaciones(models.Model):
      nombre_evaluacion=models.CharField(max_length=100)
      numero_intentos = models.IntegerField(default=2)
@@ -67,6 +66,7 @@ class Evaluaciones(models.Model):
      class Meta:
           verbose_name_plural = 'Evaluaciones'
 
+#Se crea el modelo de la tabla Preguntas de la empresa
 class Preguntas(models.Model):
      nombre_pregunta=models.TextField(max_length=100)
      opcion_a = models.CharField(max_length=100, null=True,blank=True)
@@ -90,6 +90,7 @@ class MaterialApoyo(models.Model):
      NombreMaterialApoyo = models.CharField(max_length=255)
      DescripcionMaterialApoyo = models.TextField()
      Archivo = models.URLField()  # Para almacenar la URL del archivo en Google Drive
+     #Se crea la relacion a cursos
      id_curso= models.ForeignKey(Cursos, on_delete=models.CASCADE,null=True) #Se crea la relacion a cursos
      def __str__(self):
           return self.NombreMaterialApoyo

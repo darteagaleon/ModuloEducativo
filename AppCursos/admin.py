@@ -21,6 +21,7 @@ class regClases(admin.ModelAdmin):
 
 admin.site.register(Clases,regClases)
 
+#Se crea el modelo de la tabla Evaluaciones de la empresa
 class regEvaluaciones(admin.ModelAdmin):
      list_display=['id_modulo','nombre_evaluacion','duracion_evaluacion_admin','numero_intentos','descripcion_evaluacion','instrucciones_evaluacion','finalizada']
      list_filter = ('nombre_evaluacion',)#para busqueda en admin
@@ -28,7 +29,7 @@ class regEvaluaciones(admin.ModelAdmin):
 
 admin.site.register(Evaluaciones,regEvaluaciones)
 
-
+#Se crea el modelo de la tabla Preguntas de la empresa
 class regPreguntas(admin.ModelAdmin):
      list_display=['id_evaluacion','nombre_pregunta','opcion_a','opcion_b','opcion_c','opcion_d','respuesta_correcta']
      list_filter = ('id_evaluacion',)#para busqueda en admin
@@ -41,6 +42,7 @@ class regMaterialApoyo(admin.ModelAdmin):
      list_display=['NombreMaterialApoyo', 'DescripcionMaterialApoyo', 'Archivo']
      list_filter = ('NombreMaterialApoyo',)  # para búsqueda en admin
      ordering = ['id']
+     
 admin.site.register(MaterialApoyo, regMaterialApoyo)
 
 
