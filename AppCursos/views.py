@@ -49,7 +49,7 @@ def gestion_evaluacion(request):
 
 #Vista de material de apoyo
 @login_required
-def Listar_cursos_material(request):
+def Listar_cursos_material(request): # type: ignore
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
@@ -332,9 +332,9 @@ def editar_cursos(request, curso_id):
 
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
 
-
-<<<<<<< HEAD
-=======
+#********************
+# MATERIAL DE APOYO *
+#********************
 
 def gestion_MaterialApoyo(request):
     return render(request, 'material_apoyo/MaterialApoyo.html')
@@ -347,10 +347,6 @@ def Listar_cursos_material(request):
     return render(request,'material_apoyo/cursos_material.html',context)
 
 #listar material
->>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
-    #listar material
-
-
 class MaterialApoyoListView(View):
     # @login_required
     def get(self, request, curso_id):
@@ -373,14 +369,14 @@ def agregar_material_apoyo(request):
 #editar material de apoyo
 def editar_material_apoyo(request, pk):
     editar_material = MaterialApoyo.objects.get(pk=pk)
-    curso_id = editar_material.id_curso # Obtener el curso_id del material editado
+    curso_id = editar_material.pk # Obtener el curso_id del material editado
 
     if request.method == "POST":
         form = MaterialApoyoForm(request.POST, instance=editar_material)
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-            return redirect('material_list', curso_id=curso_id)
+            return redirect('material_list', pk=curso_id)
     
     else:
         form = MaterialApoyoForm(instance=editar_material)
@@ -389,16 +385,8 @@ def editar_material_apoyo(request, pk):
     return render(request, 'material_apoyo/editar_material.html',context)
     
 
-    # context = {"form": form,"evaluacion_id":evaluacion_id}
-    #return render(request, 'material_apoyo/material_list.html')
-<<<<<<< HEAD
-=======
 
-    #mostrar detalles
 
-class MaterialApoyoDetailView(View):
-    # @login_required
-    def get(self, request, pk):
-        material = get_object_or_404(MaterialApoyo, pk=pk)
-        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
->>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
+
+
+
