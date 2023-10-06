@@ -4,7 +4,7 @@ from . import views
 from .views import Crear_cursos
 
 
-from .views import home,exit
+from .views import home,exit,login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import logout
@@ -16,8 +16,10 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns =[
-     path('',home, name='home'),
-     path('logout/',exit, name="exit"),
+     path('login/', views.login, name='login'),
+     path('home/', views.home, name='home'),
+     path('exit/', views.exit, name='exit'),
+      path('', views.login, name='root'), 
      #CREAR
 
 

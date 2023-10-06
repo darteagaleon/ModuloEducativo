@@ -1,5 +1,4 @@
 <!--para cargar los archivos estaticos en la platilla-->
-{% extends 'Layout/Base.html' %}
 {% block content %}
 
 {% load static %}
@@ -11,8 +10,9 @@
 <!--segunda línea carga la hoja de estilo de Bootstrap desde un CDN para utilizar los estilos y componentes proporcionados por Bootstrap en la página web.-->
 
 <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
-    <!--se utilizan para crear un contenedor en una página web que contiene una imagen de un icono de inicio de sesión (login).-->
-    <div class="bg-white p-5 rounded-5">
+    <div class="text-center text-white">
+        <h1 class="mb-4" style="font-size: 36px;">Bienvenido a Cyres Educativo</h1>   <!--se utilizan para crear un contenedor en una página web que contiene una imagen de un icono de inicio de sesión (login).-->
+<div class="bg-white p-5 rounded-5">
         <div class="d-flex justify-content-center">
             <img src="/static/img/login-icon.svg" alt="login-icon" class="login-icon">
         </div>
@@ -32,21 +32,28 @@
                 <div class="input-group-text bg-info  ">
                     <img src="/static/img/password-icon.svg" alt="username-icon" class="password">
                 </div>
-                <input type="password" name="password" id="" placeholder="Contraseña">
+                <input type="password" name="password" placeholder="Contraseña">
             </div>
-            <!--crea una casilla de verificación ("Recuérdame") que permite que el usuario marque o desmarque la opción de recordar su sesión en un formulario de inicio de sesión-->
-            {% comment %} <div class="d-flex mt-1">
-                <div class="d-flex align-items-center gap-1">
-                    <input class="form-check-input" type="checkbox" />
-                    <div class="pt-1" style="font-size: 0.9rem">Recuerdame</div>
-                </div>
-
-            </div> {% endcomment %}
             <!--representa un botón de inicio de sesión estilizado con Bootstrap.-->
-            <button type="submit" class="btn btn-info text-white w-100 mt-4 fw-semibold shadow-sm">Iniciar
+            <button type="submit" class=" text-white w-100 mt-4 fw-semibold shadow-sm subir">Iniciar
                 sesion</button>
 
         </form>
+    </div>
+</div>
+
 </body>
+
+<script>
+    //se agrega validacion para que cuando se presione la tecla enter permita enviar el formulario
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            const activeElement = document.activeElement;
+            if (activeElement.tagName === "INPUT" && activeElement.form) {
+                activeElement.form.submit();
+            }
+        }
+    });
+</script>
 
 {% endblock %}

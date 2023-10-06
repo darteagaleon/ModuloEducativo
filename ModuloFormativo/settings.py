@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     "AppCursos",
     "AppUsuarios",
     'widget_tweaks',   
-    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -138,7 +137,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 #Para las imagenes
 FILE_UPLOAD_MIMETYPE = 'image/*'
 #Extensiones permitidas
+
 ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif']
 
 LOGIN_REDIRECT_URL= 'home'
-LOGOUT_REDIRECT_URL= 'home'
+LOGOUT_REDIRECT_URL= 'login'
