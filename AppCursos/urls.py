@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import MaterialApoyoListView
 from .views import Crear_cursos
+
 
 from .views import home,exit
 from django.contrib.auth.decorators import login_required
@@ -19,6 +19,7 @@ urlpatterns =[
      path('',home, name='home'),
      path('logout/',exit, name="exit"),
      #CREAR
+
 
      #FILTRAR
 
@@ -66,10 +67,12 @@ urlpatterns =[
      path('editar_cursos/<int:curso_id>/', views.editar_cursos, name='editar_cursos'),
      path('editar_cursos/<int:curso_id>/',
           views.editar_cursos, name='editar_cursos'),
+
      path('gestion_MaterialApoyo', views.gestion_MaterialApoyo, name='gestion_MaterialApoyo'),
      path('Listar_cursos_material/', views.Listar_cursos_material, name='Listar_cursos_material'),
      path('filtrar_cursos_material/', views.filtrar_cursos_material, name='filtrar_cursos_material'),
-     path('material_list/<int:curso_id>/', MaterialApoyoListView.as_view(), name='material_list'),
+     # path('material_list/<int:curso_id>/', MaterialApoyoListView.as_view(), name='material_list'),
+     path('material_list/<int:curso_id>/', views.material_list, name='material_list'),
      path('filtrar_material/',views.filtrar_material,name="filtrar_material"),
      path('agregar_material/', views.agregar_material_apoyo, name='agregar_material'),
      path('editar_material/<int:pk>/', views.editar_material_apoyo, name='editar_material'),
