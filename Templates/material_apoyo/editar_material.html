@@ -19,6 +19,7 @@
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                         {{ form.as_p }}
+                        
                     <button type="submit">Guardar Cambios</button>
                     
                 </form>
@@ -27,7 +28,7 @@
         </div>
     </div>
 </div>
-<a href="{% url 'Listar_cursos_material' %}" id="back2">
+<a href="{% url 'material_list' curso_id=curso_id %}" id="back2">
     <div>
         <button class="back">Regresar</button>
     </div>

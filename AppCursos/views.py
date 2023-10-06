@@ -13,6 +13,7 @@ from .forms import ClasesForm  # Asegúrate de importar el formulario adecuado
 from django.views import View
 
 
+
 from django.contrib import messages
 #Para el tema de las imagenes del Curso
 from PIL import Image
@@ -348,12 +349,7 @@ def Listar_cursos_material(request):
     #listar material
 
 
-class MaterialApoyoListView(View):
-    # @login_required
-    def get(self, request, curso_id):
-        curso = get_object_or_404(Cursos, pk=curso_id)
-        materiales = MaterialApoyo.objects.filter(id_curso=curso)
-        return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+
 
 #agregar material de apoyo
 def agregar_material_apoyo(request):
@@ -369,8 +365,9 @@ def agregar_material_apoyo(request):
 
 #editar material de apoyo
 def editar_material_apoyo(request, pk):
-    editar_material = MaterialApoyo.objects.get(pk=pk)
-    curso_id = editar_material.id_curso # Obtener el curso_id del material editado
+    editar_material = get_object_or_404(MaterialApoyo, pk=pk)
+    curso_id = editar_material.id_curso.id # Obtener el curso_id del material editado (El ultimo id es para traer el valor numero del id)
+    
 
     if request.method == "POST":
         form = MaterialApoyoForm(request.POST, instance=editar_material)
@@ -378,6 +375,7 @@ def editar_material_apoyo(request, pk):
             form.save()
             messages.success(request, 'Editado con éxito')
             return redirect('material_list', curso_id=curso_id)
+        
     
     else:
         form = MaterialApoyoForm(instance=editar_material)
@@ -386,13 +384,14 @@ def editar_material_apoyo(request, pk):
     return render(request, 'material_apoyo/editar_material.html',context)
     
 
-    # context = {"form": form,"evaluacion_id":evaluacion_id}
-    #return render(request, 'material_apoyo/material_list.html')
-
     #mostrar detalles
-
-class MaterialApoyoDetailView(View):
-    # @login_required
-    def get(self, request, pk):
-        material = get_object_or_404(MaterialApoyo, pk=pk)
-        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
+# class MaterialApoyoListView(View):
+#     # @login_required
+#     def get(self, request, curso_id):
+#         curso = get_object_or_404(Cursos, pk=curso_id)
+#         materiales = MaterialApoyo.objects.filter(id_curso=curso)
+#         return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+def material_list(request, curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
