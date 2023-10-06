@@ -11,18 +11,12 @@ from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosF
 from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
 from .forms import ClasesForm  
 from django.views import View
-
-
-
-
-
 #Para el tema de las imagenes del Curso
 from PIL import Image
 # Create your views here.
 
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login as auth_login 
+from django.contrib.auth import logout, authenticate
+from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 
 
 # Vista de inicio de sesión
