@@ -347,6 +347,9 @@ def Listar_cursos_material(request):
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
 
+#listar material
+    #listar material
+
 
 #Listar material de apoyo
 def material_list(request, curso_id):
@@ -385,4 +388,15 @@ def editar_material_apoyo(request, pk):
     context = {"form": form,"curso_id":curso_id}
     
     return render(request, 'material_apoyo/editar_material.html',context)
+
+def material_list(request, curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+
+    # context = {"form": form,"evaluacion_id":evaluacion_id}
+    #return render(request, 'material_apoyo/material_list.html')
+
+
+    #mostrar detalles
 
