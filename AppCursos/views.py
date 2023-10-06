@@ -334,6 +334,8 @@ def editar_cursos(request, curso_id):
     return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
 
 
+<<<<<<< HEAD
+=======
 
 def gestion_MaterialApoyo(request):
     return render(request, 'material_apoyo/MaterialApoyo.html')
@@ -346,6 +348,7 @@ def Listar_cursos_material(request):
     return render(request,'material_apoyo/cursos_material.html',context)
 
 #listar material
+>>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
     #listar material
 
 
@@ -384,6 +387,7 @@ def editar_material_apoyo(request, pk):
     return render(request, 'material_apoyo/editar_material.html',context)
     
 
+<<<<<<< HEAD
     #mostrar detalles
 # class MaterialApoyoListView(View):
 #     # @login_required
@@ -395,3 +399,18 @@ def material_list(request, curso_id):
     curso = get_object_or_404(Cursos, pk=curso_id)
     materiales = MaterialApoyo.objects.filter(id_curso=curso)
     return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+=======
+    # context = {"form": form,"evaluacion_id":evaluacion_id}
+    #return render(request, 'material_apoyo/material_list.html')
+<<<<<<< HEAD
+=======
+
+    #mostrar detalles
+
+class MaterialApoyoDetailView(View):
+    # @login_required
+    def get(self, request, pk):
+        material = get_object_or_404(MaterialApoyo, pk=pk)
+        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
+>>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
+>>>>>>> 827e039b9056cd8474bb5c9646c915551abac687
