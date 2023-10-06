@@ -15,11 +15,10 @@
     <div class="text"><!--2 -->
         <div class="all">
             <div class="tabla">
-                <h1>Editar Material de Apoyo</h1>
+                <h1>Agregar Material de Apoyo</h1>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                         {{ form.as_p }}
-                        
                     <button type="submit">Guardar Cambios</button>
                     
                 </form>
@@ -28,7 +27,7 @@
         </div>
     </div>
 </div>
-<a href="{% url 'material_list' curso_id=curso_id %}" id="back2">
+<a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
     <div>
         <button class="back">Regresar</button>
     </div>
