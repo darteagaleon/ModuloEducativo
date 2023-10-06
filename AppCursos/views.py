@@ -347,96 +347,42 @@ def Listar_cursos_material(request):
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
 
-#listar material
-<<<<<<< HEAD
-class MaterialApoyoListView(View):
-    # @login_required
-    def get(self, request, curso_id):
-        curso = get_object_or_404(Cursos, pk=curso_id)
-        materiales = MaterialApoyo.objects.filter(id_curso=curso)
-        return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
-=======
->>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
-    #listar material
 
+#Listar material de apoyo
+def material_list(request, curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
 
-
->>>>>>> 24f31ec8cd18dab739f8a1de23ecce621f2c391a
 
 #agregar material de apoyo
-def agregar_material_apoyo(request):
+def crear_material_apoyo(request):
     if request.method == 'POST':
         form = MaterialApoyoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('material_list') 
+            return redirect('Listar_cursos_material') 
     else:
-        form = MaterialApoyoForm()  
+        form = MaterialApoyoForm()
 
-    return render(request, 'material_apoyo/agregar_material.html', {'form': form})
+
+    return render(request, 'material_apoyo/crear_material.html', {'form': form})
 
 #editar material de apoyo
 def editar_material_apoyo(request, pk):
-<<<<<<< HEAD
-    editar_material = MaterialApoyo.objects.get(pk=pk)
-    curso_id = editar_material.pk # Obtener el curso_id del material editado
-=======
     editar_material = get_object_or_404(MaterialApoyo, pk=pk)
     curso_id = editar_material.id_curso.id # Obtener el curso_id del material editado (El ultimo id es para traer el valor numero del id)
     
->>>>>>> 24f31ec8cd18dab739f8a1de23ecce621f2c391a
-
     if request.method == "POST":
         form = MaterialApoyoForm(request.POST, instance=editar_material)
         if form.is_valid():
             form.save()
             messages.success(request, 'Editado con éxito')
-<<<<<<< HEAD
-            return redirect('material_list', pk=curso_id)
-=======
             return redirect('material_list', curso_id=curso_id)
         
->>>>>>> 24f31ec8cd18dab739f8a1de23ecce621f2c391a
-    
     else:
         form = MaterialApoyoForm(instance=editar_material)
     context = {"form": form,"curso_id":curso_id}
     
     return render(request, 'material_apoyo/editar_material.html',context)
-    
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    #mostrar detalles
-# class MaterialApoyoListView(View):
-#     # @login_required
-#     def get(self, request, curso_id):
-#         curso = get_object_or_404(Cursos, pk=curso_id)
-#         materiales = MaterialApoyo.objects.filter(id_curso=curso)
-#         return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
-def material_list(request, curso_id):
-    curso = get_object_or_404(Cursos, pk=curso_id)
-    materiales = MaterialApoyo.objects.filter(id_curso=curso)
-    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
-=======
-    # context = {"form": form,"evaluacion_id":evaluacion_id}
-    #return render(request, 'material_apoyo/material_list.html')
-<<<<<<< HEAD
-=======
->>>>>>> 24f31ec8cd18dab739f8a1de23ecce621f2c391a
-
-
-<<<<<<< HEAD
-
-
-
-=======
-class MaterialApoyoDetailView(View):
-    # @login_required
-    def get(self, request, pk):
-        material = get_object_or_404(MaterialApoyo, pk=pk)
-        return render(request, 'material_apoyo/material_detalle.html', {'material': material})
->>>>>>> 30e4e917948fd8d986a3036fe8344bd296fc7999
->>>>>>> 827e039b9056cd8474bb5c9646c915551abac687
->>>>>>> 24f31ec8cd18dab739f8a1de23ecce621f2c391a
