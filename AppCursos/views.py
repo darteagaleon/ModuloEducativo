@@ -152,26 +152,27 @@ def crear_clases(request):
     if request.method=="POST" :
         form = ClasesForm(request.POST)
         if form.is_valid():
-            form.save()
+            nueva_classe=form.save()
             messages.success(request, 'Guardado con éxito')
 
-            return redirect('crear_clases')
+            return redirect('ver_clases',clase_id=nueva_classe.id)
     else:
         form = ClasesForm
     return render(request,'Clases/crear_clases.html',{'form':form})
             
 
 def crear_modulos(request):
-    if request.method=='POST' :
-        form = ModulosForm (request.POST )
-        if form.is_valid ():
-            form.save ()
+    if request.method == 'POST':
+        form = ModulosForm(request.POST)
+        if form.is_valid():
+            nuevo_modulo = form.save()  # Guarda el nuevo módulo y obtén el objeto creado
             messages.success(request, 'Guardado con éxito')
-
-            return redirect ('crear_modulos')
+            # Redirige a la vista "ver_modulos" con el "modulo_id" del módulo creado
+            return redirect('ver_modulos', modulo_id=nuevo_modulo.id)
     else:
-        form = ModulosForm
-    return render(request,'Modulos/crear_modulos.html',{'form':form})
+        form = ModulosForm()
+
+    return render(request, 'Modulos/crear_modulos.html', {'form': form})
 
 
 def crear_pregunta(request):
@@ -180,7 +181,7 @@ def crear_pregunta(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Guardado con éxito')
-            return redirect('crear_pregunta')
+            return redirect('ver_preguntas')
     else:
         form = PreguntasForm()
 
@@ -191,9 +192,10 @@ def crear_evaluacion(request):
     if request.method == 'POST':
         form = EvaluacionForm(request.POST)
         if form.is_valid():
-            form.save()
+            nueva_evaluacion=form.save()
             messages.success(request, 'Guardado con éxito')
-            return redirect('crear_evaluacion')  
+            return redirect('ver_evaluacion_detalle', evaluacion_id=nueva_evaluacion.id)
+
     else:
         form = EvaluacionForm()
 
@@ -215,9 +217,9 @@ def ver_evaluaciones(request, modulo_id):
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
 
-def ver_evaluacion(request):
-    evaluaciones = Evaluaciones.objects.all()
-    return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+# def ver_evaluacion(request):
+#     evaluaciones = Evaluaciones.objects.all()
+#     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
 
 
 def Listar_evaluaciones(request):
