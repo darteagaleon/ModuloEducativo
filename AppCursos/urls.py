@@ -37,7 +37,7 @@ urlpatterns =[
      path('crear_modulos/', login_required(views.crear_modulos), name='crear_modulos'),
      path('crear_clases/', login_required(views.crear_clases), name='crear_clases'),
      path('evaluacion/', login_required(views.gestion_evaluacion), name='evaluacion'),
-     path('ver_evaluacion/', login_required(views.ver_evaluacion), name='ver_evaluacion'),
+     # path('ver_evaluacion/<int:evaluacion_id>/', login_required(views.ver_evaluacion), name='ver_evaluacion'),
      path('lista_de_evaluacion/', login_required(views.Listar_evaluaciones),
           name='listar_evaluacion'),
      path('modulos/', login_required(views.All_Modulos), name='modulos'),

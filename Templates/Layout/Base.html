@@ -21,9 +21,26 @@
 <body>
     {% include 'includes/nav.html' %}
     <main>
-        <!--es un bloqueo de contenido -->
+        <!-- Bloque para mostrar los mensajes de error -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <script>
+                        Swal.fire({
+                            icon: '{{ message.tags }}',
+                            title: 'Felicitaciones',
+                            text:'Guardado con éxito',
+                            showConfirmButton: true,
+                            timer: 3000
+                        })
+                    </script>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!-- Fin del bloque de mensajes de error -->
+
         {% block content %}
-        <!--para indicar un bloqueo definido previamente. Esto permite la reutilización y extensión de plantillas en aplicaciones web-->
+        <!-- Bloque para mostrar el contenido de la página -->
         {% endblock %}
     </main>
 </body>

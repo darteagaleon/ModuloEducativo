@@ -14,7 +14,6 @@ from django.views import View
 #Para el tema de las imagenes del Curso
 from PIL import Image
 # Create your views here.
-
 from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 
@@ -32,7 +31,6 @@ def login(request):
             return redirect('home')
         else:
             # Si la autenticación falla, muestra un mensaje de error o redirige a la página de login, para poder ingresar.
-            messages.error(request, 'Nombre de usuario o contraseña incorrectos')
             return render(request, 'registration/login.html')   
     else:
         return render(request, 'registration/login.html')
@@ -79,6 +77,7 @@ class Crear_cursos(CreateView):
     model = Cursos
     form_class = crear_cursos
     template_name = 'Cursos/crear_cursos.html'
+    
     success_url=reverse_lazy('listar_cursos')
 
 
@@ -153,22 +152,27 @@ def crear_clases(request):
     if request.method=="POST" :
         form = ClasesForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('crear_clases')
+            nueva_classe=form.save()
+            messages.success(request, 'Guardado con éxito')
+
+            return redirect('ver_clases',clase_id=nueva_classe.id)
     else:
         form = ClasesForm
     return render(request,'Clases/crear_clases.html',{'form':form})
             
 
 def crear_modulos(request):
-    if request.method=='POST' :
-        form = ModulosForm (request.POST )
-        if form.is_valid ():
-            form.save ()
-            return redirect ('crear_modulos')
+    if request.method == 'POST':
+        form = ModulosForm(request.POST)
+        if form.is_valid():
+            nuevo_modulo = form.save()  # Guarda el nuevo módulo y obtén el objeto creado
+            messages.success(request, 'Guardado con éxito')
+            # Redirige a la vista "ver_modulos" con el "modulo_id" del módulo creado
+            return redirect('ver_modulos', modulo_id=nuevo_modulo.id)
     else:
-        form = ModulosForm
-    return render(request,'Modulos/crear_modulos.html',{'form':form})
+        form = ModulosForm()
+
+    return render(request, 'Modulos/crear_modulos.html', {'form': form})
 
 
 def crear_pregunta(request):
@@ -176,7 +180,8 @@ def crear_pregunta(request):
         form = PreguntasForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('crear_pregunta')
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_preguntas')
     else:
         form = PreguntasForm()
 
@@ -187,8 +192,10 @@ def crear_evaluacion(request):
     if request.method == 'POST':
         form = EvaluacionForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('crear_evaluacion')  
+            nueva_evaluacion=form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_evaluacion_detalle', evaluacion_id=nueva_evaluacion.id)
+
     else:
         form = EvaluacionForm()
 
@@ -210,9 +217,9 @@ def ver_evaluaciones(request, modulo_id):
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
 
-def ver_evaluacion(request):
-    evaluaciones = Evaluaciones.objects.all()
-    return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+# def ver_evaluacion(request):
+#     evaluaciones = Evaluaciones.objects.all()
+#     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
 
 
 def Listar_evaluaciones(request):
@@ -309,6 +316,7 @@ def editar_clases(request, clase_id):
         form = ClasesForm(request.POST, instance=editar_c)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Guardado con éxito')
             return redirect("ver_clases",clase_id=clase_id)
 
     else:
@@ -322,6 +330,7 @@ def ver_cursos(request,curso_id):
     return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
 
 
+
 def editar_cursos(request, curso_id):
     editar_c = get_object_or_404(Cursos, id=curso_id)
 
@@ -329,10 +338,8 @@ def editar_cursos(request, curso_id):
         form = CursosForm(request.POST, request.FILES, instance=editar_c)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Editado con éxito')
-            
-            # Redirigir al usuario a la vista 'ver_cursos' con el mismo 'curso_id' cuando se edite el curso
-            return redirect('ver_cursos', curso_id=curso_id)
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_cursos', curso_id=curso_id)  # Redirige después de guardar los cambios
         
     else:
         form = CursosForm(instance=editar_c)
@@ -375,6 +382,7 @@ def crear_material_apoyo(request):
         form = MaterialApoyoForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Guardado con éxito')
             return redirect('Listar_cursos_material') 
     else:
         form = MaterialApoyoForm()
