@@ -20,7 +20,7 @@ from PIL import Image
 # Create your views here.
 
 
-from django.contrib.auth.decorators import login_required
+
 from django.contrib.auth import logout
 # Create your views here.
 
@@ -29,39 +29,39 @@ def home(request):
 
 
 # antes de entrar a cualquiera de estas funciones le pide estar registrado
-@login_required
+
 def All_cursos(request):
     cursos = Cursos.objects.all()
     return render(request, 'Cursos/cursos.html', {'cursos': cursos})
-@login_required
+
 
 def All_clases(request):
     clases = Clases.objects.all()
     return render(request, 'Clases/clases.html', {'clases': clases})
-@login_required
+
 
 def All_Modulos(request):
     modulos = Modulos.objects.all()
     return render(request, 'Modulos/modulos.html', {'modulos': modulos})
-@login_required
+
 
 def gestion_evaluacion(request):
     return render(request, 'Evaluaciones/evaluacion.html')
 
 #Vista de material de apoyo
-@login_required
+
 def Listar_cursos_material(request): # type: ignore
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
 
 # funcion para hacer logout
-@login_required
+
 def exit(request):
     logout(request)
     return redirect('home')
 
-# @login_required
+# 
 
 #Vista para crear los cursos
 class Crear_cursos(CreateView):
@@ -71,7 +71,7 @@ class Crear_cursos(CreateView):
     success_url=reverse_lazy('listar_cursos')
 
 
-# @login_required
+# 
 def Listar_cursos(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
@@ -79,7 +79,7 @@ def Listar_cursos(request):
 
 
 #vista para fitrar cursos 
-@login_required
+
 def filtrar(request):
     filtro = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
     
@@ -87,7 +87,7 @@ def filtrar(request):
     return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
 
 # vista para filtrar modulos
-@login_required
+
 def filtrar_modulos(request):
     filtro_m = Modulos.objects.filter(nombre_modulo__contains=request.GET.get('search',''))
     
@@ -95,7 +95,7 @@ def filtrar_modulos(request):
     return render(request, 'Modulos/listar_modulos.html', {'listarm': filtro_m})
 
 # vista para filtrar clases
-@login_required
+
 def filtrar_clases(request):
     filtro_c = Clases.objects.filter(nombre_clase__contains=request.GET.get('search',''))
     
@@ -103,7 +103,7 @@ def filtrar_clases(request):
     return render(request, 'Clases/listar_clases.html', {'listarclases': filtro_c})
 
 # vista para filtrar evaluaciones 
-@login_required
+
 def filtrar_evaluaciones(request):
     filtro_e = Evaluaciones.objects.filter(nombre_evaluacion__contains=request.GET.get('search',''))
     
@@ -111,7 +111,7 @@ def filtrar_evaluaciones(request):
     return render(request, 'Evaluaciones/listar_evaluaciones.html', {'listare': filtro_e})
 
 # vista para filtrar preguntas
-@login_required
+
 def filtrar_preguntas(request):
     filtro_p = Preguntas.objects.filter(nombre_pregunta__contains=request.GET.get('search',''))
     
@@ -119,7 +119,7 @@ def filtrar_preguntas(request):
     return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
 
 #vista para fitrar cursos de material de apoyo
-@login_required
+
 def filtrar_cursos_material(request):
     filtrocm = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
     
@@ -129,7 +129,7 @@ def filtrar_cursos_material(request):
 
 
 # vista para filtrar material de apoyo
-@login_required
+
 def filtrar_material(request):
     filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
     
@@ -137,7 +137,7 @@ def filtrar_material(request):
     return render(request, 'material_apoyo/material_list.html', {'materiales': filtro_m})
 #vista para editar un cursito
 
-@login_required
+
 def crear_clases(request):
     if request.method=="POST" :
         form = ClasesForm(request.POST)
@@ -145,10 +145,10 @@ def crear_clases(request):
             form.save()
             return redirect('crear_clases')
     else:
-        form = ClasesForm
+        form = ClasesForm()
     return render(request,'Clases/crear_clases.html',{'form':form})
             
-@login_required
+
 def crear_modulos(request):
     if request.method=='POST' :
         form = ModulosForm (request.POST )
@@ -159,7 +159,7 @@ def crear_modulos(request):
         form = ModulosForm
     return render(request,'Modulos/crear_modulos.html',{'form':form})
 
-@login_required
+
 def crear_pregunta(request):
     if request.method == 'POST':
         form = PreguntasForm(request.POST)
@@ -171,7 +171,7 @@ def crear_pregunta(request):
 
     return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
 
-@login_required
+
 def crear_evaluacion(request):
     if request.method == 'POST':
         form = EvaluacionForm(request.POST)
@@ -184,7 +184,7 @@ def crear_evaluacion(request):
     return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
 
 # Vista para ver y realizar las evaluaciones como Usuario
-@login_required
+
 def ver_evaluaciones(request, modulo_id):
 
     evaluaciones = Evaluaciones.objects.filter(nombre_modulo=modulo_id)
@@ -198,25 +198,25 @@ def ver_evaluaciones(request, modulo_id):
     context = {'evaluaciones':evaluaciones}
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
-@login_required
+
 def ver_evaluacion(request):
     evaluaciones = Evaluaciones.objects.all()
     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
 
-@login_required
+
 def Listar_evaluaciones(request):
     listare = Evaluaciones.objects.all()
     context = {'listare':listare}
     return render(request,'Evaluaciones/listar_evaluaciones.html',context)
 
-@login_required
+
 def Listar_clases(request):
     listarclases = Clases.objects.all()
     context = {'listarclases':listarclases}
     return render(request,'Clases/listar_clases.html',context)
 
 
-@login_required
+
 def Listar_modulos(request):
     listarm = Modulos.objects.all()
     context = {'listarm':listarm}
@@ -225,19 +225,19 @@ def Listar_modulos(request):
 
 
 #  apartado se hace el llamado a detalle de cada Evaluacion
-@login_required
+
 def ver_evaluacion_detalle(request, evaluacion_id):
     evaluacion = Evaluaciones.objects.get(pk=evaluacion_id)
     return render(request, 'Evaluaciones/Visualizacion/ver_evaluacion_detalle.html', {'evaluacion': evaluacion})
 
-@login_required
+
 def ver_preguntas_detalle(request,evaluacion_id):
     evaluacion = get_object_or_404(Evaluaciones, pk=evaluacion_id)
     preguntas = Preguntas.objects.filter(id_evaluacion=evaluacion).order_by('id')
     return render(request, 'Evaluaciones/Visualizacion/ver_preguntas_detalle.html', {'evaluacion': evaluacion, 'preguntas': preguntas})
 
 
-@login_required
+
 def editar_evaluaciones(request, evaluacion_id):
     editar_e = Evaluaciones.objects.get(id=evaluacion_id)
     if request.method == "POST":
@@ -252,7 +252,7 @@ def editar_evaluaciones(request, evaluacion_id):
     context = {"form": form,"evaluacion_id":evaluacion_id}
     return render(request, 'Evaluaciones/editar_evaluacion.html', context)
 
-@login_required
+
 def editar_preguntas(request, pregunta_id):
     editar_p = Preguntas.objects.get(id=pregunta_id)
     if request.method == "POST":
@@ -266,7 +266,7 @@ def editar_preguntas(request, pregunta_id):
     context = {"form": form,"pregunta_id":pregunta_id}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
-@login_required
+
 def editar_modulos(request, modulo_id):
     editar_m = get_object_or_404(Modulos, id=modulo_id)
     if request.method == "POST":
@@ -281,17 +281,17 @@ def editar_modulos(request, modulo_id):
     context = {"form": form, "modulo_id":modulo_id}
     return render(request, 'Modulos/Visualizacion/editar_modulos.html', context)
 
-@login_required
+
 def ver_clases(request, clase_id):
     v_clases = get_object_or_404(Clases, id=clase_id)
     return render(request, 'Clases/Visualizacion/ver_clases.html', {'v_clases': v_clases})
 
-@login_required
+
 def ver_modulos(request,modulo_id):
     v_modulos = get_object_or_404(Modulos, id=modulo_id)
     return render(request, 'Modulos/Visualizacion/ver_modulos.html', {'v_modulos': v_modulos})
 
-@login_required
+
 def editar_clases(request, clase_id):
     editar_c = get_object_or_404(Clases, id=clase_id)
     if request.method == "POST":
@@ -305,12 +305,12 @@ def editar_clases(request, clase_id):
     context = {"form": form,"clase_id":clase_id}
     return render(request, 'Clases/Visualizacion/editar_clases.html', context)
 
-@login_required
+
 def ver_cursos(request,curso_id):
     v_cursos = get_object_or_404(Cursos, id=curso_id)
     return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
 
-@login_required
+
 def editar_cursos(request, curso_id):
     editar_c = get_object_or_404(Cursos, id=curso_id)
 
@@ -339,7 +339,7 @@ def editar_cursos(request, curso_id):
 
 def gestion_MaterialApoyo(request):
     return render(request, 'material_apoyo/MaterialApoyo.html')
-@login_required
+
 
 #Vista de listado de cursos del material de apoyo
 def Listar_cursos_material(request):
