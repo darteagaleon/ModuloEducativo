@@ -51,13 +51,13 @@
             <span class="tooltip">Gestion Evaluación</span>
         </li>
         <!--representa un elemento de menú en un menú de navegación que no enlaza a una página específica-->
-        <li>
+        <!-- <li>
             <a href="#">
                 <i class='bx bx-badge-check'></i>
                 <span class="links_name">Certificación </span>
             </a>
             <span class="tooltip">Certificación</span>
-        </li>
+        </li> -->
         <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de material de apoyo en el sitio web. -->
         <li>
             <a href="{% url 'gestion_MaterialApoyo' %}">
@@ -65,6 +65,14 @@
                 <span class="links_name">Material de apoyo </span>
             </a>
             <span class="tooltip">Material de apoyo</span>
+        </li>
+        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de usuario en el sitio web. -->
+        <li>
+            <a href="{% url 'GestionUsuarios' %}">
+                <i class='bx bxs-user-plus'></i>
+                <span class="links_name">Gestion de usuarios </span>
+            </a>
+            <span class="tooltip">Gestion de usuarios</span>
         </li>
     </ul>
     <div class="profile_content">

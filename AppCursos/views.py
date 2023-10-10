@@ -8,15 +8,17 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm, MaterialApoyoForm
-from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
-from .forms import ClasesForm, CrearUsuariosForm 
+from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos, Cargos
+from .forms import ClasesForm, CrearUsuariosForm, CargoForm 
 from django.views import View
 #Para el tema de las imagenes del Curso
 from PIL import Image
-# Create your views here.
 from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
+from AppUsuarios.models import Cargo #importa los modelos de la AppUsuarios
+
+# Create your views here.
 
 # Vista de inicio de sesión
 def login(request):
@@ -407,16 +409,46 @@ def editar_material_apoyo(request, pk):
     
     return render(request, 'material_apoyo/editar_material.html',context)
 
-<<<<<<< HEAD
 
+#*********************
+#       Cargos       *
+#*********************
 
+#vista para crear cargos
+def crear_cargo(request):
+    if request.method == 'POST':
+        form = CargoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Cargos/crear_cargo.html', {'mensaje': 'Cargo creado exitosamente'})
+    else:
+        form = CargoForm()
+    
+    return render(request, 'Cargos/crear_cargo.html', {'form': form})  
+    
 
-#vista para crear usuarios 
+#*********************
+# Gestion de usuario *
+#*********************
+
+#vista para gestion de usuario
+def GestionUsuarios(request):
+    return render(request, 'Usuarios/usuarios.html')
+
+#vista para crear usuario
 def crear_usuario(request):
     if request.method == 'POST':
         form = CrearUsuariosForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save() # Guardar el usuario
+
+            # Asignar un cargo al usuario
+            cargo_id = request.POST.get('cargo') 
+            if cargo_id:
+                cargo = Cargo.objects.get(pk=cargo_id)
+                user.cargo = cargo
+                user.save()
+
             username = form.cleaned_data['username']
             messages.success(request, f'Usuario {username} creado')
             return redirect('home')
@@ -425,12 +457,4 @@ def crear_usuario(request):
 
     context = {'form': form}
     return render(request, 'Usuarios/crear_usuario.html', context)
-    
-=======
-def material_list(request, curso_id):
-    curso = get_object_or_404(Cursos, pk=curso_id)
-    materiales = MaterialApoyo.objects.filter(id_curso=curso)
-    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
-
->>>>>>> 01746ea9435cd6a63181949ec0a26f341f6a5a94
 
