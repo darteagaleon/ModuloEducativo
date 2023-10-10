@@ -95,3 +95,10 @@ class MaterialApoyo(models.Model):
      def __str__(self):
           return self.NombreMaterialApoyo
 
+#Modelo de cargos
+class Cargos(models.Model):
+     nombre_cargo = models.CharField(max_length=100)
+     estado_cargo = models.BooleanField(default=True)
+
+     def __str__(self):
+          return self.nombre_cargo

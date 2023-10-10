@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 #Vista para realizar un Curso
 
-@login_required
+
 def seleccionar_curso(request):
     if request.method == "POST":
         #Leer registro del Curso seleccionado
