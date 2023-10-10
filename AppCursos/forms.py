@@ -1,7 +1,8 @@
 from django import forms 
 from .models import *
 from PIL import Image
-
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 #este código define un formulario de Django llamado crear_cursos que se utiliza para interactuar con el modelo de Cursos.
 class crear_cursos(forms.ModelForm):
@@ -57,6 +58,23 @@ class MaterialApoyoForm(forms.ModelForm):
     class Meta:
         model = MaterialApoyo
         fields = ['NombreMaterialApoyo', 'DescripcionMaterialApoyo', 'Archivo', 'id_curso']
+
+#este código define un formulario de Django llamado User que se utiliza para interactuar con el modelo de crear_usuario.        
+class CrearUsuariosForm(UserCreationForm):
+    #personalizar la apariencia y el comportamiento de los campos del formulario en una aplicación Django.
+    username = forms.CharField(label='Nombre de usuario', max_length=150)
+    nombre = forms.CharField(max_length=30)
+    apellido = forms.CharField(max_length=30)
+    cedula = forms.CharField(max_length=10)
+    email = forms.EmailField()
+    password1 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Contraseña', widget=forms.PasswordInput)
+    estadousuario = forms.BooleanField(required=False, initial=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'nombre', 'apellido', 'cedula', 'email', 'password1', 'password2', 'estadousuario']
+        help_text = {k: "" for k in fields}
 
 
 
