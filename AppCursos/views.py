@@ -37,14 +37,6 @@ def login(request):
 # Vista de inicio (home) protegida por autenticación
 def home(request):
     return render(request, 'home.html')
-
-
-
-# Vista para cerrar sesión
-def exit(request):
-    logout(request)
-    return redirect('login')
-
 def All_cursos(request):
     cursos = Cursos.objects.all()
     return render(request, 'Cursos/cursos.html', {'cursos': cursos})
@@ -70,7 +62,13 @@ def Listar_cursos_material(request): # type: ignore
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
 
+# funcion para hacer logout
 
+def exit(request):
+    logout(request)
+    return redirect('home')
+
+# 
 
 #Vista para crear los cursos
 class Crear_cursos(CreateView):
@@ -157,7 +155,7 @@ def crear_clases(request):
 
             return redirect('ver_clases',clase_id=nueva_classe.id)
     else:
-        form = ClasesForm
+        form = ClasesForm()
     return render(request,'Clases/crear_clases.html',{'form':form})
             
 
@@ -217,9 +215,11 @@ def ver_evaluaciones(request, modulo_id):
     return render(request, 'Evaluaciones/ver_evaluaciones.html', {'evaluaciones': evaluaciones})
 
 
-# def ver_evaluacion(request):
-#     evaluaciones = Evaluaciones.objects.all()
-#     return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+def ver_evaluacion(request):
+    evaluaciones = Evaluaciones.objects.all()
+    return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+
+
 
 
 def Listar_evaluaciones(request):
@@ -330,7 +330,6 @@ def ver_cursos(request,curso_id):
     return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
 
 
-
 def editar_cursos(request, curso_id):
     editar_c = get_object_or_404(Cursos, id=curso_id)
 
@@ -408,6 +407,7 @@ def editar_material_apoyo(request, pk):
     
     return render(request, 'material_apoyo/editar_material.html',context)
 
+<<<<<<< HEAD
 
 
 
@@ -426,4 +426,11 @@ def crear_usuario(request):
     context = {'form': form}
     return render(request, 'Usuarios/crear_usuario.html', context)
     
+=======
+def material_list(request, curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+
+>>>>>>> 01746ea9435cd6a63181949ec0a26f341f6a5a94
 
