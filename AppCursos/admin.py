@@ -45,5 +45,15 @@ class regMaterialApoyo(admin.ModelAdmin):
      
 admin.site.register(MaterialApoyo, regMaterialApoyo)
 
+#Cargos
+class CargosAdmin(admin.ModelAdmin):
+     list_display = ('nombre_cargo', 'estado_cargo')
+     list_filter = ('nombre_cargo',)  # para búsqueda en admin
+     ordering = ['id']
+     
+admin.site.register(Cargos, CargosAdmin)
+
+
+
 
 

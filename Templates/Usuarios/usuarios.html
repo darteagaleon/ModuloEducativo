@@ -1,0 +1,54 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+
+
+
+<body>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="container-fluid">
+                <div class="row" id="tabla">
+                    <div>
+                        <h1 style="text-align:center;">Gestion de usuario</h1>
+                        <div class="folder-container">
+                            <!--se esta enlazando la url de 'crear_usuario'-->
+                            <a href="{% url 'crear_usuario' %}" class="folder-box"> <i
+                                    class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Crear usuario</p>
+                                </div>
+                            </a>
+                            <!--se esta enlazando la url de 'listar_usuarios'-->
+                            <a href="#" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Listar usuarios</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'crear_cargo' %}" class="folder-box"> <i
+                                class="bx bx-folder folder-icon"></i>
+                            <div>
+                                <p>Crear Cargos</p>     
+                            </div>
+                        </a>
+                            <!--se esta enlazando la url de 'listar_cursos'-->
+                            <a href="#" class="folder-box"> <i
+                                    class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Listar Cargos</p>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
