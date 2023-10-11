@@ -71,8 +71,5 @@ urlpatterns =[
      path('filtrar_material/',login_required(views.filtrar_material),name="filtrar_material"),
      path('crear_material/', login_required(views.crear_material_apoyo), name='crear_material'),
      path('editar_material/<int:pk>/', login_required(views.editar_material_apoyo), name='editar_material'),
-     path('GestionUsuarios/', login_required(views.GestionUsuarios), name='GestionUsuarios'),
-     path('crear_cargo/', login_required(views.crear_cargo), name='crear_cargo'),
-     path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
      ]
 

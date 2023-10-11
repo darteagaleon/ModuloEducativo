@@ -8,8 +8,7 @@ from datetime import datetime, timedelta
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import crear_cursos,CursosForm,EvaluacionForm,PreguntasForm,ModulosForm,ClasesForm, MaterialApoyoForm
-from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos, Cargos
-from .forms import ClasesForm, CrearUsuariosForm, CargoForm 
+from .models import Evaluaciones,Modulos, MaterialApoyo,Cursos
 from django.views import View
 #Para el tema de las imagenes del Curso
 from PIL import Image
@@ -408,53 +407,3 @@ def editar_material_apoyo(request, pk):
     context = {"form": form,"curso_id":curso_id}
     
     return render(request, 'material_apoyo/editar_material.html',context)
-
-
-#*********************
-#       Cargos       *
-#*********************
-
-#vista para crear cargos
-def crear_cargo(request):
-    if request.method == 'POST':
-        form = CargoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'Cargos/crear_cargo.html', {'mensaje': 'Cargo creado exitosamente'})
-    else:
-        form = CargoForm()
-    
-    return render(request, 'Cargos/crear_cargo.html', {'form': form})  
-    
-
-#*********************
-# Gestion de usuario *
-#*********************
-
-#vista para gestion de usuario
-def GestionUsuarios(request):
-    return render(request, 'Usuarios/usuarios.html')
-
-#vista para crear usuario
-def crear_usuario(request):
-    if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST)
-        if form.is_valid():
-            user = form.save() # Guardar el usuario
-
-            # Asignar un cargo al usuario
-            cargo_id = request.POST.get('cargo') 
-            if cargo_id:
-                cargo = Cargo.objects.get(pk=cargo_id)
-                user.cargo = cargo
-                user.save()
-
-            username = form.cleaned_data['username']
-            messages.success(request, f'Usuario {username} creado')
-            return redirect('home')
-    else:
-        form = CrearUsuariosForm()
-
-    context = {'form': form}
-    return render(request, 'Usuarios/crear_usuario.html', context)
-
