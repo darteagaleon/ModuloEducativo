@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 #Vista para realizar un Curso
 
-@login_required
+
 def seleccionar_curso(request):
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -22,7 +22,7 @@ def seleccionar_curso(request):
         #Obtener fk del Cargo asociado
         fk_cargo=regCurso.id_cargo
         #Obtener pk de la tabla Usuario_Cargo
-        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo)
+        regUsuarioCargo=Usuario_Cargo.objects.filter(id_cargo=fk_cargo)[0]
         #Obtener lista de los Modulos del Curso
         listaModulos=Modulos.objects.filter(id_curso=regCurso)
         #Consular si los modulos ya existen en la tabla Clase_Usuario
@@ -103,29 +103,22 @@ def seleccionar_curso(request):
 
         #Redireccionar a la ejecucion del Curso
         return render (request,'Usuarios/ejecutar_curso.html', context)
-        
-        
-    else:
 
+    else:
         #Consultar listado de Cursos para el Usuario y sus Cargos
-     
         listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
         
         # regUsuario=User.objects.get(username=request.user)
         user_id=request.user.id
-       
         listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
             
-            #Ensamblar el contexto para el template
+        #Ensamblar el contexto para el template
         listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
-            # print(listaUsuarioCargo)
 
         #Retornar el template con el contexto
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
 
 
-
-@login_required
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -137,10 +130,12 @@ def ejecutar_clase(request, clase_id):
     }
     return render(request, 'Usuarios/ejecutar_clase.html', context)
 
-@login_required
+
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
     clase_usuario = Clase_Usuario.objects.get(id_clase=clase_id, id_usuario_cargo__id_usuario=user_id)
+    print('------------------')
+    print(clase_usuario)
     clase_usuario.visto = True
     clase_usuario.save()
     clase = get_object_or_404(Clases, pk=clase_id)

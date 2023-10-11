@@ -37,20 +37,18 @@ def login(request):
 # Vista de inicio (home) protegida por autenticación
 def home(request):
     return render(request, 'home.html')
+
 def All_cursos(request):
     cursos = Cursos.objects.all()
     return render(request, 'Cursos/cursos.html', {'cursos': cursos})
-
 
 def All_clases(request):
     clases = Clases.objects.all()
     return render(request, 'Clases/clases.html', {'clases': clases})
 
-
 def All_Modulos(request):
     modulos = Modulos.objects.all()
     return render(request, 'Modulos/modulos.html', {'modulos': modulos})
-
 
 def gestion_evaluacion(request):
     return render(request, 'Evaluaciones/evaluacion.html')
@@ -363,10 +361,6 @@ def Listar_cursos_material(request):
     listarc = Cursos.objects.all()
     context = {'listarc':listarc}
     return render(request,'material_apoyo/cursos_material.html',context)
-
-#listar material
-    #listar material
-
 
 #Listar material de apoyo
 def material_list(request, curso_id):
