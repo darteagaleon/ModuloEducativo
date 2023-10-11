@@ -3,17 +3,18 @@ from django.contrib.auth.models import User
 from AppCursos.models import *
 
 # Create your models here.
+#CARGOS
 class Cargo(models.Model):
      nombre_cargo=models.CharField(max_length=100)
      estado_cargo= models.BooleanField(default=False)
      
-
      def __str__(self):
           return self.nombre_cargo
      #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
      class Meta:
           verbose_name_plural = 'Cargos'
 
+#USUARIO_CARGO
 class Usuario_Cargo(models.Model):
      id_usuario=models.ForeignKey(User, on_delete=models.CASCADE)
      id_cargo=models.ForeignKey(Cargo, on_delete=models.CASCADE)
@@ -24,6 +25,7 @@ class Usuario_Cargo(models.Model):
      class Meta:
           verbose_name_plural = 'Usuario_Cargo'
 
+#CLASE_USUARIO
 class Clase_Usuario(models.Model):
      id_usuario_cargo=models.ForeignKey(Usuario_Cargo, on_delete=models.CASCADE, null=True)
      id_modulo=models.ForeignKey('AppCursos.Modulos', on_delete=models.CASCADE, null=True)

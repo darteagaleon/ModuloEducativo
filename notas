@@ -6,3 +6,438 @@ http://localhost:8000/accounts/login/?next=/
 
 cyresmoduloformativo@gmail.com
 lavacalola2424123
+
+Organizacion Vistas AppCursos
+#****************************************************
+#LOGIN
+#****************************************************
+# Vista de inicio de sesión
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        # se agrega una autenticación para poder ingresar al sitio
+        if user is not None:
+            # si la autenticación resulta exitosa, se redirige a la pagina de home
+            auth_login(request, user) 
+            return redirect('home')
+        else:
+            # Si la autenticación falla, muestra un mensaje de error o redirige a la página de login, para poder ingresar.
+            return render(request, 'registration/login.html')   
+    else:
+        return render(request, 'registration/login.html')
+# Vista de inicio (home) protegida por autenticación
+def home(request):
+    return render(request, 'home.html')
+
+# Vista logout
+def exit(request):
+    logout(request)
+    return redirect('home')
+
+# ******************************
+# GESTION GENERAL
+# ******************************
+
+def Gestion_general(request):
+    return render(request, 'Gestion_g/gestion_general.html')
+
+#****************************************************
+#CURSOS
+#****************************************************
+
+#CREAR
+class Crear_cursos(CreateView):
+    model = Cursos
+    form_class = crear_cursos
+    template_name = 'Cursos/crear_cursos.html'
+    
+    success_url=reverse_lazy('listar_cursos')
+
+#LISTAR
+def Listar_cursos(request):
+    listarc = Cursos.objects.all()
+    context = {'listarc':listarc}
+    return render(request,'Cursos/listar_cursos.html',context)
+
+#FILTRAR
+def filtrar(request):
+    filtro = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
+    
+    context = {'filtro':filtro}
+    return render(request, 'Cursos/listar_cursos.html', {'listarc': filtro})
+
+def All_cursos(request):
+    cursos = Cursos.objects.all()
+    return render(request, 'Cursos/cursos.html', {'cursos': cursos})
+
+#VER
+def ver_cursos(request,curso_id):
+    v_cursos = get_object_or_404(Cursos, id=curso_id)
+    return render(request, 'Cursos/Visualizacion/ver_cursos.html', {'v_cursos': v_cursos})
+
+
+#EDITAR
+def editar_cursos(request, curso_id):
+    editar_c = get_object_or_404(Cursos, id=curso_id)
+
+    if request.method == "POST":
+        form = CursosForm(request.POST, request.FILES, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_cursos', curso_id=curso_id)  # Redirige después de guardar los cambios
+        
+    else:
+        form = CursosForm(instance=editar_c)
+
+    context = {"form": form, "curso_id": curso_id}
+
+    icono_url = editar_c.iconoCurso.url if editar_c.iconoCurso else None
+    context["icono_url"] = icono_url
+
+    return render(request, 'Cursos/Visualizacion/editar_cursos.html', context)
+
+#****************************************************
+#MODULOS
+#****************************************************
+# CREAR
+def crear_modulos(request):
+    if request.method == 'POST':
+        form = ModulosForm(request.POST)
+        if form.is_valid():
+            nuevo_modulo = form.save()  # Guarda el nuevo módulo y obtén el objeto creado
+            messages.success(request, 'Guardado con éxito')
+            # Redirige a la vista "ver_modulos" con el "modulo_id" del módulo creado
+            return redirect('ver_modulos', modulo_id=nuevo_modulo.id)
+    else:
+        form = ModulosForm()
+
+    return render(request, 'Modulos/crear_modulos.html', {'form': form})
+
+# LISTAR
+def Listar_modulos(request):
+    listarm = Modulos.objects.all()
+    context = {'listarm':listarm}
+    return render(request,'Modulos/listar_modulos.html',context)
+
+# FILTRAR
+def filtrar_modulos(request):
+    filtro_m = Modulos.objects.filter(nombre_modulo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'Modulos/listar_modulos.html', {'listarm': filtro_m})
+
+def All_Modulos(request):
+    modulos = Modulos.objects.all()
+    return render(request, 'Modulos/modulos.html', {'modulos': modulos})
+
+#VER
+def ver_modulos(request,modulo_id):
+    v_modulos = get_object_or_404(Modulos, id=modulo_id)
+    return render(request, 'Modulos/Visualizacion/ver_modulos.html', {'v_modulos': v_modulos})
+
+#EDITAR
+def editar_modulos(request, modulo_id):
+    editar_m = get_object_or_404(Modulos, id=modulo_id)
+    if request.method == "POST":
+        form = ModulosForm(request.POST, instance=editar_m)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("ver_modulos" ,modulo_id=modulo_id )
+    else:
+
+        form = ModulosForm(instance=editar_m)
+    context = {"form": form, "modulo_id":modulo_id}
+    return render(request, 'Modulos/Visualizacion/editar_modulos.html', context)
+
+
+#****************************************************
+#CLASES
+#****************************************************
+# CREAR
+def crear_clases(request):
+    if request.method=="POST" :
+        form = ClasesForm(request.POST)
+        if form.is_valid():
+            nueva_classe=form.save()
+            messages.success(request, 'Guardado con éxito')
+
+            return redirect('ver_clases',clase_id=nueva_classe.id)
+    else:
+        form = ClasesForm()
+    return render(request,'Clases/crear_clases.html',{'form':form})
+            
+
+# LISTAR
+def Listar_clases(request):
+    listarclases = Clases.objects.all()
+    context = {'listarclases':listarclases}
+    return render(request,'Clases/listar_clases.html',context)
+
+# FILTRAR
+def filtrar_clases(request):
+    filtro_c = Clases.objects.filter(nombre_clase__contains=request.GET.get('search',''))
+    
+    context = {'filtro_c':filtro_c}
+    return render(request, 'Clases/listar_clases.html', {'listarclases': filtro_c})
+
+def All_clases(request):
+    clases = Clases.objects.all()
+    return render(request, 'Clases/clases.html', {'clases': clases})
+
+#VER
+def ver_clases(request, clase_id):
+    v_clases = get_object_or_404(Clases, id=clase_id)
+    return render(request, 'Clases/Visualizacion/ver_clases.html', {'v_clases': v_clases})
+
+#EDITAR
+def editar_clases(request, clase_id):
+    editar_c = get_object_or_404(Clases, id=clase_id)
+    if request.method == "POST":
+        form = ClasesForm(request.POST, instance=editar_c)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect("ver_clases",clase_id=clase_id)
+
+    else:
+        form = ClasesForm(instance=editar_c)
+    context = {"form": form,"clase_id":clase_id}
+    return render(request, 'Clases/Visualizacion/editar_clases.html', context)
+
+#****************************************************
+#EVALUACIONES
+#****************************************************
+def gestion_evaluacion(request):
+    return render(request, 'Evaluaciones/evaluacion.html')
+    
+# CREAR
+def crear_evaluacion(request):
+    if request.method == 'POST':
+        form = EvaluacionForm(request.POST)
+        if form.is_valid():
+            nueva_evaluacion=form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_evaluacion_detalle', evaluacion_id=nueva_evaluacion.id)
+
+    else:
+        form = EvaluacionForm()
+
+    return render(request, 'Evaluaciones/crear_evaluacion.html', {'form': form})
+    
+# LISTAR
+def Listar_evaluaciones(request):
+    listare = Evaluaciones.objects.all()
+    context = {'listare':listare}
+    return render(request,'Evaluaciones/listar_evaluaciones.html',context)
+
+# FILTRAR
+def filtrar_evaluaciones(request):
+    filtro_e = Evaluaciones.objects.filter(nombre_evaluacion__contains=request.GET.get('search',''))
+    
+    context = {'filtro_e':filtro_e}
+    return render(request, 'Evaluaciones/listar_evaluaciones.html', {'listare': filtro_e})
+    
+#VER
+def ver_evaluacion(request):
+    evaluaciones = Evaluaciones.objects.all()
+    return render(request, 'Evaluaciones/visualizar_evaluacion.html', {'evaluaciones': evaluaciones})
+
+def ver_evaluacion_detalle(request, evaluacion_id):
+    evaluacion = Evaluaciones.objects.get(pk=evaluacion_id)
+    return render(request, 'Evaluaciones/Visualizacion/ver_evaluacion_detalle.html', {'evaluacion': evaluacion})
+
+#EDITAR
+def editar_evaluaciones(request, evaluacion_id):
+    editar_e = Evaluaciones.objects.get(id=evaluacion_id)
+    if request.method == "POST":
+        form = EvaluacionForm(request.POST, instance=editar_e)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("ver_evaluacion_detalle", evaluacion_id=evaluacion_id)
+    else:
+        form = EvaluacionForm(instance=editar_e)
+    
+    context = {"form": form,"evaluacion_id":evaluacion_id}
+    return render(request, 'Evaluaciones/editar_evaluacion.html', context)
+
+
+#****************************************************
+#PREGUNTAS
+#****************************************************
+# CREAR
+def crear_pregunta(request):
+    if request.method == 'POST':
+        form = PreguntasForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect('ver_preguntas')
+    else:
+        form = PreguntasForm()
+
+    return render(request, 'Evaluaciones/crear_pregunta.html', {'form': form})
+
+# LISTAR
+
+# FILTRAR
+def filtrar_preguntas(request):
+    filtro_p = Preguntas.objects.filter(nombre_pregunta__contains=request.GET.get('search',''))
+    
+    context = {'filtro_p':filtro_p}
+    return render(request, 'Evaluaciones/listar_preguntas.html', {'listar_p': filtro_p})
+
+#VER
+def ver_preguntas_detalle(request,evaluacion_id):
+    evaluacion = get_object_or_404(Evaluaciones, pk=evaluacion_id)
+    preguntas = Preguntas.objects.filter(id_evaluacion=evaluacion).order_by('id')
+    return render(request, 'Evaluaciones/Visualizacion/ver_preguntas_detalle.html', {'evaluacion': evaluacion, 'preguntas': preguntas})
+
+#EDITAR
+def editar_preguntas(request, pregunta_id):
+    editar_p = Preguntas.objects.get(id=pregunta_id)
+    if request.method == "POST":
+        form = PreguntasForm(request.POST, instance=editar_p)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect("ver_preguntas_detalle", evaluacion_id=editar_p.id_evaluacion.id)
+    else:
+        form = PreguntasForm(instance=editar_p)
+    context = {"form": form,"pregunta_id":pregunta_id}
+    return render(request, 'Evaluaciones/editar_pregunta.html', context)
+
+#****************************************************
+#MATERIAL DE APOYO
+#****************************************************
+
+def gestion_MaterialApoyo(request):
+    return render(request, 'material_apoyo/MaterialApoyo.html')
+
+# CREAR
+def crear_material_apoyo(request):
+    if request.method == 'POST':
+        form = MaterialApoyoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Guardado con éxito')
+            return redirect('Listar_cursos_material') 
+    else:
+        form = MaterialApoyoForm()
+
+    return render(request, 'material_apoyo/crear_material.html', {'form': form})
+
+# LISTAR
+def material_list(request, curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'material_apoyo/material_list.html', {'materiales': materiales, 'curso': curso})
+
+def Listar_cursos_material(request): # type: ignore
+    listarc = Cursos.objects.all()
+    context = {'listarc':listarc}
+    return render(request,'material_apoyo/cursos_material.html',context)
+
+# FILTRAR
+def filtrar_material(request):
+    filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'material_apoyo/material_list.html', {'materiales': filtro_m})
+    
+def filtrar_cursos_material(request):
+    filtrocm = Cursos.objects.filter(nombre_curso__contains=request.GET.get('search',''))
+    
+    context = {'filtrocm':filtrocm}
+    return render(request, 'material_apoyo/cursos_material.html', {'listarc': filtrocm})
+
+#VER
+
+#EDITAR
+def editar_material_apoyo(request, pk):
+    editar_material = get_object_or_404(MaterialApoyo, pk=pk)
+    curso_id = editar_material.id_curso.id # Obtener el curso_id del material editado (El ultimo id es para traer el valor numero del id)
+    
+    if request.method == "POST":
+        form = MaterialApoyoForm(request.POST, instance=editar_material)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect('material_list', curso_id=curso_id)
+        
+    else:
+        form = MaterialApoyoForm(instance=editar_material)
+    context = {"form": form,"curso_id":curso_id}
+    
+    return render(request, 'material_apoyo/editar_material.html',context)
+
+
+Organizacion Urls App Cursos
+urlpatterns =[
+     path('login/',login_required(views.login), name='login'),
+     path('home/',login_required( views.home), name='home'),
+     path('exit/', views.exit, name='exit'),
+     path('', views.login, name='root'), 
+     #--------------------------------------------------------
+     #GESTION
+     path('gestion_general', login_required(views.Gestion_general), name='gestion_general'),#Permite que al dar click en el boton de gestion general se redirija a la pagina de gestion general
+     path('cursos', login_required(views.All_cursos), name="cursos"),
+     path('modulos/', login_required(views.All_Modulos), name='modulos'),
+     path('clase', login_required(views.All_clases), name='clase'),
+     path('evaluacion/', login_required(views.gestion_evaluacion), name='evaluacion'),
+     path('gestion_MaterialApoyo', login_required(views.gestion_MaterialApoyo), name='gestion_MaterialApoyo'),
+
+     #CREAR
+     path("crear_curso/", login_required(views.Crear_cursos.as_view()), name="crear_curso"),
+     path('crear_modulos/', login_required(views.crear_modulos), name='crear_modulos'),
+     path('crear_clases/', login_required(views.crear_clases), name='crear_clases'),
+     path('crear_evaluacion/', login_required(views.crear_evaluacion), name='crear_evaluacion'),
+     path('crear_pregunta/', login_required(views.crear_pregunta), name='crear_pregunta'),
+     path('crear_material/', login_required(views.crear_material_apoyo), name='crear_material'),
+     # path('crear_cargo/', login_required(views.crear_cargo), name='crear_cargo'),
+     # path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
+
+     #FILTRAR
+     path('filtrar/', login_required(views.filtrar), name='filtrar'),#Filtrar cursos
+     path('filtrar_modulos/',login_required(views.filtrar_modulos),name="filtrar_modulos"),
+     path('filtrar_clases/',login_required(views.filtrar_clases),name="filtrar_clases"),
+     path('filtrar_evaluacion/',login_required(views.filtrar_evaluaciones),name="filtrar_evaluacion"),
+     path('filtrar_preguntas/',login_required(views.filtrar_preguntas),name="filtrar_preguntas"),
+     path('filtrar_material/',login_required(views.filtrar_material),name="filtrar_material"),
+      path('filtrar_cursos_material/', login_required(views.filtrar_cursos_material), name='filtrar_cursos_material'),
+
+     #VER
+     path('ver_cursos/<int:curso_id>/', login_required(views.ver_cursos), name='ver_cursos'),
+     path('ver_modulos/<int:modulo_id>/', login_required(views.ver_modulos), name="ver_modulos"),
+     path('ver_clases/<int:clase_id>/', login_required(views.ver_clases), name='ver_clases'),
+     path('ver_evaluacion_detalle/<int:evaluacion_id>/',login_required(views.ver_evaluacion_detalle), name='ver_evaluacion_detalle'),
+     path('ver_preguntas_detalle/<int:evaluacion_id>/',login_required(views.ver_preguntas_detalle), name='ver_preguntas_detalle'),
+
+     #LISTAR
+     path('listar_cursos/',login_required( views.Listar_cursos), name='listar_cursos'),
+     path('listar_modulos', login_required(views.Listar_modulos), name='listar_modulos'),
+     path('listar_clases', login_required(views.Listar_clases), name='listar_clases'),
+     path('lista_de_evaluacion/', login_required(views.Listar_evaluaciones),name='listar_evaluacion'),
+     path('material_list/<int:curso_id>/', login_required(views.material_list), name='material_list'),
+     path('Listar_cursos_material/', login_required(views.Listar_cursos_material), name='Listar_cursos_material'),
+
+     #EDITAR
+     path('editar_cursos/<int:curso_id>/', login_required(views.editar_cursos), name='editar_cursos'),
+     path('editar_modulos/<int:modulo_id>/',login_required(views.editar_modulos), name='editar_modulos'),
+     path('editar_clases/<int:clase_id>/',login_required(views.editar_clases), name='editar_clases'),
+     path('editar_evaluacion/<int:evaluacion_id>/',login_required(views.editar_evaluaciones), name='editar_evaluacion'),
+     path('editar_pregunta/<int:pregunta_id>/',login_required(views.editar_preguntas), name='editar_pregunta'),
+     path('editar_material/<int:pk>/', login_required(views.editar_material_apoyo), name='editar_material'),
+
+
+    
+     
+     # path('GestionUsuarios/', login_required(views.GestionUsuarios), name='GestionUsuarios'),
+     
+     ]
+
+
