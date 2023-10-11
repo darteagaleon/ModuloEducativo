@@ -1,107 +1,134 @@
 <!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
 <!-- crea una barra lateral en una página web que incluye un logotipo y un posible botón de menú representado por un icono.-->
-<div class="sidebar">
-    <div class="logo_content">
-        <div class="logo">
-            <img src="{% static 'img/Cyres.png' %}" alt="logo" id="iconCyres">
-        </div>
-        <i class='bx bx-menu' id="btn"></i>
-    </div>
-    <ul class="nav_list">
-        <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
-        <li>
-            <a href="{% url 'home' %}">
-                <i class='bx bx-home'></i>
-                <span class="links_name">Inicio </span>
-            </a>
-            <span class="tooltip">Inicio</span>
-        </li>
-        <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
-        <li>
-            <a href="{% url 'cursos' %}">
-                <i class='bx bx-book'></i>
-                <span class="links_name">Gestion Cursos </span>
-            </a>
-            <span class="tooltip">Gestion Cursos</span>
-        </li>
-        
-        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
-        <li>
-            <a href="{% url 'modulos' %}">
-                <i class='bx bx-calendar-plus'></i>
-                <span class="links_name">Gestion Modulos </span>
-            </a>
-            <span class="tooltip">Gestion Modulos</span>
-        </li>
-        <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
-        <li>
-            <a href="{% url 'clase' %}">
-                <i class='bx bx-book-add'></i>
-                <span class="links_name">Gestion Clases </span>
-            </a>
-            <span class="tooltip">Gestion Clases</span>
-        </li>
-        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de evalucion en el sitio web. -->
-        <li>
-            <a href="{% url 'evaluacion' %}">
-                <i class='bx bx-file'></i>
-                <span class="links_name">Gestion Evaluación </span>
-            </a>
-            <span class="tooltip">Gestion Evaluación</span>
-        </li>
-        <!--representa un elemento de menú en un menú de navegación que no enlaza a una página específica-->
-        <!-- <li>
-            <a href="#">
-                <i class='bx bx-badge-check'></i>
-                <span class="links_name">Certificación </span>
-            </a>
-            <span class="tooltip">Certificación</span>
-        </li> -->
-        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de material de apoyo en el sitio web. -->
-        <li>
-            <a href="{% url 'gestion_MaterialApoyo' %}">
-                <i class='bx bxs-folder-open'></i>
-                <span class="links_name">Material de apoyo </span>
-            </a>
-            <span class="tooltip">Material de apoyo</span>
-        </li>
-        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de usuario en el sitio web. -->
-        <li>
-            <a href="{% url 'GestionUsuarios' %}">
-                <i class='bx bxs-user-plus'></i>
-                <span class="links_name">Gestion de usuarios </span>
-            </a>
-            <span class="tooltip">Gestion de usuarios</span>
-        </li>
-    </ul>
-    <div class="profile_content">
-        <div class="profile">
-            <div class="profile_details">
-                <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
-                <div class="name_job">
-                
-                    <div class="name">{{ user.username | title }}</div>
 
-                    <div class="cargo">{{ cargo.nombre_cargo }}</div>
-                   
+<body>
 
-                    <div class="job">{{ user.cargo }} 
-                    </div>
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <div id="iconContainer">
+                    <img src="{% static 'img/Cyres.png' %}" alt="logo" id="iconCyres">
                 </div>
             </div>
-            <a href="{% url 'exit'%}" id="log_out">
-            <i class='bx bx-log-out' >
-            </i></a>
         </div>
+
+        <ul class="nav-links">
+            <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
+
+            <li>
+                <a href="{% url 'home' %}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Inicio </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Inicio</a></li>
+
+                </ul>
+            </li>
+            <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
+            <li>
+                <div class="icon-links ">
+                    <a href="#">
+                        <i class='bx bx-user '></i>
+                        <span class="link_name">Usuarios </span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow '></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name">Usuarios</a></li>
+                    <li><a href="#">Usuarios</a></li>
+                    <li><a href="#">Certificaiones</a></li>
+                    <li><a href="#">Tiempo de interacción</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="icon-links ">
+                    <a href="{% url 'gestion_general' %}">
+                        <i class='bx bx-book '></i>
+                        <span class="link_name">Gestion</span>
+                    </a>
+                    <i class='bx bx-chevron-down arrow '></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name">Gestion</a></li>
+                    <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
+
+                    <li><a href="{% url 'cursos' %}">Cursos</a></li>
+                    <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
+
+                    <li><a href="{% url 'modulos' %}">Modulos</a></li>
+                    <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
+
+                    <li><a href="{% url 'clase' %}">Clases</a></li>
+                </ul>
+            </li>
+            <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de evalucion en el sitio web. -->
+
+            <li>
+                <a href="{% url 'evaluacion' %}">
+                    <i class='bx bx-file'></i>
+                    <span class="link_name">Evaluación </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Evaluación</a></li>
+
+                </ul>
+            </li>
+            <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de material de apoyo en el sitio web. -->
+
+            <li>
+                <a href="{% url 'gestion_MaterialApoyo' %}">
+                    <i class='bx bxs-folder-open'></i>
+                    <span class="link_name">Material de apoyo </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Material de apoyo </a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
+                    </div>
+                    <div class="name-job">
+                        <div class="profile_name">{{ user.username | title }}</div>
+                        <div class="job">Administrador</div>
+                    </div>
+                    <i class='bx bx-log-out' id="log_out"></i>
+                </div>
+            </li>
+        </ul>
     </div>
-</div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Menú</span>
+        </div>
+    </section>
+    <script>
+        // Inicialmente, el menú estará cerrado
+        let sidebar = document.querySelector(".sidebar");
+        let homeSection = document.querySelector(".home-section");
+        sidebar.classList.add("close");
+        homeSection.classList.add("close");
 
-<script>
-    let btn = document.querySelector("#btn");
-    let sidebar = document.querySelector(".sidebar");
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
 
-    btn.onclick = function () {
-        sidebar.classList.toggle("active");
-    }
-</script>
+        let sidebarBtn = document.querySelector(".bx-menu");
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+            homeSection.classList.toggle("close");
+        });
+    </script>
+
+</body>
+
+</html>

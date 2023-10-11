@@ -458,3 +458,10 @@ def crear_usuario(request):
     context = {'form': form}
     return render(request, 'Usuarios/crear_usuario.html', context)
 
+# ******************************
+# **Vista para Gestion General**
+# ******************************
+
+def Gestion_general(request):
+    return render(request, 'Gestion_g/gestion_general.html')
+

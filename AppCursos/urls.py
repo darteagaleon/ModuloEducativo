@@ -15,6 +15,7 @@ urlpatterns =[
      path('exit/', views.exit, name='exit'),
      path('', views.login, name='root'), 
      #CREAR
+     path('gestion_general', login_required(views.Gestion_general), name='gestion_general'),
 
 
      #FILTRAR
