@@ -12,8 +12,6 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 #Vista para realizar un Curso
-
-
 def seleccionar_curso(request):
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -76,7 +74,6 @@ def seleccionar_curso(request):
                 'id': clase['id'],
                 'disponible': True
             }
-            #PENDIENTE REVISAR SI LA CLASE YA FUE VISTA
             if  not visto:
                 reg['disponible']=False
 
@@ -99,8 +96,6 @@ def seleccionar_curso(request):
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
             }
-
-
         #Redireccionar a la ejecucion del Curso
         return render (request,'Usuarios/ejecutar_curso.html', context)
 
