@@ -12,7 +12,12 @@
                {% for clase in listaclases %}
                <li>
                     {% if clase.tipo == 'evaluacion' %}
-                         <a href="#">{{ clase.titulo }}</a>        
+                         {% if clase.disponible %}
+               
+                         <button onclick="solicitarPreguntas({{clase.id}})">{{ clase.titulo }}</button><!--CREAR RUTA PARA LA EVALUACION-->
+                         {% else %}
+                         {{ clase.titulo }}
+                         {% endif %}
                     {% else %}
                               {% if clase.tipo == 'modulo' %}
                                    {{ clase.titulo }}

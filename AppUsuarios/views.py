@@ -15,6 +15,7 @@ from django.contrib import messages
 # Create your views here.
 #Vista para realizar un Curso
 def seleccionar_curso(request):
+    regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
         pk_curso=request.POST['curso']
@@ -22,7 +23,8 @@ def seleccionar_curso(request):
         #Obtener fk del Cargo asociado
         fk_cargo=regCurso.id_cargo
         #Obtener pk de la tabla Usuario_Cargo
-        regUsuarioCargo=Usuario_Cargo.objects.filter(id_cargo=fk_cargo)[0]
+        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
+
         #Obtener lista de los Modulos del Curso
         listaModulos=Modulos.objects.filter(id_curso=regCurso)
         #Consular si los modulos ya existen en la tabla Clase_Usuario
@@ -60,6 +62,8 @@ def seleccionar_curso(request):
                     reg['tipo']='evaluacion'
                     reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
                     reg['id']=clase['id_modulo']
+                    if  not visto:
+                        reg['disponible']=False
 
                     listafilas.append(reg)
 
@@ -91,7 +95,11 @@ def seleccionar_curso(request):
         reg={}
         reg['tipo']='evaluacion'
         reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-        reg['id']=clase['id_modulo']
+        reg['id']=clase['id']
+        reg['disponible']=True
+        if  not visto:
+            reg['disponible']=False
+
         listafilas.append(reg)
 
         context= {
@@ -99,6 +107,8 @@ def seleccionar_curso(request):
             'listaclases' : listafilas ,
             }
         #Redireccionar a la ejecucion del Curso
+        print('------------------')
+        print(context)
         return render (request,'Usuarios/ejecutar_curso.html', context)
 
     else:
@@ -139,6 +149,21 @@ def marcar_clase_como_vista(request, clase_id, user_id):
 
     # Redirigir al usuario al contenido
     return redirect(clase.contenido_clase)
+
+#EJECUTAR EVALUACION
+def ejecutar_evaluacion(request, clase_id):
+    #Buscar el modulo_id de la clase
+    modulo=Clases.objects.get(id=clase_id).id_modulo
+    nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
+    #Mostrar las preguntas de la evaluacion
+    listaPreguntas=Preguntas.objects.filter(id_modulo=modulo)
+
+    
+    context = {
+        'nombre': nombre_modulo,
+        'listaPreguntas': listaPreguntas,
+    }
+    return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
 
 
 #*********************
