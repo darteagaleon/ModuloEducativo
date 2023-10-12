@@ -10,6 +10,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .forms import CrearUsuariosForm, CargoForm 
 from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
+
 
 
 # Create your views here.
@@ -163,8 +165,11 @@ def crear_cargo(request):
 #*********************
 
 #vista para gestion de usuario
-def GestionUsuarios(request):
+def usuarios(request):
     return render(request, 'Usuarios/usuarios.html')
+
+def GestionUsuarios(request):
+    return render(request, 'Usuarios/GestionUsuarios.html')
 
 #vista para crear usuario
 def crear_usuario(request):

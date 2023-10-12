@@ -29,16 +29,16 @@
             <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
             <li>
                 <div class="icon-links ">
-                    <a href="#">
+                    <a href="{% url 'GestionUsuarios' %}">
                         <i class='bx bx-user '></i>
-                        <span class="link_name">Usuarios </span>
+                        <span class="link_name">Gestion de Usuarios </span>
                     </a>
                     <i class='bx bx-chevron-down arrow '></i>
                 </div>
                 <ul class="sub-menu">
                     <li><a class="link_name">Usuarios</a></li>
-                    <li><a href="#">Usuarios</a></li>
-                    <li><a href="#">Certificaiones</a></li>
+                    <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
+                    <li><a href="#">Certificaciones</a></li>
                     <li><a href="#">Tiempo de interacción</a></li>
                 </ul>
             </li>
