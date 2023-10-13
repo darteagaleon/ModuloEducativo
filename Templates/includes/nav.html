@@ -96,7 +96,7 @@
                         <div class="profile_name">{{ user.username | title }}</div>
                         <div class="job">Administrador</div>
                     </div>
-                    <i class='bx bx-log-out' id="log_out"></i>
+                     <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
                 </div>
             </li>
         </ul>
@@ -104,7 +104,6 @@
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu'></i>
-            <span class="text">Menú</span>
         </div>
     </section>
     <script>
