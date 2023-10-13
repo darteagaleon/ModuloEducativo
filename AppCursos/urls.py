@@ -64,11 +64,5 @@ urlpatterns =[
      path('editar_evaluacion/<int:evaluacion_id>/',login_required(views.editar_evaluaciones), name='editar_evaluacion'),
      path('editar_pregunta/<int:pregunta_id>/',login_required(views.editar_preguntas), name='editar_pregunta'),
      path('editar_material/<int:pk>/', login_required(views.editar_material_apoyo), name='editar_material'),
-<<<<<<< HEAD
-     
-     # path('GestionUsuarios/', login_required(views.GestionUsuarios), name='GestionUsuarios'),
-     
-=======
->>>>>>> 98733c87d5cd07a3c4502a8930419114ccb06281
      ]
 

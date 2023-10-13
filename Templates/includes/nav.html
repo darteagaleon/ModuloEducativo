@@ -3,7 +3,7 @@
 <!-- crea una barra lateral en una página web que incluye un logotipo y un posible botón de menú representado por un icono.-->
 
 <body>
-
+    
     <div class="sidebar">
         <div class="logo_content">
             <div class="logo">
@@ -41,7 +41,7 @@
                     <li><a href="#">Certificaciones</a></li>
                     <li><a href="#">Tiempo de interacción</a></li>
                 </ul>
-            </li>
+            </li>       
             <li>
                 <div class="icon-links ">
                     <a href="{% url 'gestion_general' %}">
@@ -101,12 +101,14 @@
             </li>
         </ul>
     </div>
+    
     <section class="home-section">
         <div class="home-content">
             <i class='bx bx-menu'></i>
             <span class="text">Menú</span>
         </div>
     </section>
+    
     <script>
         // Inicialmente, el menú estará cerrado
         let sidebar = document.querySelector(".sidebar");
