@@ -14,7 +14,7 @@ urlpatterns = [
 
     #CREAR
     path('crear_cargo/', login_required(views.crear_cargo), name='crear_cargo'),
-    path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
+    # path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
 
     #FILTRAR
 

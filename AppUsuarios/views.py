@@ -196,26 +196,26 @@ def usuarios(request):
 def GestionUsuarios(request):
     return render(request, 'Usuarios/GestionUsuarios.html')
 
-#vista para crear usuario
-def crear_usuario(request):
-    if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST)
-        if form.is_valid():
-            user = form.save() # Guardar el usuario
+# #vista para crear usuario
+# def crear_usuario(request):
+#     if request.method == 'POST':
+#         form = CrearUsuariosForm(request.POST)
+#         if form.is_valid():
+#             user = form.save() # Guardar el usuario
 
-            # Asignar un cargo al usuario
-            cargo_id = request.POST.get('cargo') 
-            if cargo_id:
-                cargo = Cargo.objects.get(pk=cargo_id)
-                user.cargo = cargo
-                user.save()
+#             # Asignar un cargo al usuario
+#             cargo_id = request.POST.get('cargo') 
+#             if cargo_id:
+#                 cargo = Cargo.objects.get(pk=cargo_id)
+#                 user.cargo = cargo
+#                 user.save()
 
-            username = form.cleaned_data['username']
-            messages.success(request, f'Usuario {username} creado')
-            return redirect('home')
-    else:
-        form = CrearUsuariosForm()
+#             username = form.cleaned_data['username']
+#             messages.success(request, f'Usuario {username} creado')
+#             return redirect('home')
+#     else:
+#         form = CrearUsuariosForm()
 
-    context = {'form': form}
-    return render(request, 'Usuarios/crear_usuario.html', context)
+#     context = {'form': form}
+#     return render(request, 'Usuarios/crear_usuario.html', context)
 

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "AppCursos",
-    "AppUsuarios",
+    "AppUsuarios.apps.AppusuariosConfig",
     'widget_tweaks',   
 ]
 

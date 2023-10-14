@@ -1,11 +1,42 @@
 <!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
 <!-- crea una barra lateral en una página web que incluye un logotipo y un posible botón de menú representado por un icono.-->
+<style>
+    /* Sidebar abierto para usuarios */
+.sidebar-usuarios {
+    background: #ff0000;
+}
 
+/* Sidebar cerrado para usuarios */
+.sidebar-usuarios.close {
+    background: #ff5555; /* Puedes cambiar este color */
+}
+
+/* Sidebar abierto para administrativos */
+.sidebar-administrativos {
+    background: #0000ff;
+}
+
+/* Sidebar cerrado para administrativos */
+.sidebar-administrativos.close {
+    background: #5555ff; /* Puedes cambiar este color */
+}
+</style>
 <body>
-
-    <div class="sidebar">
-        <div class="logo_content">
+    
+    <div class="sidebar
+    {% if user.is_authenticated %}
+        {% if group_name == 'usuarios' %}
+            sidebar-usuarios
+        {% elif group_name == 'administrativos' %}
+            sidebar-administrativos
+        {% else %}
+            sidebar
+        {% endif %}
+    {% else %}
+        sidebar
+    {% endif %}">        
+    <div class="logo_content">
             <div class="logo">
                 <div id="iconContainer">
                     <img src="{% static 'img/Cyres.png' %}" alt="logo" id="iconCyres">
@@ -41,7 +72,7 @@
                     <li><a href="#">Certificaciones</a></li>
                     <li><a href="#">Tiempo de interacción</a></li>
                 </ul>
-            </li>
+            </li>       
             <li>
                 <div class="icon-links ">
                     <a href="{% url 'gestion_general' %}">
@@ -96,17 +127,18 @@
                         <div class="profile_name">{{ user.username | title }}</div>
                         <div class="job">Administrador</div>
                     </div>
-                    <i class='bx bx-log-out' id="log_out"></i>
+                    <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
                 </div>
             </li>
         </ul>
     </div>
+    
     <section class="home-section">
         <div class="home-content">
-            <i class='bx bx-menu'></i>
-            <span class="text">Menú</span>
+            <i class='bx bx-menu '></i>
         </div>
     </section>
+    
     <script>
         // Inicialmente, el menú estará cerrado
         let sidebar = document.querySelector(".sidebar");
@@ -132,3 +164,5 @@
 </body>
 
 </html>
+
+

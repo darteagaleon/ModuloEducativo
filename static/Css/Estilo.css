@@ -24,7 +24,9 @@ body{
 
 .sidebar.close {
     width: 78px;
+    padding: 80px 0 150px 0;
 }
+
 
 .sidebar .logo-details {
     height: 60px;
@@ -289,7 +291,9 @@ body{
     color: #11101d;
     font-size: 35px;
 }
-
+.bx-menu.active{
+    
+}
 home-section .home-content .bx-menu {
     margin: 0 15px;
     cursor: pointer;
@@ -311,7 +315,7 @@ home-section .home-content .text {
     top: 30px;
     height: 100px;
     width: 160px;
-    left: 7%;
+    left: 15%;
     opacity: 1;
     transition: opacity 0.5s ease; /* Agrega una transición de opacidad */
 }
