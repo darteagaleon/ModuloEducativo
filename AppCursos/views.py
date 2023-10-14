@@ -10,6 +10,7 @@ from django.views import View
 from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 # Create your views here.
 #****************************************************
@@ -31,9 +32,19 @@ def login(request):
             return render(request, 'registration/login.html')   
     else:
         return render(request, 'registration/login.html')
-# Vista de inicio (home) protegida por autenticación
+# Vista de inicio (home) protegida por autenticación ademas de la validacion de usuarios y admiistrativos
 def home(request):
-    return render(request, 'home.html')
+    context = {}
+    user = request.user #para obtener el usuario que esta logeado
+    group_name = None #por defecto es nulo
+    if user.is_authenticated: #si ya se logeo el user
+        group = Group.objects.filter(user=user).first() #consulta que este user, sea igual al de la linea anterior
+        if group:
+            group_name = group.name
+        
+    context['group_name']= group_name
+    return render(request, 'home.html', context)
+
 
 # Vista logout
 def exit(request):
