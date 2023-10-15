@@ -17,12 +17,12 @@ class Cargo(models.Model):
 
 #USUARIO_CARGO
 class Usuario_Cargo(models.Model):
-     id_usuario=models.ForeignKey(User, on_delete=models.CASCADE)
-     id_cargo=models.ForeignKey(Cargo, on_delete=models.CASCADE)
-     
+     id_usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cargo_usuario')
+     id_cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
+
      def __str__(self):
-          return self.id_usuario.username+" - "+self.id_cargo.nombre_cargo #Para mostrar el nombre del usuario y el cargo
-     #Sirve para mostrar el nombre de la tabla en el admin sin la palabra "s"
+          return f"{self.id_usuario.username} - {self.id_cargo.nombre_cargo}"
+
      class Meta:
           verbose_name_plural = 'Usuario_Cargo'
 
@@ -40,19 +40,20 @@ class Clase_Usuario(models.Model):
 
 
 #********************************************************
-
 # PERFIL DE USUARIO
 class Profile(models.Model):
      user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Usuario')
-     image = models.ImageField(default='users/usuario_defecto.jpg', upload_to='users/', verbose_name='Imagen de perfil')
-     address = models.CharField(max_length=150, null=True, blank=True, verbose_name='Dirección')
-     location = models.CharField(max_length=150, null=True, blank=True, verbose_name='Localidad')
-     telephone = models.CharField(max_length=50, null=True, blank=True, verbose_name='Teléfono')
+     apellido = models.CharField(max_length=30, verbose_name='Apellido', blank=True, null=True)
+     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
+     estadousuario = models.BooleanField(default=True, verbose_name='Estado de Usuario')
+     ROLES = (('usuario', 'Usuario'), ('administrador', 'Administrador'))
+     role = models.CharField(max_length=15, choices=ROLES, verbose_name='Rol', blank=True, null=True)
+     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Cargo')
 
 class Meta:
      verbose_name = 'perfil'
      verbose_name_plural = 'perfiles'
-     ordering = ['-id'] #para que mueestre arriba el ultimo creado
+     ordering = ['-id'] #para que muestre arriba el ultimo creado
 
 def __str__(self):
      return self.user.username

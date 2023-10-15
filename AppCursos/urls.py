@@ -40,7 +40,7 @@ urlpatterns =[
      path('filtrar_evaluacion/',login_required(views.filtrar_evaluaciones),name="filtrar_evaluacion"),
      path('filtrar_preguntas/',login_required(views.filtrar_preguntas),name="filtrar_preguntas"),
      path('filtrar_material/',login_required(views.filtrar_material),name="filtrar_material"),
-      path('filtrar_cursos_material/', login_required(views.filtrar_cursos_material), name='filtrar_cursos_material'),
+     path('filtrar_cursos_material/', login_required(views.filtrar_cursos_material), name='filtrar_cursos_material'),
 
      #VER
      path('ver_cursos/<int:curso_id>/', login_required(views.ver_cursos), name='ver_cursos'),

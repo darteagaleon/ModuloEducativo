@@ -14,15 +14,20 @@ urlpatterns = [
 
     #CREAR
     path('crear_cargo/', login_required(views.crear_cargo), name='crear_cargo'),
-    # path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
+    path('crear_usuario/',login_required(views.crear_usuario),name='crear_usuario'),
 
     #FILTRAR
+    path('filtrar_usuarios/', login_required(views.filtrar_usuarios), name='filtrar_usuarios'),
 
     #VER
 
     #LISTAR
+    path('listar_usuarios/',login_required(views.listar_usuarios),name='listar_usuarios'),
+
 
     #EDITAR
+    path('editar_usuarios/<int:user_id>/', views.editar_usuarios, name='editar_usuarios'),
+
     
     path('seleccionar_curso', views.seleccionar_curso, name='seleccionar_curso'),
     path('ejecutar_curso/<int:clase_id>/', views.ejecutar_clase, name='ejecutar_clase'),

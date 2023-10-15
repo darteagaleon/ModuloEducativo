@@ -1,0 +1,69 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
+
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->
+        <h1> Listar Usuarios </h1>
+        <br>
+        <form class="search" action="{% url 'filtrar_usuarios' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Usuario...">
+            <input type="submit" class="btn search-btn" value="Buscar">
+        </form>
+        <br>
+        <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <a href="{% url 'listar_usuarios' %}"><button >Ver todos</button></a>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover" id="tablam">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">E-mail</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Cargo</th>
+
+                    </tr>
+                </thead>
+
+                <tbody class="table-group-divider">
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.user.username }}</td>
+                        <td>{{ usuario.apellido }}</td>
+                        <td>{{ usuario.email }}</td>
+                        {% if usuario.estadousuario %}
+                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        {% else %}
+                            <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        {% endif %}
+                        <!-- <td>{{ usuario.estadousuario }}</td> -->
+                        <td>{{ usuario.cargo }}</td>
+                        <td>                        
+                            <a href="#">
+                                <button class="editar">
+                                    Editar
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a href="{% url 'usuarios' %}" id="back2">
+            <div>
+                <button class="back">Regresar</button>
+            </div>
+        </a>
+            
+        
+{% endblock %}
