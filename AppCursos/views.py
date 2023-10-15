@@ -389,3 +389,4 @@ def editar_material_apoyo(request, pk):
     context = {"form": form,"curso_id":curso_id}
     
     return render(request, 'material_apoyo/editar_material.html',context)
+    
