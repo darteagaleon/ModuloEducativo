@@ -1,0 +1,60 @@
+<!-- Extiende de la plantilla base -->
+{% extends 'Layout/Base.html' %}
+
+<!-- Carga archivos estáticos -->
+{% load static %}
+
+<!-- Bloque de contenido -->
+{% block content %}
+<!-- Estilos CSS para la página de edición de usuario -->
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+
+<!-- Contenedor principal -->
+<div class="home_content">
+    <div class="text">
+        <!-- Formulario de edición de usuario -->
+        <div class="formulario">
+            <h1>Editar Usuario</h1>
+
+            <!-- Formulario de edición de usuario -->
+            <form method="post" id="editarUsuarioForm">
+                <!-- Token CSRF para protección contra ataques -->
+                {% csrf_token %}
+
+                <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.estadousuario.label_tag }}
+                    {{ form.estadousuario }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.role.label_tag }}
+                    {{ form.role }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.carga.label_tag }}
+                    {{ form.carga }}
+                </div>
+
+                <button type="submit" class="subir">Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Botón para regresar -->
+<a href="{% url 'ver_clases' clase_id=clase_id %}">
+    <button class="back">Regresar a Ver Clases</button>
+</a>
+{% endblock %}

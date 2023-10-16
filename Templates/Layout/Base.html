@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> {% block title %} {% endblock %} </title>
+    <title> {% block title %}Cyres Educativo{% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'img/iconos/Cyres.ico' %}">
     <link rel="stylesheet" href="{% static 'Css/Estilo.css' %}">
     <!-- link para enlazar el estilo de la barra de navegacion -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -21,10 +22,28 @@
 <body>
     {% include 'includes/nav.html' %}
     <main>
-        <!--es un bloqueo de contenido -->
+        <!-- Bloque para mostrar los mensajes de error -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <script>
+                        Swal.fire({
+                            icon: '{{ message.tags }}',
+                            title: 'Felicitaciones',
+                            text:'Guardado con éxito',
+                            showConfirmButton: true,
+                            timer: 3000
+                        })
+                    </script>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!-- Fin del bloque de mensajes de error -->
+
         {% block content %}
-        <!--para indicar un bloqueo definido previamente. Esto permite la reutilización y extensión de plantillas en aplicaciones web-->
+        <!-- Bloque para mostrar el contenido de la página -->
         {% endblock %}
     </main>
+    <script src="{% static 'js/controlador.js' %}"></script>
 </body>
 </html>

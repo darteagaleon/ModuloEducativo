@@ -1,0 +1,46 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+
+<body>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="container-fluid">
+                <div class="row" id="tabla">
+                    <div>
+                        <h1 style="text-align:center;">Gestion</h1>
+                        <div class="folder-container">
+                            <!--se esta enlazando la url de 'crear_curso'-->
+                            <a href="{% url 'cursos' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                                <div  >
+                                <p>Gestion Cursos</p>
+                            </div>
+                        </a>
+                        <!--se esta enlazando la url de 'listar_cursos'-->
+                            <a href="{% url 'modulos' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                                <div  >
+                                <p>Gestion Modulos</p>
+
+                            </div>
+                        </a>
+                        <!--se esta enlazando la url de 'listar_cursos'-->
+                        <a href="{% url 'clase' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                            <div  >
+                            <p>Gestion Clases</p>
+                            
+                        </div>
+                    </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+{% endblock %}

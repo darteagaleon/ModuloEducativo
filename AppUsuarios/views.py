@@ -7,13 +7,19 @@ from .models import *
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .forms import CrearUsuariosForm, CargoForm 
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
+from django.contrib.auth import get_user_model
+from django.db.models import Q #permite realizar consultas más complejas
+
 
 
 # Create your views here.
 #Vista para realizar un Curso
-
-@login_required
 def seleccionar_curso(request):
+    regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
         pk_curso=request.POST['curso']
@@ -21,7 +27,8 @@ def seleccionar_curso(request):
         #Obtener fk del Cargo asociado
         fk_cargo=regCurso.id_cargo
         #Obtener pk de la tabla Usuario_Cargo
-        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo)
+        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
+
         #Obtener lista de los Modulos del Curso
         listaModulos=Modulos.objects.filter(id_curso=regCurso)
         #Consular si los modulos ya existen en la tabla Clase_Usuario
@@ -51,7 +58,7 @@ def seleccionar_curso(request):
 
         for clase in listaClases:
             reg={}
-          
+        
             #Si el modulo es diferente al anterior, agregarlo a la lista
             if nuevoModulo != clase['id_modulo__nombre_modulo']:
                 #Controlar Evaluacion
@@ -59,6 +66,8 @@ def seleccionar_curso(request):
                     reg['tipo']='evaluacion'
                     reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
                     reg['id']=clase['id_modulo']
+                    if  not visto:
+                        reg['disponible']=False
 
                     listafilas.append(reg)
 
@@ -75,7 +84,6 @@ def seleccionar_curso(request):
                 'id': clase['id'],
                 'disponible': True
             }
-            #PENDIENTE REVISAR SI LA CLASE YA FUE VISTA
             if  not visto:
                 reg['disponible']=False
 
@@ -91,40 +99,37 @@ def seleccionar_curso(request):
         reg={}
         reg['tipo']='evaluacion'
         reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-        reg['id']=clase['id_modulo']
+        reg['id']=clase['id']
+        reg['disponible']=True
+        if  not visto:
+            reg['disponible']=False
+
         listafilas.append(reg)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
             }
-
-
         #Redireccionar a la ejecucion del Curso
+        print('------------------')
+        print(context)
         return render (request,'Usuarios/ejecutar_curso.html', context)
-        
-        
-    else:
 
+    else:
         #Consultar listado de Cursos para el Usuario y sus Cargos
-     
         listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
         
         # regUsuario=User.objects.get(username=request.user)
         user_id=request.user.id
-       
         listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
             
-            #Ensamblar el contexto para el template
+        #Ensamblar el contexto para el template
         listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
-            # print(listaUsuarioCargo)
 
         #Retornar el template con el contexto
         return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
 
 
-
-@login_required
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -136,13 +141,144 @@ def ejecutar_clase(request, clase_id):
     }
     return render(request, 'Usuarios/ejecutar_clase.html', context)
 
-@login_required
+
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
     clase_usuario = Clase_Usuario.objects.get(id_clase=clase_id, id_usuario_cargo__id_usuario=user_id)
+    print('------------------')
+    print(clase_usuario)
     clase_usuario.visto = True
     clase_usuario.save()
     clase = get_object_or_404(Clases, pk=clase_id)
 
     # Redirigir al usuario al contenido
     return redirect(clase.contenido_clase)
+
+#EJECUTAR EVALUACION
+def ejecutar_evaluacion(request, clase_id):
+    #Buscar el modulo_id de la clase
+    modulo=Clases.objects.get(id=clase_id).id_modulo
+    nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
+    #Mostrar las preguntas de la evaluacion
+    listaPreguntas=Preguntas.objects.filter(id_modulo=modulo)
+
+    
+    context = {
+        'nombre': nombre_modulo,
+        'listaPreguntas': listaPreguntas,
+    }
+    return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
+
+
+#*********************
+#       Cargos       *
+#*********************
+
+#vista para crear cargos
+def crear_cargo(request):
+    if request.method == 'POST':
+        form = CargoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Cargos/crear_cargo.html', {'mensaje': 'Cargo creado exitosamente'})
+    else:
+        form = CargoForm()
+    
+    return render(request, 'Cargos/crear_cargo.html', {'form': form})  
+    
+
+#*****************************************************
+#                  Gestion de usuario                *
+#*****************************************************
+
+#vista para gestion de usuario
+def usuarios(request):
+    return render(request, 'Usuarios/usuarios.html')
+
+def GestionUsuarios(request):
+    return render(request, 'Usuarios/GestionUsuarios.html')
+
+
+# filtrar usuarios
+def filtrar_usuarios(request):
+    search_query = request.GET.get('search', '')
+
+    usuarios_filtrados = Profile.objects.filter(Q(user__username__icontains=search_query) | Q(apellido__icontains=search_query))
+
+    context = {'usuarios_filtrados': usuarios_filtrados, 'search_query': search_query}
+    return render(request, 'Usuarios/listar_usuarios.html', context)
+
+
+#vista para crear usuario
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = CrearUsuariosForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            email = form.cleaned_data['email']
+            apellido = form.cleaned_data['apellido']
+
+            # Verificar si el usuario ya existe
+            user, created = User.objects.get_or_create(username=username, defaults={'email': email})
+            
+            # Actualizar el usuario con la nueva contraseña
+            user.set_password(password)
+            user.save()
+            
+            # Crear una relación con el cargo
+            cargo = form.cleaned_data['cargo']
+            Usuario_Cargo.objects.create(id_usuario=user, id_cargo=cargo)
+
+            # Crear o actualizar el perfil del usuario
+            profile, profile_created = Profile.objects.get_or_create(user=user)
+            profile.apellido = apellido
+            profile.email = email
+            profile.estadousuario = form.cleaned_data['estadousuario']
+            profile.role = form.cleaned_data['role']
+            profile.cargo = form.cleaned_data['cargo']
+            profile.save()
+
+            if created:
+                messages.success(request, f'Usuario {username} creado')
+            else:
+                messages.success(request, f'Perfil de usuario {username} actualizado')
+
+            return redirect('home')
+    else:
+        form = CrearUsuariosForm()
+
+    context = {'form': form}
+    return render(request, 'Usuarios/crear_usuario.html', context)
+
+
+#vista para listar usuarios
+def listar_usuarios(request):
+    usuarios = Profile.objects.select_related('user').all()
+    return render(request, 'Usuarios/listar_usuarios.html', {'usuarios': usuarios})
+
+
+#vista para editar usuarios
+def editar_usuarios(request, user_id):
+    user = Profile.objects.get(id_usuario=user_id)
+
+    if request.method == 'POST':
+        form = CrearUsuariosForm(request.POST, instance=user.user)
+
+        if form.is_valid():
+            form.save()
+            user.email = form.cleaned_data['email']
+            user.estadousuario = form.cleaned_data['estadousuario']
+            user.role = form.cleaned_data['role']
+            user.carga = form.cleaned_data['carga']
+            user.save()
+
+            messages.success(request, f'Usuario {user.user.username} actualizado')
+            return redirect('inicio')
+    else:
+        form = CrearUsuariosForm(instance=user.user)
+
+    context = {'form': form, 'user_id': user_id}
+    return render(request, 'Usuarios/editar_usuarios.html', context)
+
+

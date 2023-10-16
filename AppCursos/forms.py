@@ -1,7 +1,11 @@
 from django import forms 
-from .models import Cursos, Modulos, Clases,Evaluaciones,Preguntas
+from .models import *
 from PIL import Image
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from AppUsuarios.models import Cargo
 
+#este código define un formulario de Django llamado crear_cursos que se utiliza para interactuar con el modelo de Cursos.
 class crear_cursos(forms.ModelForm):
     #se utiliza para configurar un formulario en Django basado en el modelo Cursos. 
     class Meta:
@@ -49,6 +53,19 @@ class PreguntasForm(forms.ModelForm):
     class Meta:
         model= Preguntas
         fields = '__all__'
+
+#este código define un formulario de Django llamado MaterialApoyoForm que se utiliza para interactuar con el modelo de Material de apoyo.        
+class MaterialApoyoForm(forms.ModelForm):
+    class Meta:
+        model = MaterialApoyo
+        fields = ['NombreMaterialApoyo', 'DescripcionMaterialApoyo', 'Archivo', 'id_curso']
+
+
+
+
+
+    
+
 
 
 

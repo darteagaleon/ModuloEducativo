@@ -1,0 +1,23 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+
+<body>
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+	<div class="home_content"> <!--1 -->
+        
+        <form class="form" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="submit">Guardar</button>
+        </form>
+	</div>
+	<a href="{% url 'usuarios' %}" id="back2">
+			<button class="back">Regresar</button>
+	</a>
+</body>
+{% endblock %}

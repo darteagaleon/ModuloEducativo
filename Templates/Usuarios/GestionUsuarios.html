@@ -1,0 +1,45 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
+
+
+
+<body>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="container-fluid">
+                <div class="row" id="tabla">
+                    <div>
+                        <h1 style="text-align:center;">Gestion de usuario</h1>
+                        <div class="folder-container">
+                            <!--se esta enlazando la url de 'usuarios'-->
+                            <a href="{% url 'usuarios' %}" class="folder-box"> <i
+                                    class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Usuarios</p>
+                                </div>
+                            </a>
+                            <!--se esta enlazando la url de 'tiempo de interraccion'-->
+                            <a href="#" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Certificaciones</p>
+                                </div>
+                            </a>
+                            <a href="#" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                                <div>
+                                    <p>Tiempo de interaccion</p>
+                                </div>
+                            </a>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
