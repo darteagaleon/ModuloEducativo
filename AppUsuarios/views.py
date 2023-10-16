@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CrearUsuariosForm, CargoForm 
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
+from django.contrib.auth import get_user_model
+from django.db.models import Q #permite realizar consultas más complejas
 
 
 
@@ -185,9 +187,9 @@ def crear_cargo(request):
     return render(request, 'Cargos/crear_cargo.html', {'form': form})  
     
 
-#*********************
-# Gestion de usuario *
-#*********************
+#*****************************************************
+#                  Gestion de usuario                *
+#*****************************************************
 
 #vista para gestion de usuario
 def usuarios(request):
@@ -196,26 +198,87 @@ def usuarios(request):
 def GestionUsuarios(request):
     return render(request, 'Usuarios/GestionUsuarios.html')
 
-# #vista para crear usuario
-# def crear_usuario(request):
-#     if request.method == 'POST':
-#         form = CrearUsuariosForm(request.POST)
-#         if form.is_valid():
-#             user = form.save() # Guardar el usuario
 
-#             # Asignar un cargo al usuario
-#             cargo_id = request.POST.get('cargo') 
-#             if cargo_id:
-#                 cargo = Cargo.objects.get(pk=cargo_id)
-#                 user.cargo = cargo
-#                 user.save()
+# filtrar usuarios
+def filtrar_usuarios(request):
+    search_query = request.GET.get('search', '')
 
-#             username = form.cleaned_data['username']
-#             messages.success(request, f'Usuario {username} creado')
-#             return redirect('home')
-#     else:
-#         form = CrearUsuariosForm()
+    usuarios_filtrados = Profile.objects.filter(Q(user__username__icontains=search_query) | Q(apellido__icontains=search_query))
 
-#     context = {'form': form}
-#     return render(request, 'Usuarios/crear_usuario.html', context)
+    context = {'usuarios_filtrados': usuarios_filtrados, 'search_query': search_query}
+    return render(request, 'Usuarios/listar_usuarios.html', context)
+
+
+#vista para crear usuario
+def crear_usuario(request):
+    if request.method == 'POST':
+        form = CrearUsuariosForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            email = form.cleaned_data['email']
+            apellido = form.cleaned_data['apellido']
+
+            # Verificar si el usuario ya existe
+            user, created = User.objects.get_or_create(username=username, defaults={'email': email})
+            
+            # Actualizar el usuario con la nueva contraseña
+            user.set_password(password)
+            user.save()
+            
+            # Crear una relación con el cargo
+            cargo = form.cleaned_data['cargo']
+            Usuario_Cargo.objects.create(id_usuario=user, id_cargo=cargo)
+
+            # Crear o actualizar el perfil del usuario
+            profile, profile_created = Profile.objects.get_or_create(user=user)
+            profile.apellido = apellido
+            profile.email = email
+            profile.estadousuario = form.cleaned_data['estadousuario']
+            profile.role = form.cleaned_data['role']
+            profile.cargo = form.cleaned_data['cargo']
+            profile.save()
+
+            if created:
+                messages.success(request, f'Usuario {username} creado')
+            else:
+                messages.success(request, f'Perfil de usuario {username} actualizado')
+
+            return redirect('home')
+    else:
+        form = CrearUsuariosForm()
+
+    context = {'form': form}
+    return render(request, 'Usuarios/crear_usuario.html', context)
+
+
+#vista para listar usuarios
+def listar_usuarios(request):
+    usuarios = Profile.objects.select_related('user').all()
+    return render(request, 'Usuarios/listar_usuarios.html', {'usuarios': usuarios})
+
+
+#vista para editar usuarios
+def editar_usuarios(request, user_id):
+    user = Profile.objects.get(id_usuario=user_id)
+
+    if request.method == 'POST':
+        form = CrearUsuariosForm(request.POST, instance=user.user)
+
+        if form.is_valid():
+            form.save()
+            user.email = form.cleaned_data['email']
+            user.estadousuario = form.cleaned_data['estadousuario']
+            user.role = form.cleaned_data['role']
+            user.carga = form.cleaned_data['carga']
+            user.save()
+
+            messages.success(request, f'Usuario {user.user.username} actualizado')
+            return redirect('inicio')
+    else:
+        form = CrearUsuariosForm(instance=user.user)
+
+    context = {'form': form, 'user_id': user_id}
+    return render(request, 'Usuarios/editar_usuarios.html', context)
+
 

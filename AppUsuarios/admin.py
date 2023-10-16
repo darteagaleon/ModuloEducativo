@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.models import Group
 
 
 # Register your models here.
@@ -17,13 +18,15 @@ admin.site.register(Clase_Usuario, Clase_UsuarioAdmin)
 
 
 # PERFIL DETALLADO
+
+
 class ProfileAdmin(admin.ModelAdmin):
-     list_display =('user', 'address', 'location', 'telephone', 'user_group')
-     search_fields =('location', 'user__username', 'user__groups__name')
-     list_filter = ('user__groups', 'location')
+     list_display = ('user', 'apellido', 'email', 'estadousuario', 'role', 'cargo', 'user_group')
+     list_filter = ( 'user__groups', 'user')  # Aquí he agregado 'username' a los campos a filtrar
 
      def user_group(self, obj):
-          return " - ".join([t.name for t in obj.user.groups.all().order_by('name')])
+          groups = obj.user.groups.all().values_list('name', flat=True)
+          return " - ".join(sorted(groups))
 
      user_group.short_description = 'Grupo'
 

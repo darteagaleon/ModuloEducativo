@@ -10,7 +10,27 @@ body{
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
+    /* Sidebar abierto para usuarios */
+    .sidebar-usuarios {
+        background: #ff0000;
+    }
 
+    /* Sidebar cerrado para usuarios */
+    .sidebar-usuarios.close {
+        background: #ff5555;
+        /* Puedes cambiar este color */
+    }
+
+    /* Sidebar abierto para administrativos */
+    .sidebar-administrativos {
+        background: #0000ff;
+    }
+
+    /* Sidebar cerrado para administrativos */
+    .sidebar-administrativos.close {
+        background: #5555ff;
+        /* Puedes cambiar este color */
+    }
 .sidebar {
     position: fixed;
     top: 0;
@@ -291,8 +311,10 @@ body{
     color: #11101d;
     font-size: 35px;
 }
-.bx-menu.active{
-    
+
+.bx-log-out{
+    position: fixed;
+    left: 11.8vw;
 }
 home-section .home-content .bx-menu {
     margin: 0 15px;
