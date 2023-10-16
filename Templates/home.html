@@ -3,9 +3,10 @@
 <!--para cargar los archivos estaticos en la platilla-->
 
 {% load static %}
-y
+
 <!--es un bloqueo de contenido -->
 {% block content %}
+
 <!-- crea una sección de contenido que muestra un mensaje de bienvenida centrado en la página web.-->
 <div class="contenido">
      <div class="row">
@@ -17,7 +18,6 @@ y
                     <br />
                     Bienvenid@ a Cyres Educativo
                     <br />
-                    {{ group_name }}
                </h1>
                {% else %}
                <hr>
@@ -31,7 +31,11 @@ y
           </div>
      </div>
 </div>
+<style>
 
+
+h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(-100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+</style>
 
 
 {% endblock %}

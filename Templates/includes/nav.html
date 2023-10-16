@@ -45,78 +45,118 @@
         </div>
 
         <ul class="nav-links">
-            <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
-
             <li>
-                <a href="{% url 'home' %}">
-                    <i class='bx bx-home'></i>
-                    <span class="link_name">Inicio </span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Inicio</a></li>
-
-                </ul>
-            </li>
-            <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
-            <li>
-                <div class="icon-links ">
-                    <a href="{% url 'GestionUsuarios' %}">
-                        <i class='bx bx-user '></i>
-                        <span class="link_name">Gestion de Usuarios </span>
+                {% if group_name == 'usuarios' %}
+                <!-- se muestra el icono de home -->
+                <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
+                <li> 
+                    <a href="{% url 'home' %}">
+                        <i class='bx bx-home'></i>
+                        <span class="link_name">Inicio </span>
                     </a>
-                    <i class='bx bx-chevron-down arrow '></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name">Usuarios</a></li>
-                    <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
-                    <li><a href="#">Certificaciones</a></li>
-                    <li><a href="#">Tiempo de interacción</a></li>
-                </ul>
-            </li>       
-            <li>
-                <div class="icon-links ">
-                    <a href="{% url 'gestion_general' %}">
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Inicio</a></li>
+                    </ul>
+                </li>
+                <!-- se muestra el icono de cursos -->
+                <li> 
+                    <a href="#">
                         <i class='bx bx-book '></i>
-                        <span class="link_name">Gestion</span>
+                        <span class="link_name">Cursos </span>
                     </a>
-                    <i class='bx bx-chevron-down arrow '></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a class="link_name">Gestion</a></li>
-                    <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Cursos</a></li>
+                    </ul>
+                </li>
+                <!-- se muestra el icono de Material de apoyo -->
+                <li>
+                    <a href="#">
+                        <i class='bx bxs-folder-open'></i>
+                        <span class="link_name">Material de apoyo </span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Material de apoyo </a></li>
+    
+                    </ul>
+                </li>
+                {% elif group_name == 'administrativos' %}
+                <!-- se muestra el icono de home -->
+                <li> 
+                    <a href="{% url 'home' %}">
+                        <i class='bx bx-home'></i>
+                        <span class="link_name">Inicio </span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Inicio</a></li>
+                    </ul>
+                </li>
+                <!-- se muestra el icono de Gestion de usuario-->
+                <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
+                <li>
+                    <div class="icon-links ">
+                        <a href="{% url 'GestionUsuarios' %}">
+                            <i class='bx bx-user '></i>
+                            <span class="link_name">Gestion de Usuarios </span>
+                        </a>
+                        <i class='bx bx-chevron-down arrow '></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Usuarios</a></li>
+                        <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
+                        <li><a href="#">Certificaciones</a></li>
+                        <li><a href="#">Tiempo de interacción</a></li>
+                    </ul>
+                </li>   
+                <!-- se muestra icono de Gestion general -->
+                <li>
+                    <div class="icon-links ">
+                        <a href="{% url 'gestion_general' %}">
+                            <i class='bx bx-book '></i>
+                            <span class="link_name">Gestion</span>
+                        </a>
+                        <i class='bx bx-chevron-down arrow '></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Gestion</a></li>
+                        <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
+    
+                        <li><a href="{% url 'cursos' %}">Cursos</a></li>
+                        <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
+    
+                        <li><a href="{% url 'modulos' %}">Modulos</a></li>
+                        <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
+    
+                        <li><a href="{% url 'clase' %}">Clases</a></li>
+                    </ul>
+                </li>
+                <!-- se muestra icono de Evaluacion -->
+                <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de evalucion en el sitio web. -->
 
-                    <li><a href="{% url 'cursos' %}">Cursos</a></li>
-                    <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
+                <li>
+                    <a href="{% url 'evaluacion' %}">
+                        <i class='bx bx-file'></i>
+                        <span class="link_name">Evaluación </span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Evaluación</a></li>
 
-                    <li><a href="{% url 'modulos' %}">Modulos</a></li>
-                    <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
+                    </ul>
+                </li>
+                <!-- se muestra icono de material de apoyo -->
+                <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de material de apoyo en el sitio web. -->
 
-                    <li><a href="{% url 'clase' %}">Clases</a></li>
-                </ul>
-            </li>
-            <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de evalucion en el sitio web. -->
+                <li>
+                    <a href="{% url 'gestion_MaterialApoyo' %}">
+                        <i class='bx bxs-folder-open'></i>
+                        <span class="link_name">Material de apoyo </span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name">Material de apoyo </a></li>
 
-            <li>
-                <a href="{% url 'evaluacion' %}">
-                    <i class='bx bx-file'></i>
-                    <span class="link_name">Evaluación </span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Evaluación</a></li>
-
-                </ul>
-            </li>
-            <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de material de apoyo en el sitio web. -->
-
-            <li>
-                <a href="{% url 'gestion_MaterialApoyo' %}">
-                    <i class='bx bxs-folder-open'></i>
-                    <span class="link_name">Material de apoyo </span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name">Material de apoyo </a></li>
-
-                </ul>
+                    </ul>
+                </li>
+                {% else %}
+                {% endif %}
             </li>
             <li>
                 <div class="profile-details">
@@ -125,7 +165,7 @@
                     </div>
                     <div class="name-job">
                         <div class="profile_name">{{ user.username | title }}</div>
-                        <div class="job">Administrador</div>
+                        <div class="job">{{ group_name | title}}</div>
                     </div>
                     <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
                 </div>
