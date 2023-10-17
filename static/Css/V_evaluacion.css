@@ -15,7 +15,7 @@ img {
     width: 45vw;
 }
 .tabla {
-    background-color: #0E6BA8;
+    background-image: linear-gradient(135deg, #31636d 0%,#182d34 100%);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
@@ -103,8 +103,8 @@ h2 {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
+    background-color:#8fccd1;
+    color: #182d34;    
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -113,7 +113,7 @@ h2 {
 }
 
 .subir:hover {
-    background-color: #111344;
+    background-color: #2b464e;
     color: white;
     transition: .5s;
     transform: scale(1.2);
@@ -127,8 +127,8 @@ h2 {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
+    background-color:#8fccd1;
+    color: #182d34;   
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -136,7 +136,7 @@ h2 {
 }
 
 .back a {
-    color: #00072D;
+    color: #bde2e4;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -145,14 +145,14 @@ h2 {
 }
 
 .back:hover {
-    background-color: #111344;
-    color: white;
+    background-color: #2b464e;
+    color: #bde2e4;
     transition: .5s;
     transform: scale(1.2);
 }
 
 .back:hover a {
-    color: white;
+    color: #bde2e4;
 }
 
 .back1 {
@@ -163,8 +163,8 @@ h2 {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
+    background-color:#8fccd1;
+    color: #182d34;   
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -172,7 +172,7 @@ h2 {
 }
 
 .back1 a {
-    color: #00072D;
+    color: #bde2e4;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -181,14 +181,14 @@ h2 {
 }
 
 .back1:hover {
-    background-color: #111344;
-    color: white;
+    background-color: #2b464e;
+    color: #bde2e4;
     transition: .5s;
     transform: scale(1.2);
 }
 
 .back1:hover a {
-    color: white;
+    color: #bde2e4;
 }
 h1 {
     width: 35vw;
@@ -198,3 +198,5 @@ h1 {
 .swal-button-custom {
     display: inline-block;
 }
+
+.tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }

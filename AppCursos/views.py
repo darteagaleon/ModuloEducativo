@@ -33,17 +33,7 @@ def login(request):
     else:
         return render(request, 'registration/login.html')
 # Vista de inicio (home) protegida por autenticación ademas de la validacion de usuarios y admiistrativos
-# def home(request):
-#     context = {}
-#     user = request.user #para obtener el usuario que esta logeado
-#     group_name = None #por defecto es nulo
-#     if user.is_authenticated: #si ya se logeo el user
-#         group = Group.objects.filter(user=user).first() #consulta que este user, sea igual al de la linea anterior
-#         if group:
-#             group_name = group.name
-        
-#     context['group_name']= group_name
-#     return render(request, 'home.html', context)
+
 def home(request):
     context = {}
     group_name = request.group_name

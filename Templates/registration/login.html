@@ -22,20 +22,20 @@
             {% csrf_token %}
             <!-- se utiliza para crear un grupo de entrada visualmente estilizado que contiene una imagen de un icono de nombre de usuario.-->
             <div class="input-group mt-4">
-                <div class="input-group-text bg-info  ">
+                <div class="input-group-text btn-login">
                     <img src="/static/img/username-icon.svg" alt="username-icon" class="username">
                 </div>
                 <input type="text" name="username" id="" placeholder="Nombre de Usuario">
             </div>
             <!--se utiliza para crear un campo de contraseña en un formulario web. -->
             <div class="input-group mt-4">
-                <div class="input-group-text bg-info  ">
+                <div class="input-group-text btn-login">
                     <img src="/static/img/password-icon.svg" alt="username-icon" class="password">
                 </div>
                 <input type="password" name="password" placeholder="Contraseña">
             </div>
             <!--representa un botón de inicio de sesión estilizado con Bootstrap.-->
-            <button type="submit" class=" text-white w-100 mt-4 fw-semibold shadow-sm subir">Iniciar
+            <button type="submit" class="  w-100 mt-4 fw-semibold shadow-sm subir">Iniciar
                 sesion</button>
 
         </form>

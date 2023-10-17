@@ -11,19 +11,23 @@
             <br>
 
             <div class="card-container">
-                {% for curso in listarc %}
-                <div class="card">
-                    <div class="img">
-                        <img src="@imnotflobgvic.jpeg" alt="">
+                {% if listarc %}
+      {% for curso in cursos_usuario %}
+                    <div class="card">
+                        <div class="img">
+                            <img src="{{ v_cursos.iconoCurso.url }}" alt="">
+                        </div>
+                        <div class="card_content">
+                            <h2 class="card_title">{{ curso.nombre_curso }}</h2>
+                            <a href="#" id="visualizar">
+                                <button class="read">Visualizar</button>
+                            </a>
+                        </div>
                     </div>
-                    <div class="card_content">
-                        <h2 class="card_title">{{ curso.nombre_curso }}</h2>
-                        <a href="{% url 'material_list' curso_id=curso.pk %}" id="visualizar">
-                            <button class="read">Visualizar</button>
-                        </a>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                    {% else %}
+                    <p>No hay cursos</p>
+                {% endif %}
             </div>
 
         </div>
