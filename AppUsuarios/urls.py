@@ -35,6 +35,7 @@ urlpatterns = [
     path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/', views.marcar_clase_como_vista, name='marcar_clase_como_vista'),
     
     
+    path('Cursos_Usuarios/',login_required(views.Cursos_Usuarios),name='Cursos_Usuarios'),
 ]
     
 

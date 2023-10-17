@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f2f0f0b4;
+    overflow-y: scroll;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+
+/* Estilo para la tarjeta de cursos */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    /* Centra horizontalmente las tarjetas */
+    margin: 0 auto;
+    /* Centra horizontalmente el contenedor */
+    max-width: 1200px;
+    /* Establece un ancho máximo para las tarjetas */
+    display: flex;
+    padding: 1rem;
+}
+
+#visualizar{
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.8rem;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.card {
+    padding: 20px;
+    width: 25vw;
+    text-align: center;
+    /* Alinea el contenido al centro */
+    margin: 10px;
+    /* Añade márgenes para separar las tarjetas */
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 5px 5px 0 0;
+}
+.card_content {
+    padding: 1rem;
+    background: linear-gradient(to bottom left, #1d1e33 40%, #1d1e33 100%);
+    border-radius: 0 0 5px 5px;
+    /* Establece un alto para las tarjetas */
+    height: 25vh;
+}
+
+
+.card_title {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0px;
+}
+
+
+
+.read {
+    color: #ffffff;
+    font-weight: 400;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    position: relative;
+    top: 5vh;
+}
+
+.read:hover {
+    background-color: #92dce5;
+    color: #00072D;
+    transition: .5s all ease;
+    transform: scale(1.2);
+}
+
+
+button {
+    width: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #92dce5;
+    color: #00072D;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+button:hover {
+    background-color: #111344;
+    color: white;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back {
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje*/ 
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back a {
+    color: #00072D;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #111344;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back:hover a {
+    color: white;
+}
+
+
+h1 {
+    animation: h1 0.4s linear both
+}
+
+@keyframes h1 {
+    0% {
+        letter-spacing: -.2em;
+        transform: translateZ(-700px) translateY(-100px);
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        transform: translateZ(0) translateY(0);
+        opacity: 1
+    }
+}
+
+.card {
+    animation: card 0.5s;
+}
+
+@keyframes card {
+    0% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+} 

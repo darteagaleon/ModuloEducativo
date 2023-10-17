@@ -281,4 +281,8 @@ def editar_usuarios(request, user_id):
     context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
+from django.contrib.auth.decorators import login_required
 
+# vista para la selecion de curso en el panel de usuario
+def Cursos_Usuarios(request):
+    return render(request, 'Templates_Usuarios/Cursos/Cursos_Usuarios.html')

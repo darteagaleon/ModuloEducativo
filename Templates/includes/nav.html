@@ -45,22 +45,21 @@
         </div>
 
         <ul class="nav-links">
-            <li>
+            <!-- se muestra el icono de home -->
+            <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
+            <li> 
+                <a href="{% url 'home' %}">
+                    <i class='bx bx-home'></i>
+                    <span class="link_name">Inicio </span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name">Inicio</a></li>
+                </ul>
+            </li>
                 {% if group_name == 'usuarios' %}
-                <!-- se muestra el icono de home -->
-                <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
-                <li> 
-                    <a href="{% url 'home' %}">
-                        <i class='bx bx-home'></i>
-                        <span class="link_name">Inicio </span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name">Inicio</a></li>
-                    </ul>
-                </li>
                 <!-- se muestra el icono de cursos -->
                 <li> 
-                    <a href="#">
+                    <a href="{% url 'Cursos_Usuarios' %}">
                         <i class='bx bx-book '></i>
                         <span class="link_name">Cursos </span>
                     </a>
@@ -80,16 +79,6 @@
                     </ul>
                 </li>
                 {% elif group_name == 'administrativos' %}
-                <!-- se muestra el icono de home -->
-                <li> 
-                    <a href="{% url 'home' %}">
-                        <i class='bx bx-home'></i>
-                        <span class="link_name">Inicio </span>
-                    </a>
-                    <ul class="sub-menu blank">
-                        <li><a class="link_name">Inicio</a></li>
-                    </ul>
-                </li>
                 <!-- se muestra el icono de Gestion de usuario-->
                 <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
                 <li>
@@ -157,7 +146,6 @@
                 </li>
                 {% else %}
                 {% endif %}
-            </li>
             <li>
                 <div class="profile-details">
                     <div class="profile-content">
