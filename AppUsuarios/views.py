@@ -13,8 +13,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
 from django.contrib.auth import get_user_model
 from django.db.models import Q #permite realizar consultas más complejas
-
-
+import json
+from django.core.serializers import serialize
 
 # Create your views here.
 #Vista para realizar un Curso
@@ -111,8 +111,7 @@ def seleccionar_curso(request):
             'listaclases' : listafilas ,
             }
         #Redireccionar a la ejecucion del Curso
-        print('------------------')
-        print(context)
+        
         return render (request,'Usuarios/ejecutar_curso.html', context)
 
     else:
@@ -145,8 +144,6 @@ def ejecutar_clase(request, clase_id):
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
     clase_usuario = Clase_Usuario.objects.get(id_clase=clase_id, id_usuario_cargo__id_usuario=user_id)
-    print('------------------')
-    print(clase_usuario)
     clase_usuario.visto = True
     clase_usuario.save()
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -155,20 +152,33 @@ def marcar_clase_como_vista(request, clase_id, user_id):
     return redirect(clase.contenido_clase)
 
 #EJECUTAR EVALUACION
-def ejecutar_evaluacion(request, clase_id):
-    #Buscar el modulo_id de la clase
-    modulo=Clases.objects.get(id=clase_id).id_modulo
-    nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
-    #Mostrar las preguntas de la evaluacion
-    listaPreguntas=Preguntas.objects.filter(id_modulo=modulo)
+def ejecutar_evaluacion(request):
+    is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
+    if is_ajax:
+        data=json.loads(request.body)
+        clase_id=data['clase_id']
+        #Buscar el modulo_id de la clase
+        modulo=Clases.objects.get(id=clase_id).id_modulo.id
+        nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
 
+        #Mostrar las preguntas de la evaluacion
+        id_evaluacion=Evaluaciones.objects.get(id_modulo=modulo).id
+        print('------------------')
+        print(id_evaluacion)
+        listaPreguntas=Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
     
-    context = {
-        'nombre': nombre_modulo,
-        'listaPreguntas': listaPreguntas,
-    }
-    return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
 
+        
+        data = {
+            'nombre': nombre_modulo,
+            'listaPreguntas': list(listaPreguntas),  # Convertir a lista para ser JSON serializable
+        }
+        print('------------------')
+        print(data)
+        return JsonResponse(data)
+        # return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
+    else:
+        return redirect('home')
 
 #*********************
 #       Cargos       *
@@ -228,7 +238,7 @@ def crear_usuario(request):
             
             # Crear una relación con el cargo
             cargo = form.cleaned_data['cargo']
-            Usuario_Cargo.objects.create(id_usuario=user, id_cargo=cargo)
+           
 
             # Crear o actualizar el perfil del usuario
             profile, profile_created = Profile.objects.get_or_create(user=user)
@@ -238,6 +248,7 @@ def crear_usuario(request):
             profile.role = form.cleaned_data['role']
             profile.cargo = form.cleaned_data['cargo']
             profile.save()
+            Usuario_Cargo.objects.create(id_usuario=user, id_cargo=cargo)
 
             if created:
                 messages.success(request, f'Usuario {username} creado')
