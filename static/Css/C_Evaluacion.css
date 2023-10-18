@@ -46,7 +46,7 @@ h1 {
 
 
 #tabla {
-    background-color: #0E6BA8;
+    background-image: linear-gradient(135deg, #31636d 0%,#182d34 100%);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
@@ -96,8 +96,8 @@ label {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
+    background-color:#8fccd1;
+    color: #182d34;   
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -114,14 +114,14 @@ label {
 }
 
 .back:hover {
-    background-color: #111344;
-    color: white;
+    background-color: #2b464e;
+    color: #bde2e4;
     transition: .5s;
     transform: scale(1.2);
 }
 
 .back:hover a {
-    color: white;
+    color: #bde2e4;
 }
 
 .subir {
@@ -129,8 +129,8 @@ label {
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
+    background-color:#8fccd1;
+    color: #182d34;    
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -139,7 +139,7 @@ label {
 }
 
 .subir:hover {
-    background-color: #111344;
+    background-color: #2b464e;
     color: white;
     transition: .5s;
     transform: scale(1.2);
@@ -344,3 +344,4 @@ input[type="text"]:focus {
     transform: scale(1.1);
 
 }
+#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }

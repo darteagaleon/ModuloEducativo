@@ -28,44 +28,7 @@ body {
     left: 240px;
 }
 
-/* tabla de crear curso */
-.container-fluid {
-    margin: 0 auto;
-    position: relative;
-    height: 100vh;
-    width: 40vw;
-}
 
-#tabla {
-    max-width: 500px;
-    width: 100%;
-    padding: 20px;
-    background-color: #e7b1b1;
-    border-radius: 20px;
-    box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    margin: 50px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 30px;
-    font-weight: bold;
-    color: #333;
-
-}
-
-@media only screen and (max-width: 600px) {
-    .container-fluid {
-        width: 100%;
-        height: 100%;
-        font-size: 20px;
-    }
-    body{
-        overflow: auto;
-    }
-}
 
 /* nombres de la tabla */
 label {
@@ -86,20 +49,28 @@ input[type="checkbox"] {
     transition: all 0.3s ease;
 }
 
-button{
-    width: 50%;
+
+button {
+    width: auto;
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color: #58acb4;
-    color: #fff;
+    background-color:#8fccd1;
+    color: #182d34;  
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+
 }
-button:active{
-    background-color: rgb(37, 150, 190);
+
+button:hover {
+    background-color: #2b464e;
+    color: white;
+    transition: .5s;
+    transform: scale(1.2);
 }
+
 input[type="checkbox"]:checked {
     background-color: #58acb4;
     border-color: #58acb4;
@@ -154,10 +125,11 @@ input[type="text"]:focus {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
+    
 }
 
 .back a {
-    color: #00072D;
+    color: #bde2e4;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
@@ -166,32 +138,17 @@ input[type="text"]:focus {
 }
 
 .back:hover {
-    background-color: #111344;
+    background-color: #2b464e;
     transition: .5s;
     transform: scale(1.2);
 }
 
 .back:hover a {
-    color: white;
+    color: #bde2e4;
 }
 
-button {
-    width: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: #92dce5;
-    color: #00072D;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
 
-}
 
-button:hover {
-    background-color: #111344;
-    color: white;
-    transition: .5s;
-    transform: scale(1.2);
-}
+
+h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;opacity:0}40%{opacity:.6}100%{opacity:1}}
+#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }

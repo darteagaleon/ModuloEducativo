@@ -12,7 +12,7 @@
      <div class="row">
           <div class="col-6 offset-3 text-center " id="saludo">
                {% if request.user.is_authenticated %}
-               <hr>
+               {% comment %} <hr> {% endcomment %}
                <h1>
                     Hola {{ user.username | title }}.
                     <br />
@@ -20,7 +20,7 @@
                     <br />
                </h1>
                {% else %}
-               <hr>
+               {% comment %} <hr> {% endcomment %}
                <h1>
                     Hola.
                     <br />

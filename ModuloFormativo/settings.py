@@ -51,8 +51,10 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    'AppCursos.middleware.GroupMiddleware',#aqui se llama el archivo middleware.py
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
 ]
 
 ROOT_URLCONF = "ModuloFormativo.urls"
@@ -60,7 +62,9 @@ ROOT_URLCONF = "ModuloFormativo.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Templates')],
+        'DIRS': [
+                os.path.join(BASE_DIR, 'Templates'),
+                os.path.join(BASE_DIR, 'Templates_Usuarios'),],
         'APP_DIRS': True,
         "OPTIONS": {
             "context_processors": [
@@ -68,6 +72,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'AppCursos.context_processors.group_name',#aqui se llama el archivo context_processors.py
             ],
         },
     },

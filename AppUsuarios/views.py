@@ -93,23 +93,21 @@ def seleccionar_curso(request):
                         visto=False
                         break
 
+            #Agregar la evaluacion del ultimo modulo
+            reg={}
+            reg['tipo']='evaluacion'
+            reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
+            reg['id']=listaClases.last().id_modulo.id
+            reg['disponible']=True
+            if not visto:
+                reg['disponible']=False
+
             listafilas.append(reg)
-
-        #Agregar la evaluacion del ultimo modulo
-        reg={}
-        reg['tipo']='evaluacion'
-        reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-        reg['id']=clase['id']
-        reg['disponible']=True
-        if  not visto:
-            reg['disponible']=False
-
-        listafilas.append(reg)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
-            }
+        }
         #Redireccionar a la ejecucion del Curso
         
         return render (request,'Usuarios/ejecutar_curso.html', context)
@@ -238,7 +236,6 @@ def crear_usuario(request):
             
             # Crear una relación con el cargo
             cargo = form.cleaned_data['cargo']
-           
 
             # Crear o actualizar el perfil del usuario
             profile, profile_created = Profile.objects.get_or_create(user=user)
@@ -292,4 +289,8 @@ def editar_usuarios(request, user_id):
     context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
+from django.contrib.auth.decorators import login_required
 
+# vista para la selecion de curso en el panel de usuario
+def Cursos_Usuarios(request):
+    return render(request, 'Templates_Usuarios/Cursos/Cursos_Usuarios.html')

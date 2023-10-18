@@ -61,6 +61,6 @@ a{
     color: black;
     text-decoration: none;
 }
-
+h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(-100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
 
 .folder-container{animation:folder-container 0.5s; } @keyframes folder-container{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }

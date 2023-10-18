@@ -1,0 +1,41 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Cursos_Usuarios.css' %}">
+<div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <h1 style="text-align: center;"> Cursos </h1>
+            <br>
+
+            <div class="card-container">
+                {% if listarc %}
+      {% for curso in cursos_usuario %}
+                    <div class="card">
+                        <div class="img">
+                            <img src="{{ v_cursos.iconoCurso.url }}" alt="">
+                        </div>
+                        <div class="card_content">
+                            <h2 class="card_title">{{ curso.nombre_curso }}</h2>
+                            <a href="#" id="visualizar">
+                                <button class="read">Visualizar</button>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p>No hay cursos</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+{% endblock %}
