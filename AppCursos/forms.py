@@ -10,13 +10,14 @@ class crear_cursos(forms.ModelForm):
     #se utiliza para configurar un formulario en Django basado en el modelo Cursos. 
     class Meta:
         model = Cursos
-        fields = ['nombre_curso', 'descripcion_curso', 'estado_curso','duracion_curso','iconoCurso' ]
+        fields = ['nombre_curso', 'descripcion_curso', 'estado_curso','duracion_curso','iconoCurso' ,'id_cargo']
         labels = {
             'nombre_curso': 'Nombre del curso',
             'descripcion_curso': 'Descripción del curso', 
             'estado_curso': 'Activo/Inactivo',
             'duracion_curso': 'Duración del curso',
             'iconoCurso': 'Iconos del curso',
+            'id_cargo':'Cargo',
         }
         #se utiliza para personalizar la apariencia y el comportamiento de los campos del formulario en una aplicación Django.
         widgets = {
@@ -26,12 +27,13 @@ class crear_cursos(forms.ModelForm):
             'estado_curso': forms.CheckboxInput(attrs={'class':'form-check-input value="False"'}),
             'duracion_curso': forms.NumberInput(attrs={'class':'form-control'}),
             'iconoCurso': forms.FileInput(attrs={'class':'form-control'}),
+            'id_cargo': forms.Select(attrs={'class':'form-control'}),
         }
 #este código define un formulario de Django llamado CursosForm que se utiliza para interactuar con el modelo Cursos. 
 class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
-        fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso']
+        fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso','id_cargo']
 #este código define un formulario de Django llamado ModulosForm que se utiliza para interactuar con el modelo de modelos. 
 class ModulosForm(forms.ModelForm):
     class Meta:
