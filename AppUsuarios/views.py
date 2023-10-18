@@ -17,8 +17,9 @@ import json
 from django.core.serializers import serialize
 
 # Create your views here.
+# vista para la selecion de curso en el panel de usuario
 #Vista para realizar un Curso
-def seleccionar_curso(request):
+def Cursos_Usuarios(request):
     regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -124,7 +125,7 @@ def seleccionar_curso(request):
         listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
 
         #Retornar el template con el contexto
-        return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos})
+        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
 
 
 def ejecutar_clase(request, clase_id):
@@ -291,6 +292,3 @@ def editar_usuarios(request, user_id):
 
 from django.contrib.auth.decorators import login_required
 
-# vista para la selecion de curso en el panel de usuario
-def Cursos_Usuarios(request):
-    return render(request, 'Templates_Usuarios/Cursos/Cursos_Usuarios.html')
