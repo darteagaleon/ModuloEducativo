@@ -29,7 +29,6 @@ urlpatterns = [
     path('editar_usuarios/<int:user_id>/', views.editar_usuarios, name='editar_usuarios'),
 
     
-    path('seleccionar_curso', views.seleccionar_curso, name='seleccionar_curso'),
     path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/', views.marcar_clase_como_vista, name='marcar_clase_como_vista'),
 
     #EJECUTAR
