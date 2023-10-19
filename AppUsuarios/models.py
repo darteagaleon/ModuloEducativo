@@ -43,14 +43,14 @@ class Clase_Usuario(models.Model):
 # PERFIL DE USUARIO
 class Profile(models.Model):
      apellido = models.CharField(max_length=30, verbose_name='Apellido', blank=True, null=True)
-     email = models.EmailField(verbose_name='Correo electrónico', blank=True, null=True)
+     email = models.EmailField(verbose_name='Correo electrónico', blank=True, max_length=254)
      estadousuario = models.BooleanField(default=True, verbose_name='Estado de Usuario')
      ROLES = (('usuario', 'Usuario'), ('administrador', 'Administrador'))
      role = models.CharField(max_length=15, choices=ROLES, verbose_name='Rol', blank=True, null=True)
      #Relacion a User
      user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', verbose_name='Usuario')
      #Relacion a Cargo
-     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Cargo')
+     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True, verbose_name='Cargo')
 
 class Meta:
      verbose_name = 'perfil'

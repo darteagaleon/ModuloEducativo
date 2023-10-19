@@ -29,27 +29,15 @@ class CargoForm(forms.ModelForm):
 
 class CrearUsuariosForm(UserCreationForm):
     username = forms.CharField(label='Nombre de usuario', max_length=150)
-    apellido = forms.CharField(max_length=30, label='Apellido', required=True)
-    email = forms.EmailField(label='Correo electrónico', required=True)
+    apellido = forms.CharField(max_length=30, label='Apellido', required=False)
+    email = forms.EmailField(label='Correo electrónico', required=True, max_length=254)
     estadousuario = forms.BooleanField(required=False, initial=True)
     ROLES = (('usuario', 'Usuario'), ('administrador', 'Administrador'))
     role = forms.ChoiceField(choices=ROLES, label='Rol')
-    cargo = forms.ModelChoiceField(queryset=Cargo.objects.all(), required=False, label='Cargo')
+    cargo = forms.ModelChoiceField(queryset=Cargo.objects.all(), required=True, label='Cargo')
 
-    password1 = forms.CharField(
-        label='Contraseña',
-        widget=forms.PasswordInput,
-        strip=False,
-        help_text="Al menos 8 caracteres, no debe ser completamente numérico.",
-        required=True
-    )
-    password2 = forms.CharField(
-        label='Confirmar contraseña',
-        widget=forms.PasswordInput,
-        strip=False,
-        help_text="Ingrese la misma contraseña para la verificación.",
-        required=True
-    )
+    password1 = None
+    password2 = None
 
     class Meta:
         model = User  # Cambiar el modelo a User
