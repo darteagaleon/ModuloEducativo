@@ -1,0 +1,53 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->            
+        <h1> Listado de Cargos</h1>
+        <form class="search" action="{% url 'filtrar_cargos' %}" method="GET">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Cargos...">
+            <button style="width: auto;" >Buscar</button>
+        </form>
+        
+        
+        <br>
+        <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <a href="{% url 'listar_cargos' %}"><button >Ver todos</button></a> 
+        <div class="table-responsive" >
+            <table class="table table-hover " id="tablam">
+                <thead>
+                    <tr>
+                        <th scope="col">Cargo</th>                        
+                        <th scope="col"></th>
+                        <th scope="col">Estado</th>                        
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for cargo in cargos %}<!--indica que se va a iniciar un bucle-->
+                        <tr>
+                            <!-- Esta líneas definen las celdas de datos de la tabla-->
+                            <td scope="row">{{cargo.nombre_cargo}}</td>
+                            {% if cargo.estado_cargo %}<!--Estas líneas verifican si el atributo -->
+                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        {% else %}
+                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        {% endif %}
+                        
+                        </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+<a href="#" id="back2">
+    <div >
+		<button  class="back">Regresar</button>
+	</div>
+    </a>
+{% endblock %}

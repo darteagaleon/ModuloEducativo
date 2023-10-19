@@ -16,6 +16,7 @@ from django.db.models import Q #permite realizar consultas más complejas
 import json
 from django.core.serializers import serialize
 
+
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
 #Vista para realizar un Curso
@@ -194,6 +195,18 @@ def crear_cargo(request):
         form = CargoForm()
     
     return render(request, 'Cargos/crear_cargo.html', {'form': form})  
+
+#filtrar cargos
+def filtrar_cargos(request):
+    cargos = Cargo.objects.filter(nombre_cargo__contains=request.GET.get('search',''))
+    
+    context = {'cargos':cargos}
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+
+#Views para listar cargos
+def listar_cargos(request):
+    cargos = Cargo.objects.all()
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
     
 
 #*****************************************************
@@ -209,13 +222,19 @@ def GestionUsuarios(request):
 
 
 # filtrar usuarios
+# def filtrar_usuarios(request):
+#     perfiles = Profile.objects.filter(User__username__contains=request.GET.get('search',''))
+    
+#     context = {'perfiles':perfiles}
+#     return render(request, 'Usuarios/listar_usuarios.html', {'perfiles': perfiles})
+
 def filtrar_usuarios(request):
-    search_query = request.GET.get('search', '')
-
-    usuarios_filtrados = Profile.objects.filter(Q(user__username__icontains=search_query) | Q(apellido__icontains=search_query))
-
-    context = {'usuarios_filtrados': usuarios_filtrados, 'search_query': search_query}
+    search_query = request.GET.get('search', '')  # Obtiene el valor de búsqueda de la URL
+    perfiles = Profile.objects.filter(user__username__icontains=search_query)  # Filtra por el nombre de usuario
+    
+    context = {'perfiles': perfiles, 'search_query': search_query}
     return render(request, 'Usuarios/listar_usuarios.html', context)
+
 
 
 #vista para crear usuario
@@ -296,6 +315,9 @@ def editar_usuarios(request, user_id):
     user_profile = get_object_or_404(Profile, user_id=user_id)
     user = user_profile.user
 
+    print="-------------------"
+    print= user
+
     if request.method == 'POST':
         form = CrearUsuariosForm(request.POST, instance=user)
 
@@ -320,5 +342,5 @@ def editar_usuarios(request, user_id):
     context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
-from django.contrib.auth.decorators import login_required
+
 
