@@ -20,14 +20,14 @@ admin.site.register(Clase_Usuario, Clase_UsuarioAdmin)
 # PERFIL DETALLADO
 
 
-# class ProfileAdmin(admin.ModelAdmin):
-#      list_display = ('user', 'apellido', 'email', 'estadousuario', 'role', 'cargo', 'user_group')
-#      list_filter = ( 'user__groups', 'user')  # Aquí he agregado 'username' a los campos a filtrar
+class ProfileAdmin(admin.ModelAdmin):
+     list_display = ('user', 'apellido', 'email', 'estadousuario', 'role', 'cargo', 'user_group')
+     list_filter = ( 'user__groups', 'user')  # Aquí he agregado 'username' a los campos a filtrar
 
-#      def user_group(self, obj):
-#           groups = obj.user.groups.all().values_list('name', flat=True)
-#           return " - ".join(sorted(groups))
+     def user_group(self, obj):
+          groups = obj.user.groups.all().values_list('name', flat=True)
+          return " - ".join(sorted(groups))
 
-#      user_group.short_description = 'Grupo'
+     user_group.short_description = 'Grupo'
 
-# admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Profile, ProfileAdmin)

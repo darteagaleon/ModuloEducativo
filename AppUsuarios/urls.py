@@ -18,11 +18,15 @@ urlpatterns = [
 
     #FILTRAR
     path('filtrar_usuarios/', login_required(views.filtrar_usuarios), name='filtrar_usuarios'),
+    path('filtrar_cargos/', login_required(views.filtrar_cargos), name='filtrar_cargos'),
+   
 
     #VER
 
     #LISTAR
     path('listar_usuarios/',login_required(views.listar_usuarios),name='listar_usuarios'),
+    path('listar_cargos/',login_required(views.listar_cargos),name='listar_cargos'),
+    
 
 
     #EDITAR
