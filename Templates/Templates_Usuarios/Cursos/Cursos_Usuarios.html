@@ -15,13 +15,14 @@
                     <div class="caja">
 
                         <div class="img">
-                            <img src="{% static 'img/iconos/22df20b9-65c3-4fca-a6a8-c553c9616158_GToNYnx.jpeg' %}" alt="Icono del Curso">
+                            <img src="{% static 'img/iconos/animacion-degital_1.jpg' %}" alt="Icono del Curso">
                         </div>
                         <div class="caja_content">
                             <h2 class="caja_title">{{ curso.nombre_curso }}</h2>
-                            <a href="#" id="visualizar">
+                            <a href="{% url 'Modulos_Usuarios' %}" id="visualizar">
                                 <button class="read">Visualizar</button>
                             </a>
+                            
                         </div>
                     </div>
                     {% endfor %}

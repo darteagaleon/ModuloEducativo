@@ -41,6 +41,9 @@ urlpatterns = [
     path('ejecutar_evaluacion/', views.ejecutar_evaluacion, name='ejecutar_evaluacion'),
     
     path('Cursos_Usuarios/',login_required(views.Cursos_Usuarios),name='Cursos_Usuarios'),
+    # Modulos_Usuarios
+    path('Modulos_Usuarios/',login_required(views.Modulos_Usuarios),name='Modulos_Usuarios'),
+
 ]
     
 
