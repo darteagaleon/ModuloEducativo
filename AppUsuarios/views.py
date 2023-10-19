@@ -250,7 +250,6 @@ def crear_usuario(request):
 
             # Actualizar el usuario con la nueva contraseña
             user.set_password(password)
-            user.save()
 
             # Crear una relación con el cargo
             cargo = form.cleaned_data['cargo']
@@ -262,6 +261,7 @@ def crear_usuario(request):
             profile.estadousuario = form.cleaned_data['estadousuario']
             profile.role = form.cleaned_data['role']
             profile.cargo = form.cleaned_data['cargo']
+            user.save()
             profile.save()
 
             # Crear o actualizar la relación Usuario_Cargo
@@ -303,6 +303,7 @@ def editar_usuarios(request, user_id):
             user_profile.estadousuario = form.cleaned_data['estadousuario']
             user_profile.role = form.cleaned_data['role']
             user_profile.cargo = form.cleaned_data['cargo']
+            user_profile.email = form.cleaned_data['email']  # Actualizar el email en el perfil
             user_profile.save()
 
             messages.success(request, f'Usuario {user.username} actualizado')
