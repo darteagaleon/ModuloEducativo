@@ -48,7 +48,7 @@
                         <!-- <td>{{ usuario.estadousuario }}</td> -->
                         <td>{{ usuario.cargo }}</td>
                         <td>                        
-                            <a href="#">
+                            <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
                                 <button class="editar">
                                     Editar
                                 </button>

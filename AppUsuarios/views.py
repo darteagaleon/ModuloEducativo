@@ -268,24 +268,54 @@ def listar_usuarios(request):
 
 
 #vista para editar usuarios
+# def editar_usuarios(request, user_id):
+#     # Obtener el perfil del usuario a editar
+#     profile = get_object_or_404(Profile, user_id=user_id)
+
+#     if request.method == 'POST':
+#         # Crear el formulario con los datos del usuario
+#         form = CrearUsuariosForm(request.POST, instance=profile.user)
+
+#         if form.is_valid():
+#             # Guardar los cambios en el usuario
+#             form.save()
+#             # profile.user.email = form.cleaned_data['email']
+#             # profile.estadousuario = form.cleaned_data['estadousuario']
+#             # profile.role = form.cleaned_data['role']
+#             # profile.cargo = form.cleaned_data['cargo']
+#             # profile.user.save()
+
+#             messages.success(request, f'Usuario {profile.user.username} actualizado')
+#             return redirect('listar_usuarios')
+#     else:
+#         # Crear el formulario con los datos actuales del usuario
+#         form = CrearUsuariosForm(instance=profile.user)
+
+#     return render(request, 'Usuarios/editar_usuarios.html', {'form': form, 'profile': profile})
 def editar_usuarios(request, user_id):
-    user = Profile.objects.get(id_usuario=user_id)
+    user_profile = get_object_or_404(Profile, user_id=user_id)
+    user = user_profile.user
 
     if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST, instance=user.user)
+        form = CrearUsuariosForm(request.POST, instance=user)
 
         if form.is_valid():
+            print(form.cleaned_data)  # Imprimir los datos del formulario
             form.save()
-            user.email = form.cleaned_data['email']
-            user.estadousuario = form.cleaned_data['estadousuario']
-            user.role = form.cleaned_data['role']
-            user.carga = form.cleaned_data['carga']
-            user.save()
 
-            messages.success(request, f'Usuario {user.user.username} actualizado')
+            # Actualizar propiedades específicas del Profile
+            user_profile.email = form.cleaned_data['email']
+            user_profile.estadousuario = form.cleaned_data['estadousuario']
+            user_profile.role = form.cleaned_data['role']
+            user_profile.carga = form.cleaned_data['carga']
+            user_profile.save()
+
+            messages.success(request, f'Usuario {user.username} actualizado')
             return redirect('inicio')
+        else:
+            print(form.errors)
     else:
-        form = CrearUsuariosForm(instance=user.user)
+        form = CrearUsuariosForm(instance=user)
 
     context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
