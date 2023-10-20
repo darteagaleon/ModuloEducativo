@@ -19,12 +19,12 @@
                         </div>
                         <div class="caja_content">
                             <h2 class="caja_title">{{ curso.nombre_curso }}</h2>
-                            <a href="#" id="visualizar">
+                            <a href="{% url 'ejecutar_curso' clase_id=curso.id %}">
                                 <button class="read">Visualizar</button>
                             </a>
                         </div>
                     </div>
-                    {% endfor %}
+                {% endfor %}
             </div>
 
         </div>

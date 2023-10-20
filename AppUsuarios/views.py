@@ -20,7 +20,7 @@ from django.core.serializers import serialize
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
 #Vista para realizar un Curso
-def Cursos_Usuarios(request):
+def Cursos_Usuarios(request, clase_id=None):
     regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -111,8 +111,9 @@ def Cursos_Usuarios(request):
             'listaclases' : listafilas ,
         }
         #Redireccionar a la ejecucion del Curso
-        
-        return render (request,'Usuarios/ejecutar_curso.html', context)
+        if clase_id:
+            return redirect('ejecutar_curso', clase_id=clase_id)
+      
 
     else:
         #Consultar listado de Cursos para el Usuario y sus Cargos

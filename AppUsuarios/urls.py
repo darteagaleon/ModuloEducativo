@@ -36,11 +36,14 @@ urlpatterns = [
     path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/', views.marcar_clase_como_vista, name='marcar_clase_como_vista'),
 
     #EJECUTAR
-    path('ejecutar_curso/<int:clase_id>/', views.ejecutar_clase, name='ejecutar_clase'),
+    
+    path('ejecutar_curso/<int:clase_id>/', views.Cursos_Usuarios, name='ejecutar_curso'),
     path('ejecutar_clase/<int:clase_id>/', views.ejecutar_clase, name='ejecutar_clase'),
     path('ejecutar_evaluacion/', views.ejecutar_evaluacion, name='ejecutar_evaluacion'),
+    path('Cursos_Usuarios/', login_required(views.Cursos_Usuarios), name='Cursos_Usuarios'),
     
-    path('Cursos_Usuarios/',login_required(views.Cursos_Usuarios),name='Cursos_Usuarios'),
+
+
 ]
     
 
