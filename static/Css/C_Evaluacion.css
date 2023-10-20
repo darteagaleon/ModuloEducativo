@@ -34,19 +34,42 @@ body {
     position: relative;
     width: 50vw;
     color: #f7ece1;
-    padding-bottom: .5%; /* Agrega espacio en blanco en la parte inferior */
+    padding-bottom: .5%;
+    /* Agrega espacio en blanco en la parte inferior */
 }
 
 h1 {
     color: #f7ece1;
     width: 35vw;
     word-wrap: break-word;
-    margin: 0 auto; /* Esto centrará horizontalmente el elemento */
+    margin: 0 auto;
+    /* Esto centrará horizontalmente el elemento */
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s ease;
 }
 
 
+input[type="checkbox"]:checked {
+    background-color: #58acb4;
+    border-color: #58acb4;
+    color: #fff;
+    transform: scale(1.2);
+}
+
 #tabla {
-    background-image: linear-gradient(135deg, #31636d 0%,#182d34 100%);
+    background-image: linear-gradient(135deg, #31636d 0%, #182d34 100%);
     padding: 20px;
     border-radius: 20px;
     box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
@@ -63,6 +86,8 @@ h1 {
     /* Agregar barra de desplazamiento si es necesario */
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
+    padding: 35px 35px 35px 35px;
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -89,15 +114,19 @@ label {
 
 
 .back {
-    position: fixed; /* Fija el botón en su posición */
-    top: 5%; /* Distancia desde la parte superior en porcentaje */
-    right: 5%; /* Distancia desde la derecha en porcentaje */
-    width: 15vw; /* Ancho del botón */
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color:#8fccd1;
-    color: #182d34;   
+    background-color: #8fccd1;
+    color: #182d34;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -125,12 +154,12 @@ label {
 }
 
 .subir {
-    width:15vw;
+    width: 15vw;
     padding: 10px;
     border: none;
     border-radius: 10px;
-    background-color:#8fccd1;
-    color: #182d34;    
+    background-color: #8fccd1;
+    color: #182d34;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -152,8 +181,9 @@ input[type="text"],
 #id_duracion_clase,
 #id_contenido_clase,
 #id_duracion_curso,
-#id_nombre_curso ,
-#id_nombre_evaluacion,#id_numero_intentos,
+#id_nombre_curso,
+#id_nombre_evaluacion,
+#id_numero_intentos,
 #id_nombre_modulo,
 #id_orden_clase,
 #id_id_modulo,
@@ -162,20 +192,20 @@ input[type="text"],
 #id_id_evaluacion,
 #id_email,
 #id_role,
-#id_cargo{
+#id_cargo,
+#id_id_cargo {
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
     outline: none;
-    padding: 10px;
     transition: all 0.3s ease;
     font-size: 20px;
     font-weight: bold;
     color: #000000;
     margin-bottom: 5px;
     transition: all 0.3s ease;
-    width: 90%;
-
+    width: 100%;
+    padding: 10px 10px 10px 10px;
 }
 
 input[type="checkbox"] {
@@ -187,7 +217,7 @@ input[type="checkbox"] {
     left: 5px;
     transition: all 0.3s ease;
     width: 2vw;
-    height:2vw;
+    height: 2vw;
 }
 
 
@@ -231,7 +261,9 @@ input[type="checkbox"]:checked {
 }
 
 
-#id_instrucciones_evaluacion,#id_nombre_pregunta,#id_descripcion_clase{
+#id_instrucciones_evaluacion,
+#id_nombre_pregunta,
+#id_descripcion_clase {
     background-color: #eeeeee;
     padding: .5em;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
@@ -249,6 +281,7 @@ input[type="checkbox"]:checked {
     width: 90%;
 
 }
+
 /* focus---------------- */
 #id_orden_modulo:focus {
     background-color: #c2c2c2;
@@ -273,22 +306,30 @@ input[type="checkbox"]:checked {
     color: #000000;
     transform: scale(1.1);
 }
+
 #id_id_modulo:focus {
     background-color: #c2c2c2;
     color: #000000;
     transform: scale(1.1);
 }
+
 #id_orden_clase:focus {
     background-color: #c2c2c2;
     color: #000000;
     transform: scale(1.1);
 }
+
 input[type="number"]:focus {
     background-color: #c2c2c2;
     color: #000000;
     transform: scale(1.1);
 }
 
+#id_id_cargo:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.1);
+}
 
 #id_numero_intentos:focus {
     background-color: #c2c2c2;
@@ -352,16 +393,31 @@ input[type="text"]:focus {
     transform: scale(1.1);
 
 }
+
 #id_email:focus {
     background-color: #c2c2c2;
     color: #000000;
     transform: scale(1.1);
 
 }
+
 #id_role:focus {
     background-color: #c2c2c2;
     color: #000000;
     transform: scale(1.1);
 
 }
-#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+
+#tabla {
+    animation: tabla 0.5s;
+}
+
+@keyframes tabla {
+    0% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}

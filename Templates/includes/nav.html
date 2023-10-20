@@ -58,6 +58,18 @@
     
                     </ul>
                 </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">{{ user.username | title }}</div>
+                            <div class="job">{{ group_name | title}}</div>
+                        </div>
+                        <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
+                    </div>
+                </li>
                 {% elif group_name == 'administrativos' %}
                 <!-- se muestra el icono de Gestion de usuario-->
                 <!-- se crea un sub-menu dentro el menu de Usuario y Gestion -->
@@ -124,20 +136,20 @@
 
                     </ul>
                 </li>
+                <li>
+                    <div class="profile-details">
+                        <div class="profile-content">
+                            <img src="{% static 'img/iconos/asd.jpeg' %}" alt="">
+                        </div>
+                        <div class="name-job">
+                            <div class="profile_name">{{ user.username | title }}</div>
+                            <div class="job">{{ group_name | title}}</div>
+                        </div>
+                        <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
+                    </div>
+                </li>
                 {% else %}
                 {% endif %}
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
-                    </div>
-                    <div class="name-job">
-                        <div class="profile_name">{{ user.username | title }}</div>
-                        <div class="job">{{ group_name | title}}</div>
-                    </div>
-                    <a href="{% url 'exit' %}"><i class='bx bx-log-out' id="log_out"></i></a>
-                </div>
-            </li>
         </ul>
     </div>
     

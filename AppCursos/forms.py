@@ -34,21 +34,33 @@ class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso','id_cargo']
+        widgets = {
+            'estado_curso': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
+        }  
 #este código define un formulario de Django llamado ModulosForm que se utiliza para interactuar con el modelo de modelos. 
 class ModulosForm(forms.ModelForm):
     class Meta:
         model = Modulos
         fields = '__all__'
+        widgets = {
+            'estado_modulo': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
+        }   
 #este código define un formulario de Django llamado ClasesForm que se utiliza para interactuar con el modelo de clases. 
 class ClasesForm(forms.ModelForm):
     class Meta:
         model = Clases
         fields = '__all__'
+        widgets = {
+            'estado_clase': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
+        }
 #este código define un formulario de Django llamado EvaluacionForm que se utiliza para interactuar con el modelo de Evaluciones. 
 class EvaluacionForm(forms.ModelForm):
     class Meta:
         model = Evaluaciones
         fields = '__all__'
+        widgets = {
+            'finalizada': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
+        }
         
 #este código define un formulario de Django llamado PreguntasForm que se utiliza para interactuar con el modelo de Preguntas.        
 class PreguntasForm(forms.ModelForm):
