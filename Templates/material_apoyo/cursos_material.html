@@ -33,7 +33,7 @@
                             
                         </div>
                         <div class="card-content">
-                            <h3>{{ curso.nombre_curso }}</h3> <!-- Nombre del curso -->
+                            <h3>{{ curso.nombre_curso | title  }}</h3> <!-- Nombre del curso -->
                             <a href="{% url 'material_list' curso_id=curso.pk %}" class="visualizar-link">
                                 Visualizar
                             </a>

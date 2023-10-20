@@ -45,7 +45,8 @@ urlpatterns = [
     path('Cursos_Usuarios/',login_required(views.Cursos_Usuarios),name='Cursos_Usuarios'),
     # Modulos_Usuarios
     path('Modulos_Usuarios/',login_required(views.Modulos_Usuarios),name='Modulos_Usuarios'),
-
+    # Material_Usuarios
+    path('Material_Usuarios/',login_required(views.Material_Usuarios),name='Material_Usuarios'),
 ]
     
 

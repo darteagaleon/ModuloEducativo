@@ -321,3 +321,6 @@ def editar_usuarios(request, user_id):
 # vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
 def Modulos_Usuarios(request):
     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
+
+def Material_Usuarios(request):
+    return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
