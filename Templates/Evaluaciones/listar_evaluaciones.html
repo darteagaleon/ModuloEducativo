@@ -29,12 +29,12 @@
                 <!-- crea una tabla que se utiliza para mostrar información relacionada con evaluaciones-->
                 <thead>
                     <tr>
-                        <th scope="col">Evaluación</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col">Duración</th>
-                        <th scope="col">Finalizada</th>
-                        <th scope="col">Visualizar</th>
+                        <th scope="col" id="titulos-tabla">Evaluación</th>
+                        <th scope="col" id="titulos-tabla">Descripción</th>
+                        <th scope="col" id="titulos-tabla">Estado</th>
+                        <th scope="col" id="titulos-tabla">Duración</th>
+                        <th scope="col" id="titulos-tabla">Finalizada</th>
+                        <th scope="col" id="titulos-tabla">Visualizar</th>
 
                     </tr>
                 </thead>
@@ -42,18 +42,18 @@
                     <!--Esta linea codigo llama el estatic de django-->
                     {% for evaluacion in listare %}
                     <tr>
-                        <td scope="row" >{{ evaluacion.nombre_evaluacion }}</td>
+                        <td scope="row" id="contenido-tabla" >{{ evaluacion.nombre_evaluacion }}</td>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <td scope="row">{{ evaluacion.descripcion_evaluacion }}</td>
+                        <td scope="row" id="contenido-tabla">{{ evaluacion.descripcion_evaluacion }}</td>
                         <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                         {% if evaluacion.estado_evaluacion %}
-                        <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
-                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
-                        <td scope="row">{{ evaluacion.duracion_evaluacion_admin }} min</td>
+                        <td scope="row" id="contenido-tabla">{{ evaluacion.duracion_evaluacion_admin }} min</td>
                         <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
-                        <td scope="row">
+                        <td scope="row" id="contenido-tabla">
                             {% if evaluacion.finalizada %}
                             Si
                             {% else %}

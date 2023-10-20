@@ -34,7 +34,7 @@ urlpatterns = [
 
     
     path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/', views.marcar_clase_como_vista, name='marcar_clase_como_vista'),
-
+# path('seleccionar_curso', views.seleccionar_curso, name='seleccionar_curso'), esta es la ruta de la funcion que se llama en el html
     #EJECUTAR
     
     path('ejecutar_curso/<int:clase_id>/', views.Cursos_Usuarios, name='ejecutar_curso'),
@@ -42,7 +42,9 @@ urlpatterns = [
     path('ejecutar_evaluacion/', views.ejecutar_evaluacion, name='ejecutar_evaluacion'),
     path('Cursos_Usuarios/', login_required(views.Cursos_Usuarios), name='Cursos_Usuarios'),
     
-
+    path('Cursos_Usuarios/',login_required(views.Cursos_Usuarios),name='Cursos_Usuarios'),
+    # Modulos_Usuarios
+    path('Modulos_Usuarios/',login_required(views.Modulos_Usuarios),name='Modulos_Usuarios'),
 
 ]
     

@@ -22,27 +22,27 @@
             <table class="table table-hover " id="tablam">
                 <thead>
                     <tr>
-                        <th scope="col">Clase</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Duración</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col"></th>
-                        <th scope="col">Visualizar</th>
+                        <th scope="col" id="titulos-tabla" >Clase</th>
+                        <th scope="col" id="titulos-tabla" >Descripción</th>
+                        <th scope="col" id="titulos-tabla" >Duración</th>
+                        <th scope="col" id="titulos-tabla" >Estado</th>
+                        <th scope="col" id="titulos-tabla" ></th>
+                        <th scope="col" id="titulos-tabla" >Visualizar</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
                         <tr>
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <td scope="row">{{clase.nombre_clase}}</td>
-                            <td scope="row">{{clase.descripcion_clase}}</td>
-                            <td scope="row">{{clase.duracion_clase}} min </td>
+                            <td scope="row" id="contenido-tabla" >{{clase.nombre_clase}}</td>
+                            <td scope="row" id="contenido-tabla" >{{clase.descripcion_clase}}</td>
+                            <td scope="row" id="contenido-tabla" >{{clase.duracion_clase}} min </td>
                             {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
-                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                            <td scope="row" id="contenido-tabla" ><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
-                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        <td scope="row" id="contenido-tabla" ><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
-                            <td scope="row">{{clase.duracion_clase_admin}}</td>
+                            <td scope="row" id="contenido-tabla" >{{clase.duracion_clase_admin}}</td>
                             <td>
                                 <a href="{% url 'ver_clases' clase.id %}">
                                     <button class="editar">
