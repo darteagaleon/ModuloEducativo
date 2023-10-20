@@ -7,17 +7,33 @@
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
-<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-	<div class="home_content"> <!--1 -->
-        
-        <form class="form" method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" id="submit">Guardar</button>
-        </form>
-	</div>
-	<a href="{% url 'usuarios' %}" id="back2">
-			<button class="back">Regresar</button>
-	</a>
+    <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="all">
+                <div id="tabla">
+                    <div>
+                        <h1>Crear Usuario </h1>
+                        <form class="form" method="POST">
+                            <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                            {% csrf_token %}
+                            <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                            {% load widget_tweaks %}
+                            <div class="form-group">
+                                
+
+                            </div>
+                            {{ form.as_p }}
+                            <button type="submit" class="subir">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a href="{% url 'usuarios' %}" id="back2">
+        <button class="back">Regresar</button>
+    </a>
 </body>
 {% endblock %}

@@ -37,17 +37,17 @@
                 <tbody class="table-group-divider">
                     {% for usuario in usuarios %}
                     <tr>
-                        <td>{{ usuario.user.username }}</td>
-                        <td>{{ usuario.apellido }}</td>
-                        <td>{{ usuario.email }}</td>
+                        <td scope="row" id="contenido-tabla">{{ usuario.user.username }}</td>
+                        <td scope="row" id="contenido-tabla">{{ usuario.apellido }}</td>
+                        <td scope="row" id="contenido-tabla">{{ usuario.email }}</td>
                         {% if usuario.estadousuario %}
                             <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
                             <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
-                        <!-- <td>{{ usuario.estadousuario }}</td> -->
-                        <td>{{ usuario.cargo }}</td>
-                        <td>                        
+                        <!-- <td scope="row" id="contenido-tabla">{{ usuario.estadousuario }}</td> -->
+                        <td scope="row" id="contenido-tabla">{{ usuario.cargo }}</td>
+                        <td scope="row" id="contenido-tabla">                        
                             <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
                                 <button class="editar">
                                     Editar

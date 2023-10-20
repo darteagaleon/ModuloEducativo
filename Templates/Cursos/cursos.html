@@ -18,24 +18,23 @@
                         <h1 style="text-align:center;">Gestion Curso</h1>
                         <div class="folder-container">
                             <!--se esta enlazando la url de 'crear_curso'-->
-                            {% comment %} <a href="{% url 'crear_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
+                        <a href="{% url 'crear_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                                 <div  >
                                 <p>Crear Curso</p>
                             </div>
-                        </a> {% endcomment %}
-                        <!--se esta enlazando la url de 'listar_cursos'-->
+                        </a>                                <!--se esta enlazando la url de 'listar_cursos'-->
                             <a href="{% url 'listar_cursos' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                                 <div  >
                                 <p>Listar Cursos</p>
 
                             </div>
                         </a>
-                        <!--se esta enlazando la url de 'realizar curso'-->
+                        {% comment %} <!--se esta enlazando la url de 'realizar curso'-->
                             <a href="{% url 'seleccionar_curso' %}" class="folder-box"> <i class="bx bx-folder folder-icon"></i>
                                 <div  >
                                 <p> Realizar cruso</p>
                             </div>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
