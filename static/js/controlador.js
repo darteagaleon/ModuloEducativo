@@ -2,10 +2,12 @@
 
 //Funcion para solicitar las preguntas de la evaluacion
 function solicitarPreguntas(clase_id) {
+    console.log(clase_id)
     let url = "http://localhost:8000/usuario/ejecutar_evaluacion/";
     let datos = {
         'clase_id': clase_id,
     };
+    console.log(datos);
     mensajeAjax(url, datos, mostrarPreguntas);
 }
 
