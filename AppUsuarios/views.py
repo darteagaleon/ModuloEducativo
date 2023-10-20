@@ -20,6 +20,7 @@ from django.core.serializers import serialize
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
 #Vista para realizar un Curso
+# def seleccionar_curso(request): solo se cambio este funcion opero el funcionamiento de dicha funcion no se ha modificado. !!!!!IMPORTANT!!! => para que funcione tiene que descomentar esta linea y comentar el Cursos_Usuarios, igulamente en el archivo urls.py,tambien abajo que se redirige al html y descomentar el html de cursos.html
 def Cursos_Usuarios(request):
     regUsuario=request.user
     if request.method == "POST":
@@ -127,6 +128,7 @@ def Cursos_Usuarios(request):
 
         #Retornar el template con el contexto
         return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
+    # return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos}) solo se cambio de ruta el curso
 
 
 def ejecutar_clase(request, clase_id):
