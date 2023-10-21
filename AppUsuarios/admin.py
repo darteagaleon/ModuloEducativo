@@ -18,10 +18,8 @@ admin.site.register(Clase_Usuario, Clase_UsuarioAdmin)
 
 
 # PERFIL DETALLADO
-
-
 class ProfileAdmin(admin.ModelAdmin):
-     list_display = ('user', 'apellido', 'email', 'estadousuario', 'role', 'cargo', 'user_group')
+     list_display = ('user', 'apellido', 'email','estadousuario', 'rol', 'cargo', 'user_group')
      list_filter = ( 'user__groups', 'user')  # Aquí he agregado 'username' a los campos a filtrar
 
      def user_group(self, obj):

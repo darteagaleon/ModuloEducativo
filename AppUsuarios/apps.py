@@ -7,3 +7,4 @@ class AppusuariosConfig(AppConfig):
 
     def ready(self): #para que cargue el archivo signals
         import AppUsuarios.signals
+
