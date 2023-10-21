@@ -117,12 +117,18 @@ def Modulos_Usuarios(request):
             listafilas.append(reg_clase)
             ultimo_clase_id = clase.id
 
-        # Agregar la evaluación del último módulo
-        reg_evaluacion = {
-            'tipo': 'evaluacion',
-            'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-            'id': listaClases.last().id_modulo.id,
-            'disponible': True
+        # Agregar evaluación del último módulo
+        if nuevoModulo is not None:
+            reg_evaluacion = {
+                'tipo': 'evaluacion',
+                'titulo': f'Evaluacion del Modulo {nuevoModulo}',
+                'id': clase.id_modulo.id
+            }
+            listafilas.append(reg_evaluacion)
+
+        context = {
+            'nombre_curso': regCurso.nombre_curso,
+            'listaclases': listafilas,
         }
         if not visto:
             reg_evaluacion['disponible'] = False
@@ -197,6 +203,18 @@ def ejecutar_evaluacion(request):
 #       Cargos       *
 #*********************
 
+#filtrar cargos
+def filtrar_cargos(request):
+    cargos = Cargo.objects.filter(nombre_cargo__contains=request.GET.get('search',''))
+    
+    context = {'cargos':cargos}
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+
+#Views para listar cargos
+def listar_cargos(request):
+    cargos = Cargo.objects.all()
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+
 #vista para crear cargos
 def crear_cargo(request):
     if request.method == 'POST':
@@ -209,18 +227,24 @@ def crear_cargo(request):
     
     return render(request, 'Cargos/crear_cargo.html', {'form': form})  
 
-#filtrar cargos
-def filtrar_cargos(request):
-    cargos = Cargo.objects.filter(nombre_cargo__contains=request.GET.get('search',''))
-    
-    context = {'cargos':cargos}
-    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
 
-#Views para listar cargos
-def listar_cargos(request):
-    cargos = Cargo.objects.all()
-    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+def editar_cargo(request, cargo_id):
+    cargo = get_object_or_404(Cargo, pk=cargo_id)
+
+    if request.method == 'POST':
+        form = CargoForm(request.POST, instance=cargo)
+        if form.is_valid():
+            form.save()
+            return render(request, 'Cargos/editar_cargo.html', {'mensaje': 'Cargo editado exitosamente'})
+            
+
+    else:
+        form = CargoForm(instance=cargo)
+        
     
+    return render(request, 'Cargos/editar_cargo.html', {'form': form})
+
+
 
 #*****************************************************
 #                  Gestion de usuario                *
@@ -233,13 +257,6 @@ def usuarios(request):
 def GestionUsuarios(request):
     return render(request, 'Usuarios/GestionUsuarios.html')
 
-
-# filtrar usuarios
-# def filtrar_usuarios(request):
-#     perfiles = Profile.objects.filter(User__username__contains=request.GET.get('search',''))
-    
-#     context = {'perfiles':perfiles}
-#     return render(request, 'Usuarios/listar_usuarios.html', {'perfiles': perfiles})
 
 def filtrar_usuarios(request):
     search_query = request.GET.get('search', '')  # Obtiene el valor de búsqueda de la URL
