@@ -113,7 +113,7 @@ def Modulos_Usuarios(request):
             reg_evaluacion = {
                 'tipo': 'evaluacion',
                 'titulo': f'Evaluacion del Modulo {nuevoModulo}',
-                'id': nuevoModulo.id
+                'id': clase.id_modulo.id
             }
             listafilas.append(reg_evaluacion)
 
