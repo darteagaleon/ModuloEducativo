@@ -171,6 +171,13 @@ def ejecutar_evaluacion(request):
         # return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
     else:
         return redirect('home')
+    
+    
+    
+
+
+
+
 
 #*********************
 #       Cargos       *
