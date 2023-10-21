@@ -8,14 +8,15 @@ from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import CrearUsuariosForm, CargoForm, EditarUsuariosForm, EditarPerfilForm 
+from .forms import CrearUsuariosForm, CargoForm 
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
 from django.contrib.auth import get_user_model
 from django.db.models import Q #permite realizar consultas más complejas
 import json
 from django.core.serializers import serialize
-
+from AppCursos.models import MaterialApoyo
+from AppCursos.models import Cursos
 
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
@@ -34,59 +35,62 @@ def Cursos_Usuarios(request):
 
 #Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
 def Modulos_Usuarios(request): 
-    regUsuario = request.user
-
+    regUsuario=request.user
     if request.method == "POST":
-        # Leer registro del Curso seleccionado
-        pk_curso = request.POST['curso']
-        regCurso = Cursos.objects.get(id=pk_curso)
+        #Leer registro del Curso seleccionado
+        pk_curso=request.POST['curso']
+        regCurso=Cursos.objects.get(id=pk_curso)
+        #Obtener fk del Cargo asociado
+        fk_cargo=regCurso.id_cargo
+        #Obtener pk de la tabla Usuario_Cargo
+        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
 
-        # Obtener fk del Cargo asociado
-        fk_cargo = regCurso.id_cargo
-
-        # Obtener pk de la tabla Usuario_Cargo
-        regUsuarioCargo = Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
-
-        # Obtener lista de los Modulos del Curso
-        listaModulos = Modulos.objects.filter(id_curso=regCurso)
-
-        # Consular si los modulos ya existen en la tabla Clase_Usuario
-        existe = Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).exists()
-
+        #Obtener lista de los Modulos del Curso
+        listaModulos=Modulos.objects.filter(id_curso=regCurso)
+        #Consular si los modulos ya existen en la tabla Clase_Usuario
+        existe=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).exists()
         if not existe:
-            # Si no existen, insertarlos
-            listaClases = Clases.objects.filter(id_modulo__in=listaModulos)
-            # Generar datos para insertar en la tabla Clase_Usuario
-            listaReg = []
+            #Si no existen, insertarlos
+            listaClases=Clases.objects.filter(id_modulo__in=listaModulos)
+            #Generar datos para insertar en la tabla Clase_Usuario
+            listaReg=[]
             for clase in listaClases:
                 listaReg.append(Clase_Usuario(id_usuario_cargo=regUsuarioCargo, id_modulo=clase.id_modulo, id_clase=clase, visto=False))
             
-            # Insertar registros en la tabla Clase_Usuario
-            Clase_Usuario.objects.bulk_create(listaReg)
+            #Insertar registros en la tabla Clase_Usuario (Los inserta en la base de datos) )
+            Clase_Usuario.objects.bulk_create(listaReg) #Bulk_create es para insertar varios registros a la vez
 
-        # Consultar las clases del Curso
-        # Listar los id de las clases del Curso
-        listaClasesUsuario = Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
-        listaPkClases = listaClasesUsuario.values_list('id_clase', flat=True)
+        #Consultar las clases del Curso
+        #Listar los id de las clases del Curso
+        listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
+        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
 
-        listafilas = []
-        nuevoModulo = None
-
-        for clase_id in listaPkClases:
-            clase = Clases.objects.get(id=clase_id)
-            
-            # Verificar si es un nuevo módulo
+        reg={}
+        # listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
+        listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo__orden_modulo', 'orden_clase')
+        reg['id'] = listaClases.last().id_modulo.id
+        listafilas=[]
+        #Recorrer la lista de clases para ensamblar el contexto
+        ultimo_modulo_id = None
+        ultimo_clase_id = None
+        nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
+        visto=True #Para saber si la clase ya fue vista
+        for clase in listaClases:
+            reg = {}
+            # Si el modulo es diferente al anterior, agregarlo a la lista
             if nuevoModulo != clase.id_modulo.nombre_modulo:
-                # Agregar evaluación del módulo anterior
-                if nuevoModulo is not None:
+                # Controlar Evaluacion
+                if nuevoModulo != '':  # Si no es la primera vez
                     reg_evaluacion = {
                         'tipo': 'evaluacion',
-                        'titulo': f'Evaluacion del Modulo {nuevoModulo}',
-                        'id': nuevoModulo.id
+                        'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+                        #'id': clase.id_modulo.id
+                        'id': ultimo_modulo_id# Usar el último módulo
                     }
+                    if not visto:
+                        reg_evaluacion['disponible'] = False
                     listafilas.append(reg_evaluacion)
 
-                # Agregar nuevo módulo
                 reg_modulo = {
                     'tipo': 'modulo',
                     'titulo': clase.id_modulo.nombre_modulo,
@@ -94,35 +98,45 @@ def Modulos_Usuarios(request):
                 }
                 listafilas.append(reg_modulo)
                 nuevoModulo = clase.id_modulo.nombre_modulo
+                ultimo_modulo_id = clase.id_modulo.id 
 
-            # Agregar la clase al listado
             reg_clase = {
                 'tipo': 'clase',
                 'titulo': clase.nombre_clase,
                 'id': clase.id,
                 'disponible': True
             }
+            if not visto:
+                reg_clase['disponible'] = False
+
             for claseUsuario in listaClasesUsuario:
                 if claseUsuario['id_clase'] == clase.id:
                     if claseUsuario['visto'] == False:
-                        reg_clase['disponible'] = False
+                        visto = False
+                        
             listafilas.append(reg_clase)
+            ultimo_clase_id = clase.id
 
-        # Agregar evaluación del último módulo
-        if nuevoModulo is not None:
-            reg_evaluacion = {
-                'tipo': 'evaluacion',
-                'titulo': f'Evaluacion del Modulo {nuevoModulo}',
-                'id': nuevoModulo.id
-            }
-            listafilas.append(reg_evaluacion)
-
-        context = {
-            'nombre_curso': regCurso.nombre_curso,
-            'listaclases': listafilas,
+        # Agregar la evaluación del último módulo
+        reg_evaluacion = {
+            'tipo': 'evaluacion',
+            'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+            'id': listaClases.last().id_modulo.id,
+            'disponible': True
         }
+        if not visto:
+            reg_evaluacion['disponible'] = False
+        
+        listafilas.append(reg_evaluacion)
 
-        return render(request, 'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+        context= {
+            'nombre_curso' : regCurso.nombre_curso,
+            'listaclases' : listafilas ,
+        }
+        
+        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+        
+
 
 
 def ejecutar_clase(request, clase_id):
@@ -251,19 +265,21 @@ def crear_usuario(request):
 
             # Actualizar el usuario con la nueva contraseña
             user.set_password(password)
-            user.save()
+
+            # Crear una relación con el cargo
+            cargo = form.cleaned_data['cargo']
 
             # Crear o actualizar el perfil del usuario
             profile, profile_created = Profile.objects.get_or_create(user=user)
             profile.apellido = apellido
             profile.email = email
             profile.estadousuario = form.cleaned_data['estadousuario']
-            profile.rol = form.cleaned_data['rol']
+            profile.role = form.cleaned_data['role']
             profile.cargo = form.cleaned_data['cargo']
+            user.save()
             profile.save()
 
             # Crear o actualizar la relación Usuario_Cargo
-            cargo = form.cleaned_data['cargo']
             usuario_cargo, usuario_cargo_created = Usuario_Cargo.objects.get_or_create(id_usuario=user, id_cargo=cargo)
 
             if created:
@@ -272,7 +288,6 @@ def crear_usuario(request):
                 messages.success(request, f'Perfil de usuario {username} actualizado')
 
             return redirect('home')
-
     else:
         form = CrearUsuariosForm()
 
@@ -292,20 +307,26 @@ def editar_usuarios(request, user_id):
     user = user_profile.user
 
     if request.method == 'POST':
-        user_form = EditarUsuariosForm(request.POST, instance=user)
-        profile_form = EditarPerfilForm(request.POST, instance=user_profile)
+        form = CrearUsuariosForm(request.POST, instance=user)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()  # Guardar el formulario del modelo User
-            profile_form.save()  # Guardar el formulario del modelo Profile
+        if form.is_valid():
+            # Usar form.cleaned_data para actualizar los campos necesarios
+            user.username = form.cleaned_data['username']
+            user.email = form.cleaned_data['email']
+            user.save()
+            user_profile.apellido = form.cleaned_data['apellido']
+            user_profile.estadousuario = form.cleaned_data['estadousuario']
+            user_profile.role = form.cleaned_data['role']
+            user_profile.cargo = form.cleaned_data['cargo']
+            user_profile.email = form.cleaned_data['email']  # Actualizar el email en el perfil
+            user_profile.save()
+
             messages.success(request, f'Usuario {user.username} actualizado')
             return redirect('listar_usuarios')
-
+                    
     else:
-        user_form = EditarUsuariosForm(instance=user)
-        profile_form = EditarPerfilForm(instance=user_profile)
-
-    context = {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id}
+        form = CrearUsuariosForm(instance=user)
+    context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
 
@@ -315,3 +336,27 @@ def editar_usuarios(request, user_id):
 
 # def Material_Usuarios(request):
 #     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
+
+
+
+def Material_Usuarios(request):
+    user_id = request.user.id  # Obtén el ID del usuario actual
+    search_query = request.GET.get('search', '')  # Obtén el término de búsqueda
+
+    # Filtra los cursos relacionados al usuario y aplica el filtro de búsqueda
+    listacursos = Cursos.objects.filter(id_cargo__usuario_cargo__id_usuario=user_id, estado_curso=True, nombre_curso__icontains=search_query)
+
+    return render(request, 'Templates_Usuarios/Cursos/Material_Usuarios.html', {'listacursos': listacursos})
+
+def Listar_Material_Usuarios(request,curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'Templates_Usuarios/Cursos/Listar_Material_Usuarios.html', {'materiales': materiales, 'curso':curso})
+
+
+def Filtrar_Material_Usuario(request):
+    filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'Templates_Usuarios/Cursos/Listar_Material_Usuarios.html', {'materiales': filtro_m})
+    

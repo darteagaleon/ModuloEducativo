@@ -37,3 +37,5 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['apellido', 'estadousuario', 'rol', 'cargo']
+
+#para llamar Curso_Usuarios
