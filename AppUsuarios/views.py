@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from .forms import CrearUsuariosForm, CargoForm 
+from .forms import CrearUsuariosForm, CargoForm, EditarUsuariosForm, EditarPerfilForm 
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm #Para crear usuarios
 from django.contrib.auth import get_user_model
@@ -253,21 +253,19 @@ def crear_usuario(request):
 
             # Actualizar el usuario con la nueva contraseña
             user.set_password(password)
-
-            # Crear una relación con el cargo
-            cargo = form.cleaned_data['cargo']
+            user.save()
 
             # Crear o actualizar el perfil del usuario
             profile, profile_created = Profile.objects.get_or_create(user=user)
             profile.apellido = apellido
             profile.email = email
             profile.estadousuario = form.cleaned_data['estadousuario']
-            profile.role = form.cleaned_data['role']
+            profile.rol = form.cleaned_data['rol']
             profile.cargo = form.cleaned_data['cargo']
-            user.save()
             profile.save()
 
             # Crear o actualizar la relación Usuario_Cargo
+            cargo = form.cleaned_data['cargo']
             usuario_cargo, usuario_cargo_created = Usuario_Cargo.objects.get_or_create(id_usuario=user, id_cargo=cargo)
 
             if created:
@@ -276,6 +274,7 @@ def crear_usuario(request):
                 messages.success(request, f'Perfil de usuario {username} actualizado')
 
             return redirect('home')
+
     else:
         form = CrearUsuariosForm()
 
@@ -295,26 +294,20 @@ def editar_usuarios(request, user_id):
     user = user_profile.user
 
     if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST, instance=user)
+        user_form = EditarUsuariosForm(request.POST, instance=user)
+        profile_form = EditarPerfilForm(request.POST, instance=user_profile)
 
-        if form.is_valid():
-            # Usar form.cleaned_data para actualizar los campos necesarios
-            user.username = form.cleaned_data['username']
-            user.email = form.cleaned_data['email']
-            user.save()
-            user_profile.apellido = form.cleaned_data['apellido']
-            user_profile.estadousuario = form.cleaned_data['estadousuario']
-            user_profile.role = form.cleaned_data['role']
-            user_profile.cargo = form.cleaned_data['cargo']
-            user_profile.email = form.cleaned_data['email']  # Actualizar el email en el perfil
-            user_profile.save()
-
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()  # Guardar el formulario del modelo User
+            profile_form.save()  # Guardar el formulario del modelo Profile
             messages.success(request, f'Usuario {user.username} actualizado')
             return redirect('listar_usuarios')
-                    
+
     else:
-        form = CrearUsuariosForm(instance=user)
-    context = {'form': form, 'user_id': user_id}
+        user_form = EditarUsuariosForm(instance=user)
+        profile_form = EditarPerfilForm(instance=user_profile)
+
+    context = {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
 
