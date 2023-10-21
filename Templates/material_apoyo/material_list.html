@@ -17,7 +17,7 @@
             <input type="submit" class="btn search-btn" value="Buscar">
         </form>
 
-
+        
         <div class="table-responsive">
             <table class="table table-hover" id="tablam">
                 <thead>
@@ -31,6 +31,7 @@
                 <tbody class="table-group-divider">
                     
                     {% for material in materiales %}
+                    
                     <tr>
                         <td>{{ material.NombreMaterialApoyo }}</td>
                         <td>{{ material.DescripcionMaterialApoyo }}</td>
@@ -40,6 +41,7 @@
                                     Visualizar
                                 </button>
                         </td>
+                        {% if group_name == 'administrativos' %}
                         <td>
                             <a href="{% url 'editar_material' pk=material.pk %}">
                                 <button class="editar">
@@ -47,6 +49,7 @@
                                 </button>
                             </a>
                         </td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
