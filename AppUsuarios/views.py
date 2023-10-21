@@ -268,7 +268,6 @@ def filtrar_usuarios(request):
     return render(request, 'Usuarios/listar_usuarios.html', context)
 
 
-
 #vista para crear usuario
 def crear_usuario(request):
     if request.method == 'POST':
@@ -293,7 +292,7 @@ def crear_usuario(request):
             profile.apellido = apellido
             profile.email = email
             profile.estadousuario = form.cleaned_data['estadousuario']
-            profile.role = form.cleaned_data['role']
+            profile.rol = form.cleaned_data['rol']  # Corregir el campo 'rol' aquí
             profile.cargo = form.cleaned_data['cargo']
             user.save()
             profile.save()
@@ -306,6 +305,12 @@ def crear_usuario(request):
             else:
                 messages.success(request, f'Perfil de usuario {username} actualizado')
 
+            # Asignar al usuario al grupo correspondiente
+            if form.cleaned_data['rol'] == 'usuario':
+                user.groups.add(Group.objects.get(name='usuarios'))
+            elif form.cleaned_data['rol'] == 'administrador':
+                user.groups.add(Group.objects.get(name='administrativos'))
+
             return redirect('home')
     else:
         form = CrearUsuariosForm()
@@ -313,10 +318,10 @@ def crear_usuario(request):
     context = {'form': form}
     return render(request, 'Usuarios/crear_usuario.html', context)
 
-
 #vista para listar usuarios
 def listar_usuarios(request):
     usuarios = Profile.objects.select_related('user').all()
+    search_query = request.GET.get('search', '')  # Obtén el término de búsqueda
     return render(request, 'Usuarios/listar_usuarios.html', {'usuarios': usuarios})
 
 
@@ -349,13 +354,9 @@ def editar_usuarios(request, user_id):
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
 
-# vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
-# def Modulos_Usuarios(request):
-#     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
-
-# def Material_Usuarios(request):
-#     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
-
+#*************************************
+#   Material de apoyo - usuario
+#*************************************
 
 
 def Material_Usuarios(request):
@@ -379,3 +380,12 @@ def Filtrar_Material_Usuario(request):
     context = {'filtro_m':filtro_m}
     return render(request, 'Templates_Usuarios/Cursos/Listar_Material_Usuarios.html', {'materiales': filtro_m})
     
+
+
+
+# vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
+# def Modulos_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
+
+# def Material_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
