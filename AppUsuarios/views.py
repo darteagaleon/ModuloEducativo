@@ -227,7 +227,7 @@ def crear_cargo(request):
     
     return render(request, 'Cargos/crear_cargo.html', {'form': form})  
 
-
+#vista para editar cargos 
 def editar_cargo(request, cargo_id):
     cargo = get_object_or_404(Cargo, pk=cargo_id)
 
@@ -235,14 +235,16 @@ def editar_cargo(request, cargo_id):
         form = CargoForm(request.POST, instance=cargo)
         if form.is_valid():
             form.save()
-            return render(request, 'Cargos/editar_cargo.html', {'mensaje': 'Cargo editado exitosamente'})
+            messages.success(request, 'Editado con éxito')
+            return redirect('listar_cargos')
+            # return render(request, 'Cargos/editar_cargo.html', {'mensaje': 'Cargo editado exitosamente'})
             
-
     else:
         form = CargoForm(instance=cargo)
-        
     
-    return render(request, 'Cargos/editar_cargo.html', {'form': form})
+    context = {"form": form,"cargo_id":cargo_id}   
+        
+    return render(request, 'Cargos/editar_cargo.html', context)
 
 
 
