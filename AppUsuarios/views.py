@@ -71,10 +71,9 @@ def Modulos_Usuarios(request):
 
         listafilas = []
         nuevoModulo = None
-
         for clase_id in listaPkClases:
             clase = Clases.objects.get(id=clase_id)
-            
+
             # Verificar si es un nuevo módulo
             if nuevoModulo != clase.id_modulo.nombre_modulo:
                 # Agregar evaluación del módulo anterior
@@ -82,7 +81,8 @@ def Modulos_Usuarios(request):
                     reg_evaluacion = {
                         'tipo': 'evaluacion',
                         'titulo': f'Evaluacion del Modulo {nuevoModulo}',
-                        'id': nuevoModulo.id
+                        'id': clase.id_modulo.id,
+                        'disponible': True  # Assuming this should be True for evaluations
                     }
                     listafilas.append(reg_evaluacion)
 
@@ -102,10 +102,12 @@ def Modulos_Usuarios(request):
                 'id': clase.id,
                 'disponible': True
             }
+
             for claseUsuario in listaClasesUsuario:
                 if claseUsuario['id_clase'] == clase.id:
                     if claseUsuario['visto'] == False:
                         reg_clase['disponible'] = False
+
             listafilas.append(reg_clase)
 
         # Agregar evaluación del último módulo
@@ -113,13 +115,14 @@ def Modulos_Usuarios(request):
             reg_evaluacion = {
                 'tipo': 'evaluacion',
                 'titulo': f'Evaluacion del Modulo {nuevoModulo}',
-                'id': clase.id_modulo.id
+                'id': clase.id_modulo.id,
+                'disponible': True
             }
             listafilas.append(reg_evaluacion)
-
         context = {
             'nombre_curso': regCurso.nombre_curso,
             'listaclases': listafilas,
+            'listaModulos': listaModulos,
         }
 
         return render(request, 'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
