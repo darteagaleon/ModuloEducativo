@@ -31,6 +31,7 @@ urlpatterns = [
 
     #EDITAR
     path('editar_usuarios/<int:user_id>/', views.editar_usuarios, name='editar_usuarios'),
+    path('editar_cargo/<int:cargo_id>/', views.editar_cargo, name='editar_cargo'),
 
     
     #EJECUTAR

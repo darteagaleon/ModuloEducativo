@@ -1,0 +1,44 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+{% comment %}
+<script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
+
+
+<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->
+        <div class="all">
+            <div class="tabla">
+                <h1>Editar Cargo</h1>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.id }}
+                    <div class="form-group">
+                        {{ form.nombre_cargo.label_tag }}
+                        {{ form.nombre_cargo }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.estado_cargo.label_tag }}
+                        {{ form.estado_cargo }}
+                    </div>
+                        
+                    <button type="submit">Guardar Cambios</button>
+                    
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{% url 'listar_usuarios' %}" id="back2">
+    <div>
+        <button class="back">Regresar</button>
+    </div>
+</a>
+{% endblock %}
