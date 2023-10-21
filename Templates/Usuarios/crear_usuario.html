@@ -7,12 +7,18 @@
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 
 <body>
+<<<<<<< HEAD
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 	<div class="home_content"> <!--1 -->
+=======
+    <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+    <div class="home_content"> <!--1 -->
+>>>>>>> 706ddda0dcfd02ba1fe69337f4ea132dbe9295e4
         <div class="text"><!--2 -->
             <div class="all">
                 <div id="tabla">
                     <div>
+<<<<<<< HEAD
                         <h1>Crear Usuarios </h1>
 						<div class="form">
 							<form method="post" enctype="multipart/form-data">
@@ -34,5 +40,29 @@
 	<a href="{% url 'usuarios' %}" id="back2">
 			<button class="back">Regresar</button>
 	</a>
+=======
+                        <h1>Crear Usuario </h1>
+                        <form class="form" method="POST">
+                            <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                            {% csrf_token %}
+                            <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                            {% load widget_tweaks %}
+                            <div class="form-group">
+                                
+
+                            </div>
+                            {{ form.as_p }}
+                            <button type="submit" class="subir">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <a href="{% url 'usuarios' %}" id="back2">
+        <button class="back">Regresar</button>
+    </a>
+>>>>>>> 706ddda0dcfd02ba1fe69337f4ea132dbe9295e4
 </body>
 {% endblock %}

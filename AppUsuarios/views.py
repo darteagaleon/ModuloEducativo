@@ -19,9 +19,21 @@ from django.core.serializers import serialize
 
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
-#Vista para realizar un Curso
-# def seleccionar_curso(request): solo se cambio este funcion opero el funcionamiento de dicha funcion no se ha modificado. !!!!!IMPORTANT!!! => para que funcione tiene que descomentar esta linea y comentar el Cursos_Usuarios, igulamente en el archivo urls.py,tambien abajo que se redirige al html y descomentar el html de cursos.html
 def Cursos_Usuarios(request):
+        #Consultar listado de Cursos para el Usuario y sus Cargos
+        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
+        #Obtener el id del usuario
+        user_id=request.user.id
+        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
+            
+        #Ensamblar el contexto para el template
+        listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
+
+        #Retornar el template con el contexto
+        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
+
+#Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
+def Modulos_Usuarios(request): 
     regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -52,84 +64,78 @@ def Cursos_Usuarios(request):
         listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
         listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
 
-        # listaPkClases=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase')
-        listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
+        reg={}
+        # listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
+        listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo__orden_modulo', 'orden_clase')
+        reg['id'] = listaClases.last().id_modulo.id
         listafilas=[]
         #Recorrer la lista de clases para ensamblar el contexto
+        ultimo_modulo_id = None
+        ultimo_clase_id = None
         nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
         visto=True #Para saber si la clase ya fue vista
-
         for clase in listaClases:
-            reg={}
-        
-            #Si el modulo es diferente al anterior, agregarlo a la lista
-            if nuevoModulo != clase['id_modulo__nombre_modulo']:
-                #Controlar Evaluacion
-                if nuevoModulo != '': #Si no es la primera vez
-                    reg['tipo']='evaluacion'
-                    reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-                    reg['id']=clase['id_modulo']
-                    if  not visto:
-                        reg['disponible']=False
+            reg = {}
+            # Si el modulo es diferente al anterior, agregarlo a la lista
+            if nuevoModulo != clase.id_modulo.nombre_modulo:
+                # Controlar Evaluacion
+                if nuevoModulo != '':  # Si no es la primera vez
+                    reg_evaluacion = {
+                        'tipo': 'evaluacion',
+                        'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+                        #'id': clase.id_modulo.id
+                        'id': ultimo_modulo_id# Usar el último módulo
+                    }
+                    if not visto:
+                        reg_evaluacion['disponible'] = False
+                    listafilas.append(reg_evaluacion)
 
-                    listafilas.append(reg)
+                reg_modulo = {
+                    'tipo': 'modulo',
+                    'titulo': clase.id_modulo.nombre_modulo,
+                    'id': clase.id_modulo.id
+                }
+                listafilas.append(reg_modulo)
+                nuevoModulo = clase.id_modulo.nombre_modulo
+                ultimo_modulo_id = clase.id_modulo.id 
 
-                reg={}
-                reg['tipo']='modulo'
-                reg['titulo']=clase['id_modulo__nombre_modulo']
-                reg['id']=clase['id_modulo']
-                listafilas.append(reg)
-                nuevoModulo=clase['id_modulo__nombre_modulo']
-
-            reg={
+            reg_clase = {
                 'tipo': 'clase',
-                'titulo': clase['nombre_clase'],
-                'id': clase['id'],
+                'titulo': clase.nombre_clase,
+                'id': clase.id,
                 'disponible': True
             }
-            if  not visto:
-                reg['disponible']=False
+            if not visto:
+                reg_clase['disponible'] = False
 
             for claseUsuario in listaClasesUsuario:
-                if claseUsuario['id_clase'] == clase['id']:
-                    if claseUsuario['visto']==False:
-                        visto=False
-                        break
+                if claseUsuario['id_clase'] == clase.id:
+                    if claseUsuario['visto'] == False:
+                        visto = False
+                        
+            listafilas.append(reg_clase)
+            ultimo_clase_id = clase.id
 
-            #Agregar la evaluacion del ultimo modulo
-            reg={}
-            reg['tipo']='evaluacion'
-            reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-            reg['id']=listaClases.last().id_modulo.id
-            reg['disponible']=True
-            if not visto:
-                reg['disponible']=False
-
-            listafilas.append(reg)
+        # Agregar la evaluación del último módulo
+        reg_evaluacion = {
+            'tipo': 'evaluacion',
+            'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+            'id': listaClases.last().id_modulo.id,
+            'disponible': True
+        }
+        if not visto:
+            reg_evaluacion['disponible'] = False
+        
+        listafilas.append(reg_evaluacion)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
         }
-        #Redireccionar a la ejecucion del Curso
-        if clase_id:
-            return redirect('ejecutar_curso', clase_id=clase_id)
-      
-
-    else:
-        #Consultar listado de Cursos para el Usuario y sus Cargos
-        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
         
-        # regUsuario=User.objects.get(username=request.user)
-        user_id=request.user.id
-        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
-            
-        #Ensamblar el contexto para el template
-        listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
+        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+        
 
-        #Retornar el template con el contexto
-        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
-    # return render (request,'Usuarios/seleccionar_curso.html',{'listacursos':listacursos}) solo se cambio de ruta el curso
 
 
 def ejecutar_clase(request, clase_id):
@@ -141,7 +147,7 @@ def ejecutar_clase(request, clase_id):
         'v_clases': clase,
         'user_id': request.user.id
     }
-    return render(request, 'Usuarios/ejecutar_clase.html', context)
+    return render(request, 'Templates_Usuarios/Cursos/ejecutar_clase.html', context)
 
 
 def marcar_clase_como_vista(request, clase_id, user_id):
@@ -160,22 +166,20 @@ def ejecutar_evaluacion(request):
     if is_ajax:
         data=json.loads(request.body)
         clase_id=data['clase_id']
+        print('------------------')
+        print(clase_id)
         #Buscar el modulo_id de la clase
         modulo=Clases.objects.get(id=clase_id).id_modulo.id
         nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
 
         #Mostrar las preguntas de la evaluacion
         id_evaluacion=Evaluaciones.objects.get(id_modulo=modulo).id
-        print('------------------')
-        print(id_evaluacion)
         listaPreguntas=Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
     
         data = {
             'nombre': nombre_modulo,
             'listaPreguntas': list(listaPreguntas),  # Convertir a lista para ser JSON serializable
         }
-        print('------------------')
-        print(data)
         return JsonResponse(data)
         # return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
     else:
@@ -312,5 +316,8 @@ def editar_usuarios(request, user_id):
 
 
 # vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
-def Modulos_Usuarios(request):
-    return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
+# def Modulos_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
+
+# def Material_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')

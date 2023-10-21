@@ -36,7 +36,7 @@
                     {% for modulos in listarm %}<!--indica que se va a iniciar un bucle-->
                     <tr>
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <td scope="row" id="contenido-tabla">{{modulos.nombre_modulo}}</td>
+                        <td scope="row" id="contenido-tabla">{{modulos.nombre_modulo | title }}</td>
                         <!--Estas líneas verifican si el atributo -->
                         {% if modulos.estado_modulo %}
                         <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>

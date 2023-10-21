@@ -19,9 +19,17 @@
                         </div>
                         <div class="caja_content">
                             <h2 class="caja_title">{{ curso.nombre_curso }}</h2>
-                            <a href="{% url 'Modulos_Usuarios' %}" id="visualizar">
-                                <button class="read">Visualizar</button>
-                            </a>
+                            <form method="post" action="{% url 'Modulos_Usuarios' %}">
+                                {% csrf_token %}
+                                <a href="#" id="visualizar">
+                                    <input type="hidden" name="curso" value="{{ curso.id }}">
+                                    <button type="submit" class="read">Visualizar</button>
+                                </a>
+
+                            </form>
+                            <!-- <a href="{% url 'Modulos_Usuarios' %}" id="visualizar">
+                                <button class="submit">Visualizar</button>
+                            </a> -->
                             
                         </div>
                     </div>

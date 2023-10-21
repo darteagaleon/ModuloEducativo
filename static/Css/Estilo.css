@@ -8,7 +8,8 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'DM Serif Display', serif;}
+    font-family: 'DM Serif Display', serif;
+}
 
 /* Sidebar */
 .sidebar {
