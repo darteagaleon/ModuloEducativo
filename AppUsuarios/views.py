@@ -34,62 +34,59 @@ def Cursos_Usuarios(request):
 
 #Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
 def Modulos_Usuarios(request): 
-    regUsuario=request.user
-    if request.method == "POST":
-        #Leer registro del Curso seleccionado
-        pk_curso=request.POST['curso']
-        regCurso=Cursos.objects.get(id=pk_curso)
-        #Obtener fk del Cargo asociado
-        fk_cargo=regCurso.id_cargo
-        #Obtener pk de la tabla Usuario_Cargo
-        regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
+    regUsuario = request.user
 
-        #Obtener lista de los Modulos del Curso
-        listaModulos=Modulos.objects.filter(id_curso=regCurso)
-        #Consular si los modulos ya existen en la tabla Clase_Usuario
-        existe=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).exists()
+    if request.method == "POST":
+        # Leer registro del Curso seleccionado
+        pk_curso = request.POST['curso']
+        regCurso = Cursos.objects.get(id=pk_curso)
+
+        # Obtener fk del Cargo asociado
+        fk_cargo = regCurso.id_cargo
+
+        # Obtener pk de la tabla Usuario_Cargo
+        regUsuarioCargo = Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
+
+        # Obtener lista de los Modulos del Curso
+        listaModulos = Modulos.objects.filter(id_curso=regCurso)
+
+        # Consular si los modulos ya existen en la tabla Clase_Usuario
+        existe = Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).exists()
+
         if not existe:
-            #Si no existen, insertarlos
-            listaClases=Clases.objects.filter(id_modulo__in=listaModulos)
-            #Generar datos para insertar en la tabla Clase_Usuario
-            listaReg=[]
+            # Si no existen, insertarlos
+            listaClases = Clases.objects.filter(id_modulo__in=listaModulos)
+            # Generar datos para insertar en la tabla Clase_Usuario
+            listaReg = []
             for clase in listaClases:
                 listaReg.append(Clase_Usuario(id_usuario_cargo=regUsuarioCargo, id_modulo=clase.id_modulo, id_clase=clase, visto=False))
             
-            #Insertar registros en la tabla Clase_Usuario (Los inserta en la base de datos) )
-            Clase_Usuario.objects.bulk_create(listaReg) #Bulk_create es para insertar varios registros a la vez
+            # Insertar registros en la tabla Clase_Usuario
+            Clase_Usuario.objects.bulk_create(listaReg)
 
-        #Consultar las clases del Curso
-        #Listar los id de las clases del Curso
-        listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
-        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
+        # Consultar las clases del Curso
+        # Listar los id de las clases del Curso
+        listaClasesUsuario = Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
+        listaPkClases = listaClasesUsuario.values_list('id_clase', flat=True)
 
-        reg={}
-        # listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
-        listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo__orden_modulo', 'orden_clase')
-        reg['id'] = listaClases.last().id_modulo.id
-        listafilas=[]
-        #Recorrer la lista de clases para ensamblar el contexto
-        ultimo_modulo_id = None
-        ultimo_clase_id = None
-        nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
-        visto=True #Para saber si la clase ya fue vista
-        for clase in listaClases:
-            reg = {}
-            # Si el modulo es diferente al anterior, agregarlo a la lista
+        listafilas = []
+        nuevoModulo = None
+
+        for clase_id in listaPkClases:
+            clase = Clases.objects.get(id=clase_id)
+            
+            # Verificar si es un nuevo módulo
             if nuevoModulo != clase.id_modulo.nombre_modulo:
-                # Controlar Evaluacion
-                if nuevoModulo != '':  # Si no es la primera vez
+                # Agregar evaluación del módulo anterior
+                if nuevoModulo is not None:
                     reg_evaluacion = {
                         'tipo': 'evaluacion',
-                        'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-                        #'id': clase.id_modulo.id
-                        'id': ultimo_modulo_id# Usar el último módulo
+                        'titulo': f'Evaluacion del Modulo {nuevoModulo}',
+                        'id': nuevoModulo.id
                     }
-                    if not visto:
-                        reg_evaluacion['disponible'] = False
                     listafilas.append(reg_evaluacion)
 
+                # Agregar nuevo módulo
                 reg_modulo = {
                     'tipo': 'modulo',
                     'titulo': clase.id_modulo.nombre_modulo,
@@ -97,45 +94,35 @@ def Modulos_Usuarios(request):
                 }
                 listafilas.append(reg_modulo)
                 nuevoModulo = clase.id_modulo.nombre_modulo
-                ultimo_modulo_id = clase.id_modulo.id 
 
+            # Agregar la clase al listado
             reg_clase = {
                 'tipo': 'clase',
                 'titulo': clase.nombre_clase,
                 'id': clase.id,
                 'disponible': True
             }
-            if not visto:
-                reg_clase['disponible'] = False
-
             for claseUsuario in listaClasesUsuario:
                 if claseUsuario['id_clase'] == clase.id:
                     if claseUsuario['visto'] == False:
-                        visto = False
-                        
+                        reg_clase['disponible'] = False
             listafilas.append(reg_clase)
-            ultimo_clase_id = clase.id
 
-        # Agregar la evaluación del último módulo
-        reg_evaluacion = {
-            'tipo': 'evaluacion',
-            'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-            'id': listaClases.last().id_modulo.id,
-            'disponible': True
+        # Agregar evaluación del último módulo
+        if nuevoModulo is not None:
+            reg_evaluacion = {
+                'tipo': 'evaluacion',
+                'titulo': f'Evaluacion del Modulo {nuevoModulo}',
+                'id': nuevoModulo.id
+            }
+            listafilas.append(reg_evaluacion)
+
+        context = {
+            'nombre_curso': regCurso.nombre_curso,
+            'listaclases': listafilas,
         }
-        if not visto:
-            reg_evaluacion['disponible'] = False
-        
-        listafilas.append(reg_evaluacion)
 
-        context= {
-            'nombre_curso' : regCurso.nombre_curso,
-            'listaclases' : listafilas ,
-        }
-        
-        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
-        
-
+        return render(request, 'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
 
 
 def ejecutar_clase(request, clase_id):
