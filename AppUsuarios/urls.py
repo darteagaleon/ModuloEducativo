@@ -37,10 +37,10 @@ urlpatterns = [
     #EJECUTAR
     #Estas rutas estan en orden de ejecucion
     path('Cursos_Usuarios/', login_required(views.Cursos_Usuarios), name='Cursos_Usuarios'),
-    path('Modulos_Usuarios/', views.Modulos_Usuarios, name='Modulos_Usuarios'),
-    path('ejecutar_clase/<int:clase_id>/', views.ejecutar_clase, name='ejecutar_clase'),
-    path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/', views.marcar_clase_como_vista, name='marcar_clase_como_vista'),
-    path('ejecutar_evaluacion/', views.ejecutar_evaluacion, name='ejecutar_evaluacion'),
+    path('Modulos_Usuarios/', login_required(views.Modulos_Usuarios), name='Modulos_Usuarios'),
+    path('ejecutar_clase/<int:clase_id>/',login_required( views.ejecutar_clase), name='ejecutar_clase'),
+    path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/',login_required (views.marcar_clase_como_vista), name='marcar_clase_como_vista'),
+    path('ejecutar_evaluacion/',login_required( views.ejecutar_evaluacion), name='ejecutar_evaluacion'),
 
 
 ]
