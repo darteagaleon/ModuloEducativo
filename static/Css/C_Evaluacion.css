@@ -193,7 +193,11 @@ input[type="text"],
 #id_email,
 #id_role,
 #id_cargo,
-#id_id_cargo {
+#id_id_cargo,
+#id_Archivo,
+#id_password1,
+#id_password2,
+#id_rol{
     background-color: #f2f2f2;
     border: none;
     border-radius: 10px;
@@ -263,7 +267,8 @@ input[type="checkbox"]:checked {
 
 #id_instrucciones_evaluacion,
 #id_nombre_pregunta,
-#id_descripcion_clase {
+#id_descripcion_clase,
+#id_DescripcionMaterialApoyo {
     background-color: #eeeeee;
     padding: .5em;
     box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
@@ -286,125 +291,160 @@ input[type="checkbox"]:checked {
 #id_orden_modulo:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_id_evaluacion:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_nombre_curso:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_id_curso:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+#id_rol:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
 }
 
 #id_id_modulo:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_orden_clase:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+#id_password1:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+#id_password2:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+#id_role:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+#id_DescripcionMaterialApoyo:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
 }
 
 input[type="number"]:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_id_cargo:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 #id_numero_intentos:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
+#id_Archivo:focus {
+    background-color: #c2c2c2;
+    color: #000000;
+    transform: scale(1.05);
+}
 
 input[type="text"]:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
 #id_duracion_curso:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
 #id_descripcion_clase:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
 #id_nombre_pregunta:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 
 #id_respuesta_correcta:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 
 #id_nombre_evaluacion:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 
 #id_instrucciones_evaluacion:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 
 #id_cargo:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 
 #id_email:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 
 #id_role:focus {
     background-color: #c2c2c2;
     color: #000000;
-    transform: scale(1.1);
+    transform: scale(1.05);
 
 }
 

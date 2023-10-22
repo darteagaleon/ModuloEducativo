@@ -1,49 +1,40 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
-
+<!--es un bloqueo de contenido -->
 {% block content %}
+
 <link rel="stylesheet" href="{% static 'Css/evaluacion.css' %}">
-<div class="home_content">
-    <div class="text">
+<div class="home_content"> <!--1 -->
+    <div class="text"><!--2 -->
         <h1 style="text-align: center;">{{nombre_curso}}</h1>
         <ul style="margin-left: 50px;">
-            {% for modulo in listaModulos %}
-                <li>
-                    <h2>{{ modulo.nombre_modulo }}</h2>
-                    <ul>
-                        {% for clase in listaclases %}
-                            {% if clase.tipo == 'evaluacion' %}
-                                <li>
-                                    {% if clase.disponible %}
-                                        <button onclick="solicitarPreguntas({{clase.id}})">{{ clase.titulo }}</button>
-                                    {% else %}
-                                        {{ clase.titulo }}
-                                    {% endif %}
-                                </li>
+            {% for clase in listaclases %}
+            <li>
+                {% if clase.tipo == 'evaluacion' %}
+                    {% if clase.disponible %}
+                        <button onclick="solicitarPreguntas({{clase.id}})">{{ clase.titulo }}</button><!--CREAR RUTA PARA LA EVALUACION-->
+                    {% else %}
+                        {{ clase.titulo }}
+                    {% endif %}
+                {% else %}
+                        {% if clase.tipo == 'modulo' %}
+                            {{ clase.titulo }}
+                        {% else %}
+                            {% if clase.disponible %}
+                                <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>            
                             {% else %}
-                                {% if clase.id_modulo.id == modulo.id %}
-                                    <li>
-                                        {% if clase.tipo == 'modulo' %}
-                                            {{ clase.titulo }}
-                                        {% else %}
-                                            {% if clase.disponible %}
-                                                <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>
-                                            {% else %}
-                                                {{ clase.titulo }}
-                                            {% endif %}
-                                        {% endif %}
-                                    </li>
-                                {% endif %}
+                                {{ clase.titulo }}
                             {% endif %}
-                        {% endfor %}
-                    </ul>
+                        {% endif %}
+                {% endif %}
                 </li>
             {% endfor %}
-        </ul>
-    </div>
-</div>
+            </ul>
+    </div><!--2 -->
+</div><!--1 -->
 {% endblock %}
-    
     <!-- <div class="flex-container">
         <div class="flex-items">
             <article>
