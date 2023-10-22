@@ -21,6 +21,7 @@ class Cargo(models.Model):
 class Usuario_Cargo(models.Model):
      id_usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cargo_usuario', unique=True)
      id_cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE)
+     
 
      def __str__(self):
           return f"{self.id_usuario.username} - {self.id_cargo.nombre_cargo}"

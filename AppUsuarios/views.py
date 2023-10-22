@@ -44,56 +44,78 @@ def Modulos_Usuarios(request):
         fk_cargo=regCurso.id_cargo
         #Obtener pk de la tabla Usuario_Cargo
         regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
-    
-        # Obtener todos los modulos del curso
-        listaModulos = Modulos.objects.filter(id_curso=regCurso)
+        #Obtener lista de los Modulos del Curso
+        listaModulos=Modulos.objects.filter(id_curso=regCurso)
+        #Consular si los modulos ya existen en la tabla Clase_Usuario
+        existe=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).exists()
+        if not existe:
+            #Si no existen, insertarlos
+            listaClases=Clases.objects.filter(id_modulo__in=listaModulos)
+            #Generar datos para insertar en la tabla Clase_Usuario
+            listaReg=[]
+            for clase in listaClases:
+                listaReg.append(Clase_Usuario(id_usuario_cargo=regUsuarioCargo, id_modulo=clase.id_modulo, id_clase=clase, visto=False))
+            
+            #Insertar registros en la tabla Clase_Usuario (Los inserta en la base de datos) )
+            Clase_Usuario.objects.bulk_create(listaReg) #Bulk_create es para insertar varios registros a la vez
 
-        # Consultar las clases del Curso
-        listaClasesUsuario = Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
-        listafilas = []
-        nuevoModulo = ''
-        visto = False
-        for modulo in listaModulos:
-            reg_modulo = {
-                'tipo': 'modulo',
-                'titulo': modulo.nombre_modulo,
-                'id': modulo.id
-            }
-            listafilas.append(reg_modulo)
-            nuevoModulo = modulo.nombre_modulo
-
-            # Obtener las clases del módulo actual
-            listaClasesModulo = Clases.objects.filter(id_modulo=modulo).values('id', 'nombre_clase', 'orden_clase')
-            for clase in listaClasesModulo:
+        #Consultar las clases del Curso
+        #Listar los id de las clases del Curso
+        listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
+        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
+        reg={}
+        listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo', 'orden_clase')
+        reg['id'] = listaClases.last().id_modulo.id
+        listafilas=[]
+        #Recorrer la lista de clases para ensamblar el contexto
+        nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
+        visto=True #Para saber si la clase ya fue vista
+        for clase in listaClases:
+            reg = {}
+            # Si el modulo es diferente al anterior, agregarlo a la lista
+            if nuevoModulo != clase.id_modulo.nombre_modulo:
                 # Controlar Evaluacion
                 if nuevoModulo != '':  # Si no es la primera vez
                     reg_evaluacion = {
                         'tipo': 'evaluacion',
                         'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-                        #'id': clase.id_modulo.id
-                        'id': listaModulos.last().id  # Usar el último módulo
+                        'id': listaClases.last().id_modulo.id,  # Usar el último módulo
+                        'disponible': True
+                        
                     }
                     if not visto:
                         reg_evaluacion['disponible'] = False
                     listafilas.append(reg_evaluacion)
 
-                reg_clase = {
-                    'tipo': 'clase',
-                    'titulo': clase['nombre_clase'],
-                    'id': clase['id'],
-                    'disponible': True
+                reg_modulo = {
+                    'tipo': 'modulo',
+                    'titulo': clase.id_modulo.nombre_modulo,
+                    'id': clase.id_modulo.id
                 }
-                for claseUsuario in listaClasesUsuario:
-                    if claseUsuario['id_clase'] == clase['id']:
-                        if claseUsuario['visto'] == False:
-                            reg_clase['disponible'] = False
+                listafilas.append(reg_modulo)
+                nuevoModulo = clase.id_modulo.nombre_modulo
 
-                listafilas.append(reg_clase)
-         # Agregar la evaluación del último módulo
+            reg_clase = {
+                'tipo': 'clase',
+                'titulo': clase.nombre_clase,
+                'id': clase.id,
+                'disponible': True
+            }
+            if not visto:
+                reg_clase['disponible'] = False
+
+            for claseUsuario in listaClasesUsuario:
+                if claseUsuario['id_clase'] == clase.id:
+                    if claseUsuario['visto'] == False:
+                        visto = False
+                        
+            listafilas.append(reg_clase)
+
+        # Agregar la evaluación del último módulo
         reg_evaluacion = {
             'tipo': 'evaluacion',
             'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-            'id': listaModulos.last().id,
+            'id': listaClases.last().id_modulo.id,
             'disponible': True
         }
         if not visto:
@@ -101,15 +123,12 @@ def Modulos_Usuarios(request):
         
         listafilas.append(reg_evaluacion)
 
-        context = {
-            'nombre_curso': regCurso.nombre_curso,
-            'listaclases': listafilas,
-            'listaModulos': listaModulos,
+        context= {
+            'nombre_curso' : regCurso.nombre_curso,
+            'listaclases' : listafilas ,
         }
-        print(context)
-
-        return render(request, 'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
-
+        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+        
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -120,7 +139,6 @@ def ejecutar_clase(request, clase_id):
         'user_id': request.user.id
     }
     return render(request, 'Templates_Usuarios/Cursos/ejecutar_clase.html', context)
-
 
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
