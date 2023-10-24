@@ -7,7 +7,6 @@ function solicitarPreguntas(clase_id) {
     let datos = {
         'clase_id': clase_id,
     };
-    console.log(datos);
     mensajeAjax(url, datos, mostrarPreguntas);
 }
 

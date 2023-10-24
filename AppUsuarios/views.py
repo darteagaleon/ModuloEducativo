@@ -15,8 +15,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q #permite realizar consultas más complejas
 import json
 from django.core.serializers import serialize
-from AppCursos.models import MaterialApoyo
-from AppCursos.models import Cursos
+
 
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
@@ -154,29 +153,36 @@ def marcar_clase_como_vista(request, clase_id, user_id):
 def ejecutar_evaluacion(request):
     is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     if is_ajax:
-        data=json.loads(request.body)
-        clase_id=data['clase_id']
-        print('------------------')
-        print(clase_id)
-        #Buscar el modulo_id de la clase
-        modulo=Clases.objects.get(id=clase_id).id_modulo.id
-        nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
+        data = json.loads(request.body)
+        clase_id = data['clase_id']
+        
 
-        #Mostrar las preguntas de la evaluacion
-        id_evaluacion=Evaluaciones.objects.get(id_modulo=modulo).id
-        listaPreguntas=Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
-    
+        # Obtener la clase
+        clase = get_object_or_404(Clases, pk=clase_id)
+        print(clase)
+
+        # Obtener el módulo y el nombre del módulo
+        modulo = clase.id_modulo
+        nombre_modulo = modulo.nombre_modulo
+        print(nombre_modulo)
+
+        # Obtener la última clase asociada al módulo
+        ultima_clase = Clases.objects.filter(id_modulo=modulo).last()
+        print(ultima_clase)
+        ultima_clase_id = ultima_clase.id if ultima_clase else None
+
+        # Mostrar las preguntas de la evaluación
+        id_evaluacion = Evaluaciones.objects.get(id_modulo=modulo).id
+        listaPreguntas = Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
+
         data = {
             'nombre': nombre_modulo,
-            'listaPreguntas': list(listaPreguntas),  # Convertir a lista para ser JSON serializable
+            'ultima_clase_id': ultima_clase_id,
+            'listaPreguntas': list(listaPreguntas),
         }
         return JsonResponse(data)
-        # return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
     else:
         return redirect('home')
-    
-    
-    
 
 
 
