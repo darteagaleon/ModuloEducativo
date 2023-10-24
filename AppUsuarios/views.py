@@ -62,65 +62,65 @@ def Modulos_Usuarios(request):
         #Listar los id de las clases del Curso
         listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
         listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
-        reg={}
         listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo', 'orden_clase')
-        reg['id'] = listaClases.last().id_modulo.id
         listafilas=[]
         #Recorrer la lista de clases para ensamblar el contexto
         nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
         visto=True #Para saber si la clase ya fue vista
+        ultima_clase=0 #Para saber si es la ultima clase del modulo
         for clase in listaClases:
             reg = {}
             # Si el modulo es diferente al anterior, agregarlo a la lista
             if nuevoModulo != clase.id_modulo.nombre_modulo:
                 # Controlar Evaluacion
                 if nuevoModulo != '':  # Si no es la primera vez
-                    reg_evaluacion = {
+                    reg = {
                         'tipo': 'evaluacion',
                         'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-                        'id': listaClases.last().id_modulo.id,  # Usar el último módulo
+                        'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
                         'disponible': True
                         
                     }
                     if not visto:
-                        reg_evaluacion['disponible'] = False
-                    listafilas.append(reg_evaluacion)
+                        reg['disponible'] = False
+                    listafilas.append(reg)
 
-                reg_modulo = {
+                reg = {
                     'tipo': 'modulo',
                     'titulo': clase.id_modulo.nombre_modulo,
                     'id': clase.id_modulo.id
                 }
-                listafilas.append(reg_modulo)
+                listafilas.append(reg)
                 nuevoModulo = clase.id_modulo.nombre_modulo
 
-            reg_clase = {
+            ultima_clase=clase.id
+            reg = {
                 'tipo': 'clase',
                 'titulo': clase.nombre_clase,
                 'id': clase.id,
                 'disponible': True
             }
             if not visto:
-                reg_clase['disponible'] = False
-
+                reg['disponible'] = False
+            #Consulta si la clase ya la vio el usuario 
             for claseUsuario in listaClasesUsuario:
                 if claseUsuario['id_clase'] == clase.id:
                     if claseUsuario['visto'] == False:
                         visto = False
                         
-            listafilas.append(reg_clase)
+            listafilas.append(reg)
 
         # Agregar la evaluación del último módulo
-        reg_evaluacion = {
+        reg = {
             'tipo': 'evaluacion',
             'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
-            'id': listaClases.last().id_modulo.id,
+            'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
             'disponible': True
         }
         if not visto:
-            reg_evaluacion['disponible'] = False
+            reg['disponible'] = False
         
-        listafilas.append(reg_evaluacion)
+        listafilas.append(reg)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
@@ -153,37 +153,29 @@ def marcar_clase_como_vista(request, clase_id, user_id):
 def ejecutar_evaluacion(request):
     is_ajax = request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest'
     if is_ajax:
-        data = json.loads(request.body)
-        clase_id = data['clase_id']
+        data=json.loads(request.body)
+        clase_id=data['clase_id']
         
+        #Buscar el modulo_id de la clase
+        modulo=Clases.objects.get(id=clase_id).id_modulo.id
+        nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
 
-        # Obtener la clase
-        clase = get_object_or_404(Clases, pk=clase_id)
-        print(clase)
-
-        # Obtener el módulo y el nombre del módulo
-        modulo = clase.id_modulo
-        nombre_modulo = modulo.nombre_modulo
-        print(nombre_modulo)
-
-        # Obtener la última clase asociada al módulo
-        ultima_clase = Clases.objects.filter(id_modulo=modulo).last()
-        print(ultima_clase)
-        ultima_clase_id = ultima_clase.id if ultima_clase else None
-
-        # Mostrar las preguntas de la evaluación
-        id_evaluacion = Evaluaciones.objects.get(id_modulo=modulo).id
-        listaPreguntas = Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
-
+        #Mostrar las preguntas de la evaluacion
+        reg_evaluacion=Evaluaciones.objects.get(id_modulo=modulo)
+        listaPreguntas=Preguntas.objects.filter(id_evaluacion=reg_evaluacion).values()
+    
         data = {
             'nombre': nombre_modulo,
-            'ultima_clase_id': ultima_clase_id,
-            'listaPreguntas': list(listaPreguntas),
+            'descripcion': reg_evaluacion.descripcion_evaluacion,
+            'instrucciones': reg_evaluacion.instrucciones_evaluacion,
+            'duracion': reg_evaluacion.duracion_evaluacion_admin,
+            'intentos': reg_evaluacion.numero_intentos,
+            'listaPreguntas': list(listaPreguntas),  # Convertir a lista para ser JSON serializable
         }
         return JsonResponse(data)
+        
     else:
         return redirect('home')
-
 
 
 
