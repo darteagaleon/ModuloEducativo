@@ -1,12 +1,16 @@
-.login-icon{
+.login-icon {
     height: 7rem;
 }
-.username,.password{
+
+.username,
+.password {
     height: 1rem;
 }
-#login{
+
+#login {
     width: 20rem;
 }
+
 input {
     width: 89%;
     background-color: #c2c2c2;
@@ -23,15 +27,17 @@ input {
 
 
 
-#id_username,#id_password{
+#id_username,
+#id_password {
     border: none;
     border: 2px solid gray;
-    outline:none; 
+    outline: none;
     border-left: none;
     border-end-end-radius: 5px;
     border-top-right-radius: 5px;
     font-weight: bold;
 }
+
 .subir {
     padding: 10px;
     border: none;
@@ -45,12 +51,20 @@ input {
 }
 
 .subir:hover {
-    background-color:#8fccd1;
-    color: #182d34; 
+    background-color: #8fccd1;
+    color: #182d34;
     transition: .5s;
     transform: scale(1.2);
 }
-.btn-login{
-    background-color:  #2b464e !important;
+
+.btn-login {
+    background-color: #2b464e !important;
 }
-/* background-image: linear-gradient(135deg, rgb(107, 101, 198) 0%, rgb(75, 70, 141) 100%); */
+
+.bx-show,
+.bx-hide {
+    font-size: 20px;
+    color: #333; /* Cambia el color a tu preferencia */
+    cursor: pointer;
+    margin-left: -30px; /* Ajusta el margen para que esté al lado derecho del campo de contraseña */
+}
