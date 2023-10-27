@@ -22,21 +22,27 @@
             <table class="table table-hover " id="tablam">
                 <thead>
                     <tr>
-                        <th scope="col">Cargo</th>                        
-                        <th scope="col"></th>
-                        <th scope="col">Estado</th>                        
+                        <th scope="col" id="titulos-tabla">Cargo</th>                        
+                        <th scope="col" id="titulos-tabla">Estado</th>                        
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     {% for cargo in cargos %}<!--indica que se va a iniciar un bucle-->
                         <tr>
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <td scope="row">{{cargo.nombre_cargo}}</td>
+                            <td scope="row" id="contenido-tabla">{{cargo.nombre_cargo | title }}</td>
                             {% if cargo.estado_cargo %}<!--Estas líneas verifican si el atributo -->
-                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                            <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
-                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
+                        <td scope="row" id="contenido-tabla">                        
+                            <a href="{% url 'editar_cargo' cargo.id %}">
+                                <button class="editar">
+                                    Editar
+                                </button>
+                            </a>
+                        </td>
                         
                         </tr>
                 </tbody>
@@ -45,7 +51,7 @@
         </div>
     </div>
 </div>
-<a href="#" id="back2">
+<a href="{% url 'usuarios' %}" id="back2">
     <div >
 		<button  class="back">Regresar</button>
 	</div>

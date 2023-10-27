@@ -33,11 +33,12 @@
                             
                         </div>
                         <div class="card-content">
-                            <h3>{{ curso.nombre_curso }}</h3> <!-- Nombre del curso -->
-                            <a href="{% url 'material_list' curso_id=curso.pk %}" class="visualizar-link">
+                            <h3>{{ curso.nombre_curso | title  }}</h3> <!-- Nombre del curso -->
+                            <a href="{% url 'material_list' curso_id=curso.pk  %}" class="visualizar-link" id="visualizar">
                                 Visualizar
                             </a>
                         </div>
+                        
                     </div>
                     {% endfor %}
                 </div>
@@ -45,9 +46,19 @@
         </div>
     </div>
 </div>
+{% if group_name == 'administrativos' %}
 <a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
     <div>
         <button class="back">Regresar</button>
     </div>
 </a>
+
+    {% elif group_name == 'usuarios' %}
+    <a href="{% url 'home' %}" id="back2">
+        <div>
+            <button class="back">Regresar</button>
+        </div>
+    </a>
+    {% endif %}
+    
 {% endblock %}

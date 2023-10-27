@@ -28,26 +28,26 @@
                 <table class="table table-hover " id="tablam">
                     <thead>
                         <tr>
-                            <th scope="col">Curso</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Duración</th>
-                            <th scope="col">Visualizar</th>
+                            <th scope="col" id="titulos-tabla" >Curso</th>
+                            <th scope="col" id="titulos-tabla">Descripción</th>
+                            <th scope="col" id="titulos-tabla">Estado</th>
+                            <th scope="col" id="titulos-tabla">Duración</th>
+                            <th scope="col" id="titulos-tabla">Visualizar</th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
                         {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
                             <tr>
                                 <!-- Esta líneas definen las celdas de datos de la tabla-->
-                                <td scope="row">{{curso.nombre_curso}}</td>
-                                <td scope="row">{{curso.descripcion_curso}}</td>
+                                <td scope="row" id="contenido-tabla">{{curso.nombre_curso | title }}</td>
+                                <td scope="row" id="contenido-tabla">{{curso.descripcion_curso | title }}</td>
                                 <!--Estas líneas verifican si el atributo -->
                                 {% if curso.estado_curso %}
-                                <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                                <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                                 {% else %}
-                                <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                                <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                                 {% endif %}
-                                <td scope="row">{{curso.duracion_curso}} min
+                                <td scope="row" id="contenido-tabla">{{curso.duracion_curso}} min
                                 </td>
                                 <td>
                                         <a href="{% url 'ver_cursos' curso.id %}">

@@ -6,14 +6,35 @@ function solicitarPreguntas(clase_id) {
     let datos = {
         'clase_id': clase_id,
     };
+    
     mensajeAjax(url, datos, mostrarPreguntas);
 }
 
 //Funcion para mostrar las preguntas de la evaluacion
 
 function mostrarPreguntas(data) {
+    console.log(data);
     // Mostrar todas las preguntas de una en una
+    let html = '<div class="tabla"><div class="titulo"><h1>'; 
+    html += 'Evaluacion del Modulo ' +data.nombre + '</h1></div>';
+    html += '<div class="descripcion"><p>'; 
+    html += data.descripcion + '</p></div>';
+    html += '<div class="instrucciones"><h2>Instrucciones</h2><div class="instrucciones2"><p id="parrafo">';
+    html += data.instrucciones + '</p></div></div>';
+    html += '<div class="duracion"><p>Duración: ' ;
+    html += data.duracion +'  minutos</p></div>';
+    html += '<div class="numIntentos"><p>Número de intentos: ';
+    html += data.intentos + '</p></div>';
+    html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
+
+    let contenedor=document.getElementsByClassName("text")[0];
+    let contenido = document.createElement("div");
+    contenido.innerHTML = html;
+    contenedor.append(contenido);
+
+    for(pregunta in data){
         // Se muestra pregunta, 
+    }
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
     }

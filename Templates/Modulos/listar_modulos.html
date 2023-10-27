@@ -26,24 +26,24 @@
             <table class="table table-hover " id="tablam">
                 <thead>
                     <tr>
-                        <th scope="col">Modulos</th>
-                        <th scope="col">Estado</th>
-                        <th scope="col"></th>
-                        <th scope="col">Visualizar</th>
+                        <th scope="col" id="titulos-tabla">Modulos</th>
+                        <th scope="col" id="titulos-tabla">Estado</th>
+                        <th scope="col" id="titulos-tabla"></th>
+                        <th scope="col" id="titulos-tabla">Visualizar</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     {% for modulos in listarm %}<!--indica que se va a iniciar un bucle-->
                     <tr>
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <td scope="row">{{modulos.nombre_modulo}}</td>
+                        <td scope="row" id="contenido-tabla">{{modulos.nombre_modulo | title }}</td>
                         <!--Estas líneas verifican si el atributo -->
                         {% if modulos.estado_modulo %}
-                        <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
                         {% else %}
-                        <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
                         {% endif %}
-                        <td scope="row">{{modulos.duracion_modulos_admin}}</td>
+                        <td scope="row" id="contenido-tabla">{{modulos.duracion_modulos_admin}}</td>
                         <td>
                             <a href="{% url 'ver_modulos' modulos.id %}">  
                                 <button class="back3">Visualizar</button>

@@ -24,6 +24,7 @@ from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 from django.contrib import messages
 from django.contrib.auth.models import Group
+from AppUsuarios.views import *
 
 #importacion para el xhtml2pdf
 

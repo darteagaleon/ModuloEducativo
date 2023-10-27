@@ -19,8 +19,21 @@ from django.core.serializers import serialize
 
 # Create your views here.
 # vista para la selecion de curso en el panel de usuario
-#Vista para realizar un Curso
 def Cursos_Usuarios(request):
+        #Consultar listado de Cursos para el Usuario y sus Cargos
+        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
+        #Obtener el id del usuario
+        user_id=request.user.id
+        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
+            
+        #Ensamblar el contexto para el template
+        listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
+
+        #Retornar el template con el contexto
+        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
+
+#Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
+def Modulos_Usuarios(request): 
     regUsuario=request.user
     if request.method == "POST":
         #Leer registro del Curso seleccionado
@@ -30,7 +43,6 @@ def Cursos_Usuarios(request):
         fk_cargo=regCurso.id_cargo
         #Obtener pk de la tabla Usuario_Cargo
         regUsuarioCargo=Usuario_Cargo.objects.get(id_cargo=fk_cargo, id_usuario=regUsuario)
-
         #Obtener lista de los Modulos del Curso
         listaModulos=Modulos.objects.filter(id_curso=regCurso)
         #Consular si los modulos ya existen en la tabla Clase_Usuario
@@ -50,85 +62,72 @@ def Cursos_Usuarios(request):
         #Listar los id de las clases del Curso
         listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
         listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
-
-        # listaPkClases=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase')
-        listaClases=Clases.objects.filter(id__in=listaPkClases).values('id', 'nombre_clase', 'id_modulo', 'id_modulo__nombre_modulo' ).order_by('id_modulo__orden_modulo', 'orden_clase')
+        listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo', 'orden_clase')
         listafilas=[]
         #Recorrer la lista de clases para ensamblar el contexto
         nuevoModulo='' #Para saber cuando el registro es una clase o es un modulo
         visto=True #Para saber si la clase ya fue vista
-
+        ultima_clase=0 #Para saber si es la ultima clase del modulo
         for clase in listaClases:
-            reg={}
-        
-            #Si el modulo es diferente al anterior, agregarlo a la lista
-            if nuevoModulo != clase['id_modulo__nombre_modulo']:
-                #Controlar Evaluacion
-                if nuevoModulo != '': #Si no es la primera vez
-                    reg['tipo']='evaluacion'
-                    reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-                    reg['id']=clase['id_modulo']
-                    if  not visto:
-                        reg['disponible']=False
-
+            reg = {}
+            # Si el modulo es diferente al anterior, agregarlo a la lista
+            if nuevoModulo != clase.id_modulo.nombre_modulo:
+                # Controlar Evaluacion
+                if nuevoModulo != '':  # Si no es la primera vez
+                    reg = {
+                        'tipo': 'evaluacion',
+                        'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+                        'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
+                        'disponible': True
+                        
+                    }
+                    if not visto:
+                        reg['disponible'] = False
                     listafilas.append(reg)
 
-                reg={}
-                reg['tipo']='modulo'
-                reg['titulo']=clase['id_modulo__nombre_modulo']
-                reg['id']=clase['id_modulo']
+                reg = {
+                    'tipo': 'modulo',
+                    'titulo': clase.id_modulo.nombre_modulo,
+                    'id': clase.id_modulo.id
+                }
                 listafilas.append(reg)
-                nuevoModulo=clase['id_modulo__nombre_modulo']
+                nuevoModulo = clase.id_modulo.nombre_modulo
 
-            reg={
+            ultima_clase=clase.id
+            reg = {
                 'tipo': 'clase',
-                'titulo': clase['nombre_clase'],
-                'id': clase['id'],
+                'titulo': clase.nombre_clase,
+                'id': clase.id,
                 'disponible': True
             }
-            if  not visto:
-                reg['disponible']=False
-
-            for claseUsuario in listaClasesUsuario:
-                if claseUsuario['id_clase'] == clase['id']:
-                    if claseUsuario['visto']==False:
-                        visto=False
-                        break
-
-            #Agregar la evaluacion del ultimo modulo
-            reg={}
-            reg['tipo']='evaluacion'
-            reg['titulo']='Evaluacion del Modulo ' + nuevoModulo
-            reg['id']=listaClases.last().id_modulo.id
-            reg['disponible']=True
             if not visto:
-                reg['disponible']=False
-
+                reg['disponible'] = False
+            #Consulta si la clase ya la vio el usuario 
+            for claseUsuario in listaClasesUsuario:
+                if claseUsuario['id_clase'] == clase.id:
+                    if claseUsuario['visto'] == False:
+                        visto = False
+                        
             listafilas.append(reg)
+
+        # Agregar la evaluación del último módulo
+        reg = {
+            'tipo': 'evaluacion',
+            'titulo': 'Evaluacion del Modulo ' + nuevoModulo,
+            'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
+            'disponible': True
+        }
+        if not visto:
+            reg['disponible'] = False
+        
+        listafilas.append(reg)
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
             'listaclases' : listafilas ,
         }
-        #Redireccionar a la ejecucion del Curso
+        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
         
-        return render (request,'Usuarios/ejecutar_curso.html', context)
-
-    else:
-        #Consultar listado de Cursos para el Usuario y sus Cargos
-        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
-        
-        # regUsuario=User.objects.get(username=request.user)
-        user_id=request.user.id
-        listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
-            
-        #Ensamblar el contexto para el template
-        listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
-
-        #Retornar el template con el contexto
-        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
-
-
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase
     clase = get_object_or_404(Clases, pk=clase_id)
@@ -138,8 +137,7 @@ def ejecutar_clase(request, clase_id):
         'v_clases': clase,
         'user_id': request.user.id
     }
-    return render(request, 'Usuarios/ejecutar_clase.html', context)
-
+    return render(request, 'Templates_Usuarios/Cursos/ejecutar_clase.html', context)
 
 def marcar_clase_como_vista(request, clase_id, user_id):
     # Marcar la clase como vista
@@ -157,32 +155,46 @@ def ejecutar_evaluacion(request):
     if is_ajax:
         data=json.loads(request.body)
         clase_id=data['clase_id']
+        
         #Buscar el modulo_id de la clase
         modulo=Clases.objects.get(id=clase_id).id_modulo.id
         nombre_modulo=Modulos.objects.get(id=modulo).nombre_modulo
 
         #Mostrar las preguntas de la evaluacion
-        id_evaluacion=Evaluaciones.objects.get(id_modulo=modulo).id
-        print('------------------')
-        print(id_evaluacion)
-        listaPreguntas=Preguntas.objects.filter(id_evaluacion=id_evaluacion).values()
+        reg_evaluacion=Evaluaciones.objects.get(id_modulo=modulo)
+        listaPreguntas=Preguntas.objects.filter(id_evaluacion=reg_evaluacion).values()
     
-
-        
         data = {
             'nombre': nombre_modulo,
+            'descripcion': reg_evaluacion.descripcion_evaluacion,
+            'instrucciones': reg_evaluacion.instrucciones_evaluacion,
+            'duracion': reg_evaluacion.duracion_evaluacion_admin,
+            'intentos': reg_evaluacion.numero_intentos,
             'listaPreguntas': list(listaPreguntas),  # Convertir a lista para ser JSON serializable
         }
-        print('------------------')
-        print(data)
         return JsonResponse(data)
-        # return render(request, 'Usuarios/ejecutar_evaluacion.html', context)
+        
     else:
         return redirect('home')
+
+
+
 
 #*********************
 #       Cargos       *
 #*********************
+
+#filtrar cargos
+def filtrar_cargos(request):
+    cargos = Cargo.objects.filter(nombre_cargo__contains=request.GET.get('search',''))
+    
+    context = {'cargos':cargos}
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+
+#Views para listar cargos
+def listar_cargos(request):
+    cargos = Cargo.objects.all()
+    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
 
 #vista para crear cargos
 def crear_cargo(request):
@@ -196,18 +208,26 @@ def crear_cargo(request):
     
     return render(request, 'Cargos/crear_cargo.html', {'form': form})  
 
-#filtrar cargos
-def filtrar_cargos(request):
-    cargos = Cargo.objects.filter(nombre_cargo__contains=request.GET.get('search',''))
-    
-    context = {'cargos':cargos}
-    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+#vista para editar cargos 
+def editar_cargo(request, cargo_id):
+    cargo = get_object_or_404(Cargo, pk=cargo_id)
 
-#Views para listar cargos
-def listar_cargos(request):
-    cargos = Cargo.objects.all()
-    return render(request, 'Cargos/listar_cargos.html', {'cargos': cargos})
+    if request.method == 'POST':
+        form = CargoForm(request.POST, instance=cargo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Editado con éxito')
+            return redirect('listar_cargos')
+            # return render(request, 'Cargos/editar_cargo.html', {'mensaje': 'Cargo editado exitosamente'})
+            
+    else:
+        form = CargoForm(instance=cargo)
     
+    context = {"form": form,"cargo_id":cargo_id}   
+        
+    return render(request, 'Cargos/editar_cargo.html', context)
+
+
 
 #*****************************************************
 #                  Gestion de usuario                *
@@ -221,13 +241,6 @@ def GestionUsuarios(request):
     return render(request, 'Usuarios/GestionUsuarios.html')
 
 
-# filtrar usuarios
-# def filtrar_usuarios(request):
-#     perfiles = Profile.objects.filter(User__username__contains=request.GET.get('search',''))
-    
-#     context = {'perfiles':perfiles}
-#     return render(request, 'Usuarios/listar_usuarios.html', {'perfiles': perfiles})
-
 def filtrar_usuarios(request):
     search_query = request.GET.get('search', '')  # Obtiene el valor de búsqueda de la URL
     perfiles = Profile.objects.filter(user__username__icontains=search_query)  # Filtra por el nombre de usuario
@@ -236,24 +249,22 @@ def filtrar_usuarios(request):
     return render(request, 'Usuarios/listar_usuarios.html', context)
 
 
-
 #vista para crear usuario
 def crear_usuario(request):
     if request.method == 'POST':
         form = CrearUsuariosForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            email = form.cleaned_data['email']
             apellido = form.cleaned_data['apellido']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password1']
 
             # Verificar si el usuario ya existe
             user, created = User.objects.get_or_create(username=username, defaults={'email': email})
-            
+
             # Actualizar el usuario con la nueva contraseña
             user.set_password(password)
-            user.save()
-            
+
             # Crear una relación con el cargo
             cargo = form.cleaned_data['cargo']
 
@@ -262,15 +273,24 @@ def crear_usuario(request):
             profile.apellido = apellido
             profile.email = email
             profile.estadousuario = form.cleaned_data['estadousuario']
-            profile.role = form.cleaned_data['role']
+            profile.rol = form.cleaned_data['rol']  # Corregir el campo 'rol' aquí
             profile.cargo = form.cleaned_data['cargo']
+            user.save()
             profile.save()
-            Usuario_Cargo.objects.create(id_usuario=user, id_cargo=cargo)
+
+            # Crear o actualizar la relación Usuario_Cargo
+            usuario_cargo, usuario_cargo_created = Usuario_Cargo.objects.get_or_create(id_usuario=user, id_cargo=cargo)
 
             if created:
                 messages.success(request, f'Usuario {username} creado')
             else:
                 messages.success(request, f'Perfil de usuario {username} actualizado')
+
+            # Asignar al usuario al grupo correspondiente
+            if form.cleaned_data['rol'] == 'usuario':
+                user.groups.add(Group.objects.get(name='usuarios'))
+            elif form.cleaned_data['rol'] == 'administrador':
+                user.groups.add(Group.objects.get(name='administrativos'))
 
             return redirect('home')
     else:
@@ -279,38 +299,74 @@ def crear_usuario(request):
     context = {'form': form}
     return render(request, 'Usuarios/crear_usuario.html', context)
 
-
 #vista para listar usuarios
 def listar_usuarios(request):
     usuarios = Profile.objects.select_related('user').all()
+    search_query = request.GET.get('search', '')  # Obtén el término de búsqueda
     return render(request, 'Usuarios/listar_usuarios.html', {'usuarios': usuarios})
 
 
 #vista para editar usuarios
 def editar_usuarios(request, user_id):
-    user = Profile.objects.get(id_usuario=user_id)
-
-    print="-------------------"
-    print= user
+    user_profile = get_object_or_404(Profile, user_id=user_id)
+    user = user_profile.user
 
     if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST, instance=user.user)
+        form = CrearUsuariosForm(request.POST, instance=user)
 
         if form.is_valid():
-            form.save()
+            # Usar form.cleaned_data para actualizar los campos necesarios
+            user.username = form.cleaned_data['username']
             user.email = form.cleaned_data['email']
-            user.estadousuario = form.cleaned_data['estadousuario']
-            user.role = form.cleaned_data['role']
-            user.carga = form.cleaned_data['carga']
             user.save()
+            user_profile.apellido = form.cleaned_data['apellido']
+            user_profile.estadousuario = form.cleaned_data['estadousuario']
+            user_profile.role = form.cleaned_data['role']
+            user_profile.cargo = form.cleaned_data['cargo']
+            user_profile.email = form.cleaned_data['email']  # Actualizar el email en el perfil
+            user_profile.save()
 
-            messages.success(request, f'Usuario {user.user.username} actualizado')
-            return redirect('inicio')
+            messages.success(request, f'Usuario {user.username} actualizado')
+            return redirect('listar_usuarios')
+                    
     else:
-        form = CrearUsuariosForm(instance=user.user)
-
+        form = CrearUsuariosForm(instance=user)
     context = {'form': form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
 
 
+#*************************************
+#   Material de apoyo - usuario
+#*************************************
 
+
+def Material_Usuarios(request):
+    user_id = request.user.id  # Obtén el ID del usuario actual
+    search_query = request.GET.get('search', '')  # Obtén el término de búsqueda
+
+    # Filtra los cursos relacionados al usuario y aplica el filtro de búsqueda
+    listacursos = Cursos.objects.filter(id_cargo__usuario_cargo__id_usuario=user_id, estado_curso=True, nombre_curso__icontains=search_query)
+
+    return render(request, 'Templates_Usuarios/Cursos/Material_Usuarios.html', {'listacursos': listacursos})
+
+def Listar_Material_Usuarios(request,curso_id):
+    curso = get_object_or_404(Cursos, pk=curso_id)
+    materiales = MaterialApoyo.objects.filter(id_curso=curso)
+    return render(request, 'Templates_Usuarios/Cursos/Listar_Material_Usuarios.html', {'materiales': materiales, 'curso':curso})
+
+
+def Filtrar_Material_Usuario(request):
+    filtro_m = MaterialApoyo.objects.filter(NombreMaterialApoyo__contains=request.GET.get('search',''))
+    
+    context = {'filtro_m':filtro_m}
+    return render(request, 'Templates_Usuarios/Cursos/Listar_Material_Usuarios.html', {'materiales': filtro_m})
+    
+
+
+
+# vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
+# def Modulos_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
+
+# def Material_Usuarios(request):
+#     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
