@@ -24,9 +24,17 @@ input {
     color: #fff;
     margin-bottom: 5px;
 }
+#password1{
+    width: 78%;
 
+}
 
-
+#show{
+    background-color: #ecf4fc  ;
+    padding: 10px;
+    border: none;
+    border-radius:0 10px 10px 0;
+}
 #id_username,
 #id_password {
     border: none;
@@ -61,10 +69,31 @@ input {
     background-color: #2b464e !important;
 }
 
-.bx-show,
-.bx-hide {
-    font-size: 20px;
-    color: #333; /* Cambia el color a tu preferencia */
-    cursor: pointer;
-    margin-left: -30px; /* Ajusta el margen para que esté al lado derecho del campo de contraseña */
+
+
+@media screen and (max-width: 768px) {
+    input{
+        width: 64vw;
+    }
+    #password1{
+        width: 53vw;
+    }
+
+    #form-login{
+        border: 1px solid blue;
+    }
+}
+
+@media screen and (max-width: 1024) {
+    input{
+        width: 64vw;
+    }
+    #password1{
+        width: 53vw;
+    }
+
+    #form-login{
+        border: 1px solid blue;
+    }
+    
 }

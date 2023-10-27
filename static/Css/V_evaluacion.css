@@ -41,6 +41,7 @@ img {
     justify-content: center;
     align-items: center;
     top: -5%;
+    
 }
 
 .descripcion {
@@ -56,6 +57,7 @@ img {
     /* Agregar barra de desplazamiento si es necesario */
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
+    font-weight: 400;
 }
 
 #parrafo {
@@ -194,6 +196,7 @@ h1 {
     width: 35vw;
     word-wrap:break-word;
     text-align: center;
+    font-weight: 700;
 }
 .swal-button-custom {
     display: inline-block;
