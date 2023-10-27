@@ -1,6 +1,19 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
+#! importo desde appusuarios el modelo de profile para usar esos datos--------------------- keydmon inicio
+from AppUsuarios.models import Profile
+#importo la libreria de los utils
+from .utils import render_to_pdf
+#importo el utilitaries de fecha y hora
+from django.utils import timezone
+#? importaciones para usar link_callback
+from django.contrib.staticfiles import finders
+from io import BytesIO
+from django.conf import settings
+from xhtml2pdf import pisa
+#?finalizan importaciones para el link_callback
+#!------------------------------------------------------------------------------------ keydmon fin
 from .models import *
 from django.urls import reverse_lazy
 from datetime import datetime, timedelta
@@ -11,6 +24,10 @@ from django.contrib.auth import logout, authenticate
 from django.contrib.auth import login as auth_login  #esta linea de codigo llama a login pero poniendole un alias alternativo llamado "auth_login"
 from django.contrib import messages
 from django.contrib.auth.models import Group
+
+#importacion para el xhtml2pdf
+
+from django.views.generic import View
 
 # Create your views here.
 #****************************************************
@@ -384,4 +401,32 @@ def editar_material_apoyo(request, pk):
     context = {"form": form,"curso_id":curso_id}
     
     return render(request, 'material_apoyo/editar_material.html',context)
+
+    #------------------------------------------ vistas para usar xhtml2pdf  ------------------------ keydmon
+#vista basada en clase login_required
+class generar_certificacion(View):
+    #! metodo para  renderizar imagenes con libreria xhtml2
+    #? metodo que renderiza el template y lo vuelva pdf
+    def get(self,request,*args,**Kwargs):
+        template_certificado= "Certificados/certificado.html"
+        try:
+            # Obtén el perfil de usuario
+            profile = Profile.objects.get(user=request.user)
+            nombre_certificado = f"{profile.user.username} {profile.apellido}"
+            # Lógica para generar los certificados usando nombre_certificado
+            pdf = render_to_pdf(template_certificado, {
+                'nombre_certificado': nombre_certificado,
+                'fecha_generacion': timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+            })
+
+            if pdf:
+                response = HttpResponse(pdf, content_type='application/pdf')
+                response['Content-Disposition'] = 'inline; filename="certificado.pdf"'
+                return response
+            return HttpResponse("No se pudo generar el certificado.")       
+        except Profile.DoesNotExist:
+            return HttpResponse("El perfil de usuario no se encontró o no está vinculado al usuario actual.")
+
+
+
 

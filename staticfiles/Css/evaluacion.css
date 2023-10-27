@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f2f0f0b4;
+    overflow-y: scroll;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+.folder-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.folder-box {
+    width: 40vw;
+    height: 100px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s; 
+
+}
+
+.folder-icon {
+    font-size: 40px;
+}
+
+.folder-box:hover{
+    transform: scale(1.2);
+    background-color: #e4e3e399;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;transform:translateZ(-700px) translateY(-100px);opacity:0}40%{opacity:.6}100%{transform:translateZ(0) translateY(0);opacity:1}}
+
+.folder-container{animation:folder-container 0.5s; } @keyframes folder-container{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
