@@ -66,7 +66,7 @@ urlpatterns =[
      path('editar_material/<int:pk>/', login_required(views.editar_material_apoyo), name='editar_material'),
 
      #Certificados
-     path('generar_certificacion/', generar_certificacion.as_view(), name='generar_certificacion'),
+     path('generar_certificacion/', login_required(generar_certificacion.as_view()), name='generar_certificacion'),
 
      ]
 
