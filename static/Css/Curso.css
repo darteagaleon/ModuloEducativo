@@ -32,11 +32,11 @@ body {
 
 /* nombres de la tabla */
 #titulos-tabla{
-    font-weight: 400;
+    font-weight: 700;
     font-size: 30px;
 }
 #contenido-tabla{
-    font-weight: 400 italic;
+    font-weight: 400 ;
     font-size: 20px;
 }
 
@@ -131,7 +131,9 @@ input[type="text"]:focus {
 .back:hover a {
     color: #bde2e4;
 }
-
+h1{
+    font-weight: 700;
+}
 
 
 

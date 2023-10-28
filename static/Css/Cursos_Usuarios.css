@@ -29,10 +29,9 @@ body {
 
 /* Estilo para la tarjeta de cursos */
 .caja-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Crea tres columnas de igual ancho */
     gap: 20px; /* Espacio entre las cajas */
-    justify-content: space-between; /* Espacio uniforme entre las columnas */
     max-width: 1200px; /* Establece un ancho máximo para las cajas */
     margin: 0 auto; /* Centra horizontalmente el contenedor */
     padding: 1rem;
@@ -40,12 +39,16 @@ body {
 
 /* Estilos de las cajas */
 .caja {
-    flex: 0 0 calc(30% - 20px); /* Asegura que haya 3 cajas en una fila */
     padding: 20px;
     text-align: center;
     box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
+@media (max-width: 768px) {
+    .caja {
+        width: calc(50% - 20px); /* Calcula la mitad del ancho con espacio entre las cajas */
+    }
+}
 img {
     height: auto;
     max-width: 100%;
@@ -63,9 +66,8 @@ img {
 
 .caja_title {
     color: #ffffff;
-    font-size: 2rem;
+    font-size: 30px;
     font-weight: 700;
-    letter-spacing: 1px;
     text-transform: capitalize;
     margin: 0px;
 }
@@ -163,41 +165,6 @@ button:hover {
 
 
 h1 {
-    animation: h1 0.4s linear both
+    animation: h1 0.4s linear both;
+    font-weight: 700;
 }
-
-@keyframes h1 {
-    0% {
-        letter-spacing: -.2em;
-        transform: translateZ(-700px) translateY(-100px);
-        opacity: 0
-    }
-
-    40% {
-        opacity: .6
-    }
-
-    100% {
-        transform: translateZ(0) translateY(0);
-        opacity: 1
-    }
-}
-
-.caja {
-    animation: caja 0.5s;
-}
-
-@keyframes caja {
-    0% {
-        transform: scale(.5)
-    }
-
-    100% {
-        transform: scale(1)
-    }
-}
-
-
-
-
-

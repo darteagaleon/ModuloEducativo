@@ -48,6 +48,7 @@ h2 {
 h1 {
     width: 35vw;
     word-wrap:break-word;
+    font-weight: 700;
 }
 .tabla {
     min-width: 40vw;
@@ -84,6 +85,7 @@ h1 {
     overflow: auto;
     height: auto;
     width: auto;
+    font-weight: 200;
 
 }
 

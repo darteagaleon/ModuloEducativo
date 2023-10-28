@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import Crear_cursos
+from .views import Crear_cursos, generar_certificacion
 from .views import home,exit,login
 from django.contrib.auth.decorators import login_required
 
@@ -61,5 +61,11 @@ urlpatterns =[
      path('editar_evaluacion/<int:evaluacion_id>/',login_required(views.editar_evaluaciones), name='editar_evaluacion'),
      path('editar_pregunta/<int:pregunta_id>/',login_required(views.editar_preguntas), name='editar_pregunta'),
      path('editar_material/<int:pk>/', login_required(views.editar_material_apoyo), name='editar_material'),
+
+     #Certificados
+     path('generar_certificacion/', login_required(generar_certificacion.as_view()), name='generar_certificacion'),
+
      ]
+
+
 

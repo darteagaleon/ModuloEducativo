@@ -364,9 +364,6 @@ def Filtrar_Material_Usuario(request):
 
 
 
-# vista para mostrar el template de modulo (aun no esta funcional, pues con los recursos que deberia mostrar)
-# def Modulos_Usuarios(request):
-#     return render(request, 'Templates_Usuarios/Modulos/Modulos_Usuarios.html')
-
-# def Material_Usuarios(request):
-#     return render(request, 'Templates_Usuarios/Material/Material_Usuarios.html')
+# vista para mostrar los datos del usuario
+def perfil_usuario(request):
+    return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html')

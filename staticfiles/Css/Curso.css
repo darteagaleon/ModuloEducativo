@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f2f0f0b4;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+
+
+
+/* nombres de la tabla */
+label {
+    font-size: 20px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 10px;
+    position: relative;
+    top: 5px;
+    left: 5px;
+    transition: all 0.3s ease;
+}
+
+
+button {
+    width: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color:#8fccd1;
+    color: #182d34;  
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+button:hover {
+    background-color: #2b464e;
+    color: white;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+input[type="checkbox"]:checked {
+    background-color: #58acb4;
+    border-color: #58acb4;
+    color: #fff;
+    transform: scale(1.2);
+}
+
+input[type="text"],
+#id_duracion_curso,
+#id_iconoCurso,
+#id_numero_intentos,
+#id_instrucciones_evaluacion {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    outline: none;
+    padding: 10px;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="number"]:focus{
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+#id_numero_intentos:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+input[type="text"]:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+#id_duracion_curso:focus {
+    background-color: #c2c2c2;
+    color: #fff;
+    transform: scale(1.1);
+}
+.back {
+    position: fixed; /* Fija el botón en su posición */
+    top: 5%; /* Distancia desde la parte superior en porcentaje */
+    right: 5%; /* Distancia desde la derecha en porcentaje */
+    width: 15vw; /* Ancho del botón */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+
+.back a {
+    color: #bde2e4;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #2b464e;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back:hover a {
+    color: #bde2e4;
+}
+
+
+
+
+h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;opacity:0}40%{opacity:.6}100%{opacity:1}}
+#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
