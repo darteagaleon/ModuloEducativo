@@ -5,9 +5,6 @@ from .views import Crear_cursos, generar_certificacion
 from .views import home,exit,login
 from django.contrib.auth.decorators import login_required
 
-
-
-
 # se agrego el login_required a las urls para que el usuario no pudiera saltar el inicio de sesion y obligar a que se loguee para poder er los recursos que ofrece la pagina web
 urlpatterns =[
      path('login/',login_required(views.login), name='login'),
