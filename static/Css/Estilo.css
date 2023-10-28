@@ -347,7 +347,7 @@ home-section .home-content .bx-menu {
 .bx-log-out {
     position: fixed;
     left: 11vw;
-    border: rgb(102, 255, 0) 1px solid;
+    /* border: rgb(102, 255, 0) 1px solid; */
 
 }
 
@@ -357,22 +357,22 @@ home-section .home-content .bx-menu {
     .bx-log-out {
         position: relative;
         left:2vw;
-        border: rgb(255, 0, 225) 1px solid;
+        /* border: rgb(255, 0, 225) 1px solid; */
     }
 
 }
 
 @media screen and (max-width: 1024px) {
-    .sidebar .nav-links li .sub-menu a {
+    /* .sidebar .nav-links li .sub-menu a {
 
-        border: rgb(55, 3, 3) 1px solid;
-    }
+         border: rgb(55, 3, 3) 1px solid; 
+    } */
     .sidebar .nav-links li {
-        border: rgb(255, 0, 0) 1px solid;
+        /* border: rgb(255, 0, 0) 1px solid; */
         font-size: 15px;
     }
     .sidebar .nav-links li a .link_name{ 
-        border: rgb(0, 38, 255) 1px solid;
+        /* border: rgb(0, 38, 255) 1px solid; */
         font-size: 15px;
         /* font-weight: 400 italic;  */
     }
