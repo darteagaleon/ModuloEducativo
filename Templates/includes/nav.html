@@ -61,7 +61,7 @@
                 <li>
                     <div class="profile-details">
                         <div class="profile-content">
-                            <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
+                            <a href="{% url 'perfil_usuario_detalle' %}"> <img src="{% static 'img/iconos/profile2.jpg' %}" alt=""></a>
                         </div>
                         <div class="name-job">
                             <div class="profile_name">{{ user.username | title }}</div>

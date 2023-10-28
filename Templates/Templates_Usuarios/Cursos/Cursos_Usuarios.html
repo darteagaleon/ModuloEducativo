@@ -6,14 +6,15 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Cursos_Usuarios.css' %}">
 <div class="home_content"> <!--1 -->
-        <div class="text"><!--2 -->
-            <h1 style="text-align: center;"> Cursos </h1>
-            <br>
+    <div class="text"><!--2 -->
+        <h1 style="text-align: center;"> Cursos </h1>
+        <br>
 
-            <div class="caja-container">
-                {% for curso in listacursos %}
+        <div class="caja-container">
+            {% for curso in listacursos %}
+            <div class="flex-container">
+                <div class="flex-items">
                     <div class="caja">
-
                         <div class="img">
                             <img src="{% static 'img/iconos/animacion-degital_1.jpg' %}" alt="Icono del Curso">
                         </div>
@@ -24,25 +25,23 @@
                                 <a href="#" id="visualizar">
                                     <input type="hidden" name="curso" value="{{ curso.id }}">
                                     <button type="submit" class="read">Visualizar</button>
-
                                 </a>
-
                             </form>
                             <!-- <a href="{% url 'Modulos_Usuarios' %}" id="visualizar">
                                 <button class="submit">Visualizar</button>
                             </a> -->
-                            
                         </div>
                     </div>
-                {% endfor %}
+                </div>
             </div>
-
+            {% endfor %}
         </div>
     </div>
+</div>
+</div>
+<a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
+    <div>
+        <button class="back">Regresar</button>
     </div>
-    <a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
-        <div>
-            <button class="back">Regresar</button>
-        </div>
-    </a>
+</a>
 {% endblock %}
