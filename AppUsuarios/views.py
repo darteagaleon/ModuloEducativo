@@ -305,6 +305,7 @@ def listar_usuarios(request):
     search_query = request.GET.get('search', '')  # Obtén el término de búsqueda
     return render(request, 'Usuarios/listar_usuarios.html', {'usuarios': usuarios})
 
+from .forms import CrearUsuariosForm, CargoForm, EditarUsuariosForm, EditarPerfilForm 
 
 #vista para editar usuarios
 def editar_usuarios(request, user_id):
@@ -312,29 +313,21 @@ def editar_usuarios(request, user_id):
     user = user_profile.user
 
     if request.method == 'POST':
-        form = CrearUsuariosForm(request.POST, instance=user)
+        user_form = EditarUsuariosForm(request.POST, instance=user)
+        profile_form = EditarPerfilForm(request.POST, instance=user_profile)
 
-        if form.is_valid():
-            # Usar form.cleaned_data para actualizar los campos necesarios
-            user.username = form.cleaned_data['username']
-            user.email = form.cleaned_data['email']
-            user.save()
-            user_profile.apellido = form.cleaned_data['apellido']
-            user_profile.estadousuario = form.cleaned_data['estadousuario']
-            user_profile.role = form.cleaned_data['role']
-            user_profile.cargo = form.cleaned_data['cargo']
-            user_profile.email = form.cleaned_data['email']  # Actualizar el email en el perfil
-            user_profile.save()
-
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()  # Guardar el formulario del modelo User
+            profile_form.save()  # Guardar el formulario del modelo Profile
             messages.success(request, f'Usuario {user.username} actualizado')
             return redirect('listar_usuarios')
                     
     else:
-        form = CrearUsuariosForm(instance=user)
-    context = {'form': form, 'user_id': user_id}
+        user_form = EditarUsuariosForm(instance=user)
+        profile_form = EditarPerfilForm(instance=user_profile)
+
+    context = {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
-
-
 #*************************************
 #   Material de apoyo - usuario
 #*************************************
