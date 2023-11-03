@@ -4,44 +4,33 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
-
+<!-- <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}"> -->
+<link rel="stylesheet" href="{% static 'Css/ver_cursos.css'%}">
 <body>
-    <div class="home_content">
-        <div class="text">
-            <div class="all">
-                <div class="tabla">
-                    <!--este div se utiliza para mostrar el nombre de un curso en una página web.-->
-                    <div class="titulo">
-                        <h1>{{ v_cursos.nombre_curso }}</h1>
-                    </div>
-                    <!--este div se utiliza para mostrar la imagen asociada a un curso en una página web.-->
-                    <div class="descripcion">
-                        <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
-                    </div>  
-                    <!--este div se utiliza para mostrar la descripción de un curso en una página web.-->
-                    <div class="instrucciones">
-                        <h2>Descripción</h2>
-                        <div class="instrucciones2">
-                            <p id="parrafo">{{ v_cursos.descripcion_curso }}</p>
-                        </div>
-                    </div> 
-                    <!-- este div se utiliza para mostrar la duración de un curso en minutos en una página web.-->
-                    <div class="duracion">
-                        <p>Duración: {{ v_cursos.duracion_curso }} minutos</p>
-                    </div>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="card">
+                <div class="card__corner"></div>
+                <div class="card__img">
+                    <img src="{{ v_cursos.iconoCurso.url }}"  alt="Curso Image">
+                </div>
+                <div class="card-int">
+                    <p class="card-int__title">{{ v_cursos.nombre_curso }}</p>
+                    <p class="excerpt">{{ v_cursos.descripcion_curso }}</p>
+                    <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Duración:
+                    <p class="excerpt"> {{ v_cursos.duracion_curso }} minutos</p>
+                    </p>
 
-                    <div class="button">
+                    <div class="button-box">
                         <a href="{% url 'editar_cursos' v_cursos.id %}"> 
-                            <button type="button" class="subir">Editar</button>
+                        <button class="subir" type="submit"><span>Editar </span></button>
                         </a>
                     </div>
-                    
-                    
                 </div>
             </div>
         </div>
     </div>
+    
     <a href="{% url 'listar_cursos' %}" id="back2">
             <button class="back">Regresar</button>
     </a>

@@ -31,16 +31,18 @@ body {
 
 
 /* nombres de la tabla */
-#titulos-tabla{
+#titulos-tabla {
     font-weight: 700;
     font-size: 30px;
+    color: #182d34;
 }
-#contenido-tabla{
-    font-weight: 400 ;
+
+#contenido-tabla {
+    font-weight: 400;
     font-size: 20px;
 }
 
-
+/* 
 button {
     width: auto;
     padding: 10px;
@@ -60,57 +62,22 @@ button:hover {
     color: white;
     transition: .5s;
     transform: scale(1.2);
-}
+} */
 
-
-input[type="text"],
-#id_duracion_curso,
-#id_iconoCurso,
-#id_numero_intentos,
-#id_instrucciones_evaluacion {
-    background-color: #f2f2f2;
-    border: none;
-    border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
-    outline: none;
-    padding: 10px;
-    transition: all 0.3s ease;
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
-input[type="number"]:focus{
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-#id_numero_intentos:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-input[type="text"]:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-
-#id_duracion_curso:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
 .back {
-    position: fixed; /* Fija el botón en su posición */
-    top: 5%; /* Distancia desde la parte superior en porcentaje */
-    right: 5%; /* Distancia desde la derecha en porcentaje */
-    width: 15vw; /* Ancho del botón */
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    
+
 }
 
 .back a {
@@ -131,11 +98,161 @@ input[type="text"]:focus {
 .back:hover a {
     color: #bde2e4;
 }
-h1{
+
+h1 {
     font-weight: 700;
+}
+/* 
+.search-bar {
+    caret-color: #0fbf12;
+    font-family: 'Lato', sans-serif;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    border: none;
+    border-radius: 40px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    width: 25%;
+    padding: 10px 10px 10px 10px;
+}
+
+.subir {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: auto;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.subir span {
+    position: relative;
+    transition: 400ms;
+}
+
+.subir span::after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
+} */
+
+/* tbody {
+    overflow-y: scroll;
+    height: 400px;
+    display: block;
+    width: auto; 
+    z-index: 1;
+} */
+
+h1 {
+    animation: h1 0.4s linear both
+}
+
+@keyframes h1 {
+    0% {
+        letter-spacing: -.2em;
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+#tabla {
+    animation: tabla 0.5s;
+}
+
+@keyframes tabla {
+    0% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+body {
+    background: #ecf0f3;
 }
 
 
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
 
-h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;opacity:0}40%{opacity:.6}100%{opacity:1}}
-#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+}
+
+
+.table-fixed tbody td,
+.table-fixed thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+}   
+/* #tablam {
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    transition: all 0.3s ease;
+    width: 80vw;
+    margin: 20px auto;
+    height: 75vh;
+    border-radius: 20px;
+    padding: 40px;
+
+} */
+
+
+/* tbody{
+    overflow-y: scroll;
+    height: 400px;
+    display: block;
+    width: auto;
+} */
+
+/* .listar{
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    width: 80vw;
+    
+    border-radius: 20px;
+    padding: 20px;
+} */

@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@500&display=swap');
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f2f0f0b4;
+    background: #ecf0f3;
     overflow-y: scroll;
+
 }
 
 /* codigo para organizar el espacio utilizable en los htmls */
@@ -15,15 +18,191 @@ body {
     transition: all 0.5s ease;
 }
 
-.home_content .text {
-    font-size: 25px;
-    font-weight: 500;
-    color: #1d1b31;
-    margin: 12px;
-
-}
-
 .sidebar.active~.home_content {
     width: calc(100 - 240px);
     left: 240px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0.75rem;
+    background-color: white;
+    width: 45vw;
+    height: auto;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, .1),
+        0 2px 4px -2px rgba(0, 0, 0, .1);
+    margin: 0 auto;
+}
+
+.header {
+    position: relative;
+    background-clip: border-box;
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 0.75rem;
+    background-color: #4ca2cb;
+    box-shadow: 0 10px 15px -3px rgba(33, 150, 243, .4), 0 4px 6px -4px rgba(33, 150, 243, .4);
+    height: auto;
+
+}
+
+.header h1 {
+    font-family: 'Poppins', sans-serif;
+    color: rgb(255 255 255);
+    font-weight: 500;
+    text-align: center;
+    padding: 1rem;
+
+}
+
+.info {
+    border: none;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.title {
+    color: rgb(38 50 56);
+    letter-spacing: 0;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.375;
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-family: 'Lato', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.footer {
+    padding: 1rem;
+    border: 1px solid rgb(236 239 241);
+    display: flex;
+justify-items: center;
+    justify-content: space-between;
+    background-color: rgba(0, 140, 255, 0.082);
+}
+/* .footer .subir{
+position: relative;
+left: 0;
+} */
+.tag {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+}
+
+.subir {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%; 
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+
+}
+
+.subir span {
+    position: relative;
+    transition: 400ms;
+}
+
+.subir span::after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
+}
+.back {
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back a {
+    color: #bde2e4;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #2b464e;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back:hover a {
+    color: #bde2e4;
+}
+
+.back1 {
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 15%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.back1 a {
+    color: #00072D;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back1:hover {
+    background-color: #111344;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back1:hover a {
+    color: white;
 }

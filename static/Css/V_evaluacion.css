@@ -101,26 +101,44 @@ h2 {
     width:100%;
 }
 .subir {
-    width: 15vw;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
     padding: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color:#8fccd1;
-    color: #182d34;    
+    text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
     transition: all 0.3s ease;
-    
+    cursor: pointer;
+    width: 50%; 
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
-.subir:hover {
-    background-color: #2b464e;
-    color: white;
-    transition: .5s;
-    transform: scale(1.2);
+.subir span {
+    position: relative;
+    transition: 400ms;
 }
 
+.subir span::after {
+    content: '\00bb';
+    position: absolute; 
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
+}
 .back {
     position: fixed; /* Fija el botón en su posición */
     top: 5%; /* Distancia desde la parte superior en porcentaje */

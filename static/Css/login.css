@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@500&display=swap'); 
+
+h1,#sub-titulo{
+font-family: 'Poppins', sans-serif;
+font-weight: 500;
+
+}
+
 .login-icon {
     height: 7rem;
 }
@@ -12,6 +20,8 @@
 }
 
 input {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300 !important;
     width: 89%;
     background-color: #c2c2c2;
     border: none;
@@ -20,7 +30,6 @@ input {
     padding: 10px;
     transition: all 0.3s ease;
     font-size: 20px;
-    font-weight: bold;
     color: #fff;
     margin-bottom: 5px;
 }
