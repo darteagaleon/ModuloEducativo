@@ -7,61 +7,58 @@
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
-    <div class="text"><!--2 -->            
-        <h1> Listado de Clases</h1>
-        <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
-            <button style="width: auto;" >Buscar</button>
-        </form>
-        
-        
-        <br>
-        <!--esta linea nos dirije a la página que lista todos los cursos-->
-        <a href="{% url 'listar_clases' %}"><button >Ver todos</button></a> 
-        <div class="table-responsive" >
-            <table class="table table-hover " id="tablam">
+    <div class="text"><!--2 -->
+        <div id="contenedor">
+            <h1> Listado de Clases</h1>
+            <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
+                <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
+                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                    style="font-size:27px; "></i></button>
+                <a href="{% url 'listar_clases' %}"><button class="subir">
+                    <span>Ver todos </span>
+                </button> </a>
+            </form>
+            <br>
+            <!--esta linea nos dirije a la página que lista todos los cursos-->
+            <table class="table table-fixed">
                 <thead>
-                    <tr>
-                        <th scope="col" id="titulos-tabla" >Clase</th>
-                        <th scope="col" id="titulos-tabla" >Descripción</th>
-                        <th scope="col" id="titulos-tabla" >Duración</th>
-                        <th scope="col" id="titulos-tabla" >Estado</th>
-                        <th scope="col" id="titulos-tabla" ></th>
-                        <th scope="col" id="titulos-tabla" >Visualizar</th>
+                    <tr style="width: 180px;" id="cabecera">
+                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
+                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
-                        <tr>
-                            <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <td scope="row" id="contenido-tabla" >{{clase.nombre_clase | title}}</td>
-                            <td scope="row" id="contenido-tabla" >{{clase.descripcion_clase | title}}</td>
-                            <td scope="row" id="contenido-tabla" >{{clase.duracion_clase | title}} min </td>
-                            {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
-                            <td scope="row" id="contenido-tabla" ><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                    <tr style="width: 180px;">
+                        <!-- Esta líneas definen las celdas de datos de la tabla-->
+                        <td style="width:400px;" id="nombre">{{clase.nombre_clase | title}}</td>
+                        {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
+                        <td style="width: 200px;" id="estado">
+                            <p class='status--active'>Activo</p>
+                        </td>
+                        </td>
                         {% else %}
-                        <td scope="row" id="contenido-tabla" ><i class='bx bxs-x-circle' style="color:red;"></i></td>
+                        <td style="width: 200px;" id="estado">
+                            <p class='status--inactive'>Inactivo</p>
+                        </td>
                         {% endif %}
-                            <td scope="row" id="contenido-tabla" >{{clase.duracion_clase_admin}}</td>
-                            <td>
-                                <a href="{% url 'ver_clases' clase.id %}">
-                                    <button class="editar">
-                                        Visualizar
-                                    </button>
-                                </a>
-                                
-                                
-                            </td>
-                        </tr>
+                        <td style="width: 200px;" id="visualizar">
+                            <a href="{% url 'ver_clases' clase.id %}">
+                                <button class="subir"> <span>Visualizar</span>
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>
 </div>
 <a href="{% url 'clase' %}" id="back2">
-    <div >
-		<button  class="back">Regresar</button>
-	</div>
-    </a>
+    <div>
+        <button class="back">Regresar</button>
+    </div>
+</a>
 {% endblock %}

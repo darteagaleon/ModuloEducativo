@@ -1,70 +1,61 @@
-<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
-<!--para cargar los archivos estaticos en la platilla-->
 {% load static %}
-<!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
 
-	<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-	<div class="home_content"> <!--1 -->
-		<div class="text"><!--2 -->            
+<div class="home_content">
+    <div class="text">
+        <div id="contenedor">
             <h1> Listado de Cursos </h1>
             <br>
             <form class="search" action="{% url 'filtrar' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-                <button style="width: auto;" >Buscar</button>
+                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                        style="font-size:27px; "></i></button> <br>
+                <a href="{% url 'listar_cursos' %}">
+                    <button class="subir">
+                        Ver todos
+                    </button>
+                </a>
             </form>
-            
-            <br>
-            <!--esta linea nos dirije a la página que lista todos los cursos-->
-            <a href="{% url 'listar_cursos' %}"> 
-                <button>
-                Ver todos
-            </button>
-            </a> 
-            
-            <div class="table-responsive" >
-                <table class="table table-hover " id="tablam">
-                    <thead>
-                        <tr>
-                            <th scope="col" id="titulos-tabla" >Curso</th>
-                            <th scope="col" id="titulos-tabla">Descripción</th>
-                            <th scope="col" id="titulos-tabla">Estado</th>
-                            <th scope="col" id="titulos-tabla">Duración</th>
-                            <th scope="col" id="titulos-tabla">Visualizar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider">
-                        {% for curso in listarc %}<!--indica que se va a iniciar un bucle-->
-                            <tr>
-                                <!-- Esta líneas definen las celdas de datos de la tabla-->
-                                <td scope="row" id="contenido-tabla">{{curso.nombre_curso | title }}</td>
-                                <td scope="row" id="contenido-tabla">{{curso.descripcion_curso | title }}</td>
-                                <!--Estas líneas verifican si el atributo -->
-                                {% if curso.estado_curso %}
-                                <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
-                                {% else %}
-                                <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
-                                {% endif %}
-                                <td scope="row" id="contenido-tabla">{{curso.duracion_curso}} min
-                                </td>
-                                <td>
-                                        <a href="{% url 'ver_cursos' curso.id %}">
-                                        <button  class="back3">Visualizar</button>
-                                    </a>
-                                    
-                                </td>
-                            </tr>
-                    </tbody>
+            <table class="table table-fixed ">
+                <thead>
+                    <tr style="width: 180px;" id="cabecera">
+                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
+                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for curso in listarc %}
+                    <tr style="width: 180px;">
+                        <td style="width:400px;" id="nombre">{{ curso.nombre_curso | title }}</td>
+                        {% if curso.estado_curso %}
+                        <td style="width: 200px;" id="estado">
+                            <p class='status--active'>Activo</p>
+                        </td>
+                        {% else %}
+                        <td style="width: 200px;" id="estado">
+                            <p class='status--inactive'>Inactivo</p>
+                        </td>
+                        {% endif %}
+                        <td style="width: 200px;" id="visualizar">
+                            <a href="{% url 'ver_cursos' curso.id %}">
+                                <button class="subir"> <span>Visualizar</span>
+                                </button> 
+                            </a>
+                        </td>
+                    </tr>
                     {% endfor %}
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
-    <a href="{% url 'cursos' %}" id="back2">
-		<div>
-			<button class="back">Regresar</button>
-		</div>
-	</a>
+</div>
+</div>
+<a href="{% url 'cursos' %}" id="back2">
+    <div>
+        <button class="back">Regresar</button>
+    </div>
+</a>
 {% endblock %}

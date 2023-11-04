@@ -1,87 +1,75 @@
-<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
-{% extends 'Layout/Base.html' %}
-<!--para cargar los archivos estaticos en la platilla-->
-{% load static %}
-<!--es un bloqueo de contenido -->
-{% block content %}
-<link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
-<!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
+    <!--que la plantilla extiende a ota platilla llamada 'Base.html'-->
+    {% extends 'Layout/Base.html' %}
+    <!--para cargar los archivos estaticos en la platilla-->
+    {% load static %}
+    <!--es un bloqueo de contenido -->
+    {% block content %}
+    <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
+    <!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
 
-<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-<div class="home_content"> <!--1 -->
-    <div class="text"><!--2 -->
-        <div id="tablam">
-        <h1> Listado de Evaluaciones </h1>
-        <br>
-        <form class="search" action="{% url 'filtrar_evaluacion' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
-            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt' style="font-size:27px; "></i></button>
-            
-            <a href="{% url 'listar_evaluacion' %}">
-                <button class="subir">
-                    <span>Ver todos </span>
-                </button>
-            </a>
-        </form>
-            <div class="table-responsive">
-                {% comment %}  {% endcomment %}
-            <table class="table table-hover table-fixed " >
-                    <!-- crea una tabla que se utiliza para mostrar información relacionada con evaluaciones-->
-                <thead>
-                    <tr>
-                        <th scope="col" id="titulos-tabla">Evaluación</th>
-                        <th scope="col" id="titulos-tabla">Estado</th>
-                        <th scope="col" id="titulos-tabla">Visualizar</th>
-
-                    </tr>
-                </thead>
-                {% comment %} <tbody class="table-group-divider"> {% endcomment %}
-                <tbody class="table-group-divider" style="max-height: 60vh; overflow-y: scroll; display:block; width:100%;" >
-                    <!--Esta linea codigo llama el estatic de django-->
-                    {% for evaluacion in listare %}
-                    <tr>
-                        <td scope="row" id="contenido-tabla" >{{ evaluacion.nombre_evaluacion }}</td>
-                        <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
-                        {% if evaluacion.estado_evaluacion %}
-                        <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
-                        {% else %}
-                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
-                        {% endif %}
-                        <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
-                        <th>
-                            <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
-                                <button class="subir"> <span>Visualizar</span>
-                                </button>
-                            </a>
-                        </th>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </div> 
-        </table>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
-          </nav>
-
-        </div>
+    <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div id="contenedor">
+                <h1> Listado de Evaluaciones </h1>
+                <br>
+                <form class="search" action="{% url 'filtrar_evaluacion' %}" method="GET">
+                    <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
+                    <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                            style="font-size:27px; "></i></button>
+                    <a href="{% url 'listar_evaluacion' %}">
+                        <button class="subir">
+                            <span>Ver todos </span>
+                        </button>
+                    </a>
+                </form>
+                <br>
+                <table class="table  table-fixed">
+                    <thead>
+                        <tr style="width: 180px;" id="cabecera">
+                            <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
+                            <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                            <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider"  >
+                        {% for evaluacion in listare %}
+                        <tr style="width: 180px;">
+                            <td style="width:400px;" id="nombre">{{ evaluacion.nombre_evaluacion }}</td>
+                            <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                            <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
+                            {% comment %} {% if evaluacion.estado_evaluacion %} {% endcomment %}
+                            {% if evaluacion.finalizada %}
+                            <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
+                            {% else %}
+                            <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                            {% endif %} 
+                            <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
+                            <td style="width: 200px;" id="visualizar">
+                                <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
+                                    <button class="subir"> <span>Visualizar</span>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>    
     </div>
-</div>
-<a href="{% url 'evaluacion' %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-        {% comment %} {% if evaluacion.finalizada %}
-        Sí
-        {% else %}
-        No
-        {% endif %}
-        </td> {% endcomment %}
+    
+        <a href="{% url 'evaluacion' %}">
+            <button class="back ">
+                <span>Regresar</span>
+            </button>
+        </a>
     </div>
-</a>
-{% endblock %}
+    
+    {% endblock %}
+    {% comment %} {% if evaluacion.finalizada %}
+    Sí
+    {% else %}
+    No
+    {% endif %}
+    </td> {% endcomment %}
