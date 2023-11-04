@@ -4,10 +4,41 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/ver_Evaluacion.css' %}">
 
 <body>
-    <div class="home_content">
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="card">
+                <div class="header">
+                    <h1>{{ evaluacion.nombre_evaluacion }}</h1>
+                </div>
+                <div class="info">
+                    <p class="title">Descripcion</p>
+                    <p>{{ evaluacion.descripcion_evaluacion }}</p>
+                    <p class="title">Instrucciones</p>
+                    <p>{{ evaluacion.instrucciones_evaluacion }}</p>
+                </div>
+                <div class="footer">
+                    <p class="tag">{{ evaluacion.duracion_evaluacion_admin }} minutos/ {{ evaluacion.numero_intentos }}
+                        intentos</p>
+                        <a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}">
+                            <button class="subir" type="submit"><span>Ver Preguntas </span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="{% url 'listar_evaluacion' %}" id="back2">
+
+        <button class="back">Regresar</button>
+    </a>
+    <a href="{% url 'editar_evaluacion' evaluacion_id=evaluacion.id %}" id="back2">
+        <button class="back1">Editar</button>
+    </a>
+
+
+    {% comment %} <div class="home_content">
         <div class="text">
             <div class="all">
                 <div class="tabla">
@@ -33,13 +64,12 @@
                     <div class="numIntentos">
                         <p>Número de intentos: {{ evaluacion.numero_intentos }}</p>
                     </div>
-                    <div class="button">
+
+                <div class="button-box">
                         <a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}">
-                            <button type="button" class="subir">Ver Preguntas</button>
-                        </a>
+                        <button class="subir" type="submit"><span>Ver Preguntas </span></button>
                     </div>
-                    
-                    
+
                 </div>
             </div>
         </div>
@@ -50,6 +80,6 @@
     </a>
     <a href="{% url 'editar_evaluacion' evaluacion_id=evaluacion.id %}" id="back2">
             <button class="back1">Editar</button>
-    </a>
+    </a> {% endcomment %}
 </body>
 {% endblock %}

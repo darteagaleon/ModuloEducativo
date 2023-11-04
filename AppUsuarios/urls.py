@@ -42,6 +42,9 @@ urlpatterns = [
     path('ejecutar_clase/<int:clase_id>/',login_required( views.ejecutar_clase), name='ejecutar_clase'),
     path('marcar_clase_como_vista/<int:clase_id>/<int:user_id>/',login_required (views.marcar_clase_como_vista), name='marcar_clase_como_vista'),
     path('ejecutar_evaluacion/',login_required( views.ejecutar_evaluacion), name='ejecutar_evaluacion'),
+    
+    # para la visualizacion del perfil de los usuarios
+    path('perfil_usuario_detalle/', login_required(views.perfil_usuario), name='perfil_usuario_detalle'),
 ]
     
 

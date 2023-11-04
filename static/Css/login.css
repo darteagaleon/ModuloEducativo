@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@500&display=swap'); 
+
+h1,#sub-titulo{
+font-family: 'Poppins', sans-serif;
+font-weight: 500;
+
+}
+
 .login-icon {
     height: 7rem;
 }
@@ -12,6 +20,8 @@
 }
 
 input {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300 !important;
     width: 89%;
     background-color: #c2c2c2;
     border: none;
@@ -20,13 +30,20 @@ input {
     padding: 10px;
     transition: all 0.3s ease;
     font-size: 20px;
-    font-weight: bold;
     color: #fff;
     margin-bottom: 5px;
 }
+#password1{
+    width: 78%;
 
+}
 
-
+#show{
+    background-color: #ecf4fc  ;
+    padding: 10px;
+    border: none;
+    border-radius:0 10px 10px 0;
+}
 #id_username,
 #id_password {
     border: none;
@@ -61,10 +78,31 @@ input {
     background-color: #2b464e !important;
 }
 
-.bx-show,
-.bx-hide {
-    font-size: 20px;
-    color: #333; /* Cambia el color a tu preferencia */
-    cursor: pointer;
-    margin-left: -30px; /* Ajusta el margen para que esté al lado derecho del campo de contraseña */
+
+
+@media screen and (max-width: 768px) {
+    input{
+        width: 64vw;
+    }
+    #password1{
+        width: 53vw;
+    }
+
+    #form-login{
+        border: 1px solid blue;
+    }
+}
+
+@media screen and (max-width: 1024) {
+    input{
+        width: 64vw;
+    }
+    #password1{
+        width: 53vw;
+    }
+
+    #form-login{
+        border: 1px solid blue;
+    }
+    
 }

@@ -18,20 +18,18 @@
                         <h1 style="text-align:center;">Gestion de Material de apoyo</h1>
                         <div class="folder-container">
                             <!--cuando se hace clic, llevará al usuario a la URL llamada 'crear_evaluacion'. -->
-                            <a href="{% url 'Listar_cursos_material' %}" class="folder-box"> 
-                                
-                                <i class="bx bx-folder folder-icon"></i>
-                                <div>
-                                    <p>Ver material de apoyo</p>
-                                </div>
-                            </a>
                             <!--cuando se hace clic, llevará al usuario a la URL llamada 'crear_preguntas'. -->
                             
                             <!--ando se hace clic, llevará al usuario a la URL llamada 'listar_evaluacion'. -->
-                            <a href="{% url 'crear_material' %}" class="folder-box"> <i
-                                    class="bx bx-folder folder-icon"></i>
+                            <a href="{% url 'crear_material' %}" class="folder-box"> <i class='bx bxs-file-pdf'></i>
                                 <div>
                                     <p>Crear material de apoyo</p>
+                                </div>
+                            </a>
+                            <a href="{% url 'Listar_cursos_material' %}" class="folder-box"> 
+                                
+                                <i class='bx bx-list-ul' ></i>                                   <div>
+                                    <p>Ver material de apoyo</p>
                                 </div>
                             </a>
                         </div>

@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f2f0f0b4;
+    background: #ecf0f3;
     overflow-y: scroll;
 }
 
@@ -39,11 +39,12 @@ body {
 }
 
 h1 {
-    color: #f7ece1;
+    color: #182d34;
     width: 35vw;
     word-wrap: break-word;
     margin: 0 auto;
-    /* Esto centrará horizontalmente el elemento */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 input[type="checkbox"] {
@@ -69,15 +70,16 @@ input[type="checkbox"]:checked {
 }
 
 #tabla {
-    background-image: linear-gradient(135deg, #31636d 0%, #182d34 100%);
-    padding: 20px;
+
     border-radius: 20px;
-    box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     transition: all 0.3s ease;
     box-sizing: border-box;
     margin: 50px auto;
     font-size: 30px;
-    font-weight: bold;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -86,7 +88,6 @@ input[type="checkbox"]:checked {
     /* Agregar barra de desplazamiento si es necesario */
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
-    padding: 35px 35px 35px 35px;
 
 }
 
@@ -105,10 +106,11 @@ input[type="checkbox"]:checked {
 /* nombres de la tabla */
 label {
     font-size: 20px;
-    font-weight: bold;
     display: block;
     margin-bottom: 5px;
-    color: #d9d9d9;
+    color: #182d34;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
 
@@ -152,26 +154,44 @@ label {
 .back:hover a {
     color: #bde2e4;
 }
-
 .subir {
-    width: 15vw;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
     padding: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: #8fccd1;
-    color: #182d34;
+    text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
     transition: all 0.3s ease;
-
+    cursor: pointer;
+    width: 50%; 
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
 }
 
-.subir:hover {
-    background-color: #2b464e;
-    color: white;
-    transition: .5s;
-    transform: scale(1.2);
+.subir span {
+    position: relative;
+    transition: 400ms;
+}
+
+.subir span::after {
+    content: '\00bb';
+    position: absolute; 
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
 }
 
 
@@ -197,18 +217,21 @@ input[type="text"],
 #id_Archivo,
 #id_password1,
 #id_password2,
-#id_rol{
-    background-color: #f2f2f2;
+#id_rol {
+    caret-color: #0fbf12;
+    font-family: 'Lato', sans-serif;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
     border: none;
-    border-radius: 10px;
+    border-radius: 40px;
     outline: none;
     transition: all 0.3s ease;
     font-size: 20px;
-    font-weight: 400;
     color: #000000;
     margin-bottom: 5px;
     transition: all 0.3s ease;
-    width: 100%;
+    width: 95%;
     padding: 10px 10px 10px 10px;
 }
 
@@ -233,8 +256,15 @@ input[type="checkbox"]:checked {
 }
 
 #id_descripcion_evaluacion {
+    border-radius: 40px;
+
+    caret-color: #0fbf12;
+    font-family: 'Lato', sans-serif;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
     position: relative;
-    width: 90%;
+    width: 95%;
     text-align: left;
     display: inline-block;
     padding: 10px;
@@ -246,7 +276,6 @@ input[type="checkbox"]:checked {
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
     transition: all 0.3s ease;
-    border-radius: 5px;
 
 
 }
@@ -269,9 +298,13 @@ input[type="checkbox"]:checked {
 #id_nombre_pregunta,
 #id_descripcion_clase,
 #id_DescripcionMaterialApoyo {
-    background-color: #eeeeee;
+    caret-color: #0fbf12;
+    font-family: 'Lato', sans-serif;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
     padding: .5em;
-    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3);
+    border: none;
     border-radius: 10px;
     display: inline-block;
     padding: 10px;
@@ -280,173 +313,14 @@ input[type="checkbox"]:checked {
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
     font-size: 20px;
-    font-weight: 400;
     color: #00072D;
     transition: all 0.3s ease;
-    width: 90%;
+    width: 95%;
+    outline: none;
 
 }
 
-/* focus---------------- */
-#id_orden_modulo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
 
-#id_id_evaluacion:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_nombre_curso:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_id_curso:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_rol:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_id_modulo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_orden_clase:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_password1:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_password2:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_role:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_DescripcionMaterialApoyo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-input[type="number"]:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_id_cargo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_numero_intentos:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-#id_Archivo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-input[type="text"]:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-
-#id_duracion_curso:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-
-#id_descripcion_clase:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-
-#id_nombre_pregunta:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-}
-
-
-#id_respuesta_correcta:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
-
-#id_nombre_evaluacion:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
-
-#id_instrucciones_evaluacion:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
-
-#id_cargo:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
-
-#id_email:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
-
-#id_role:focus {
-    background-color: #c2c2c2;
-    color: #000000;
-    transform: scale(1.05);
-
-}
 
 #tabla {
     animation: tabla 0.5s;
@@ -459,5 +333,5 @@ input[type="text"]:focus {
 
     100% {
         transform: scale(1)
-    }
+    }  
 }

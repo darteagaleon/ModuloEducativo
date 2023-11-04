@@ -13,7 +13,7 @@
             <div class="all">
                 <div id="tabla">
                     <div>
-                        <h1>Crear Cursos </h1>
+                        <h1><i class='bx bx-book-add'></i>Crear Cursos </h1>
 						<div class="form">
 							<form method="post" enctype="multipart/form-data">
 								<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
@@ -23,7 +23,9 @@
 								<div class="form-group">
 								</div>
 								{{ form.as_p }}
-								<button type="submit" class="subir">Guardar</button>
+								<div class="button-box">
+									<button class="subir" type="submit"><span>Guardar </span></button>
+								</div>
 							</form>
 						</div>
 					</div>

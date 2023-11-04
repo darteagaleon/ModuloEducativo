@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@500&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f2f0f0b4;
+    overflow-x: none;
+    overflow-y: none;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+.card {
+    width: 45vw;
+    position: relative;
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 0 auto;
+    height: auto;
+}
+
+.card::after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 10px;
+    bottom: 15px;
+    right: 0;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    transform: rotate(5deg);
+    transition: all 0.1s ease-in;
+}
+
+.card::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 10px;
+    bottom: 15px;
+    left: 0;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    transform: rotate(-5deg);
+    transition: all 0.1s ease-in;
+}
+
+.card:hover:before,
+.card:hover:after {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+}
+
+.card:hover:before {
+    transform: rotate(-8deg);
+}
+
+.card:hover:after {
+    transform: rotate(8deg);
+}
+
+.card__img img {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.card__span {
+    cursor: pointer;
+    font-size: 11px;
+    position: absolute;
+    background-color: white;
+    top: 10px;
+    left: 10px;
+    padding: 3px 7px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.1s ease-in;
+    user-select: none;
+}
+
+.card__span:hover {
+    transform: translateX(5px);
+}
+
+.card-int {
+    padding: 20px 0 0 0;
+}
+
+.card-int__title {
+    font-weight: 500;
+    font-size: 40px;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 10px;
+}.subir {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 100%; 
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.subir span {
+    position: relative;
+    transition: 400ms;
+}
+
+.subir span::after {
+    content: '\00bb';
+    position: absolute; 
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
+}
+
+.excerpt {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+}
+.back {
+    position: fixed; /* Fija el botón en su posición */
+    top: 5%; /* Distancia desde la parte superior en porcentaje */
+    right: 5%; /* Distancia desde la derecha en porcentaje */
+    width: 15vw; /* Ancho del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color:#8fccd1;
+    color: #182d34;   
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back a {
+    color: #bde2e4;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #2b464e;
+    color: #bde2e4;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back:hover a {
+    color: #bde2e4;
+}
+
+.back1 {
+    position: fixed; /* Fija el botón en su posición */
+    top: 15%; /* Distancia desde la parte superior en porcentaje */
+    right: 5%; /* Distancia desde la derecha en porcentaje */
+    width: 15vw; /* Ancho del botón */
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color:#8fccd1;
+    color: #182d34;   
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back1 a {
+    color: #bde2e4;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back1:hover {
+    background-color: #2b464e;
+    color: #bde2e4;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back1:hover a {
+    color: #bde2e4;
+}
+h1 {
+    width: 35vw;
+    word-wrap:break-word;
+    text-align: center;
+    font-weight: 700;
+}
+.swal-button-custom {
+    display: inline-block;
+}
+
+.card{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+@keyframes effect_one {
+    0% {
+        transform: translateX(-99%);
+    }
+
+    25% {
+        transform: translateX(-90%);
+    }
+
+    50% {
+        transform: translateX(-80%);
+    }
+
+    75% {
+        transform: translateX(-95%);
+    }
+
+    100% {
+        transform: translateX(-99%);
+    }
+}
+
+@keyframes effect_two {
+    to {
+        transform: translateX(-1%);
+    }
+
+    from {
+        transform: translateX(-99%);
+    }
+}

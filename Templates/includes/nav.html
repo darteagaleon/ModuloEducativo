@@ -61,7 +61,7 @@
                 <li>
                     <div class="profile-details">
                         <div class="profile-content">
-                            <img src="{% static 'img/iconos/profile2.jpg' %}" alt="">
+                            <a href="{% url 'perfil_usuario_detalle' %}"> <img src="{% static 'img/iconos/profile2.jpg' %}" alt=""></a>
                         </div>
                         <div class="name-job">
                             <div class="profile_name">{{ user.username | title }}</div>
@@ -84,7 +84,7 @@
                     <ul class="sub-menu">
                         <li><a class="link_name">Usuarios</a></li>
                         <li><a href="{% url 'usuarios' %}">Usuarios</a></li>
-                        <li><a href="#">Certificaciones</a></li>
+                        <li><a href="{% url 'generar_certificacion' %}">Certificaciones</a></li>
                         <li><a href="#">Tiempo de interacción</a></li>
                     </ul>
                 </li>   
@@ -155,7 +155,7 @@
     
     <section class="home-section">
         <div class="home-content">
-            <i class='bx bx-menu '></i>
+            <i class='bx bx-chevrons-right'></i>
         </div>
     </section>
     
@@ -174,7 +174,7 @@
             });
         }
 
-        let sidebarBtn = document.querySelector(".bx-menu");
+        let sidebarBtn = document.querySelector(".bx-chevrons-right");
         sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");
             homeSection.classList.toggle("close");
