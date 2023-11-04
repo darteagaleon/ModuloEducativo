@@ -23,9 +23,7 @@
                                     Nombre y Apellido
                                 </p>
                                 <p id="name">
-                                    {{ user.username  }}
-                                    {% comment %} {{  user_profile.apellido }} {% endcomment %}
-                                    España
+                                    {{ usuario.user.username }} {{ usuario.apellido }}
                                 </p>
                                 <hr>
                             </div>
@@ -42,7 +40,7 @@
                                     Correo
                                 </p>
                                 <p id="email">
-                                    {{ user.email }}
+                                    {{ usuario.email }}
                                 </p>
                                 <hr>
                             </div>
@@ -52,7 +50,7 @@
                                 </p>
                                 <p id="position">
                                     {% comment %} {{ user.cargo }} {% endcomment %}
-                                    Diseñador
+                                    {{ usuario.cargo }}
                                 </p>
                                 <hr>
                             </div>
