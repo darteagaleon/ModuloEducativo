@@ -8,45 +8,46 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->            
+        <div id="contenedor">
         <h1> Listado de Cargos</h1>
         <form class="search" action="{% url 'filtrar_cargos' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Cargos...">
-            <button style="width: auto;" >Buscar</button>
-        </form>
-        
-        
-        <br>
+            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                style="font-size:27px; "></i></button>
+            <a href="{% url 'listar_cargos' %}"> <button class="subir">
+                <span>Ver todos </span>
+            </button></a> 
+        </form>    
+            <br>
         <!--esta linea nos dirije a la página que lista todos los cursos-->
-        <a href="{% url 'listar_cargos' %}"><button >Ver todos</button></a> 
-        <div class="table-responsive" >
-            <table class="table table-hover " id="tablam">
-                <thead>
-                    <tr>
-                        <th scope="col" id="titulos-tabla">Cargo</th>                        
-                        <th scope="col" id="titulos-tabla">Estado</th>                        
-                    </tr>
-                </thead>
+        <table class="table  table-fixed">
+            <thead>
+                <tr style="width: 180px;" id="cabecera">
+                    <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
+                    <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                    <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                </tr>
+            </thead>
                 <tbody class="table-group-divider">
                     {% for cargo in cargos %}<!--indica que se va a iniciar un bucle-->
-                        <tr>
+                    <tr style="width: 180px;">
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <td scope="row" id="contenido-tabla">{{cargo.nombre_cargo | title }}</td>
+                            <td style="width:400px;" id="nombre">{{cargo.nombre_cargo | title }}</td>
                             {% if cargo.estado_cargo %}<!--Estas líneas verifican si el atributo -->
-                            <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
-                        {% else %}
-                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
-                        {% endif %}
-                        <td scope="row" id="contenido-tabla">                        
+                            <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
+                            {% else %}
+                            <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                            {% endif %} 
+                        <td style="width: 200px;" id="visualizar">                       
                             <a href="{% url 'editar_cargo' cargo.id %}">
-                                <button class="editar">
-                                    Editar
+                                <button class="subir"> <span>Visualizar</span>
                                 </button>
                             </a>
                         </td>
                         
                         </tr>
+                        {% endfor %}
                 </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>

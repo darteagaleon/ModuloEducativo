@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormView
-#! importo desde appusuarios el modelo de profile para usar esos datos--------------------- keydmon inicio
+#! importo desde appusuarios el modelo de profile para usar esos datos--------------------- keydmon - - -- -inicio
 from AppUsuarios.models import Profile
 #importo la libreria de los utils
 from .utils import render_to_pdf
@@ -13,7 +13,13 @@ from io import BytesIO
 from django.conf import settings
 from xhtml2pdf import pisa
 #?finalizan importaciones para el link_callback
-#!------------------------------------------------------------------------------------ keydmon fin
+#!------------------------------------------------------------------------------------ keydmon- - -- - fin
+
+#? importaciones para usar la funcion de enviar correos electronicos de django - - - -  inico
+from django.core.mail import send_mail
+from decouple import config
+# se ocupa tambien los messages de contrib pero esta ya se importo abajo
+#? - - - - - - -  -- - - - - - - - -  - - - - - - - -- -  --  - - - - - - --  - --  keydmon - - - fin
 from .models import *
 from django.urls import reverse_lazy
 from datetime import datetime, timedelta
@@ -403,10 +409,9 @@ def editar_material_apoyo(request, pk):
     
     return render(request, 'material_apoyo/editar_material.html',context)
 
-    #------------------------------------------ vistas para usar xhtml2pdf  ------------------------ keydmon
+#!------------------------------------------ vistas para usar xhtml2pdf  ------------------------ keydmon
 #vista basada en clase login_required
 class generar_certificacion(View):
-    #! metodo para  renderizar imagenes con libreria xhtml2
     #? metodo que renderiza el template y lo vuelva pdf
     def get(self,request,*args,**Kwargs):
         template_certificado= "Certificados/certificado.html"
@@ -429,5 +434,37 @@ class generar_certificacion(View):
             return HttpResponse("El perfil de usuario no se encontró o no está vinculado al usuario actual.")
 
 
+#! -------------------------------- vista para generar correo electronido --------------------------------- keydmon
 
+def certificados_notificacion_gmail(request):
+    return render(request, 'certificados/notificacion_gmail.html',{})
 
+def notificacion_gmail(request):
+    # Obtén el perfil del usuario logueado
+    profile = Profile.objects.get(user=request.user)
+
+    #? Construye el mensaje con los datos del usuario y del curso -----------------------------------------
+    mensaje = (
+        f"El usuario {profile.user.username} {profile.apellido} ha culminado satisfactoriamente el curso XXX "
+        f"de xxxxx horas. Se encuentra actualmente disponible la certificación para descargar y anexar  la hoja de vida del colaborador. "
+        
+        f" Cordialmente gestor de cursos de Cyres educativco "
+    )
+
+    #? Envia el correo ---------------------------------------------------------
+    send_mail(
+
+        f"{profile.user.username} {profile.apellido} - certificación del curso XXX",  # Asunto
+        mensaje,  # Mensaje
+        settings.EMAIL_HOST_USER,  # Correo del que se remitente el mensaje
+        [settings.DEFAULT_FROM_EMAIL],  # Lista de correos destinatarios (en este caso el cmismo correo que envia)
+        fail_silently=False,  # No silenciar errores si falla el envío
+    )
+
+    # Mensaje de éxito con contrib.messages
+    messages.success(request, 'El correo se ha enviado con éxito.')
+
+    # Redirecciona a alguna vista o a donde sea necesario
+    return redirect('generar_notificacion')
+
+    #! - -------------- fin de la vista para envviar correos -  keydmon

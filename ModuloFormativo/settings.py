@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+
+#! importacion para encriptar datos sensibles mediante las variables de entorno ----------------inicio -  keydmon
+from decouple import config
+#! --------------------------------- keydmon fin
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -148,3 +153,16 @@ ALLOWED_IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif']
 
 LOGIN_REDIRECT_URL= 'home'
 LOGOUT_REDIRECT_URL= 'login'
+
+
+#? Configuración para enviar correos electrónicos ---------------------------------------------------------
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER') #! llama las credenciales desde las variables de entorno
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  #! asi no se exponen los datos :d
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'inbox32222@gmail.com '
+
+#? finalzia informacion de correo //keydmon ---------------------------------------------

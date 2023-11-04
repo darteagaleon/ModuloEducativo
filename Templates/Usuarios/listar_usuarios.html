@@ -10,47 +10,43 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
+        <div id="contenedor">
         <h1> Listar Usuarios </h1>
         <br>
         <form class="search" action="{% url 'filtrar_usuarios' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Usuario...">
-            <input type="submit" class="btn search-btn" value="Buscar">
+                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                style="font-size:27px; "></i></button>
+            <a href="{% url 'listar_usuarios' %}"><button class="subir">
+                <span>Ver todos </span>
+            </button></a>
         </form>
         <br>
         <!--esta linea nos dirije a la página que lista todos los cursos-->
-        <a href="{% url 'listar_usuarios' %}"><button >Ver todos</button></a>
-
-
-        <div class="table-responsive">
-            <table class="table table-hover" id="tablam">
-                <thead>
-                    <tr>
-                        <th scope="col" id="titulos-tabla">Nombre</th>
-                        <th scope="col" id="titulos-tabla">Apellido</th>
-                        <th scope="col" id="titulos-tabla">E-mail</th>
-                        <th scope="col" id="titulos-tabla">Estado</th>
-                        <th scope="col" id="titulos-tabla">Cargo</th>
-
-                    </tr>
-                </thead>
+        <table class="table  table-fixed">
+            <thead>
+                <tr style="width: 180px;" id="cabecera">
+                    <th style="width: 400px;" scope="col" id="nombre">Nombre y Apellido</th>
+                    <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                    <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                </tr>
+            </thead>
 
                 <tbody class="table-group-divider">
                     {% for usuario in usuarios %}
-                    <tr>
-                        <td scope="row" id="contenido-tabla">{{ usuario.user.username }}</td>
-                        <td scope="row" id="contenido-tabla">{{ usuario.apellido }}</td>
-                        <td scope="row" id="contenido-tabla">{{ usuario.email }}</td>
+                    <tr style="width: 180px;">
+                        <td style="width:400px;" id="nombre">{{ usuario.user.username }} {{ usuario.apellido }} </td>
+
                         {% if usuario.estadousuario %}
-                            <td scope="row"><i class='bx bxs-check-circle' style="color:green; "></i></td>
+                        <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
                         {% else %}
-                            <td scope="row"><i class='bx bxs-x-circle' style="color:red;"></i></td>
-                        {% endif %}
+                        <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                        {% endif %} 
                         <!-- <td scope="row" id="contenido-tabla">{{ usuario.estadousuario }}</td> -->
-                        <td scope="row" id="contenido-tabla">{{ usuario.cargo }}</td>
-                        <td scope="row" id="contenido-tabla">                        
+
+                        <td style="width: 200px;" id="visualizar">                     
                             <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
-                                <button class="editar">
-                                    Editar
+                                <button class="subir"> <span>Visualizar</span>
                                 </button>
                             </a>
                         </td>
