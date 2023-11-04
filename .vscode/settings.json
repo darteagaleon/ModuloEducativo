@@ -4,6 +4,9 @@
         "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
+<<<<<<< HEAD
  
     "peacock.color": "#007fff"
+=======
+>>>>>>> 36f77817b72072aa492434e1b93a2b7dbe17290d
 }
