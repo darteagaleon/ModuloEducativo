@@ -10,15 +10,15 @@
 <!--segunda línea carga la hoja de estilo de Bootstrap desde un CDN para utilizar los estilos y componentes proporcionados por Bootstrap en la página web.-->
 
 <body class="bg-dark d-flex justify-content-center align-items-center vh-100">
-    <div class="text-center text-white" >
-        <h1 class="mb-4" style="font-size: 36px;">Bienvenido a Cyres Educativo</h1>
+    <div class="text-center text-white " >
+        <h1 class="mb-4" style="font-size:36px;">Bienvenido a Cyres Educativo</h1>
         <!--se utilizan para crear un contenedor en una página web que contiene una imagen de un icono de inicio de sesión (login).-->
         <div class="bg-white p-5 rounded-5" id="all ">
             <div class="d-flex justify-content-center">
                 <img src="/static/img/login-icon.svg" alt="login-icon" class="login-icon">
             </div>
             <form id="form-login" method="post" action="">
-                <div class="text-center fs-1 fw-bold text-secondary " id="">Login</div>
+                <div class="text-center fs-1 text-secondary " id="sub-titulo">Login</div>
                 <!-- se utiliza en plantillas HTML en aplicaciones web basadas en Django para incluir un token de seguridad-->
                 {% csrf_token %}
                 <!-- se utiliza para crear un grupo de entrada visualmente estilizado que contiene una imagen de un icono de nombre de usuario.-->

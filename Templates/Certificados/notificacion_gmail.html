@@ -1,0 +1,21 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %} 
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notificación por email</title>
+</head>
+<body>
+    <h1>Enviar Notificación por Email</h1>
+    <form method="post" action="{% url 'notificacion_gmail' %}">
+        {% csrf_token %}
+        <button type="submit">Enviar Notificación</button>
+    </form>
+</body>
+</html>
+{% endblock %}

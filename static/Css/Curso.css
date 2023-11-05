@@ -1,9 +1,11 @@
+
+/* desde aqui empezare desde 0 */
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f2f0f0b4;
-    overflow-y: scroll;
+    background-color: #ecf0f3;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 
@@ -28,114 +30,343 @@ body {
     left: 240px;
 }
 
-
-
-/* nombres de la tabla */
-#titulos-tabla{
-    font-weight: 700;
-    font-size: 30px;
+#contenedor{
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+    transition: all 0.3s ease;
+    width: 60vw;
+    margin: 20px auto;
+    /* height: 75vh; */
+    border-radius: 20px;
+    padding: 40px;
 }
-#contenido-tabla{
-    font-weight: 400 ;
+.table-fixed tbody{
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+    font-weight: 400;
     font-size: 20px;
 }
 
-
-button {
-    width: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color:#8fccd1;
-    color: #182d34;  
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    
-}
-
-button:hover {
-    background-color: #2b464e;
-    color: white;
-    transition: .5s;
-    transform: scale(1.2);
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th {
+    display: block;
 }
 
 
-input[type="text"],
-#id_duracion_curso,
-#id_iconoCurso,
-#id_numero_intentos,
-#id_instrucciones_evaluacion {
-    background-color: #f2f2f2;
+.table-fixed tbody td,
+.table-fixed thead > tr> th {
+    float: left;
+    border-bottom-width: 0;
+}   
+.search-bar {
+    caret-color: #0fbf12;
+    font-family: 'Lato', sans-serif;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
     border: none;
-    border-radius: 10px;
-    /* box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff; */
+    border-radius: 40px;
     outline: none;
-    padding: 10px;
     transition: all 0.3s ease;
     font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
-input[type="number"]:focus{
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-#id_numero_intentos:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-input[type="text"]:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-
-#id_duracion_curso:focus {
-    background-color: #c2c2c2;
-    color: #fff;
-    transform: scale(1.1);
-}
-.back {
-    position: fixed; /* Fija el botón en su posición */
-    top: 5%; /* Distancia desde la parte superior en porcentaje */
-    right: 5%; /* Distancia desde la derecha en porcentaje */
-    width: 15vw; /* Ancho del botón */
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    color: #000000;
+    margin-bottom: 5px;
     transition: all 0.3s ease;
+    width: 50%;
+    padding: 10px 10px 10px 10px;
+}
+
+.subir {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: auto;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.subir span {
+    position: relative;
+    transition: 400ms;
+}
+
+.subir span::after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
+}
+
+.subir:hover span {
+    padding-right: 25px;
+}
+
+.subir:hover span::after {
+    opacity: 1;
+    right: 0;
+} 
+
+.status--active{
+    color: #EAFEF3;
+    background-color: #2ECC71;
+    font-weight: 500;
+    margin: 5px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+}
+.status--inactive{
+    color: #fff6e5;
+    background-color: #F3BD50 !important;
+    font-weight: 500;
+    margin: 5px;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    border-radius: 5px;
+}
+form{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: start;
+}
+/* Agrega un margen derecho para espaciar los elementos */
+form > * {
+    margin-right: 10px; /* Ajusta el valor según tu preferencia */
+}
+
+/* Elimina el margen derecho del último elemento para evitar espacio adicional */
+form > *:last-child {
+    margin-right: 0;
+}
+
+/* Cambiar el color del scrollbar en el aside */
+table::-webkit-scrollbar,
+tbody::-webkit-scrollbar {
+    width: 12px;
+}
+
+table::-webkit-scrollbar-thumb,
+tbody::-webkit-scrollbar-thumb {
+    background: #075373;
+    /* Cambiar el color del thumb en el .descripcion */
+    border-radius: 6px;
+}
+
+table::-webkit-scrollbar-trackm,
+tbody::-webkit-scrollbar-track {
+    background: transparent;
+    /* Cambiar el color del track en el aside (puede ser transparente) */
+    border-radius: 6px;
+}
+
+
+@media screen and (max-width: 1920px) {
+    #contenedor{
+        width: 55vw;
+        max-width: 55vw;
+    }
+    tbody{
+        /* background-color: #0fbf12; */
+    }
+    #nombre{
+        /* background-color: blue; */
+        width: 400px !important;
+    }
     
+    #estado{
+        /* background-color: red; */
+        width: 170px !important;
+    }
+
+    #visualizar{
+        /* background-color: yellow; */
+        width: 170px !important;
+    }
 }
 
-.back a {
-    color: #bde2e4;
-    text-decoration: none;
+@media screen and (max-width: 1366px) {
+    #contenedor{
+        width: 60vw;
+        max-width: 60vw;
+    }
+    .search-bar{
+        width: 50%;
+    }
+    tbody{
+        /* background-color: #8f5a5a; */
+    }
+    #nombre{
+        /* background-color: blue; */
+        width: 350px !important;
+    }
+    
+    #estado{
+        /* background-color: red; */
+        width: 150px !important;
+    
+    }
+
+    #visualizar{
+        /* background-color: yellow; */
+        width: 150px !important;
+    
+    }
+
+}
+
+@media screen and (max-width:1240px){
+    #contenedor{
+        width: 50vw;
+        max-width: 50vw;
+    }
+    .search-bar{
+        width: 40%;
+    }
+    tbody{
+        /* background-color: #bf0fb3; */
+    }
+    #nombre{
+        /* background-color: blue; */
+        width: 250px !important;
+    }
+    
+    #estado{
+        /* background-color: red; */
+        width: 130px !important;
+    
+    }
+
+    #visualizar{
+        /* background-color: yellow; */
+        width: 130px !important;
+    }
+}
+
+@media screen and (max-width:1179px) {
+    #contenedor{
+        width: 50vw;
+        max-width: 50vw;
+    }
+    .search-bar{
+        width: 35%;
+    }
+    tbody{
+        /* background-color: #0fbfaa; */
+        
+    }
+    table td{
+        /* background-color: blue; */
+        font-size: 16px;
+    }
+    #nombre{
+        /* background-color: blue; */
+        width: 200px !important;
+
+    }
+    
+    #estado{
+        /* background-color: red; */
+        width: 150px !important;
+    
+    }
+
+    #visualizar{
+        /* background-color: yellow; */
+        width: 150px !important;
+    }
+}
+
+
+
+.back {
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
+    position: relative;
     transition: all 0.3s ease;
+        position: fixed;
+    top: 5%;
+    right: 5%;
+}
+/* 
+.fixed-back-button .back span::before {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 500ms;
 }
 
-.back:hover {
-    background-color: #2b464e;
-    transition: .5s;
-    transform: scale(1.2);
+.fixed-back-button .back:hover span {
+    padding-right: 25px;
 }
 
-.back:hover a {
-    color: #bde2e4;
+.fixed-back-button .back:hover span::before {
+    opacity: 1;
+    right: 0;
 }
-h1{
+ */
+
+
+h1 {
     font-weight: 700;
 }
+h1 {
+    animation: h1 0.4s linear both
+}
+
+@keyframes h1 {
+    0% {
+        letter-spacing: -.2em;
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        opacity: 1
+    }
+}
 
 
+#contenedor {
+    animation: contenedor 0.5s;
+}
 
-h1{animation:h1 0.4s linear both} @keyframes h1{0%{letter-spacing:-.2em;opacity:0}40%{opacity:.6}100%{opacity:1}}
-#tabla{animation:tabla 0.5s; } @keyframes tabla{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }
+
+@keyframes contenedor {
+    0% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}

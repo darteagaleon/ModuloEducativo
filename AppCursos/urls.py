@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from .views import Crear_cursos, generar_certificacion
+from .views import Crear_cursos, generar_certificacion, notificacion_gmail
 from .views import home,exit,login
 from django.contrib.auth.decorators import login_required
 
@@ -64,6 +64,10 @@ urlpatterns =[
 
      #Certificados
      path('generar_certificacion/', login_required(generar_certificacion.as_view()), name='generar_certificacion'),
+
+     #Nofificiaicon por email
+     path('generar_notificacion/', login_required(views.certificados_notificacion_gmail), name='genrar_notificacion'),
+     path('notificacion_gmail/', login_required(views.notificacion_gmail), name='notificacion_gmail'),
 
      ]
 

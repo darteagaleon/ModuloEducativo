@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Poppins:wght@500&display=swap'); 
+
 /* Google Fonts Import Link */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;400&family=Lora:ital@0;1&display=swap');
+
 body {
     overflow-x: hidden;
 }
@@ -8,8 +10,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Fira Sans', sans-serif;
-    font-family: 'Lora', serif;
+
 }
 
 /* Sidebar */
@@ -20,7 +21,7 @@ body {
     height: 100%;
     width: 260px;
     background-image: linear-gradient(135deg, #182d34 0%, #31636d 100%);
-    z-index: 100;
+    z-index: 1;
     transition: all 0.5s ease;
 }
 
@@ -131,8 +132,9 @@ body {
 /* se editan los span que estan dentro del li del .nav-links */
 
 .sidebar .nav-links li a .link_name {
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
     font-size: 18px;
-    font-weight: 400;
     color: #fff;
     transition: all 0.4s ease;
 }
@@ -149,6 +151,8 @@ body {
     margin-top: -10px;
     background: #2b464e;
     display: none;
+    font-family: 'Lato', sans-serif;	
+    font-weight: 300;
 }
 
 /* se edita el apartado de showMenu que se muestra por medio de js y se ejecuta cuando se hace clik en la flecha arrow */
@@ -201,6 +205,8 @@ body {
 
 .sidebar .nav-links li .sub-menu .link_name {
     display: none;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
 }
 
 .sidebar.close .nav-links li .sub-menu .link_name {
@@ -217,6 +223,8 @@ body {
     padding: 3px 20px 6px 16px;
     opacity: 0;
     pointer-events: none;
+    font-family: 'Lato', sans-serif;	
+    font-weight: 300;
 }
 
 /* se hce el hover de la animacion del nombre  */
@@ -266,12 +274,26 @@ body {
 .sidebar.close .profile-details img {
     padding: 10px;
 }
-
+.sidebar .profile-details .profile_name{
+    font-family: 'Poppins', sans-serif; 
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+.sidebar .profile-details .job{
+    font-family: 'Lato', sans-serif;	
+    font-weight: 300;
+    font-size: 15px;
+    color: #fff;
+    opacity: 0.6;
+    transition: all 0.5s ease;
+}
 .sidebar .profile-details .profile_name,
 .sidebar .profile-details .job {
     color: #fff;
     font-size: 15px;
-    font-weight: 500;
+
     white-space: nowrap;
 }
 
@@ -281,18 +303,14 @@ body {
     display: none;
 }
 
-.sidebar .profile-details .job {
-    font-size: 13px;
-    font-weight: 400;
-    opacity: 0.6;
-    transition: all 0.5s ease;
-}
+
 
 .home-section {
     position: relative;
     left: 260px;
     width: calc(10% - 260px);
     transition: all 0.5s ease;
+    border: 1px solid rgb(0, 145, 255);
 }
 
 .sidebar.close~.home-section {
@@ -306,15 +324,18 @@ body {
     align-items: center;
 }
 
-.home-section .home-content .bx-menu {
-    /* border: 1px solid red; */
-    color: #182d34;
+.home-section .home-content .bx-chevrons-right {
+    border: 1px solid red;
+    color: #000000;
     font-size: 35px;
-    /* position: fixed; */
+    position: absolute;
+    /* top: 20px;
+    left: 25px;
+    z-index: 2; */
 }
 
 
-home-section .home-content .bx-menu {
+home-section .home-content .bx-chevrons-right {
     margin: 0 15px;
     cursor: pointer;
 }

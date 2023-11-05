@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #ff0000b4;
+    overflow-y: none;
+    overflow-x: none;
+}
+
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+}
+
+.sidebar.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+
+.contenerdor {
+    width: 700px;
+background-color: red;
+}
+
+
+.back {
+    position: fixed;
+    /* Fija el botón en su posición */
+    top: 5%;
+    /* Distancia desde la parte superior en porcentaje */
+    right: 5%;
+    /* Distancia desde la derecha en porcentaje */
+    width: 15vw;
+    /* Ancho del botón */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+}
+
+.back a {
+    color: #bde2e4;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back:hover {
+    background-color: #2b464e;
+    transition: .5s;
+    transform: scale(1.2);
+}
+
+.back:hover a {
+    color: #bde2e4;
+}
+
+h1 {
+    font-weight: 700;
+}
+h1 {
+    animation: h1 0.4s linear both
+}
+
+@keyframes h1 {
+    0% {
+        letter-spacing: -.2em;
+        opacity: 0
+    }
+
+    40% {
+        opacity: .6
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+#tabla {
+    animation: tabla 0.5s;
+}
+
+@keyframes tabla {
+    0% {
+        transform: scale(.5)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+body {
+    background: #ecf0f3;
+}
+
+.table-fixed tbody {
+    height: 230px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th {
+    display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead>tr>th {
+    float: left;
+    border-bottom-width: 0;
+}

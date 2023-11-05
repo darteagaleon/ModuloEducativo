@@ -1,63 +1,63 @@
-<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+<!-- La plantilla extiende a otra plantilla llamada 'Base.html' -->
 {% extends 'Layout/Base.html' %}
-<!--para cargar los archivos estaticos en la platilla-->
+<!-- Para cargar los archivos estáticos en la plantilla -->
 {% load static %}
-<!--es un bloqueo de contenido -->
+<!-- Es un bloque de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/Curso.css' %}">
-<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
+        <div id="contenedor">
         <h1> Listado de Modulos </h1>
         <br>
-        <!--rea un formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista-->
+        <!-- Formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista -->
         <form class="search" action="{% url 'filtrar_modulos' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Modulos...">
-            <button style="width: auto;" >Buscar</button>
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
+            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                style="font-size:27px; "></i></button>
+            <br>
+            <!-- Enlace para ver todos los módulos -->
+            <a href="{% url 'listar_modulos' %}">
+                <button class="subir">
+                    <span>Ver todos </span>
+                </button>
+            </a>
         </form>
-
-        <br>
-        <a href="{% url 'listar_modulos' %}">
-            <button>
-            ver todos
-            </button>
-        </a> 
-        <div class="table-responsive">
-            <table class="table table-hover " id="tablam">
+        <table class="table  table-fixed">
                 <thead>
-                    <tr>
-                        <th scope="col" id="titulos-tabla">Modulos</th>
-                        <th scope="col" id="titulos-tabla">Estado</th>
-                        <th scope="col" id="titulos-tabla"></th>
-                        <th scope="col" id="titulos-tabla">Visualizar</th>
+                    <tr style="width: 180px;" id="cabecera">
+                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
+                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    {% for modulos in listarm %}<!--indica que se va a iniciar un bucle-->
-                    <tr>
-                        <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <td scope="row" id="contenido-tabla">{{modulos.nombre_modulo | title }}</td>
-                        <!--Estas líneas verifican si el atributo -->
+                    {% for modulos in listarm %} <!-- Inicia un bucle para listar los módulos -->
+                    <tr style="width: 180px;">
+                        <!-- Celdas de datos de la tabla -->
+                        <td style="width:400px;" id="nombre">{{ modulos.nombre_modulo | title }}</td>
+                        <!-- Verifica el estado del módulo y muestra el ícono correspondiente -->
                         {% if modulos.estado_modulo %}
-                        <td scope="row" id="contenido-tabla"><i class='bx bxs-check-circle' style="color:green; "></i></td>
-                        {% else %}
-                        <td scope="row" id="contenido-tabla"><i class='bx bxs-x-circle' style="color:red;"></i></td>
-                        {% endif %}
-                        <td scope="row" id="contenido-tabla">{{modulos.duracion_modulos_admin}}</td>
-                        <td>
-                            <a href="{% url 'ver_modulos' modulos.id %}">  
-                                <button class="back3">Visualizar</button>
+                            <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
+                            {% else %}
+                            <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                            {% endif %} 
+                            <td style="width: 200px;" id="visualizar">
+                            <!-- Enlace para visualizar el módulo -->
+                            <a href="{% url 'ver_modulos' modulos.id %}">
+                                <button class="subir"> <span>Visualizar</span>
+                                </button>
                             </a>
-                                
                         </td>
-                        
                     </tr>
+                    {% endfor %} <!-- Fin del bucle de módulos -->
                 </tbody>
-                {% endfor %}
             </table>
         </div>
     </div>
 </div>
+<!-- Enlace para regresar a la lista de módulos -->
 <a href="{% url 'modulos' %}" id="back2">
     <div>
         <button class="back">Regresar</button>
