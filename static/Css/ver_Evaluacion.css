@@ -137,72 +137,88 @@ left: 0;
 .subir:hover span::after {
     opacity: 1;
     right: 0;
-}
-.back {
+}.back {
+    display: inline-flex;
+    align-items: center;
     position: fixed;
-    /* Fija el botón en su posición */
     top: 5%;
-    /* Distancia desde la parte superior en porcentaje */
     right: 5%;
-    /* Distancia desde la derecha en porcentaje */
-    width: 15vw;
-    /* Ancho del botón */
+    width: 10vw;
+    height: 50px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.back a {
-    color: #bde2e4;
-    text-decoration: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border: none;
+}
+.back span{
+    transition: .4s ease-in-out all;
+    position: absolute;
+    right: 25%;
+}
+.back:hover span{
+    right: 20px;
 }
 
-.back:hover {
-    background-color: #2b464e;
-    transition: .5s;
-    transform: scale(1.2);
-}
+.back .icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    left: -15px;
+    transition: .4s ease-in-out all;
+    opacity: 0;
 
-.back:hover a {
-    color: #bde2e4;
 }
-
+.back:hover .icon{
+    left: 10px;
+    opacity: 1;
+}
 .back1 {
+    display: inline-flex;
+    align-items: center;
     position: fixed;
-    /* Fija el botón en su posición */
     top: 15%;
-    /* Distancia desde la parte superior en porcentaje */
     right: 5%;
-    /* Distancia desde la derecha en porcentaje */
-    width: 15vw;
-    /* Ancho del botón */
+    width: 10vw;
+    height: 50px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-
-}
-
-.back1 a {
-    color: #00072D;
-    text-decoration: none;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border: none;
 }
-
-.back1:hover {
-    background-color: #111344;
-    transition: .5s;
-    transform: scale(1.2);
+.back1 span{
+    transition: .4s ease-in-out all;
+    position: absolute;
+    right: 30%;
 }
+.back1:hover span{
+    right: 20px;
+}
+.back1 .icon1{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    left: -15px;
+    transition: .4s ease-in-out all;
+    opacity: 0;
 
-.back1:hover a {
-    color: white;
+}
+.back1:hover .icon1{
+    left: 10px;
+    opacity: 1;
 }

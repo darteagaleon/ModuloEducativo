@@ -29,8 +29,13 @@
     </div>
 </div>
 <a href="{% url 'material_list' curso_id=curso_id %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
 </a>
 {% endblock %}
