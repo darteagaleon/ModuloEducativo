@@ -1,0 +1,25 @@
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+body {
+    text-align: center;
+    background-color: #f4f4f4;
+}
+h2 {
+    color: #182d34;
+    width: 35vw;
+    word-wrap: break-word;
+    margin: 0 auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+#acceso_denegado {
+    margin-top: 80px;
+    margin-bottom: 30px;
+    max-width: 100%;
+    filter: drop-shadow(18px 10px 10px rgba(0, 0, 0, 0.77))
+}

@@ -203,12 +203,14 @@ tbody::-webkit-scrollbar-track {
     #contenedor{
         width: 60vw;
         max-width: 60vw;
+        height: auto;
     }
     .search-bar{
         width: 50%;
     }
     tbody{
         /* background-color: #8f5a5a; */
+        height:150px !important;
     }
     #nombre{
         /* background-color: blue; */
