@@ -16,14 +16,14 @@
             <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
             <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
                 style="font-size:27px; "></i></button>
-            <br>
-            <!-- Enlace para ver todos los módulos -->
-            <a href="{% url 'listar_modulos' %}">
-                <button class="subir">
-                    <span>Ver todos </span>
-                </button>
-            </a>
-        </form>
+                <!-- Enlace para ver todos los módulos -->
+            </form>
+            <hr>
+        <a href="{% url 'listar_modulos' %}">
+            <button class="subir">
+                <span>Ver todos </span>
+            </button>
+        </a>
         <table class="table  table-fixed">
                 <thead>
                     <tr style="width: 180px;" id="cabecera">
@@ -59,8 +59,13 @@
 </div>
 <!-- Enlace para regresar a la lista de módulos -->
 <a href="{% url 'modulos' %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
 </a>
 {% endblock %}

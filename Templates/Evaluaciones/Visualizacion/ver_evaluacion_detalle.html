@@ -31,11 +31,24 @@
 
     <a href="{% url 'listar_evaluacion' %}" id="back2">
 
-        <button class="back">Regresar</button>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>
     </a>
     <a href="{% url 'editar_evaluacion' evaluacion_id=evaluacion.id %}" id="back2">
-        <button class="back1">Editar</button>
-    </a>
+        <button class="back1">
+            <div class="icon1">
+                <i class='bx bx-pencil' ></i>
+            </div>
+            <span>
+                Editar
+            </span>
+        </button>    </a>
 
 
     {% comment %} <div class="home_content">

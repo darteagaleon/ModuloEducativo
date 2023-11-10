@@ -11,7 +11,7 @@
         <div class="text"><!--2 -->
             <div class="all">
                 <div id="tabla">
-                    <div>
+                    
                         <h1><i class='bx bx-file'></i>Crear Evaluacion </h1>
                         <div class="form">
 							<form method="post">
@@ -29,13 +29,19 @@
                                 </div>
 							</form>
 						</div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <a href="{% url 'evaluacion' %}">
-            <button  class="back">Regresar</button>
-        </a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>        </a>
 </body>
 {% endblock %}

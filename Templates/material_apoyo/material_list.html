@@ -8,23 +8,30 @@
 <!--se utiliza para cargar una hoja de estilo CSS llamada 'Curso.css' en una página web. -->
 
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-<div class="home_content"> <!--1 -->
-    <div class="text"><!--2 -->
-        <h1> Material de apoyo </h1>
-        <br>
+<div class="home_content">
+    <div class="text">
+        <div id="contenedor">
+            <h1> Listado de Cursos </h1>
+            <br>
         <form class="search" action="{% url 'filtrar_material' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Material de apoyo...">
-            <input type="submit" class="btn search-btn" value="Buscar">
+            <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
+                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                        style="font-size:27px; "></i></button>
         </form>
-
+        <hr>
+        <a href="#">
+            <button class="subir">
+                Ver todos
+            </button>
+        </a>
         
         <div class="table-responsive">
             <table class="table table-hover" id="tablam">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Archivo</th>
+                        <th scope="col">Visualizar</th>
+                        <th scope="col">Editar</th>
                     </tr>
                 </thead>
 
@@ -34,7 +41,6 @@
                     
                     <tr>
                         <td>{{ material.NombreMaterialApoyo }}</td>
-                        <td>{{ material.DescripcionMaterialApoyo }}</td>
                         <td>
                             <a href="{{ material.Archivo }}" target="_blank">
                                 <button class="editar">
@@ -56,9 +62,14 @@
             </table>
         </div>
         <a href="{% url 'Listar_cursos_material' %}" id="back2">
-            <div>
-                <button class="back">Regresar</button>
-            </div>
+            <button class="back">
+                <div class="icon">
+                    <i class='bx bx-arrow-back'></i>
+                </div>
+                <span>
+                    Regresar
+                </span>
+            </button>
         </a>
             
         
