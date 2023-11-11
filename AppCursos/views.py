@@ -82,10 +82,6 @@ def valida_administrativos(user):
 def acceso_denegado(request):
     return render(request, 'Gestion_g/acceso_denegado.html')
 
-#vista para validar rutas, segun grupo de usuario
-# def valida_usuarios(user):
-#     return user.groups.filter(name='usuarios').exists()
-
 
 # ******************************
 # GESTION GENERAL
