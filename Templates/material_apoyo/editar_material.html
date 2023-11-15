@@ -20,8 +20,14 @@
                     {% csrf_token %}
                         {{ form.as_p }}
                         
-                    <button type="submit" class="subir">Guardar Cambios</button>
-                    
+                        <div class="button-box">
+                            <button class="subir" type="submit"><div class="icono">
+                                <i class='bx bx-pencil'></i>
+                            </div>
+                            <span>
+                                Editar
+                            </span></button>
+                        </div>                      
                 </form>
 
             </div>

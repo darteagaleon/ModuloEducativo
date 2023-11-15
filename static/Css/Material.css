@@ -3,7 +3,10 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #f2f0f0b4;
+    /* overflow-y: hidden; */
     overflow-y: scroll;
+
+
 }
 
 /* codigo para organizar el espacio utilizable en los htmls */
@@ -38,6 +41,8 @@ body {
     /* Centra horizontalmente el contenedor */
     max-width: 1200px;
     /* Establece un ancho máximo para las tarjetas */
+    /* overflow-y: scroll; */
+
 }
 
 
@@ -241,6 +246,7 @@ form{
     /* border: 1px solid red; */
     display: flex;
     justify-content: start;
+    
 }
 /* Agrega un margen derecho para espaciar los elementos */
 form > * {
@@ -266,4 +272,13 @@ form > *:last-child {
         transform: scale(1);
         transform-origin: left center
     }
+}
+
+.container2{
+    /* border: solid 1px red; */
+    width: 80vw;
+    margin: 5%  auto;
+    padding: 10px;
+    position: relative;
+    top: 10%;
 }

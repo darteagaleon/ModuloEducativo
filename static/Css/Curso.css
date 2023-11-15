@@ -29,16 +29,18 @@ body {
     left: 240px;
 }
 
-#contenedor{
+#contenedor {
     background: #ecf0f3;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     transition: all 0.3s ease;
     width: 60vw;
-    margin: 20px auto;
-    /* height: 75vh; */
+    margin: 7% auto 20px;  /* Establece el top en 5% */
     border-radius: 20px;
     padding: 40px;
+    position: relative;  /* Añade posicionamiento relativo */
+    top: 10%;  /* Añade top del 5% */
 }
+    
 .table-fixed tbody{
     height: 230px;
     overflow-y: auto;
