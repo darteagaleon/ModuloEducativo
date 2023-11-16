@@ -175,27 +175,27 @@ tbody::-webkit-scrollbar-track {
     border-radius: 6px;
 }
 
-
+/* 
 @media screen and (max-width: 1920px) {
     #contenedor{
         width: 55vw;
         max-width: 55vw;
     }
     tbody{
-        /* background-color: #0fbf12; */
+        background-color: #0fbf12; 
     }
     #nombre{
-        /* background-color: blue; */
+        background-color: blue; 
         width: 400px !important;
     }
     
     #estado{
-        /* background-color: red; */
+        background-color: red; 
         width: 170px !important;
     }
 
     #visualizar{
-        /* background-color: yellow; */
+        background-color: yellow; 
         width: 170px !important;
     }
 }
@@ -210,22 +210,22 @@ tbody::-webkit-scrollbar-track {
         width: 50%;
     }
     tbody{
-        /* background-color: #8f5a5a; */
+        background-color: #8f5a5a; 
         height:150px !important;
     }
     #nombre{
-        /* background-color: blue; */
+        background-color: blue; 
         width: 350px !important;
     }
     
     #estado{
-        /* background-color: red; */
+        background-color: red; 
         width: 150px !important;
     
     }
 
     #visualizar{
-        /* background-color: yellow; */
+        background-color: yellow; 
         width: 150px !important;
     
     }
@@ -241,21 +241,21 @@ tbody::-webkit-scrollbar-track {
         width: 40%;
     }
     tbody{
-        /* background-color: #bf0fb3; */
+        background-color: #bf0fb3; 
     }
     #nombre{
-        /* background-color: blue; */
+        background-color: blue; 
         width: 250px !important;
     }
     
     #estado{
-        /* background-color: red; */
+        background-color: red; 
         width: 130px !important;
     
     }
 
     #visualizar{
-        /* background-color: yellow; */
+        background-color: yellow; 
         width: 130px !important;
     }
 }
@@ -269,31 +269,31 @@ tbody::-webkit-scrollbar-track {
         width: 35%;
     }
     tbody{
-        /* background-color: #0fbfaa; */
+        /* background-color: #0fbfaa;
         
     }
     table td{
-        /* background-color: blue; */
+        /* background-color: blue; 
         font-size: 16px;
     }
     #nombre{
-        /* background-color: blue; */
+        /* background-color: blue; 
         width: 200px !important;
 
     }
     
     #estado{
-        /* background-color: red; */
+        /* background-color: red; 
         width: 150px !important;
     
     }
 
     #visualizar{
-        /* background-color: yellow; */
+        /* background-color: yellow; 
         width: 150px !important;
     }
 }
-
+ */
 
 
 .back {
@@ -359,10 +359,9 @@ tbody::-webkit-scrollbar-track {
  */
 
 
+
 h1 {
     font-weight: 700;
-}
-h1 {
     animation: h1 0.4s linear both
 }
 

@@ -45,7 +45,7 @@ urlpatterns =[
      path('ver_modulos/<int:modulo_id>/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.ver_modulos)), name="ver_modulos"),
      path('ver_clases/<int:clase_id>/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.ver_clases)), name='ver_clases'),
      path('ver_evaluacion_detalle/<int:evaluacion_id>/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.ver_evaluacion_detalle)), name='ver_evaluacion_detalle'),
-     path('ver_preguntas_detalle/<int:evaluacion_id>/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.ver_preguntas_detalle)), name='ver_preguntas_detalle'),
+     path('cursos/ver_preguntas_detalle/<int:evaluacion_id>/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.ver_preguntas_detalle)), name='ver_preguntas_detalle'),
 
      #LISTAR
      path('listar_cursos/', login_required(user_passes_test(views.valida_administrativos, login_url='/acceso_denegado/')(views.Listar_cursos)), name='listar_cursos'),

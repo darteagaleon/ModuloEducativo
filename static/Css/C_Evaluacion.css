@@ -71,7 +71,7 @@ input[type="checkbox"]:checked {
 }
 
 #tabla {
-
+    color: #182d34;
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
@@ -203,7 +203,7 @@ a{
 
 input[type="text"],
 #id_duracion_evaluacion_admin,
-#id_iconoCurso,
+
 #id_duracion_clase,
 #id_contenido_clase,
 #id_duracion_curso,
@@ -240,7 +240,20 @@ input[type="text"],
     width: 95%;
     padding: 10px 10px 10px 10px;
 }
+#id_iconoCurso{
+    color: transparent;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    border: none;
+    border-radius: 40px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    color: #000000;
+    width: 95%;
 
+}
 input[type="checkbox"] {
     border-radius: 5px;
     outline: none;

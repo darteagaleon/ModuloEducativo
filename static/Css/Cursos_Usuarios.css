@@ -31,15 +31,12 @@ body {
 .caja-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* Crea tres columnas de igual ancho */
-    gap: 20px;
-    /* Espacio entre las cajas */
-    max-width: 1200px;
-    /* Establece un ancho máximo para las cajas */
-    margin: 0 auto;
-    /* Centra horizontalmente el contenedor */
-    padding: 1rem;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 20px;
 }
+
 .back {
     display: inline-flex;
     align-items: center;
@@ -91,7 +88,7 @@ h1 {
 .card {
     display: flex;
     flex-direction: column;
-    width: 20vw;
+    width: auto;
     height: auto !important;
     background-color: var(--white);
     border-radius: 10px;
@@ -141,9 +138,10 @@ h1 {
     -webkit-box-orient: vertical;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    /* -webkit-line-clamp: 1; */
     line-clamp: 1;
     text-align: center;
+    
 }
 
 

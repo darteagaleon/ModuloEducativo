@@ -4,7 +4,6 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 {% comment %} <script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
 
@@ -13,7 +12,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="all">
-            <div class="tabla">
+            <div id="tabla">
                 <h1>Editar CURSO</h1>
                 {% csrf_token %}
                 <!--#enctype="multipart/form-data" Esto es esencial para que los archivos, como las imágenes, se puedan cargar correctamente.-->
@@ -49,4 +48,6 @@
         </span>
     </button>
 </a>
+
+
 {% endblock %}
