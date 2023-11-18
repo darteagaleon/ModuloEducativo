@@ -1,0 +1,200 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200;400&family=Lora:ital@0;1&display=swap');
+body {
+    overflow-x: hidden;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Lora', serif;
+}
+/* codigo para organizar el espacio utilizable en los htmls */
+.home_content {
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 78px);
+    left: 78px;
+    transition: all 0.5s ease;
+}
+
+.home_content .text {
+    font-size: 25px;
+    font-weight: 500;
+    color: #1d1b31;
+    margin: 12px;
+}
+
+.content_cursos.active~.home_content {
+    width: calc(100 - 240px);
+    left: 240px;
+}
+.parent {
+    position: relative;
+    width: 80vw;
+    height: auto;
+    background-color: #ffff;
+    margin: auto;
+    margin-top: 5vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    display: flex;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+#img-user {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.tittle {
+    text-align: center;
+}
+
+.content {
+    padding: 10px;
+    margin-bottom: 10px;
+    margin: 0;
+}
+
+
+/* Estilos de las cajas desplegables */
+.content_cursos {
+    display: flex;
+    flex-direction: column;
+}
+
+.cursos,
+.cursos_culminados,
+.certificaciones {
+    margin-bottom: 20px;
+}
+
+#courses,
+#position {
+    margin: 0;
+}
+
+
+
+/* Estilos para las líneas horizontales */
+hr {
+    border: 1px solid #3498db;
+}
+
+/* Estilos para cajas desplegables */
+select {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* Estilos para el botón en la caja desplegable */
+.button-container {
+    text-align: center;
+}
+
+.button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+
+/* ******************************************** */
+
+/* se agrega la animacion de la voltear la flecha */
+
+.content_cursos  li.showMenu i.arrow {
+    transform: rotate(-180deg);
+}
+
+
+/* se editan los a que estan dentro del li del  */
+.content_cursos  li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* se editan los span que estan dentro del li del  */
+
+.content_cursos  li a .link_name {
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
+    font-size: 18px;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+.content_cursos.close  li a .link_name {
+    opacity: 0;
+    pointer-events: none;
+}
+.content_cursos  li .sub-menu {
+    padding: 6px 6px 14px 80px;
+    margin-top: -10px;
+    background: #2b464e;
+    display: none;
+    font-family: 'Lato', sans-serif;	
+    font-weight: 300;
+}
+
+/* se edita el apartado de showMenu que se muestra por medio de js y se ejecuta cuando se hace clik en la flecha arrow */
+
+.content_cursos  li.showMenu .sub-menu {
+    display: block;
+}
+
+/* se edita la etiqueta "a" que redirije a un enlace personalizado y este va dentro de .sub-menu */
+
+.content_cursos  li .sub-menu a {
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 0;
+    white-space: nowrap;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.content_cursos  li .sub-menu .link_name {
+    display: none;
+    font-family: 'Poppins', sans-serif; 
+    font-weight: 500;
+}
+
+
+
+/* se hace la animacion del nombre que se muestra a la derecha cuando el navbar esta cerrado */
+
+.content_cursos  li .sub-menu.blank {
+    opacity: 1;
+    pointer-events: auto;
+    padding: 3px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
+    font-family: 'Lato', sans-serif;	
+    font-weight: 300;
+}
+
+/* se hce el hover de la animacion del nombre  */
+
+.content_cursos  li:hover .sub-menu.blank {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+
+
+
