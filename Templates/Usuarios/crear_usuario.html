@@ -29,7 +29,7 @@
             <div class="all">
                 <div id="tabla">
                     <div>
-                        <h1><i class='bx bx-user'></i>Crear Usuario </h1>
+                        <h1>Crear Usuario </h1>
                         <form class="form" method="POST">
                             <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                             {% csrf_token %}
@@ -39,9 +39,14 @@
 
                             </div>
                             {{ form.as_p }}
-                            <div class="button-box">
-                                <button class="subir" type="submit"><span>Guardar </span></button>
-                            </div>
+								<div class="button-box">
+									<button class="subir" type="submit"><div class="icono">
+										<i class='bx bx-save'></i>
+									</div>
+									<span>
+										Guardar
+									</span></button>
+								</div>
                         </form>
                     </div>
                 </div>
@@ -49,7 +54,13 @@
         </div>
     </div>
     <a href="{% url 'usuarios' %}" id="back2">
-        <button class="back">Regresar</button>
-    </a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>    </a>
 </body>
 {% endblock %}

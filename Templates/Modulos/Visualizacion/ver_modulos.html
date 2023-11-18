@@ -4,39 +4,41 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/ver_cursos.css' %}">
 
 <body>
     <div class="home_content">
         <div class="text">
-            <div class="all">
-                <div class="tabla">
+            <div class="card">
                     <!--este div se utiliza para mostrar el nombre de un módulo en una página web. -->
-                    <div class="titulo">
-                        <h1>{{ v_modulos.nombre_modulo }}</h1>
-                    </div>
+                    <div class="card-int">
+                        <p class="card-int__title">{{ v_modulos.nombre_modulo }}</p>
                     <!-- etse div se utiliza para mostrar el estado de un módulo en una página web. -->
-                    <div class="numIntentos">
-                        <p>Estado: {% if v_modulos.estado_modulo %}
+                        <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Estado: {% if v_modulos.estado_modulo %}
                         Activo
                     {% else %}
                         Inactivo
                     {% endif %}
                     </p>
                     </div>
-                    <div class="button">
+                    <div class="button-box">
                         <a href="{% url 'editar_modulos' v_modulos.id %}">
-                            <button type="button" class="subir">Editar</button>
+                            <button class="subir" type="submit"><span>Editar </span></button>
                         </a>
                     </div>
-                    
                     
                 </div>
             </div>
         </div>
     </div>
     <a href="{% url 'listar_modulos' %}" id="back2">
-            <button class="back">Regresar</button>
-    </a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>    </a>
 </body>
 {% endblock %}

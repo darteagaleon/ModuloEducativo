@@ -14,11 +14,13 @@
                 <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
                 <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
                     style="font-size:27px; "></i></button>
-                <a href="{% url 'listar_clases' %}"><button class="subir">
-                    <span>Ver todos </span>
-                </button> </a>
-            </form>
-            <br>
+                </form>
+                <hr>
+                <a href="{% url 'listar_clases' %}">
+                    <button class="subir">
+                        <span>Ver todos </span>
+                    </button> 
+            </a>
             <!--esta linea nos dirije a la página que lista todos los cursos-->
             <table class="table table-fixed">
                 <thead>
@@ -58,7 +60,13 @@
 </div>
 <a href="{% url 'clase' %}" id="back2">
     <div>
-        <button class="back">Regresar</button>
-    </div>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>    </div>
 </a>
 {% endblock %}

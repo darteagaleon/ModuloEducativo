@@ -11,22 +11,27 @@
         <div class="text"><!--2 -->
             <div class="all">
                 <div id="tabla">
-                    <div>
-                        <h1><i class='bx bx-book-add'></i>Crear Modulos </h1>
-                        <div class="form">
-							<form method="post">
-                                <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
-                                {% csrf_token %}
-								<!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
-                                {% load widget_tweaks %}
-								<div class="form-group">
+                    <h1>Crear Modulos </h1>
+                    <div class="form">
+                        <form method="post">
+                            <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                            {% csrf_token %}
+                            <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                            {% load widget_tweaks %}
+                            <div class="form-group">
 
 
-								</div>
-                                {{ form.as_p }}
-								<button type="submit" class="subir" >Guardar</button>
-							</form>
-						</div>
+                            </div>
+                            {{ form.as_p }}
+                            <div class="button-box">
+                                <button class="subir" type="submit"><div class="icono">
+                                    <i class='bx bx-save'></i>
+                                </div>
+                                <span>
+                                    Guardar
+                                </span></button>
+                            </div>
+                            </form>
                     </div>
                 </div>
             </div>
@@ -34,7 +39,13 @@
     </div>
     <!--nos dirije a la URL correspondiente a la vista llamada 'modulo' -->
     <a href="{% url 'modulos' %}"  id="back2">
-		<button  class="back">Regresar</button>
-</a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button></a>
 </body>
 {% endblock %}

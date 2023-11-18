@@ -4,40 +4,33 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/ver_cursos.css'%}">
 
 <body>
-    <div class="home_content">
-        <div class="text">
-            <div class="all">
-                <div class="tabla">
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <div class="card">
                     <!--este div se utiliza para mostrar el nombre de una clase en una página web. -->
-                    <div class="titulo">
-                        <h1>{{ v_clases.nombre_clase }}</h1>
-                    </div>
+                    <div class="card-int">
+                        <p class="card-int__title">{{ v_clases.nombre_clase }}</p>
                     <!--esta es se utiliza para mostrar la descripción de una clase en una página web. -->
-                    <div class="instrucciones">
-                        <h2>Descripción</h2>
-                        <div class="instrucciones2">
-                            <p id="parrafo">{{ v_clases.descripcion_clase }}</p>
-                        </div>
-                    </div>
+
+                    <p class="excerpt">{{ v_clases.descripcion_clase }}</p>
                     <!--este div se utiliza para mostrar la duración de una clase en minutos en una página web.-->
-                    <div class="duracion">
-                        <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
-                    </div>
+                    <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Duración:
+                        <p class="excerpt"> {{ v_clases.duracion_clase }} minutos</p>
+                    </p>
                     <!--este div con lenguaje de plantillas se utiliza para mostrar el estado de una clase en una página web-->
-                    <div class="numIntentos">
-                        <p>Estado: {% if v_clases.estado_clase %}
+                        <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Estado:<p class="excerpt"> {% if v_clases.estado_clase %}
                         Activo
                     {% else %}
                         Inactivo
                     {% endif %}
                     </p>
-                    </div>
-                    <div class="button">
+                    </p>
+                    <div class="button-box">
                         <a href="{% url 'editar_clases' v_clases.id %}">
-                            <button type="submit" class="subir">Editar</button>
+                            <button class="subir" type="submit"><span>Editar </span></button>
                         </a>
                     </div>
                     
@@ -47,7 +40,14 @@
         </div>
     </div>
     <a href="{% url 'listar_clases' %}" id="back2">
-            <button class="back">Regresar</button>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>
     </a>
 </body>
 {% endblock %}

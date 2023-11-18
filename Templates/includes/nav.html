@@ -3,7 +3,7 @@
 <!-- crea una barra lateral en una página web que incluye un logotipo y un posible botón de menú representado por un icono.-->
 
 <body>
-    
+
     <div class="sidebar
     {% if user.is_authenticated %}
         {% if group_name == 'usuarios' %}
@@ -15,19 +15,24 @@
         {% endif %}
     {% else %}
         sidebar
-    {% endif %}">        
+    {% endif %}">
     <div class="logo_content">
             <div class="logo">
                 <div id="iconContainer">
                     <img src="{% static 'img/Cyres.png' %}" alt="logo" id="iconCyres">
                 </div>
             </div>
+            <i class='bx bx-chevrons-left toggle'></i>
+            {% comment %} <section class="home-section">
+                <div class="home-content">
+                </div>
+            </section> {% endcomment %}
         </div>
 
         <ul class="nav-links">
             <!-- se muestra el icono de home -->
             <!-- representa un elemento de menú en un menú de navegación que enlaza a la página de inicio del sitio web.-->
-            <li> 
+            <li>
                 <a href="{% url 'home' %}">
                     <i class='bx bx-home'></i>
                     <span class="link_name">Inicio </span>
@@ -38,7 +43,7 @@
             </li>
                 {% if group_name == 'usuarios' %}
                 <!-- se muestra el icono de cursos -->
-                <li> 
+                <li>
                     <a href="{% url 'Cursos_Usuarios' %}">
                         <i class='bx bx-book '></i>
                         <span class="link_name">Cursos </span>
@@ -55,13 +60,13 @@
                     </a>
                     <ul class="sub-menu blank">
                         <li><a class="link_name">Material de apoyo </a></li>
-    
+
                     </ul>
                 </li>
                 <li>
                     <div class="profile-details">
                         <div class="profile-content">
-                            <a href="{% url 'perfil_usuario_detalle' %}"> <img src="{% static 'img/iconos/profile2.jpg' %}" alt=""></a>
+                            <a href="{% url 'perfil_usuario_detalle' %}"> <img src="{% static 'img/user.png' %}" alt=""></a>
                         </div>
                         <div class="name-job">
                             <div class="profile_name">{{ user.username | title }}</div>
@@ -87,7 +92,7 @@
                         <li><a href="{% url 'generar_certificacion' %}">Certificaciones</a></li>
                         <li><a href="#">Tiempo de interacción</a></li>
                     </ul>
-                </li>   
+                </li>
                 <!-- se muestra icono de Gestion general -->
                 <li>
                     <div class="icon-links ">
@@ -100,13 +105,13 @@
                     <ul class="sub-menu">
                         <li><a class="link_name">Gestion</a></li>
                         <!--representa un elemento de menú en un menú de navegación que enlaza a la página de gestión de cursos en el sitio web. -->
-    
+
                         <li><a href="{% url 'cursos' %}">Cursos</a></li>
                         <!--representa un elemento de menu en un menu de navegacion que enlaza a la pagina de gestion de modulos en el sitio web.-->
-    
+
                         <li><a href="{% url 'modulos' %}">Modulos</a></li>
                         <!--representa un elemento de menu en un menu de navegacion que enlaza a la paguina de gestion de clase en el sitio web. -->
-    
+
                         <li><a href="{% url 'clase' %}">Clases</a></li>
                     </ul>
                 </li>
@@ -139,7 +144,8 @@
                 <li>
                     <div class="profile-details">
                         <div class="profile-content">
-                            <img src="{% static 'img/iconos/asd.jpeg' %}" alt="">
+                            <img src="{% static 'img/user.png' %}" alt="">
+                                                    
                         </div>
                         <div class="name-job">
                             <div class="profile_name">{{ user.username | title }}</div>
@@ -151,20 +157,16 @@
                 {% else %}
                 {% endif %}
         </ul>
+
     </div>
-    
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-chevrons-right'></i>
-        </div>
-    </section>
-    
+
+
     <script>
         // Inicialmente, el menú estará cerrado
         let sidebar = document.querySelector(".sidebar");
-        let homeSection = document.querySelector(".home-section");
+        let toggle = document.querySelector(".toggle");
         sidebar.classList.add("close");
-        homeSection.classList.add("close");
+        toggle.classList.add("close");
 
         let arrow = document.querySelectorAll(".arrow");
         for (var i = 0; i < arrow.length; i++) {
@@ -174,11 +176,14 @@
             });
         }
 
-        let sidebarBtn = document.querySelector(".bx-chevrons-right");
+
+        let sidebarBtn = document.querySelector(".bx-chevrons-left");
         sidebarBtn.addEventListener("click", () => {
             sidebar.classList.toggle("close");
-            homeSection.classList.toggle("close");
+            toggle.classList.toggle("rotate");
+            toggle.classList.toggle("close");
         });
+        
     </script>
 
 </body>

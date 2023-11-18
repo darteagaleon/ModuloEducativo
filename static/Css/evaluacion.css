@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: #f2f0f0b4;
+    background-color: #ecf0f3   ;
     overflow-y: scroll;
 }
 
@@ -34,8 +34,17 @@ body {
     justify-content: center;
     align-items: center;
     max-width: 600px;
-    margin: 0 auto;
+    margin:  auto;
     padding: 20px;
+    
+
+}
+.folder-container  h1{
+    margin: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    color: #1d1b31;
 }
 
 .folder-box {

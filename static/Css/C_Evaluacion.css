@@ -59,6 +59,7 @@ input[type="checkbox"] {
     top: 5px;
     left: 5px;
     transition: all 0.3s ease;
+    margin: 10px;
 }
 
 
@@ -70,7 +71,7 @@ input[type="checkbox"]:checked {
 }
 
 #tabla {
-
+    color: #182d34;
     border-radius: 20px;
     padding: 40px;
     box-sizing: border-box;
@@ -113,91 +114,96 @@ label {
     font-weight: 500;
 }
 
-
-
-.back {
-    position: fixed;
-    /* Fija el botón en su posición */
-    top: 5%;
-    /* Distancia desde la parte superior en porcentaje */
-    right: 5%;
-    /* Distancia desde la derecha en porcentaje */
-    width: 15vw;
-    /* Ancho del botón */
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    background-color: #8fccd1;
-    color: #182d34;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back a {
-    color: #00072D;
+a{
     text-decoration: none;
+}
+.back  {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    width: 10vw;
+    height: 50px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.back:hover {
-    background-color: #2b464e;
-    color: #bde2e4;
-    transition: .5s;
-    transform: scale(1.2);
-}
-
-.back:hover a {
-    color: #bde2e4;
-}
-.subir {
     border-radius: 4px;
     background: linear-gradient(to right, #67b26b, #4ca2cb);
     color: #fff;
     padding: 10px;
     text-transform: uppercase;
     font-size: 16px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    width: 50%; 
     border: none;
-    outline: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
 }
-
-.subir span {
-    position: relative;
-    transition: 400ms;
+.back span{
+    transition: .4s ease-in-out all;
+    position: absolute;
+    right: 25%;
 }
-
-.subir span::after {
-    content: '\00bb';
-    position: absolute; 
+.back:hover span{
+    right: 20px;
+}
+.back .icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    left: -15px;
+    transition: .4s ease-in-out all;
     opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 500ms;
-}
 
-.subir:hover span {
-    padding-right: 25px;
 }
-
-.subir:hover span::after {
+.back:hover .icon{
+    left: 10px;
     opacity: 1;
-    right: 0;
+}
+.subir {
+    display: inline-flex;
+    align-items: center;
+    width: 10vw;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
+    border: none;
 }
 
+.subir span{
+    transition: .4s ease-in-out all;
+    position: relative;
+    right: -20%;
+}
+.subir:hover span{
+    right: 1px;
+}
+.subir .icono{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    right: 280px;
+    transition: .4s ease-in-out all;
+    opacity: 0;
+    /* color: #000000; */
+
+}
+.subir:hover .icono{
+    right:  320px;
+    opacity: 1;
+}
 
 input[type="text"],
 #id_duracion_evaluacion_admin,
-#id_iconoCurso,
+
 #id_duracion_clase,
 #id_contenido_clase,
 #id_duracion_curso,
@@ -234,7 +240,20 @@ input[type="text"],
     width: 95%;
     padding: 10px 10px 10px 10px;
 }
+#id_iconoCurso{
+    color: transparent;
+    background: #ecf0f3;
+    font-weight: 300;
+    box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+    border: none;
+    border-radius: 40px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 20px;
+    color: #000000;
+    width: 95%;
 
+}
 input[type="checkbox"] {
     border-radius: 5px;
     outline: none;

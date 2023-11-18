@@ -33,11 +33,17 @@
                     <div class="respuesta_d {% if pregunta.respuesta_correcta == 'd' %}correct{% endif %}">
                         <p>d. {{ pregunta.opcion_d }}</p>
                     </div>
+
                     <div class="button-box">
                         <a href="{% url 'editar_pregunta' pregunta.id%}"> 
-                        <button class="subir" type="submit"><span>Editar </span></button>
-                        </a>
-                    </div>
+                            <button class="subir" type="submit"><div class="icono">
+                                <i class='bx bx-pencil'></i>
+                        </div>
+                        <span>
+                            Editar
+                        </span></button>
+                    </a>
+                    </div>  
                     {% endfor %}
                 </div>
 
@@ -46,8 +52,14 @@
     </div>
     </div>
     <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}" id="back2">
-            <button class="back">Regresar</button>
-    </a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button></a>
 
 </body>
 {% endblock %}

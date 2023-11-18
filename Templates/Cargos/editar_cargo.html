@@ -4,7 +4,6 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 {% comment %}
 <script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
@@ -14,7 +13,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="all">
-            <div class="tabla">
+            <div id="tabla">
                 <h1>Editar Cargo</h1>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
@@ -28,8 +27,13 @@
                         {{ form.estado_cargo }}
                     </div>
                     <div class="button-box">
-                        <button class="subir" type="submit"><span>Guardar </span></button>
-                    </div> 
+                        <button class="subir" type="submit"><div class="icono">
+                            <i class='bx bx-pencil'></i>
+                        </div>
+                        <span>
+                            Editar
+                        </span></button>
+                    </div>  
                 </form>
 
             </div>
@@ -37,8 +41,13 @@
     </div>
 </div>
 <a href="{% url 'listar_cargos' %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
 </a>
 {% endblock %}

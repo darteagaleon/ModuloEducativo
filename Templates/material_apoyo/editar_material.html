@@ -4,7 +4,6 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 {% comment %}
 <script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
@@ -20,8 +19,14 @@
                     {% csrf_token %}
                         {{ form.as_p }}
                         
-                    <button type="submit" class="subir">Guardar Cambios</button>
-                    
+                        <div class="button-box">
+                            <button class="subir" type="submit"><div class="icono">
+                                <i class='bx bx-pencil'></i>
+                            </div>
+                            <span>
+                                Editar
+                            </span></button>
+                        </div>                      
                 </form>
 
             </div>
@@ -29,8 +34,13 @@
     </div>
 </div>
 <a href="{% url 'material_list' curso_id=curso_id %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
 </a>
 {% endblock %}

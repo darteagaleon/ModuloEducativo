@@ -12,7 +12,7 @@
             <div class="all">
                 <div id="tabla">
                     <div>
-                        <h1><i class='bx bx-question-mark' ></i>Crear Preguntas </h1>
+                        <h1>Crear Preguntas </h1>
                         <div class="form">
 							<form method="post">
                                 <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
@@ -25,9 +25,14 @@
 								</div>
                                 {{ form.as_p }}
                                 
-                                <div class="button-box">
-                                    <button class="subir" type="submit"><span>Guardar </span></button>
-                                </div>
+								<div class="button-box">
+									<button class="subir" type="submit"><div class="icono">
+										<i class='bx bx-save'></i>
+									</div>
+									<span>
+										Guardar
+									</span></button>
+								</div>
 							</form>
 						</div>
                     </div>
@@ -36,7 +41,13 @@
         </div>
     </div>
     <a href="{% url 'evaluacion' %}" >
-            <button  class="back">Regresar</button>
-        </a>
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>        </a>
 </body>
 {% endblock %}

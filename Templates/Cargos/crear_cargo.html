@@ -4,7 +4,6 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 <link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
 {% comment %}
 <script src="{% static 'js/alertas.js' %}"></script> {% endcomment %}
@@ -15,8 +14,7 @@
     <div class="text"><!--2 -->
         <div class="all">
             <div id="tabla">
-                <div>
-        <h1><i class='bx bx-hard-hat' ></i>Crear Cargo</h1>
+        <h1>Crear Cargo</h1>
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
@@ -24,16 +22,28 @@
                 {{ form.estado_cargo.label_tag }} {{ form.estado_cargo }}
             </div>
             <div class="button-box">
-                <button class="subir" type="submit"><span>Guardar </span></button>
-            </div>         </form>
+                <button class="subir" type="submit"><div class="icono">
+                    <i class='bx bx-save'></i>
+                </div>
+                <span>
+                    Guardar
+                </span></button>
+            </div>         
+        </form>
         {% if mensaje %}
             <p>{{ mensaje }}</p>
         {% endif %}
     </div>
 </div>
+
 <a href="{% url 'usuarios' %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
 </a>
 {% endblock %}

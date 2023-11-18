@@ -20,8 +20,8 @@ font-weight: 500;
 }
 
 input {
-    font-family: 'Lato', sans-serif;
-    font-weight: 300 !important;
+    font-family: 'poppins', sans-serif;
+    font-weight: 500 !important;
     width: 89%;
     background-color: #c2c2c2;
     border: none;
@@ -79,7 +79,7 @@ input {
 }
 
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     input{
         width: 64vw;
     }
@@ -92,7 +92,9 @@ input {
     }
 }
 
-@media screen and (max-width: 1024) {
+@media screen and (max-width: 1336px) {
+    
+    
     input{
         width: 64vw;
     }
@@ -104,4 +106,4 @@ input {
         border: 1px solid blue;
     }
     
-}
+} */

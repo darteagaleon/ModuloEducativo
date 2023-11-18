@@ -31,6 +31,8 @@ from django.contrib.auth import login as auth_login  #esta linea de codigo llama
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from AppUsuarios.views import *
+from django.contrib.auth.decorators import user_passes_test  #para la validacion de accesos segun grupo
+
 
 #importacion para el xhtml2pdf
 
@@ -69,6 +71,17 @@ def home(request):
 def exit(request):
     logout(request)
     return redirect('home')
+
+
+#****************************
+#vista para validar rutas, segun grupo de usuario
+def valida_administrativos(user):
+    return user.groups.filter(name='administrativos').exists()
+
+
+def acceso_denegado(request):
+    return render(request, 'Gestion_g/acceso_denegado.html')
+
 
 # ******************************
 # GESTION GENERAL
@@ -344,6 +357,7 @@ def editar_preguntas(request, pregunta_id):
         form = PreguntasForm(instance=editar_p)
     context = {"form": form,"pregunta_id":pregunta_id}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
+
 
 #****************************************************
 #MATERIAL DE APOYO

@@ -51,17 +51,16 @@ h1 {
     font-weight: 700;
 }
 .tabla {
-    min-width: 40vw;
-
-    width: auto;
-    background-image: linear-gradient(135deg, #31636d 0%,#182d34 100%);
-    padding: 20px;
+    color: #182d34;
     border-radius: 20px;
-    box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #ecf0f3;
+    box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     transition: all 0.3s ease;
     box-sizing: border-box;
     margin: 50px auto;
-    font-weight: bold;
+    font-size: 30px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -70,7 +69,6 @@ h1 {
     /* Agregar barra de desplazamiento si es necesario */
     height: auto;
     /* Permitir que la altura se ajuste automáticamente */
-    width: auto;
 }
 
 .respuesta_a,
@@ -98,88 +96,91 @@ p {
     font-weight: bold;
 }
 
-button {
-    width: auto;
+
+
+
+.back  {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    width: 10vw;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
     padding: 10px;
+    text-transform: uppercase;
+    font-size: 16px;
     border: none;
-    border-radius: 10px;
-    background-color:#8fccd1;
-    color: #182d34;   
+}
+.back span{
+    transition: .4s ease-in-out all;
+    position: absolute;
+    right: 25%;
+}
+.back:hover span{
+    right: 20px;
+}
+.back .icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    left: -15px;
+    transition: .4s ease-in-out all;
+    opacity: 0;
+
+}
+.back:hover .icon{
+    left: 10px;
+    opacity: 1;
+}
+.subir {
+    display: inline-flex;
+    align-items: center;
+    width: 10vw;
+    height: 50px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-
-}
-
-button:hover {
-    background-color: #2b464e;
-    color: white;
-    transition: .5s;
-    transform: scale(1.2);
-}
-
-
-
-.back {
-    position: fixed; /* Fija el botón en su posición */
-    top: 5%; /* Distancia desde la parte superior en porcentaje */
-    right: 5%; /* Distancia desde la derecha en porcentaje */
-    width: 15vw; /* Ancho del botón */
+    border-radius: 4px;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border: none;
 }
 
-.back a {
-    color: #bde2e4;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.subir span{
+    transition: .4s ease-in-out all;
+    position: relative;
+    right: -20%;
 }
-
-.back:hover {
-    background-color: #2b464e;
-    transition: .5s;
-    transform: scale(1.2);
+.subir:hover span{
+    right: 1px;
 }
-
-.back:hover a {
-    color: #bde2e4;
-}
-
-.back1 {
-    position: fixed; /* Fija el botón en su posición */
-    top: 15%; /* Distancia desde la parte superior en porcentaje */
-    right: 5%; /* Distancia desde la derecha en porcentaje */
-    width: 15vw; /* Ancho del botón */
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+.subir .icono{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    z-index: 2;
+    right: 200px;
+    transition: .4s ease-in-out all;
+    opacity: 0;
+    /* color: #000000; */
 
 }
-
-.back1 a {
-    color: #00072D;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back1:hover {
-    background-color: #111344;
-    transition: .5s;
-    transform: scale(1.2);
-}
-
-.back1:hover a {
-    color: white;
+.subir:hover .icono{
+    right:  240px;
+    opacity: 1;
 }
 
 .correct {
