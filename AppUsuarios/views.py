@@ -357,6 +357,6 @@ def Filtrar_Material_Usuario(request):
 
 
 
-# vista para mostrar los datos del usuario
+# vista para mostrar los dat-os del usuario
 def perfil_usuario(request):
     return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html')

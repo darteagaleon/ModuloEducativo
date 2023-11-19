@@ -112,6 +112,9 @@ body {
     transition: all 0.3s ease;
 }
 
+
+/* se edita el sub-menu que se mostrara abajo de Gestion Usuario y Gestion Curso */
+
 /* se agrega la animacion de la voltear la flecha */
 
 .sidebar .nav-links li.showMenu i.arrow {
@@ -143,9 +146,6 @@ body {
     opacity: 0;
     pointer-events: none;
 }
-
-/* se edita el sub-menu que se mostrara abajo de Gestion Usuario y Gestion Curso */
-
 .sidebar .nav-links li .sub-menu {
     padding: 6px 6px 14px 80px;
     margin-top: -10px;
@@ -398,27 +398,3 @@ home-section .home-content .bx-chevrons-right {
 
 
 
-@media screen and (max-width: 1500px) {
-    .bx-log-out {
-        position: relative;
-        left:2vw;
-        /* border: rgb(255, 0, 225) 1px solid; */
-    }
-
-}
-
-@media screen and (max-width: 1024px) {
-    /* .sidebar .nav-links li .sub-menu a {
-
-         border: rgb(55, 3, 3) 1px solid; 
-    } */
-    .sidebar .nav-links li {
-        /* border: rgb(255, 0, 0) 1px solid; */
-        font-size: 15px;
-    }
-    .sidebar .nav-links li a .link_name{ 
-        /* border: rgb(0, 38, 255) 1px solid; */
-        font-size: 15px;
-        /* font-weight: 400 italic;  */
-    }
-}

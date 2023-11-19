@@ -33,20 +33,25 @@ body {
     background: #ecf0f3;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     transition: all 0.3s ease;
-    width: 60vw;
-    margin: 7% auto 20px;  /* Establece el top en 5% */
+    width: 50vw;
+    max-width: 60vw;
+    height: 80vh;
+    margin: 5% auto;
+    /* Ajusta el margen superior al 5% */
     border-radius: 20px;
     padding: 40px;
-    position: relative;  /* Añade posicionamiento relativo */
-    top: 10%;  /* Añade top del 5% */
+    position: relative;
+    top: 5%;
+    overflow: hidden;
+    /* Oculta el contenido que excede el contenedor */
+
 }
-    
-.table-fixed tbody{
-    height: 230px;
+
+
+.table-responsive {
     overflow-y: auto;
-    width: 100%;
-    font-weight: 400;
-    font-size: 20px;
+    max-height: 25vh;
+    /* Ajusta según tus necesidades */
 }
 
 .table-fixed thead,
@@ -56,12 +61,19 @@ body {
     display: block;
 }
 
-
 .table-fixed tbody td,
-.table-fixed thead > tr> th {
+.table-fixed thead>tr>th {
     float: left;
     border-bottom-width: 0;
-}   
+    width: 33.33%;
+    /* Divide las columnas en un tercio */
+}
+
+.table {
+    width: 100%;
+    height: 10vh;
+}
+
 .search-bar {
     caret-color: #0fbf12;
     font-family: 'Lato', sans-serif;
@@ -79,100 +91,210 @@ body {
     width: 50%;
     padding: 10px 10px 10px 10px;
 }
-
-.subir {
-    border-radius: 4px;
+.search-icon{
+    border: none;
     background: linear-gradient(to right, #67b26b, #4ca2cb);
     color: #fff;
-    padding: 10px;
-    text-transform: uppercase;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    border-radius:50%; 
+    width:45px; 
+    height:45px;
+    font-size: 20px;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+.ver_todos {
     width: auto;
-    border: none;
-    outline: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    font-size: 20px;
+    margin: 10px 0px 0px 0px;
+    display: flex;
+    height:auto;
+    padding: 10px;
+    align-items: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.4s linear;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+    text-decoration: none;
 }
 
-.subir span {
-    position: relative;
-    transition: 400ms;
+
+.ver_todos>i {
+    width: 30px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
 }
 
-.subir span::after {
-    content: '\00bb';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 500ms;
+.ver_todos:hover>i {
+    font-size: 1.2em;
+    transform: translateX(5px);
 }
 
-.subir:hover span {
-    padding-right: 25px;
+.ver_todos:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+
 }
 
-.subir:hover span::after {
-    opacity: 1;
-    right: 0;
-} 
 
-.status--active{
+
+
+.subir {
+    width: 100%;
+    font-size: 20px;
+    margin: 10px 0px 0px 0px;
+    display: flex;
+    height: 3em;
+    padding: 10px;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    justify-content: center;
+    border-radius: 3px;
+    transition: all 0.4s linear;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+}
+
+
+.subir>i {
+    width: 30px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.subir:hover>i {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.subir:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+
+}
+
+
+
+/* boton regresar a la pagina anterior */
+.back {
+    align-items: center;
+    position: fixed;
+    top: 5%;
+    right: 5%;
+    display: flex;
+    height: 3em;
+    width: 150px;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.4s linear;
+    cursor: pointer;
+    border: none;
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff;
+
+}
+
+
+.back>i {
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+    width: 30px;
+
+}
+
+.back:hover>i {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.back:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+
+}
+.status--active {
     color: #EAFEF3;
     background-color: #2ECC71;
     font-weight: 500;
-    margin: 5px;
+    /* margin: 5px; */
     padding: 5px;
     width: 100px;
     text-align: center;
     border-radius: 5px;
 }
-.status--inactive{
+
+.inactivo{
     color: #fff6e5;
-    background-color: #F3BD50 !important;
     font-weight: 500;
-    margin: 5px;
-    padding: 5px;
-    width: 100px;
-    text-align: center;
-    border-radius: 5px;
+    font-size: 20px;
+
 }
-form{
+.visualizar{
+    background: linear-gradient(to right, #67b26b, #4ca2cb);
+    color: #fff6e5;
+    font-weight: 500;
+    font-size: 20px;
+    transition: all 0.4s linear;
+}
+.visualizar:hover{
+    color: #fff6e5;
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+
+}
+form {
     /* border: 1px solid red; */
     display: flex;
     justify-content: start;
 }
+
 /* Agrega un margen derecho para espaciar los elementos */
-form > * {
-    margin-right: 10px; /* Ajusta el valor según tu preferencia */
+form>* {
+    margin-right: 10px;
+    /* Ajusta el valor según tu preferencia */
 }
 
 /* Elimina el margen derecho del último elemento para evitar espacio adicional */
-form > *:last-child {
+form>*:last-child {
     margin-right: 0;
 }
 
 /* Cambiar el color del scrollbar en el aside */
-table::-webkit-scrollbar,
-tbody::-webkit-scrollbar {
+.table-responsive::-webkit-scrollbar {
     width: 12px;
+    cursor: pointer;
 }
 
-table::-webkit-scrollbar-thumb,
-tbody::-webkit-scrollbar-thumb {
+.table-responsive::-webkit-scrollbar-thumb {
     background: #075373;
     /* Cambiar el color del thumb en el .descripcion */
     border-radius: 6px;
 }
 
-table::-webkit-scrollbar-trackm,
-tbody::-webkit-scrollbar-track {
+.table-responsive::-webkit-scrollbar-trackm {
     background: transparent;
     /* Cambiar el color del track en el aside (puede ser transparente) */
     border-radius: 6px;
+}
+
+#cabecera {
+    border-bottom: 1px solid black;
 }
 
 /* 
@@ -296,48 +418,8 @@ tbody::-webkit-scrollbar-track {
  */
 
 
-.back {
-    display: inline-flex;
-    align-items: center;
-    position: fixed;
-    top: 5%;
-    right: 5%;
-    width: 10vw;
-    height: 50px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-    background: linear-gradient(to right, #67b26b, #4ca2cb);
-    color: #fff;
-    padding: 10px;
-    text-transform: uppercase;
-    font-size: 16px;
-    border: none;
-}
-.back span{
-    transition: .4s ease-in-out all;
-    position: absolute;
-    right: 25%;
-}
-.back:hover span{
-    right: 20px;
-}
-.back .icon{
-    display: flex;
-    align-items: center;
-    position: absolute;
-    z-index: 2;
-    left: -15px;
-    transition: .4s ease-in-out all;
-    opacity: 0;
 
-}
-.back:hover .icon{
-    left: 10px;
-    opacity: 1;
-}
+
 /* 
 .fixed-back-button .back span::before {
     content: '\00bb';
