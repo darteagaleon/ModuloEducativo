@@ -328,6 +328,18 @@ def editar_usuarios(request, user_id):
 
     context = {'user_form': user_form, 'profile_form': profile_form, 'user_id': user_id}
     return render(request, 'Usuarios/editar_usuarios.html', context)
+
+
+# vista para mostrar los datos del usuario
+def perfil_usuario(request, user_id):
+    usuario = get_object_or_404(User, id=user_id)
+    perfil = get_object_or_404(Profile, user=usuario)
+    
+    context = {'usuario': usuario, 'perfil': perfil}
+    return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html', context)
+
+
+
 #*************************************
 #   Material de apoyo - usuario
 #*************************************
@@ -357,6 +369,6 @@ def Filtrar_Material_Usuario(request):
 
 
 
-# vista para mostrar los dat-os del usuario
-def perfil_usuario(request):
-    return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html')
+# # vista para mostrar los dat-os del usuario
+# def perfil_usuario(request):
+#     return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html')

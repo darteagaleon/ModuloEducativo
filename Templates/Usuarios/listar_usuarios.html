@@ -45,10 +45,15 @@
                         <!-- <td scope="row" id="contenido-tabla">{{ usuario.estadousuario }}</td> -->
 
                         <td style="width: 200px;" id="visualizar">                     
-                            <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
+                            <!-- <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
+                                <button class="subir"> <span>Visualizar</span>
+                                </button>
+                            </a> -->
+                            <a href="{% url 'perfil_usuario_detalle' user_id=usuario.id %}">
                                 <button class="subir"> <span>Visualizar</span>
                                 </button>
                             </a>
+                            
                         </td>
                     </tr>
                     {% endfor %}

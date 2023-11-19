@@ -4,83 +4,124 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/perfil.css' %}">
+<link rel="stylesheet" href="{% static 'Css/perfil_usuario.css' %}">
 <body>
-    <div class="home_content"> <!--1 -->
-        <div class="text"><!--2 -->
+    <div class="home-content">
+        <div class="text">
             <div class="parent">
-                <div class="tittle">
-                    <h1>
-                        Perfil
-                    </h1>
-                    <img src="{% static 'img/user-removebg-preview.png' %}" alt="" id="img-user">
+                <div class="user-info">
+                    <!-- Aquí va la información del usuario, como foto, nombre, apellido, estado, cargo, email, y tiempo de interacción -->
+                    <div class="tittle">
+                        <img src="{% static 'img/user-removebg-preview.png' %}" alt="" id="img-user">
+                    </div>
+                    <div class="content">                    
+                        <div class="nombre">
+                            <p>
+                                Nombre y Apellido
+                            </p>
+                            <p id="name">
+                                {{ usuario.username }} {{ perfil.apellido }}
+                                
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="estado">
+                            <p>
+                                Estado
+                            </p>
+                            <p id="estado_usuario">
+                                {% if perfil.estadousuario %} Activo {% else %} Inactivo {% endif %}
+                                
+                            </p>
+                            <hr>
+                        </div>                            
+                        <div class="correo">
+                            <p>
+                                Correo
+                            </p>
+                            <p id="email">
+                                {{ perfil.email }}
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="cargo">
+                            <p>
+                                Cargo
+                            </p>
+                            <p id="position">
+                                {{ perfil.cargo }}  
+                            </p>
+                            <hr>
+                        </div>
+                        <div class="tiempo-interaccion">
+                            <p>
+                                Tiempo de interacción
+                            </p>
+                            <p id="time">
+                                18 Horas
+                            </p>
+                            <hr>
+                        </div>
+                    </div>
                 </div>
-                <div class="content">
-                    <article>
-                        <section>
-                            <div class="nombre">
-                                <p>
-                                    Nombre y Apellido
-                                </p>
-                                <p id="name">
-                                    {{ usuario.user.username }} {{ usuario.apellido }}
-                                </p>
-                                <hr>
-                            </div>
-                            <div class="edad">
-                                <p>Edad</p>
-                                <p id="age">
-                                    {% comment %} {{user.profile.edad}} {% endcomment %}
-                                    18
-                                </p>
-                                <hr>
-                            </div>
-                            <div class="correo">
-                                <p>
-                                    Correo
-                                </p>
-                                <p id="email">
-                                    {{ usuario.email }}
-                                </p>
-                                <hr>
-                            </div>
-                            <div class="cargo">
-                                <p>
-                                    Cargo
-                                </p>
-                                <p id="position">
-                                    {% comment %} {{ user.cargo }} {% endcomment %}
-                                    {{ usuario.cargo }}
-                                </p>
-                                <hr>
-                            </div>
-                            <div class="tiempo-interaccion">
-                                <p>
-                                    Tiempo de interacción
-                                </p>
-                                <p id="time">
-                                    18 Horas
-                                </p>
-                                <hr>
-                            </div>
-                            {% comment %} {% for curso in listacursos %} {% endcomment %}
-                            <div class="cursos">
-                                <p>
-                                    Cursos
-                                </p>
-                                <p id="courses">
-                                    {% comment %} {{ curso.nombre_curso }} {% endcomment %}
-                                    Curso 1, Curso 2, Curso 3
-                                </p>
-                                <hr>
-                            </div>
-                            {% comment %} {% endfor %} {% endcomment %}
-
-                        </section>
-                    </article>
+                <ul class="content_cursos">
+                    <!-- Aquí va el contenido principal de la página -->
+                    <li>
+                        <div class="icon-links ">
+                            <span class="link_name">Cursos asignados </span>
+                            <i class='bx bx-chevron-down arrow '></i>
+                        </div>
+                        <ul class="sub-menu">
+                            {% for curso in listacursos %}
+                                <li><a href="#">{{ curso.nombre_curso }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                    <div class="cursos_culminados">
+                        <p>
+                            Cursos Culminados
+                        </p>
+                        <p id="position">
+                            curso 5, curso 6 
+                        </p>
+                        <hr>
+                    </div>
+                    <div class="certificaciones">
+                        <p>
+                            Certificaciones
+                        </p>
+                        <p id="position">
+                            Certificacion curso 5
+                            Certificacion curso 6 
+                        </p>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+    <a href="{% url 'usuarios' %}" id="back2">
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>
+    </a>
+
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;
+                arrowParent.classList.toggle("showMenu");
+        });
+    }
+    </script>
+
 {% endblock %}
+

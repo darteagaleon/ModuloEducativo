@@ -1,0 +1,98 @@
+<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
+{% extends 'Layout/Base.html' %}
+<!--para cargar los archivos estaticos en la platilla-->
+{% load static %}
+<!--es un bloqueo de contenido -->
+{% block content %}
+<link rel="stylesheet" href="{% static 'Css/perfil.css' %}">
+<body>
+    <div class="home_content"> <!--1 -->
+        <div class="text"><!--2 -->
+            <h1>Perfil de {{ usuario.username }}</h1>
+            <div class="parent">
+                <div class="tittle">
+                    <h1>
+                        Perfil
+                    </h1>
+                    <img src="{% static 'img/user-removebg-preview.png' %}" alt="" id="img-user">
+                </div>
+                <div class="content">
+                    <article>
+                        <section>
+                            <div class="nombre">
+                                <p>
+                                    Nombre y Apellido
+                                </p>
+                                <p id="name">
+                                    {{ usuario.username }} {{ perfil.apellido }}
+                                    
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="estado">
+                                <p>
+                                    Estado
+                                </p>
+                                <p id="estado_usuario">
+                                    {% if perfil.estadousuario %} Activo {% else %} Inactivo {% endif %}
+                                    
+                                </p>
+                                <hr>
+                            </div>                            
+                            <div class="correo">
+                                <p>
+                                    Correo
+                                </p>
+                                <p id="email">
+                                    {{ perfil.email }}
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="cargo">
+                                <p>
+                                    Cargo
+                                </p>
+                                <p id="position">
+                                    {{ perfil.cargo }}  
+                                </p>
+                                <hr>
+                            </div>
+                            <div class="tiempo-interaccion">
+                                <p>
+                                    Tiempo de interacción
+                                </p>
+                                <p id="time">
+                                    18 Horas
+                                </p>
+                                <hr>
+                            </div>
+                            {% comment %} {% for curso in listacursos %} {% endcomment %}
+                            <div class="cursos">
+                                <p>
+                                    Cursos
+                                </p>
+                                <p id="courses">
+                                    {% comment %} {{ curso.nombre_curso }} {% endcomment %}
+                                    Curso 1, Curso 2, Curso 3
+                                </p>
+                                <hr>
+                            </div>
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </section>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<a href="{% url 'usuarios' %}" id="back2">
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
+</a>
+{% endblock %}

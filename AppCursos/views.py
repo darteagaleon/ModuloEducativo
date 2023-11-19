@@ -358,6 +358,7 @@ def editar_preguntas(request, pregunta_id):
     context = {"form": form,"pregunta_id":pregunta_id}
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
+
 #****************************************************
 #MATERIAL DE APOYO
 #****************************************************
