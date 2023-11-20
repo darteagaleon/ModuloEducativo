@@ -23,8 +23,10 @@
 
                     <div class="button-box">
                         <a href="{% url 'editar_cursos' v_cursos.id %}"> 
-                        <button class="subir" type="submit"><span>Editar </span></button>
-                        </a>
+                            <button class="subir" type="submit">
+                                <i class='bx bx-pencil'></i>
+                                <span>Editar</span>
+                             </button>                        </a>
                     </div>
                 </div>
             </div>
@@ -33,13 +35,12 @@
     
     <a href="{% url 'listar_cursos' %}" id="back2">
         <button class="back">
-            <div class="icon">
+            <button class="back">
                 <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button>
+                <span>Regresar</span>
+            </button>
+        </button>   
+    
         </a>
 </body>
 {% endblock %}

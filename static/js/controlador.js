@@ -13,7 +13,6 @@ function solicitarPreguntas(clase_id) {
 //Funcion para mostrar las preguntas de la evaluacion
 
 function mostrarPreguntas(data) {
-    console.log(data);
     // Mostrar todas las preguntas de una en una
     let html = '<div class="tabla"><div class="titulo"><h1>'; 
     html += 'Evaluacion del Modulo ' +data.nombre + '</h1></div>';
@@ -28,16 +27,57 @@ function mostrarPreguntas(data) {
     html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
 
     let contenedor=document.getElementsByClassName("text")[0];
-    let contenido = document.createElement("div");
-    contenido.innerHTML = html;
-    contenedor.append(contenido);
+    // let contenido = document.createElement("div");
+    contenedor.innerHTML = html;
+    // contenedor.append(contenido);
+    let botonComenzar = document.querySelector(".button .subir");
+    botonComenzar.addEventListener("click", function() {
+        comenzarEvaluacion(data);
+    });
 
-    for(pregunta in data){
-        // Se muestra pregunta, 
+}
+function mostrarPreguntasEvaluacion(data) {
+    console.log(data);
+
+    if (data && Array.isArray(data.listaPreguntas)) {
+        let html = '';
+
+        // Iterar sobre el array de preguntas
+        for (let i = 0; i < data.listaPreguntas.length; i++) {
+            let pregunta = data.listaPreguntas[i];
+
+            // Se muestra pregunta
+            html += '<div class="tabla"><div class="nombre_pregunta"><h1>';
+            html += pregunta.nombre_pregunta + '</h1></div>';
+
+            // Se muestran las opciones
+            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion1">';
+            html += pregunta.opcion_a + '</div>';
+            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion2">';
+            html += pregunta.opcion_b + '</div>';
+            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion3">';
+            html += pregunta.opcion_c + '</div>';
+            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion4">';
+            html += pregunta.opcion_d + '</div>';
+
+            html += '</div>'; // Cierre del div de pregunta
+        }
+
+        let contenedor = document.getElementsByClassName("text")[0];
+        contenedor.innerHTML = html;
+    } else {
+        console.error('Los datos recibidos no son válidos o no contienen preguntas.');
     }
+}
+
+function comenzarEvaluacion(data) {
+    mostrarPreguntasEvaluacion(data);
+}
+
+
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
-    }
+    
 
 
 

@@ -10,57 +10,66 @@
             <br>
             <form class="search" action="{% url 'filtrar' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
+                <button class="search-icon"> <i class='bx bx-search-alt'
                         style="font-size:27px; "></i></button> <br>
-                    </form>
-                    <hr>
-                    <a href="{% url 'listar_cursos' %}">
-                        <button class="subir">
-                            Ver todos
-                        </button>
-                    </a>
-            <table class="table table-fixed ">
+            </form>
+            <hr>
+            <a href="{% url 'listar_cursos' %}">
+                <button class="ver_todos">
+                    <span>Ver todos</span>
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </a>
+            <table class="table table-hover mt-4 ">
                 <thead>
-                    <tr style="width: 180px;" id="cabecera">
-                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
-                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
-                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                    <tr  id="cabecera">
+                        <th  style="width: 355px;" scope="col" >Nombre</th>
+                        <th  style="width: 100px;" scope="col" id="estado">Estado</th>
+                        <th   style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    {% for curso in listarc %}
-                    <tr style="width: 180px;">
-                        <td style="width:400px;" id="nombre">{{ curso.nombre_curso | title }}</td>
-                        {% if curso.estado_curso %}
-                        <td style="width: 200px;" id="estado">
-                            <p class='status--active'>Activo</p>
-                        </td>
-                        {% else %}
-                        <td style="width: 200px;" id="estado">
-                            <p class='status--inactive'>Inactivo</p>
-                        </td>
-                        {% endif %}
-                        <td style="width: 200px;" id="visualizar">
-                            <a href="{% url 'ver_cursos' curso.id %}">
-                                    <button class="subir"> <span>Visualizar</span>
-                                    </button> 
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
             </table>
+                <div class="table-responsive ">
+                    <table class="table table-hover mt-4 table-2">
+                    
+                    <tbody class=" overflow-hidden">
+                        {% for curso in listarc %}
+                        <tr >
+                            <td id="nombre">{{ curso.nombre_curso | title }}</td>
+                            {% if curso.estado_curso %}
+                            <td  id="estado">
+                                <!-- <p class='status--active'>Activo</p> -->
+                                <button type="button" class="btn btn-success text-white activo">Activo</button>
+
+                            </td>
+                            {% else %}
+                            <td  id="estado">
+                                <!-- <p class='status--inactive'>Inactivo</p> -->
+                                <button type="button" class="btn btn-warning text-white inactivo">Inactivo</button>
+
+                            </td>
+                            {% endif %}
+                            <td  id="visualizar">
+                                <a href="{% url 'ver_cursos' curso.id %}">
+                                    <button type="button" class="btn visualizar">Visualizar</button>
+
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<a href="{% url 'cursos' %}" id="back2">
-    <button class="back">
-        <div class="icon">
-            <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button>
-</a>
-{% endblock %}
+    <a href="{% url 'cursos' %}" id="back2">
+        <button class="back">
+            <div class="icon">
+                <i class='bx bx-arrow-back'></i>
+            </div>
+            <span>
+                Regresar
+            </span>
+        </button>
+    </a>
+    {% endblock %}

@@ -114,87 +114,63 @@ select {
 
 /* ******************************************** */
 
-/* se agrega la animacion de la voltear la flecha */
+.content_cursos li{
+    list-style: none;
+}
+.content_cursos li i.arrow {
+    transition: transform 0.3s ease;
+}
 
-.content_cursos  li.showMenu i.arrow {
+.content_cursos li.showMenu i.arrow {
     transform: rotate(-180deg);
 }
 
-
-/* se editan los a que estan dentro del li del  */
-.content_cursos  li a {
+.content_cursos li a {
     display: flex;
     align-items: center;
     text-decoration: none;
 }
 
-/* se editan los span que estan dentro del li del  */
-
-.content_cursos  li a .link_name {
-    font-family: 'Poppins', sans-serif; 
+.content_cursos li a .link_name {
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 18px;
-    color: #fff;
-    transition: all 0.4s ease;
+    color: #000000;
+    transition: opacity 0.4s ease;
+    list-style: none;
+
 }
 
-.content_cursos.close  li a .link_name {
+.content_cursos li.showMenu a .link_name {
     opacity: 0;
     pointer-events: none;
 }
-.content_cursos  li .sub-menu {
+
+.content_cursos li .sub-menu {
+    display: none;
     padding: 6px 6px 14px 80px;
     margin-top: -10px;
-    background: #2b464e;
-    display: none;
-    font-family: 'Lato', sans-serif;	
+    font-family: 'Lato', sans-serif;
     font-weight: 300;
+    list-style: none;
+
 }
 
-/* se edita el apartado de showMenu que se muestra por medio de js y se ejecuta cuando se hace clik en la flecha arrow */
-
-.content_cursos  li.showMenu .sub-menu {
+.content_cursos li.showMenu .sub-menu {
     display: block;
 }
 
-/* se edita la etiqueta "a" que redirije a un enlace personalizado y este va dentro de .sub-menu */
-
-.content_cursos  li .sub-menu a {
-    color: #fff;
+.content_cursos li .sub-menu a {
+    color: #000000;
     font-size: 15px;
     padding: 5px 0;
     white-space: nowrap;
-    opacity: 0.6;
-    transition: all 0.3s ease;
-}
-
-.content_cursos  li .sub-menu .link_name {
-    display: none;
-    font-family: 'Poppins', sans-serif; 
-    font-weight: 500;
-}
-
-
-
-/* se hace la animacion del nombre que se muestra a la derecha cuando el navbar esta cerrado */
-
-.content_cursos  li .sub-menu.blank {
     opacity: 1;
-    pointer-events: auto;
-    padding: 3px 20px 6px 16px;
-    opacity: 0;
-    pointer-events: none;
-    font-family: 'Lato', sans-serif;	
-    font-weight: 300;
+    transition: opacity 0.3s ease;
 }
 
-/* se hce el hover de la animacion del nombre  */
-
-.content_cursos  li:hover .sub-menu.blank {
+.content_cursos li:hover .sub-menu.blank {
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(50%);
 }
-
-
-
 

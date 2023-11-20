@@ -10,10 +10,9 @@
 
 
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-<div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="all">
-            <div id="tabla">
+            <div id="tabla"  class="container-fluid">
                 <h1>Editar Clases</h1>
                 <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                 {% csrf_token %}
@@ -25,28 +24,23 @@
                         {{ form.nombre_modulo }}
                         {{ form }}
                     </div>
-                    <div class="button-box">
-                        <button class="subir" type="submit"><div class="icono">
-                            <i class='bx bx-pencil'></i>
-                        </div>
-                        <span>
-                            Editar
-                        </span></button>
-                    </div>               
+                    <button class="subir" type="submit">
+                        <i class='bx bx-pencil'></i>
+                        <span>Editar</span>
+                    </button>              
                 </form>
             </div>
         </div>
     </div>
 </div>
 <a href="{% url 'ver_clases' clase_id=clase_id %}" >
+    <button class="back">
         <button class="back">
-            <div class="icon">
-                <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button></a>
+            <i class='bx bx-arrow-back'></i>
+            <span>Regresar</span>
+        </button>
+    </button>    
+</a>
 
 
 {% endblock %} 

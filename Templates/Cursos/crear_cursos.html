@@ -4,49 +4,49 @@
 {% load static %}
 <!--es un bloqueo de contenido -->
 {% block content %}
-<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}">
+<link rel="stylesheet" href="{% static 'Css/C_Evaluacion.css' %}" />
 
 <body>
-<!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
-	<div class="home_content"> <!--1 -->
-        <div class="text"><!--2 -->
-            <div class="all">
-                <div id="tabla">
-                    <div>
-                        <h1>Crear Cursos </h1>
-						<div class="form">
-							<form method="post" enctype="multipart/form-data">
-								<!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
-								{% csrf_token %}
-								<!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
-								{% load widget_tweaks %}
-								<div class="form-group">
-								</div>
-								{{ form.as_p }}
-								<div class="button-box">
-									<button class="subir" type="submit"><div class="icono">
-										<i class='bx bx-save'></i>
-									</div>
-									<span>
-										Guardar
-									</span></button>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<a href="{% url 'cursos' %}" id="back2">
-		<button class="back">
-			<div class="icon">
-				<i class='bx bx-arrow-back'></i>
-			</div>
-			<span>
-				Regresar
-			</span>
-		</button>
-	</a>
+  <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
+  <div class="home_content">
+    <!--1 -->
+    <div class="text">
+      <!--2 -->
+      <div class="all">
+        <div id="tabla" class="container-fluid">
+          <div>
+            <h1>Crear Cursos</h1>
+            <div class="form">
+              <form method="post" enctype="multipart/form-data">
+                <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
+                {% csrf_token %}
+                <!--sirve para  cargar la biblioteca de etiquetas llamada "widget_tweaks"-->
+                {% load widget_tweaks %}
+                <div class="form-group"></div>
+                {{ form.as_p }}
+                <button class="subir" type="submit">
+                  <i class="bx bx-save"></i>
+                  <span>Guardar</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="{% url 'cursos' %}" id="back2">
+    <button class="back btn  ">
+      <i class="bx bx-arrow-back"></i>
+      <span>Regresar</span>
+    </button>
+  </a>
 </body>
+<style>
+  #back2:hover{
+    text-decoration:none;
+    color:white;
+  }
+
+</style>
 {% endblock %}

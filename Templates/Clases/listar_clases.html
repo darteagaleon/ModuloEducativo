@@ -12,43 +12,47 @@
             <h1> Listado de Clases</h1>
             <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
-                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                    style="font-size:27px; "></i></button>
+                <button class="search-icon"> <i class='bx bx-search-alt'
+                    style="font-size:27px; "></i></button> <br>
                 </form>
                 <hr>
                 <a href="{% url 'listar_clases' %}">
-                    <button class="subir">
-                        <span>Ver todos </span>
-                    </button> 
-            </a>
-            <!--esta linea nos dirije a la página que lista todos los cursos-->
-            <table class="table table-fixed">
+                    <button class="ver_todos">
+                        <span>Ver todos</span>
+                        <i class='bx bx-chevron-right'></i>
+                    </button>
+                </a>
+            <table class="table table-hover mt-4 ">
                 <thead>
-                    <tr style="width: 180px;" id="cabecera">
-                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
-                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
-                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                    <tr  id="cabecera">
+                        <th  style="width: 355px;" scope="col" >Nombre</th>
+                        <th  style="width: 100px;" scope="col" id="estado">Estado</th>
+                        <th   style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
+            </table>
+            <!--esta linea nos dirije a la página que lista todos los cursos-->
+            <div class="table-responsive ">
+                <table class="table table-hover mt-4 table-2">
+                <tbody class=" overflow-hidden">
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
-                    <tr style="width: 180px;">
+                    <tr >
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <td style="width:400px;" id="nombre">{{clase.nombre_clase | title}}</td>
+                        <td id="nombre">{{clase.nombre_clase | title}}</td>
                         {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
-                        <td style="width: 200px;" id="estado">
-                            <p class='status--active'>Activo</p>
+                        <td  id="estado">
+                            <button type="button" class="btn btn-success text-white activo">Activo</button>
                         </td>
                         </td>
                         {% else %}
-                        <td style="width: 200px;" id="estado">
-                            <p class='status--inactive'>Inactivo</p>
+                        <td  id="estado">
+                            <button type="button" class="btn btn-warning text-white inactivo">Inactivo</button>
                         </td>
                         {% endif %}
-                        <td style="width: 200px;" id="visualizar">
+                        <td  id="visualizar">
                             <a href="{% url 'ver_clases' clase.id %}">
-                                <button class="subir"> <span>Visualizar</span>
-                                </button>
+                                <button type="button" class="btn visualizar">Visualizar</button>
+                            </button>
                             </a>
                         </td>
                     </tr>
@@ -59,14 +63,11 @@
     </div>
 </div>
 <a href="{% url 'clase' %}" id="back2">
-    <div>
+    <button class="back">
         <button class="back">
-            <div class="icon">
-                <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button>    </div>
+            <i class='bx bx-arrow-back'></i>
+            <span>Regresar</span>
+        </button>
+    </button>
 </a>
 {% endblock %}

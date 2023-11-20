@@ -22,12 +22,10 @@
                 {{ form.estado_cargo.label_tag }} {{ form.estado_cargo }}
             </div>
             <div class="button-box">
-                <button class="subir" type="submit"><div class="icono">
+                <button class="subir" type="submit">
                     <i class='bx bx-save'></i>
-                </div>
-                <span>
-                    Guardar
-                </span></button>
+                    <span>Guardar</span>
+                </button> 
             </div>         
         </form>
         {% if mensaje %}
@@ -38,12 +36,10 @@
 
 <a href="{% url 'usuarios' %}" id="back2">
     <button class="back">
-        <div class="icon">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button>
+            <span>Regresar</span>
+        </button>
+    </button> 
 </a>
 {% endblock %}

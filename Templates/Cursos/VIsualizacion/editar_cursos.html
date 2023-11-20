@@ -25,12 +25,10 @@
                         {% endif %}
                     </div>
                     <div class="button-box">
-                        <button class="subir" type="submit"><div class="icono">
+                        <button class="subir" type="submit">
                             <i class='bx bx-pencil'></i>
-                        </div>
-                        <span>
-                            Editar
-                        </span></button>
+                            <span>Editar</span>
+                        </button>
                     </div>  
                 </form>
             </div>
@@ -40,12 +38,10 @@
 <!--nos dirije  a la URL correspondiente a la vista llamada 'cursos' -->
 <a href="{% url 'ver_cursos' curso_id=curso_id %}"> 
     <button class="back">
-        <div class="icon">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
+            <span>Regresar</span>
+        </button>
     </button>
 </a>
 
