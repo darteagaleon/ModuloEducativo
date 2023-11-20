@@ -13,6 +13,7 @@ function solicitarPreguntas(clase_id) {
 //Funcion para mostrar las preguntas de la evaluacion
 
 function mostrarPreguntas(data) {
+    console.log(data);
     // Mostrar todas las preguntas de una en una
     let html = '<div class="tabla"><div class="titulo"><h1>'; 
     html += 'Evaluacion del Modulo ' +data.nombre + '</h1></div>';
@@ -36,44 +37,82 @@ function mostrarPreguntas(data) {
     });
 
 }
-function mostrarPreguntasEvaluacion(data) {
-    console.log(data);
 
-    if (data && Array.isArray(data.listaPreguntas)) {
-        let html = '';
+let preguntaActual = 0; // Variable para rastrear la pregunta actual
+let respuestasCorrectas = 0; // Contador de respuestas correctas
 
-        // Iterar sobre el array de preguntas
-        for (let i = 0; i < data.listaPreguntas.length; i++) {
-            let pregunta = data.listaPreguntas[i];
-
-            // Se muestra pregunta
-            html += '<div class="tabla"><div class="nombre_pregunta"><h1>';
-            html += pregunta.nombre_pregunta + '</h1></div>';
-
-            // Se muestran las opciones
-            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion1">';
-            html += pregunta.opcion_a + '</div>';
-            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion2">';
-            html += pregunta.opcion_b + '</div>';
-            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion3">';
-            html += pregunta.opcion_c + '</div>';
-            html += '<div class="opcion"><input type="radio" name="opcion" value="opcion4">';
-            html += pregunta.opcion_d + '</div>';
-
-            html += '</div>'; // Cierre del div de pregunta
-        }
+function mostrarPreguntaActual(data) {
+    
+    if (data && Array.isArray(data.listaPreguntas) && preguntaActual < data.listaPreguntas.length) {
+        let pregunta = data.listaPreguntas[preguntaActual];
+        let html = '<div class="tabla"><div class="nombre_pregunta"><h1>';
+        html += pregunta.nombre_pregunta + '</h1></div>';
+        html += '<div class="opcion"><input type="radio" name="opcion" value="a">';
+        html += pregunta.opcion_a + '</div>';
+        html += '<div class="opcion"><input type="radio" name="opcion" value="b">';
+        html += pregunta.opcion_b + '</div>';
+        html += '<div class="opcion"><input type="radio" name="opcion" value="c">';
+        html += pregunta.opcion_c + '</div>';
+        html += '<div class="opcion"><input type="radio" name="opcion" value="d">';
+        html += pregunta.opcion_d + '</div>';
+        html += '</div>'; // Cierre del div de pregunta
 
         let contenedor = document.getElementsByClassName("text")[0];
         contenedor.innerHTML = html;
+
+        // Agregar evento para el botón de siguiente
+        let botonSiguiente = document.createElement("button");
+        botonSiguiente.innerHTML = "Siguiente";
+        botonSiguiente.addEventListener("click", function() {
+            evaluarRespuesta(data, pregunta);
+        });
+        contenedor.appendChild(botonSiguiente);
     } else {
-        console.error('Los datos recibidos no son válidos o no contienen preguntas.');
+        // Mostrar resultados finales
+        mostrarResultados();
     }
 }
+let respuestasUsuario = []; // Variable global para almacenar respuestas del usuario
 
-function comenzarEvaluacion(data) {
-    mostrarPreguntasEvaluacion(data);
+function evaluarRespuesta(data, pregunta) {
+    let opciones = document.getElementsByName("opcion");
+    let respuestaUsuario = null;
+
+    opciones.forEach(function(opcion) {
+        if (opcion.checked) {
+            respuestaUsuario = opcion.value;
+        }
+    });
+    // Guardar la respuesta del usuario
+    respuestasUsuario.push({ preguntaId: pregunta.id, respuesta: respuestaUsuario });
+    console.log("Respuesta del usuario: ");
+
+    if (respuestaUsuario === pregunta.respuesta_correcta.toString()) {
+        console.log("Respuesta correcta");
+        console.log(respuestaUsuario, pregunta.respuesta_correcta);
+        respuestasCorrectas++;
+    }
+
+    // Incrementar el contador de pregunta actual
+    preguntaActual++;
+
+    // Mostrar la siguiente pregunta o los resultados finales
+    mostrarPreguntaActual(data);
 }
 
+function mostrarResultados() {
+    let contenedor = document.getElementsByClassName("text")[0];
+    contenedor.innerHTML = '<h2>¡Evaluación completada!</h2>';
+    contenedor.innerHTML += '<p>Respuestas correctas: ' + respuestasCorrectas + '</p>';
+    
+}
+
+//Funcion para comenzar la evaluacion, activando el temporizador y mostrando la primera pregunta
+function comenzarEvaluacion(data) {
+    preguntaActual = 0; // Reiniciar el contador de preguntas al inicio
+    respuestasCorrectas = 0; // Reiniciar el contador de respuestas correctas al inicio
+    mostrarPreguntaActual(data);
+}
 
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
