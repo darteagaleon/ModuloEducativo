@@ -15,43 +15,52 @@
         <br>
         <form class="search" action="{% url 'filtrar_usuarios' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Usuario...">
-                <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                style="font-size:27px; "></i></button>
+            <button class="search-icon"> <i class='bx bx-search-alt'
+                style="font-size:27px; "></i></button> <br>
             </form>
             <hr>
-            <a href="{% url 'listar_usuarios' %}"><button class="subir">
-                <span>Ver todos </span>
-            </button></a>
-        <!--esta linea nos dirije a la página que lista todos los cursos-->
-        <table class="table  table-fixed">
+            <a href="{% url 'listar_usuarios' %}">
+                <button class="ver_todos">
+                    <span>Ver todos</span>
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </a>
+        <table class="table table-hover mt-4 ">
             <thead>
-                <tr style="width: 180px;" id="cabecera">
-                    <th style="width: 400px;" scope="col" id="nombre">Nombre y Apellido</th>
-                    <th style="width: 200px;" scope="col" id="estado">Estado</th>
-                    <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                <tr  id="cabecera">
+                    <th  style="width: 185px;" scope="col" >Nombre</th>
+                    <th  style="width: 100px;" scope="col" id="estado">Estado</th>
+                    <th   style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
                 </tr>
             </thead>
-
-                <tbody class="table-group-divider">
+        </table>
+        <!--esta linea nos dirije a la página que lista todos los cursos-->
+        <div class="table-responsive ">
+            <table class="table table-hover mt-4 table-2">
+            <tbody class=" overflow-hidden">
                     {% for usuario in usuarios %}
-                    <tr style="width: 180px;">
-                        <td style="width:400px;" id="nombre">{{ usuario.user.username }} {{ usuario.apellido }} </td>
+                    <tr >
+                        <td id="nombre">{{ usuario.user.username }} {{ usuario.apellido }} </td>
 
                         {% if usuario.estadousuario %}
-                        <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
+                        <td  id="estado">
+                            <button type="button" class="btn btn-success text-white activo">Activo</button>
+                        </td>
                         {% else %}
-                        <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                        <td  id="estado">
+                            <button type="button" class="btn btn-warning text-white inactivo">Inactivo</button>
+                        </td>
                         {% endif %} 
                         <!-- <td scope="row" id="contenido-tabla">{{ usuario.estadousuario }}</td> -->
 
-                        <td style="width: 200px;" id="visualizar">                     
+                        <td  id="visualizar">                     
                             <!-- <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
                                 <button class="subir"> <span>Visualizar</span>
                                 </button>
                             </a> -->
                             <a href="{% url 'perfil_usuario_detalle' user_id=usuario.id %}">
-                                <button class="subir"> <span>Visualizar</span>
-                                </button>
+                                <button type="button" class="btn visualizar">Visualizar</button>
+                            </button>
                             </a>
                             
                         </td>
@@ -62,12 +71,10 @@
         </div>
         <a href="{% url 'usuarios' %}" id="back2">
             <button class="back">
-                <div class="icon">
+                <button class="back">
                     <i class='bx bx-arrow-back'></i>
-                </div>
-                <span>
-                    Regresar
-                </span>
+                    <span>Regresar</span>
+                </button>
             </button>
         </a>
             

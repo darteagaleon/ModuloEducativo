@@ -5,6 +5,7 @@
 <!--es un bloqueo de contenido -->
 {% block content %}
 <link rel="stylesheet" href="{% static 'Css/perfil_usuario.css' %}">
+
 <body>
     <div class="home-content">
         <div class="text">
@@ -14,14 +15,14 @@
                     <div class="tittle">
                         <img src="{% static 'img/user-removebg-preview.png' %}" alt="" id="img-user">
                     </div>
-                    <div class="content">                    
+                    <div class="content">
                         <div class="nombre">
                             <p>
                                 Nombre y Apellido
                             </p>
                             <p id="name">
                                 {{ usuario.username }} {{ perfil.apellido }}
-                                
+
                             </p>
                             <hr>
                         </div>
@@ -31,10 +32,10 @@
                             </p>
                             <p id="estado_usuario">
                                 {% if perfil.estadousuario %} Activo {% else %} Inactivo {% endif %}
-                                
+
                             </p>
                             <hr>
-                        </div>                            
+                        </div>
                         <div class="correo">
                             <p>
                                 Correo
@@ -49,7 +50,7 @@
                                 Cargo
                             </p>
                             <p id="position">
-                                {{ perfil.cargo }}  
+                                {{ perfil.cargo }}
                             </p>
                             <hr>
                         </div>
@@ -64,64 +65,67 @@
                         </div>
                     </div>
                 </div>
-                <ul class="content_cursos">
-                    <!-- Aquí va el contenido principal de la página -->
+                <div class="content_cursos">
                     <li>
-                        <div class="icon-links ">
-                            <span class="link_name">Cursos asignados </span>
-                            <i class='bx bx-chevron-down arrow '></i>
+                        <div class="icon-links">
+                            <span class="link_name">Cursos asignados</span>
+                            <i class='bx bx-chevron-down arrow'></i>
                         </div>
                         <ul class="sub-menu">
-                            {% for curso in listacursos %}
-                                <li><a href="#">{{ curso.nombre_curso }}</a></li>
-                            {% endfor %}
+                            {% comment %} {% for curso in listacursos %}
+                            <li><a href="#">{{ curso.nombre_curso }}</a></li>
+                            {% endfor %} {% endcomment %}
+                            <li><a href="#">Curso 1</a></li>
+                            <li><a href="#">Curso 2</a></li>
+                            <li><a href="#">Curso 3</a></li>
                         </ul>
                     </li>
-                </ul>
-                    <div class="cursos_culminados">
-                        <p>
-                            Cursos Culminados
-                        </p>
-                        <p id="position">
-                            curso 5, curso 6 
-                        </p>
-                        <hr>
-                    </div>
-                    <div class="certificaciones">
-                        <p>
-                            Certificaciones
-                        </p>
-                        <p id="position">
-                            Certificacion curso 5
-                            Certificacion curso 6 
-                        </p>
-                        <hr>
-                    </div>
+                </div>
+                <div class="cursos_culminados">
+                    <p>
+                        Cursos Culminados
+                    </p>
+                    <p id="position">
+                        curso 5, curso 6
+                    </p>
+                    <hr>
+                </div>
+                <div class="certificaciones">
+                    <p>
+                        Certificaciones
+                    </p>
+                    <p id="position">
+                        Certificacion curso 5
+                        Certificacion curso 6
+                    </p>
+                    <hr>
                 </div>
             </div>
         </div>
     </div>
+    </div>
 </body>
-    <a href="{% url 'usuarios' %}" id="back2">
-        <button class="back">
-            <div class="icon">
-                <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button>
-    </a>
+<a href="{% url 'usuarios' %}" id="back2">
+    <button class="back">
+        <div class="icon">
+            <i class='bx bx-arrow-back'></i>
+        </div>
+        <span>
+            Regresar
+        </span>
+    </button>
+</a>
 
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e) => {
-                let arrowParent = e.target.parentElement.parentElement;
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let arrows = document.querySelectorAll(".arrow");
+        for (let arrow of arrows) {
+            arrow.addEventListener("click", function (e) {
+                let arrowParent = e.target.closest("li");
                 arrowParent.classList.toggle("showMenu");
-        });
-    }
-    </script>
+            });
+        }
+    });
+</script>
 
 {% endblock %}
-

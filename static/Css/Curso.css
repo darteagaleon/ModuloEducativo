@@ -35,7 +35,6 @@ body {
     transition: all 0.3s ease;
     width: 50vw;
     max-width: 60vw;
-    height: 80vh;
     margin: 5% auto;
     /* Ajusta el margen superior al 5% */
     border-radius: 20px;
@@ -69,16 +68,12 @@ body {
     /* Divide las columnas en un tercio */
 }
 
-.table {
-    width: 100%;
-    height: 10vh;
-}
 
 .search-bar {
     caret-color: #0fbf12;
     font-family: 'Lato', sans-serif;
-    background: #ecf0f3;
     font-weight: 300;
+    background: #ecf0f3;
     box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
     border: none;
     border-radius: 40px;
@@ -91,16 +86,20 @@ body {
     width: 50%;
     padding: 10px 10px 10px 10px;
 }
-.search-icon{
+.search-icon {
     border: none;
     background: linear-gradient(to right, #67b26b, #4ca2cb);
     color: #fff;
-    border-radius:50%; 
-    width:45px; 
-    height:45px;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
     font-size: 20px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 a {
     text-decoration: none;
 }
@@ -196,8 +195,6 @@ a {
     width: 150px;
     padding: 10px;
     font-size: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
@@ -207,27 +204,32 @@ a {
     border: none;
     background: linear-gradient(to right, #67b26b, #4ca2cb);
     color: #fff;
-
+    transition: all 0.4s ease-in;
+    font-family: 'Poppins', sans-serif ;
+    font-weight: 500;
 }
 
 
-.back>i {
-    font-size: 20px;
+
+.back > i {
+
     transition: all 0.4s ease-in;
     width: 30px;
-
 }
-
-.back:hover>i {
+   
+.back:hover > i {
+    font-weight: bold;
     font-size: 1.2em;
     transform: translateX(-5px);
-}
-
-.back:hover {
+   }
+   
+   .back:hover {
     box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
     transform: translateY(-2px);
 
 }
+
+
 .status--active {
     color: #EAFEF3;
     background-color: #2ECC71;
@@ -239,11 +241,17 @@ a {
     border-radius: 5px;
 }
 
+.activo{
+    color: #fff6e5;
+    font-weight: 500;
+    font-size: 20px;
+    padding-left: 20px; /* Padding a la izquierda */
+    padding-right:20px; /* Padding a la derecha */
+}
 .inactivo{
     color: #fff6e5;
     font-weight: 500;
     font-size: 20px;
-
 }
 .visualizar{
     background: linear-gradient(to right, #67b26b, #4ca2cb);
@@ -292,9 +300,20 @@ form>*:last-child {
     /* Cambiar el color del track en el aside (puede ser transparente) */
     border-radius: 6px;
 }
+.table-2 {
+    /* border: #000000 solid 1px; */
+    position: relative;
+    top:-32px;
+}
 
 #cabecera {
     border-bottom: 1px solid black;
+    margin-bottom: -1px; /* Para superponer el borde sobre la tabla */
+}
+#nombre{
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
 }
 
 /* 
@@ -322,7 +341,7 @@ form>*:last-child {
     }
 }
 
-@media screen and (max-width: 1366px) {
+@media sc35reen and (max-width: 1366px) {
     #contenedor{
         width: 60vw;
         max-width: 60vw;
