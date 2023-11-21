@@ -67,11 +67,11 @@
                 </div>
                 <div class="content_cursos">
                     <li>
-                        <div class="icon-links">
-                            <span class="link_name">Cursos asignados</span>
-                            <i class='bx bx-chevron-down arrow'></i>
+                        <div class="Icon-links">
+                            <span class="Link_name">Cursos asignados</span>
+                            <i class='bx bx-chevron-down Arrow'></i>
                         </div>
-                        <ul class="sub-menu">
+                        <ul class="Sub-menu">
                             {% comment %} {% for curso in listacursos %}
                             <li><a href="#">{{ curso.nombre_curso }}</a></li>
                             {% endfor %} {% endcomment %}
@@ -118,11 +118,11 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let arrows = document.querySelectorAll(".arrow");
-        for (let arrow of arrows) {
-            arrow.addEventListener("click", function (e) {
+        let arrows = document.querySelectorAll(".Arrow");
+        for (let Arrow of arrows) {
+            Arrow.addEventListener("click", function (e) {
                 let arrowParent = e.target.closest("li");
-                arrowParent.classList.toggle("showMenu");
+                arrowParent.classList.toggle("ShowMenu");
             });
         }
     });

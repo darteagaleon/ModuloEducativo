@@ -12,7 +12,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="all">
-            <div id="tabla">
+            <div id="tabla"  class="container-fluid">
                 <h1>Editar Evaluación </h1>
                 <!--es una medida de seguridad importante para proteger tu aplicación web Django contra ataques -->
                 {% csrf_token %}
@@ -22,14 +22,10 @@
                     <div class="form-group">
                         {{ form }}
                     </div>
-                    <div class="button-box">
-                        <button class="subir" type="submit"><div class="icono">
-                            <i class='bx bx-pencil'></i>
-                        </div>
-                        <span>
-                            Editar
-                        </span></button>
-                    </div>  
+                    <button class="subir" type="submit">
+                        <i class='bx bx-pencil'></i>
+                        <span>Editar</span>
+                     </button>
                 </form>
             </div>
         </div>
@@ -37,11 +33,10 @@
 </div>
 <a href="{% url 'ver_evaluacion_detalle' evaluacion_id=evaluacion_id %}" ><!--nos dirije  a la URL correspondiente a la vista llamada 'listar_evaluacion' -->
     <button class="back">
-        <div class="icon">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button></a>
+            <span>Regresar</span>
+        </button>
+    </button> 
+</a>
 {% endblock %}

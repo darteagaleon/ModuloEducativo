@@ -13,19 +13,15 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="all">
-            <div id="tabla">
+            <div id="tabla"  class="container-fluid">
                 <h1>Crear Material de Apoyo</h1>
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                         {{ form.as_p }}
-                        <div class="button-box">
-                            <button class="subir" type="submit"><div class="icono">
-                                <i class='bx bx-save'></i>
-                            </div>
-                            <span>
-                                Guardar
-                            </span></button>
-                        </div>                        
+                        <button class="subir" type="submit">
+                            <i class='bx bx-save'></i>
+                            <span>Guardar</span>
+                         </button>       
                 </form>
 
             </div>
@@ -34,12 +30,10 @@
 </div>
 <a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
     <button class="back">
-        <div class="icon">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button>
+            <span>Regresar</span>
+        </button>
+    </button> 
 </a>
 {% endblock %}

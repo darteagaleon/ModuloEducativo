@@ -8,7 +8,7 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
-        <div id="contenedor">
+        <div id="contenedor"  class="container-fluid">
             <h1> Listado de Clases</h1>
             <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">

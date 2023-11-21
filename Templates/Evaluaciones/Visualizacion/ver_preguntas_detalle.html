@@ -10,7 +10,7 @@
     <div class="home_content"> <!--1 -->
         <div class="text"><!--2 -->
             <div class="all">
-                <div class="tabla">
+                <div class="tabla container-fluid">
                     <div class="titulo">
                         <h1>{{ evaluacion.nombre_evaluacion }}</h1>
                         <!-- En resumen, esta línea de código se utiliza para mostrar el título o nombre de una evaluación específica en una página web.-- -->
@@ -34,16 +34,12 @@
                         <p>d. {{ pregunta.opcion_d }}</p>
                     </div>
 
-                    <div class="button-box">
                         <a href="{% url 'editar_pregunta' pregunta.id%}"> 
-                            <button class="subir" type="submit"><div class="icono">
+                            <button class="subir" type="submit">
                                 <i class='bx bx-pencil'></i>
-                        </div>
-                        <span>
-                            Editar
-                        </span></button>
+                                <span>Editar</span>
+                             </button>
                     </a>
-                    </div>  
                     {% endfor %}
                 </div>
 
@@ -53,13 +49,12 @@
     </div>
     <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}" id="back2">
         <button class="back">
-            <div class="icon">
+            <button class="back">
                 <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button></a>
+                <span>Regresar</span>
+            </button>
+        </button>
+    </a>
 
 </body>
 {% endblock %}

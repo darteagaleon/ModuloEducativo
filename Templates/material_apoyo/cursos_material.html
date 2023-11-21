@@ -9,19 +9,21 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
-        <div class="container2"><!--2 -->
-        <h1> Listado de Cursos </h1>
+        <div class="container2 container-fluid"><!--2 -->
+        <h1> Listado de Material </h1>
         <br>
         <form class="search" action="{% url 'filtrar_cursos_material' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                style="font-size:27px; "></i></button>        </form>
+            <button class="search-icon"> <i class='bx bx-search-alt'
+                style="font-size:27px; "></i></button> <br>
+            </form>
         
         <br>
         <!--esta linea nos dirije a la página que lista todos los cursos-->
         <a href="{% url 'Listar_cursos_material' %}">
-            <button class="subir">
-                Ver todos
+            <button class="ver_todos">
+                <span>Ver todos</span>
+                <i class='bx bx-chevron-right'></i>
             </button>
         </a>
 
@@ -36,7 +38,7 @@
                         <div class="card-content">
                             <h3>{{ curso.nombre_curso | title  }}</h3> <!-- Nombre del curso -->
                             <a href="{% url 'material_list' curso_id=curso.pk  %}" >
-                                <button class="visualizar-link" type="submit"><span>Visualizar </span></button>
+                                <button type="button" class="btn visualizar">Visualizar</button>
                             </a>
                         </div>
                         
@@ -49,26 +51,22 @@
 </div>
 {% if group_name == 'administrativos' %}
 <a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
-    <button class="back">
-        <div class="icon">
+     <button class="back">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button>
+            <span>Regresar</span>
+        </button>
+    </button>   
 </a>
 
     {% elif group_name == 'usuarios' %}
     <a href="{% url 'home' %}" id="back2">
+         <button class="back">
         <button class="back">
-            <div class="icon">
-                <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
+            <i class='bx bx-arrow-back'></i>
+            <span>Regresar</span>
         </button>
+    </button>   
     </a>
     {% endif %}
     

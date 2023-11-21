@@ -117,11 +117,11 @@ select {
 .content_cursos li{
     list-style: none;
 }
-.content_cursos li i.arrow {
+.content_cursos li i.Arrow {
     transition: transform 0.3s ease;
 }
 
-.content_cursos li.showMenu i.arrow {
+.content_cursos li.ShowMenu i.Arrow {
     transform: rotate(-180deg);
 }
 
@@ -131,7 +131,7 @@ select {
     text-decoration: none;
 }
 
-.content_cursos li a .link_name {
+.content_cursos li a .Link_name {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 18px;
@@ -141,12 +141,13 @@ select {
 
 }
 
-.content_cursos li.showMenu a .link_name {
+.content_cursos li.ShowMenu a .Link_name {
     opacity: 0;
     pointer-events: none;
+    transition: all 0.4s ease;
 }
 
-.content_cursos li .sub-menu {
+.content_cursos li .Sub-menu {
     display: none;
     padding: 6px 6px 14px 80px;
     margin-top: -10px;
@@ -156,11 +157,11 @@ select {
 
 }
 
-.content_cursos li.showMenu .sub-menu {
+.content_cursos li.ShowMenu .Sub-menu {
     display: block;
 }
 
-.content_cursos li .sub-menu a {
+.content_cursos li .Sub-menu a {
     color: #000000;
     font-size: 15px;
     padding: 5px 0;
@@ -169,8 +170,8 @@ select {
     transition: opacity 0.3s ease;
 }
 
-.content_cursos li:hover .sub-menu.blank {
+.content_cursos li:hover .Sub-menu.blank {
     top: 50%;
-    transform: translateY(50%);
+    transform: translateY(10%);
 }
 

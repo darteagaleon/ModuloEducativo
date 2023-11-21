@@ -10,7 +10,7 @@
     <div class="home_content"> <!--1 -->
         <div class="text"><!--2 -->
             <div class="all">
-                <div id="tabla">
+                <div id="tabla"  class="container-fluid">
                     <div>
                         <h1>Crear Preguntas </h1>
                         <div class="form">
@@ -25,14 +25,10 @@
 								</div>
                                 {{ form.as_p }}
                                 
-								<div class="button-box">
-									<button class="subir" type="submit"><div class="icono">
-										<i class='bx bx-save'></i>
-									</div>
-									<span>
-										Guardar
-									</span></button>
-								</div>
+								<button class="subir" type="submit">
+                                    <i class='bx bx-save'></i>
+                                    <span>Guardar</span>
+                                </button> 
 							</form>
 						</div>
                     </div>
@@ -42,12 +38,11 @@
     </div>
     <a href="{% url 'evaluacion' %}" >
         <button class="back">
-            <div class="icon">
+            <button class="back">
                 <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button>        </a>
+                <span>Regresar</span>
+            </button>
+        </button>   
+    </a>
 </body>
 {% endblock %}

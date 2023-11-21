@@ -8,64 +8,69 @@
 
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
-        <div id="contenedor">
-        <h1> Listado de Modulos </h1>
-        <br>
-        <!-- Formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista -->
-        <form class="search" action="{% url 'filtrar_modulos' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
-            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                style="font-size:27px; "></i></button>
+        <div id="contenedor" class="container-fluid">
+            <h1> Listado de Modulos </h1>
+            <br>
+            <!-- Formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista -->
+            <form class="search" action="{% url 'filtrar_modulos' %}" method="GET">
+                <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
+                <button class="search-icon"> <i class='bx bx-search-alt' style="font-size:27px; "></i></button> <br>
                 <!-- Enlace para ver todos los módulos -->
             </form>
             <hr>
-        <a href="{% url 'listar_modulos' %}">
-            <button class="subir">
-                <span>Ver todos </span>
-            </button>
-        </a>
-        <table class="table  table-fixed">
+            <a href="{% url 'listar_modulos' %}">
+                <button class="ver_todos">
+                    <span>Ver todos</span>
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </a>
+            <table class="table table-hover mt-4 ">
                 <thead>
-                    <tr style="width: 180px;" id="cabecera">
-                        <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
-                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
-                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
+                    <tr id="cabecera">
+                        <th style="width: 355px;" scope="col">Nombre</th>
+                        <th style="width: 100px;" scope="col" id="estado">Estado</th>
+                        <th style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    {% for modulos in listarm %} <!-- Inicia un bucle para listar los módulos -->
-                    <tr style="width: 180px;">
-                        <!-- Celdas de datos de la tabla -->
-                        <td style="width:400px;" id="nombre">{{ modulos.nombre_modulo | title }}</td>
-                        <!-- Verifica el estado del módulo y muestra el ícono correspondiente -->
-                        {% if modulos.estado_modulo %}
-                            <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
-                            {% else %}
-                            <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
-                            {% endif %} 
-                            <td style="width: 200px;" id="visualizar">
-                            <!-- Enlace para visualizar el módulo -->
-                            <a href="{% url 'ver_modulos' modulos.id %}">
-                                <button class="subir"> <span>Visualizar</span>
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                    {% endfor %} <!-- Fin del bucle de módulos -->
-                </tbody>
             </table>
+            <div class="table-responsive ">
+                <table class="table table-hover mt-4 table-2">
+
+                    <tbody class=" overflow-hidden">
+                        {% for modulos in listarm %} <!-- Inicia un bucle para listar los módulos -->
+                        <tr style="width: 180px;">
+                            <!-- Celdas de datos de la tabla -->
+                            <td id="nombre">{{ modulos.nombre_modulo | title }}</td>
+                            <!-- Verifica el estado del módulo y muestra el ícono correspondiente -->
+                            {% if modulos.estado_modulo %}
+                            <td  id="estado">
+                                <button type="button" class="btn btn-success text-white activo">Activo</button>
+                            </td>
+                            {% else %}
+                            <td  id="estado">
+                                <button type="button" class="btn btn-warning text-white inactivo">Inactivo</button>
+                            </td>
+                            {% endif %}
+                            <td  id="visualizar">
+                                <!-- Enlace para visualizar el módulo -->
+                                <a href="{% url 'ver_modulos' modulos.id %}">
+                                    <button type="button" class="btn visualizar">Visualizar</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %} <!-- Fin del bucle de módulos -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<!-- Enlace para regresar a la lista de módulos -->
-<a href="{% url 'modulos' %}" id="back2">
-    <button class="back">
-        <div class="icon">
-            <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button>
-</a>
-{% endblock %}
+    <!-- Enlace para regresar a la lista de módulos -->
+    <a href="{% url 'modulos' %}" id="back2">
+        <button class="back">
+            <button class="back">
+                <i class='bx bx-arrow-back'></i>
+                <span>Regresar</span>
+            </button>
+        </button>
+    </a>
+    {% endblock %}
