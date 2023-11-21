@@ -21,23 +21,21 @@
                     <div class="form-group">
                         {{ form }}
                     </div>
-                    <div class="button-box">
-                        <button class="subir" type="submit"><div class="icono">
-                            <i class='bx bx-pencil'></i>
-                        </div>
-                        <span>
-                            Editar
-                        </span>                </form>
+                    <button class="subir" type="submit">
+                        <i class='bx bx-pencil'></i>
+                        <span>Editar</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<a href="{% url 'ver_modulos' modulo_id=modulo_id %}" id="back2">
-    <button class="back">
-        <div class="icon">
-            <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
-    </button></a>
-{% endblock %}
+    <a href="{% url 'ver_modulos' modulo_id=modulo_id %}" id="back2">
+        <button class="back">
+            <button class="back">
+                <i class='bx bx-arrow-back'></i>
+                <span>Regresar</span>
+            </button>
+        </button>     
+    </a>
+    {% endblock %}

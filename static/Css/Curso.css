@@ -230,29 +230,8 @@ a {
 }
 
 
-.status--active {
-    color: #EAFEF3;
-    background-color: #2ECC71;
-    font-weight: 500;
-    /* margin: 5px; */
-    padding: 5px;
-    width: 100px;
-    text-align: center;
-    border-radius: 5px;
-}
 
-.activo{
-    color: #fff6e5;
-    font-weight: 500;
-    font-size: 20px;
-    padding-left: 20px; /* Padding a la izquierda */
-    padding-right:20px; /* Padding a la derecha */
-}
-.inactivo{
-    color: #fff6e5;
-    font-weight: 500;
-    font-size: 20px;
-}
+
 .visualizar{
     background: linear-gradient(to right, #67b26b, #4ca2cb);
     color: #fff6e5;
@@ -265,6 +244,18 @@ a {
     box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
     transform: translateY(-2px);
 
+}
+.activo{
+    color: #fff6e5;
+    font-weight: 500;
+    font-size: 20px;
+    padding-left: 20px; /* Padding a la izquierda */
+    padding-right:20px; /* Padding a la derecha */
+}
+.inactivo{
+    color: #fff6e5;
+    font-weight: 500;
+    font-size: 20px;
 }
 form {
     /* border: 1px solid red; */

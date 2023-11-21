@@ -10,45 +10,49 @@
     <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
     <div class="home_content"> <!--1 -->
         <div class="text"><!--2 -->
-            <div id="contenedor">
-                <h1> Listado de Evaluaciones </h1>
+            <div id="contenedor"  class="container-fluid">
+                    <h1> Listado de Evaluaciones </h1>
                 <br>
                 <form class="search" action="{% url 'filtrar_evaluacion' %}" method="GET">
                     <input type="text" class="search-bar" name="search" placeholder="Buscar Evaluación...">
-                    <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                            style="font-size:27px; "></i></button>
-                        </form>
+                    <button class="search-icon"> <i class='bx bx-search-alt'
+                        style="font-size:27px; "></i></button> <br>
+                    </form>
                         <hr>
                         <a href="{% url 'listar_evaluacion' %}">
-                            <button class="subir">
-                                <span>Ver todos </span>
+                            <button class="ver_todos">
+                                <span>Ver todos</span>
+                                <i class='bx bx-chevron-right'></i>
                             </button>
                         </a>
-                <table class="table  table-fixed">
-                    <thead>
-                        <tr style="width: 180px;" id="cabecera">
-                            <th style="width: 400px;" scope="col" id="nombre">Nombre</th>
-                            <th style="width: 200px;" scope="col" id="estado">Estado</th>
-                            <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-group-divider"  >
+                        <table class="table table-hover mt-4 ">
+                            <thead>
+                                <tr  id="cabecera">
+                                    <th  style="width: 355px;" scope="col" >Nombre</th>
+                                    <th  style="width: 100px;" scope="col" id="estado">Estado</th>
+                                    <th   style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
+                                </tr>
+                            </thead>
+                        </table>
+                        <div class="table-responsive ">
+                            <table class="table table-hover mt-4 table-2">
+                            
+                            <tbody class=" overflow-hidden">
                         {% for evaluacion in listare %}
                         <tr>
-                            <td style="width:400px;" id="nombre">{{ evaluacion.nombre_evaluacion }}</td>
+                            <td id="nombre">{{ evaluacion.nombre_evaluacion }}</td>
                             <!--se utiliza para mostrar dinámicamente el valor de la propiedad "nombre_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                             <!--se utiliza para mostrar dinámicamente el valor de la propiedad "descrpcion_evaluacion" de un objeto "evaluacion" en una celda de una tabla HTML.-->
                             {% comment %} {% if evaluacion.estado_evaluacion %} {% endcomment %}
                             {% if evaluacion.finalizada %}
-                            <td style="width: 200px;" id="estado"><p class='status--active'>Activo</p></td>
+                            <td  id="estado"><button type="button" class="btn btn-success text-white activo">Activo</button></td>
                             {% else %}
-                            <td style="width: 200px;" id="estado"><p class='status--inactive'>Inactivo</p></td>
+                            <td  id="estado"><button type="button" class="btn btn-warning text-white inactivo">Inactivo</button></td>
                             {% endif %} 
                             <!--este <td> se utiliza para mostrar de manera dinámica si una evaluación está finalizada o no en una tabla-->
-                            <td style="width: 200px;" id="visualizar">
+                            <td  id="visualizar">
                                 <a href="{% url 'ver_evaluacion_detalle' evaluacion.id %}">
-                                    <button class="subir"> <span>Visualizar</span>
-                                    </button>
+                                    <button type="button" class="btn visualizar">Visualizar</button>
                                 </a>
                             </td>
                         </tr>

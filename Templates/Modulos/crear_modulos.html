@@ -23,14 +23,10 @@
 
                             </div>
                             {{ form.as_p }}
-                            <div class="button-box">
-                                <button class="subir" type="submit"><div class="icono">
-                                    <i class='bx bx-save'></i>
-                                </div>
-                                <span>
-                                    Guardar
-                                </span></button>
-                            </div>
+                            <button class="subir" type="submit">
+                                <i class="bx bx-save"></i>
+                                <span>Guardar</span>
+                              </button>
                             </form>
                     </div>
                 </div>
@@ -39,13 +35,19 @@
     </div>
     <!--nos dirije a la URL correspondiente a la vista llamada 'modulo' -->
     <a href="{% url 'modulos' %}"  id="back2">
-        <button class="back">
-            <div class="icon">
-                <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button></a>
+        <button class="back btn  ">
+            <i class="bx bx-arrow-back"></i>
+            <span>Regresar</span>
+          </button>
+        </a>
+    </a>
+    
 </body>
+<style>
+    #back2:hover{
+      text-decoration:none;
+      color:white;
+    }
+  
+  </style>
 {% endblock %}

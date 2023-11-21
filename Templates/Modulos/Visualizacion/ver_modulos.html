@@ -9,7 +9,7 @@
 <body>
     <div class="home_content">
         <div class="text">
-            <div class="card">
+            <div class="card container-fluid">
                     <!--este div se utiliza para mostrar el nombre de un módulo en una página web. -->
                     <div class="card-int">
                         <p class="card-int__title">{{ v_modulos.nombre_modulo }}</p>
@@ -23,7 +23,10 @@
                     </div>
                     <div class="button-box">
                         <a href="{% url 'editar_modulos' v_modulos.id %}">
-                            <button class="subir" type="submit"><span>Editar </span></button>
+                            <button class="subir" type="submit">
+                                <i class='bx bx-pencil'></i>
+                                <span>Editar</span>
+                            </button>                 
                         </a>
                     </div>
                     
@@ -33,12 +36,11 @@
     </div>
     <a href="{% url 'listar_modulos' %}" id="back2">
         <button class="back">
-            <div class="icon">
+            <button class="back">
                 <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
-        </button>    </a>
+                <span>Regresar</span>
+            </button>
+        </button>   
+    </a>
 </body>
 {% endblock %}

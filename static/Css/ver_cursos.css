@@ -198,6 +198,9 @@ a{
     transform: translateY(-2px);
 
 }
+
+
+
 .back1 {
     position: fixed; /* Fija el botón en su posición */
     top: 15%; /* Distancia desde la parte superior en porcentaje */

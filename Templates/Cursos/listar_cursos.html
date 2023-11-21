@@ -5,15 +5,15 @@
 
 <div class="home_content">
     <div class="text">
-        <div id="contenedor">
+        <div id="contenedor"  class="container-fluid">
             <h1> Listado de Cursos </h1>
             <br>
             <form class="search" action="{% url 'filtrar' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
                 <button class="search-icon"> <i class='bx bx-search-alt'
-                        style="font-size:27px; "></i></button> <br>
-            </form>
-            <hr>
+                    style="font-size:27px; "></i></button> <br>
+                </form>
+                <hr>
             <a href="{% url 'listar_cursos' %}">
                 <button class="ver_todos">
                     <span>Ver todos</span>
@@ -64,12 +64,10 @@
     </div>
     <a href="{% url 'cursos' %}" id="back2">
         <button class="back">
-            <div class="icon">
+            <button class="back">
                 <i class='bx bx-arrow-back'></i>
-            </div>
-            <span>
-                Regresar
-            </span>
+                <span>Regresar</span>
+            </button>
         </button>
     </a>
     {% endblock %}
