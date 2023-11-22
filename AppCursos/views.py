@@ -55,6 +55,7 @@ def login(request):
             return redirect('home')
         else:
             # Si la autenticación falla, muestra un mensaje de error o redirige a la página de login, para poder ingresar.
+            messages.error(request, 'Usuario o contraseña incorrectos')  
             return render(request, 'registration/login.html')   
     else:
         return render(request, 'registration/login.html')
