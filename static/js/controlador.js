@@ -13,7 +13,6 @@ function solicitarPreguntas(clase_id) {
 //Funcion para mostrar las preguntas de la evaluacion
 
 function mostrarPreguntas(data) {
-    console.log(data);
     // Mostrar todas las preguntas de una en una
     let html = '<div class="tabla"><div class="titulo"><h1>'; 
     html += 'Evaluacion del Modulo ' +data.nombre + '</h1></div>';
@@ -47,14 +46,14 @@ function mostrarPreguntaActual(data) {
         let pregunta = data.listaPreguntas[preguntaActual];
         let html = '<div class="tabla"><div class="nombre_pregunta"><h1>';
         html += pregunta.nombre_pregunta + '</h1></div>';
-        html += '<div class="opcion"><input type="radio" name="opcion" value="a">';
-        html += pregunta.opcion_a + '</div>';
-        html += '<div class="opcion"><input type="radio" name="opcion" value="b">';
-        html += pregunta.opcion_b + '</div>';
-        html += '<div class="opcion"><input type="radio" name="opcion" value="c">';
-        html += pregunta.opcion_c + '</div>';
-        html += '<div class="opcion"><input type="radio" name="opcion" value="d">';
-        html += pregunta.opcion_d + '</div>';
+        html += '<div class="opcion"><label><input type="radio" name="opcion" value="a">';
+        html += 'A. ' + pregunta.opcion_a + '</label></div>';
+        html += '<div class="opcion"><label><input type="radio" name="opcion" value="b">';
+        html += 'B. ' + pregunta.opcion_b + '</label></div>';
+        html += '<div class="opcion"><label><input type="radio" name="opcion" value="c">';
+        html += 'C. ' + pregunta.opcion_c + '</label></div>';
+        html += '<div class="opcion"><label><input type="radio" name="opcion" value="d">';
+        html += 'D. ' + pregunta.opcion_d + '</label></div>';
         html += '</div>'; // Cierre del div de pregunta
 
         let contenedor = document.getElementsByClassName("text")[0];
@@ -69,7 +68,7 @@ function mostrarPreguntaActual(data) {
         contenedor.appendChild(botonSiguiente);
     } else {
         // Mostrar resultados finales
-        mostrarResultados();
+        mostrarResultados(data);
     }
 }
 let respuestasUsuario = []; // Variable global para almacenar respuestas del usuario
@@ -85,11 +84,8 @@ function evaluarRespuesta(data, pregunta) {
     });
     // Guardar la respuesta del usuario
     respuestasUsuario.push({ preguntaId: pregunta.id, respuesta: respuestaUsuario });
-    console.log("Respuesta del usuario: ");
 
     if (respuestaUsuario === pregunta.respuesta_correcta.toString()) {
-        console.log("Respuesta correcta");
-        console.log(respuestaUsuario, pregunta.respuesta_correcta);
         respuestasCorrectas++;
     }
 
@@ -100,20 +96,49 @@ function evaluarRespuesta(data, pregunta) {
     mostrarPreguntaActual(data);
 }
 
-function mostrarResultados() {
+function mostrarResultados(data) {
     let contenedor = document.getElementsByClassName("text")[0];
-    contenedor.innerHTML = '<h2>¡Evaluación completada!</h2>';
-    contenedor.innerHTML += '<p>Respuestas correctas: ' + respuestasCorrectas + '</p>';
-    
-}
 
-//Funcion para comenzar la evaluacion, activando el temporizador y mostrando la primera pregunta
-function comenzarEvaluacion(data) {
-    preguntaActual = 0; // Reiniciar el contador de preguntas al inicio
-    respuestasCorrectas = 0; // Reiniciar el contador de respuestas correctas al inicio
-    mostrarPreguntaActual(data);
-}
+    if (data && data.listaPreguntas) {
+        // Calcular la puntuación mínima requerida
+        let puntuacionMinimaRequerida = Math.ceil(data.listaPreguntas.length * 0.7);
 
+        // Verificar si el usuario superó la puntuación mínima requerida
+        if (respuestasCorrectas >= puntuacionMinimaRequerida) {
+            contenedor.innerHTML += '<p>Felicidades, has superado la evaluación.</p>';
+            contenedor.innerHTML += '<p>Respuestas correctas: ' + respuestasCorrectas + '</p>';
+        } else {
+            if (data.intentos > 0) {
+                data.intentos--;
+                contenedor.innerHTML += '<p>¡Ups! No has alcanzado la puntuación mínima. Tienes ' + data.intentos + ' intentos restantes.</p>';
+                
+                 // Agregar botón para intentar de nuevo solo si hay intentos disponibles
+                 if (data.intentos > 0) {
+                    let botonIntentarDeNuevo = document.createElement("button");
+                    botonIntentarDeNuevo.innerHTML = "Intentar de nuevo";
+                    botonIntentarDeNuevo.addEventListener("click", function() {
+                        // Reiniciar la evaluación
+                        respuestasUsuario = [];
+                        comenzarEvaluacion(data);
+                    });
+                    contenedor.appendChild(botonIntentarDeNuevo);
+                }
+            } else {
+                // Agregar mensaje de que se han agotado los intentos
+                contenedor.innerHTML += '<p>Lo siento, has agotado todos tus intentos.</p>';
+            }
+        }
+    } else {
+        console.error("Los datos de la evaluación son incorrectos.");
+    }
+}
+// Funcion para comenzar la evaluacion, activando el temporizador y mostrando la primera pregunta
+function comenzarEvaluacion(listaPreguntas) {
+    preguntaActual = 0;
+    respuestasCorrectas = 0;
+    respuestasUsuario = []; // Asegúrate de reiniciar respuestasUsuario
+    mostrarPreguntaActual(listaPreguntas);
+}
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
     
@@ -172,5 +197,5 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// 
+
 
