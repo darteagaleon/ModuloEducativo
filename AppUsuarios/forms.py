@@ -24,7 +24,7 @@ class CargoForm(forms.ModelForm):
 class CrearUsuariosForm(UserCreationForm):
     username = forms.CharField(label='Nombre Usuario', max_length=150)
     apellido = forms.CharField(max_length=30, label='Apellido', required=False)
-    email = forms.EmailField(label='Correo electrónico', required=True, max_length=254)
+    email = forms.EmailField(label='Correo Electrónico', required=True, max_length=254)
     estadousuario = forms.BooleanField(
         required=False,
         initial=True,
