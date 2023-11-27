@@ -14,14 +14,14 @@
                     <h1>{{ evaluacion.nombre_evaluacion }}</h1>
                 </div>
                 <div class="info">
-                    <p class="title">Descripcion</p>
+                    <p class="title">Descripción</p>
                     <p>{{ evaluacion.descripcion_evaluacion }}</p>
                     <p class="title">Instrucciones</p>
                     <p>{{ evaluacion.instrucciones_evaluacion }}</p>
                 </div>
                 <div class="footer">
-                    <p class="tag" style="font-weight:bold;">{{ evaluacion.duracion_evaluacion_admin }} minutos/ {{ evaluacion.numero_intentos }}
-                        intentos</p>
+                    <p class="tag" style="font-weight:bold;">{{ evaluacion.duracion_evaluacion_admin }} inutos/ {{ evaluacion.numero_intentos }}
+                        Intentos</p>
                         <a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}">
                             <button class="subir" type="submit">
                                 <i class='bx bx-question-mark'></i>

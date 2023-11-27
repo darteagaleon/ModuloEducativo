@@ -9,119 +9,82 @@
 <div class="home_content">
     <div class="text">
         <h1 style="text-align: center;">{{ nombre_curso }}</h1>
-        <div class="flex-container">
-            <div class="flex-items">
-                <article>
-                    <img src="    {% static 'img/iconos/animacion-degital_1.jpg' %}
-                    " alt="Icono del Curso" id="imagen-curso">
-                    <section>
-                        <h2>Descripción</h2>
-                        <div class="descripcion">
-                            <p>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.Lorem ipsum dolor sit, amet consectetur adipisicing elit. Id vel itaque similique,
-                                aspernatur suscipit eos vitae, odio deleniti dolorum libero excepturi minus
-                                molestias impedit praesentium debitis animi nesciunt optio temporibus.
-                            </p>
-                        </div>
-                    </section>
-                </article>
+        <div class="grid-container">
+            <div class="column">
+                <div class="row">
+                    <img src="{% static 'img/iconos/animacion-degital_1.jpg' %}" alt="Icono del Curso" class="icono-curso">
+                </div>
+                <div class="descripcion">
+                    <div class="titulo">Descripción</div>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
+                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
+                        accusantium totam alias! Laudantium?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
+                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
+                        accusantium totam alias! Laudantium?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
+                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
+                        accusantium totam alias! Laudantium?
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
+                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
+                        accusantium totam alias! Laudantium?
+                    </p>
+                </div>
             </div>
 
-            <div class="flex-items">
-                <div class="container">
-                    <h2 style="text-align: center;">Clases</h2>
-                    <aside>
-                        <section>
-                            {% for clase in listaclases %}
+            <div class="column-single">
+                <div class="modulos">
+                    {% for clase in listaclases %}
+                        {% if clase.tipo == 'evaluacion' %}
+                                {% if clase.disponible %}
+                                <button  class="evaluacion" onclick="solicitarPreguntas({{ clase.id }})">
+                                    <h3 >{{ clase.titulo | title }}</h3 >
+                                </button>
+                                {% else %}
+                                <!-- <h1>{{ clase.titulo | title }}</h1> -->
+                                <button class="evaluacion-invalida " >
+                                        <h3 >No hay evaluaciones por el momento
+                                        </h3>
+                                    </button>
+                            {% endif %}
+                        {% else %}
+                        <div class="modulo-titulo">
+                            {% if clase.tipo == 'modulo' %}
+                                <h1>{{ clase.titulo | title }}</h1>
+                            {% else %}
+                        </div>
                             <div class="clases">
-                                
-                                    {% if clase.tipo == 'evaluacion' %}
-                                        {% if clase.disponible %}
-                                            <button onclick="solicitarPreguntas({{ clase.id }})">{{ clase.titulo | title }}</button>
-                                        {% else %}
-                                            <h3>{{ clase.titulo | title }}</h3>
-                                        {% endif %}
+                                <div class="contenido-clases">
+                                    {% if clase.disponible %}
+                                    <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
+                                            <h3 class="nombre-clase">
+                                            {{ clase.titulo | title }}
+                                        </h3>
+                                    </a>
                                     {% else %}
-                                        {% if clase.tipo == 'modulo' %}
-                                            <h3>{{ clase.titulo | title }}</h3>
-                                        {% else %}
-                                            {% if clase.disponible %}
-                                            <h3><a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo | title }}</a></h3>
-                                            {% else %}
-                                            <div class="clases-invalida">
-                                                <h3>{{ clase.titulo | title }}</h3>
-                                            </div>
-                                            {% endif %}
-                                        {% endif %}
-                                    {% endif %}
                                 </div>
-                                {% endfor %}
-                        </section>
-                    </aside>
+                                    <div class="contenido-clases-invalida">
+                                        <h3 class="nombre-clase">
+                                            {{ clase.titulo | title }}<i class='bx bx-lock-alt'></i>
+                                        </h3>
+                                    </div>
+                                {% endif %}
+                                {% endif %}
+                            </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<a href="{% url 'gestion_MaterialApoyo' %}" id="back2">
-    <div>
-        <button class="back">Regresar</button>
-    </div>
+<a href="{% url 'Cursos_Usuarios' %}" id="back2">
+    <button class="back">
+        <i class='bx bx-arrow-back'></i>
+        <span>Regresar</span>
+    </button>
 </a>
 
-
 {% endblock %}
-<!-- 
-    
-    <div class="clases-invalida">
-        <h3><i class='bx bxs-x-circle bx-tada bx-rotate-90'></i>
-            !No tienes acceso¡
-        </h3>
-    </div>
-
-    
-        <h1 style="text-align: center;">{{nombre_curso}}</h1>
-        <ul style="margin-left: 50px;">
-            {% for clase in listaclases %}
-            <li>
-                {% if clase.tipo == 'evaluacion' %}
-                    {% if clase.disponible %}
-                        <button onclick="solicitarPreguntas({{clase.id}})">{{ clase.titulo }}</button>CREAR RUTA PARA LA EVALUACION
-                    {% else %}
-                        {{ clase.titulo }}
-                    {% endif %}
-                {% else %}
-                        {% if clase.tipo == 'modulo' %}
-                            {{ clase.titulo }}
-                        {% else %}
-                            {% if clase.disponible %}
-                                <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">{{ clase.titulo }}</a>            
-                            {% else %}
-                                {{ clase.titulo }}
-                            {% endif %}
-                        {% endif %}
-                {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-    </div>2 
-</div>
