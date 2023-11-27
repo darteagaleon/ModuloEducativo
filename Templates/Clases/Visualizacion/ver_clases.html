@@ -17,11 +17,11 @@
 
                     <p class="excerpt">{{ v_clases.descripcion_clase }}</p>
                     <!--este div se utiliza para mostrar la duración de una clase en minutos en una página web.-->
-                    <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Duración:
+                    <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: bold; font-size:20px;">Duración:
                         <p class="excerpt"> {{ v_clases.duracion_clase }} minutos</p>
                     </p>
                     <!--este div con lenguaje de plantillas se utiliza para mostrar el estado de una clase en una página web-->
-                        <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: 500;">Estado:<p class="excerpt"> {% if v_clases.estado_clase %}
+                        <p class="excerpt" style="font-family: 'Poppins', sans-serif; font-weight: bold; font-size:20px;">Estado:<p class="excerpt"> {% if v_clases.estado_clase %}
                         Activo
                     {% else %}
                         Inactivo

@@ -30,6 +30,8 @@ body {
     left: 240px;
 }
 
+
+
 /* Estilo para la tarjeta de cursos */
 .card-container {
     display: flex;
@@ -316,8 +318,8 @@ form > *:last-child {
 .container2{
     /* border: solid 1px red; */
     width: 80vw;
-    margin: 5%  auto;
+    margin: 3%  auto;
     padding: 10px;
     position: relative;
-    top: 10%;
+    top: 1%;
 }

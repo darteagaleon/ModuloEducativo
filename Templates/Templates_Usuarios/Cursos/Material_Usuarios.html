@@ -12,18 +12,18 @@
         <div class="container2"><!--2 -->
             <h1> Listado de Cursos </h1>
         <form class="search" action="{% url 'Material_Usuarios' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar curso...">
-            <button class="subir" style="border-radius:50%; width:auto; height:45px;"> <i class='bx bx-search-alt'
-                style="font-size:27px; "></i></button>
+            <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
+            <button class="search-icon"> <i class='bx bx-search-alt' style="font-size:27px; "></i></button> <br>
+            <!-- Enlace para ver todos los módulos -->
             </form>
-            <br>
+            <hr>
         <a href="{% url 'Material_Usuarios' %}">
-            <button  class="subir">
-                Ver todos
+            <button class="ver_todos">
+                <span>Ver todos</span>
+                <i class='bx bx-chevron-right'></i>
             </button>
         </a>
-        
-        <!--esta linea nos dirije a la página que lista todos los cursos-->
+            <!--esta linea nos dirije a la página que lista todos los cursos-->
 
         <div class="card-container">
             
@@ -36,7 +36,7 @@
                             <h3>{{ curso.nombre_curso | title  }}</h3> <!-- Nombre del curso -->
                             <div  >
                             <a href="{% url 'Listar_Material_Usuarios' curso_id=curso.id %}">
-									<button class="visualizar-link" type="submit"><span>Visualizar </span></button>
+									  <button type="button" class="btn visualizar">Visualizar</button>
                                 </a>
                             </div>                            
                         </div>

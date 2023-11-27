@@ -29,13 +29,19 @@ body {
     left: 240px;
 }
 
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* O ajusta la altura según tus necesidades */
+}
 #contenedor {
     background: #ecf0f3;
     box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
     transition: all 0.3s ease;
     width: 50vw;
     max-width: 60vw;
-    margin: 5% auto;
+    
     /* Ajusta el margen superior al 5% */
     border-radius: 20px;
     padding: 40px;

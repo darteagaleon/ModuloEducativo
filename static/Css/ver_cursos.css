@@ -28,12 +28,17 @@ body {
     width: calc(100 - 240px);
     left: 240px;
 }
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* O ajusta la altura según tus necesidades */
+}
 .card {
     width: 45vw;
-
     background: rgb(255, 255, 255);
     padding: 20px;
-    margin: 0 auto 20px;  
+    margin: 20px auto ;  
     height: auto;
 
 }
