@@ -11,24 +11,14 @@
         <h1 style="text-align: center;">{{ nombre_curso }}</h1>
         <div class="grid-container">
             <div class="column">
-                <div class="row">
-                    <img src="{% static 'img/iconos/animacion-degital_1.jpg' %}" alt="Icono del Curso" class="icono-curso">
-                </div>
+                
+                    <div class="row">
+                        <img src="{{ icono_curso }}" alt="Icono del Curso" class="icono-curso">
+                    </div>
                 <div class="descripcion">
                     <div class="titulo">Descripción</div>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
-                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
-                        accusantium totam alias! Laudantium?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
-                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
-                        accusantium totam alias! Laudantium?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
-                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
-                        accusantium totam alias! Laudantium?
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, non corrupti amet temporibus
-                        nesciunt rem, enim facilis dolore ipsa sed error illum impedit beatae reiciendis nobis
-                        accusantium totam alias! Laudantium?
+                        {{ descripcion_curso }}
                     </p>
                 </div>
             </div>

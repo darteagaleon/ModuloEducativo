@@ -21,16 +21,20 @@ from django.core.serializers import serialize
 # vista para la selecion de curso en el panel de usuario
 def Cursos_Usuarios(request):
         #Consultar listado de Cursos para el Usuario y sus Cargos
-        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id')
+        listaCursos= Cursos.objects.filter(estado_curso=True).values('nombre_curso','id','iconoCurso')
         #Obtener el id del usuario
         user_id=request.user.id
         listaUsuarioCargo=Usuario_Cargo.objects.filter(id_usuario=user_id).values('id_cargo')
             
         #Ensamblar el contexto para el template
-        listacursos= Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True).values('nombre_curso','id')
+        listacursos = Cursos.objects.filter(id_cargo__in=listaUsuarioCargo, estado_curso=True)
 
         #Retornar el template con el contexto
-        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html',{'listacursos':listacursos})
+        context = {
+            'listacursos': listacursos,
+        }
+
+        return render (request,'Templates_Usuarios/Cursos/Cursos_Usuarios.html', context)
 
 #Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
 def Modulos_Usuarios(request): 
@@ -124,6 +128,8 @@ def Modulos_Usuarios(request):
 
         context= {
             'nombre_curso' : regCurso.nombre_curso,
+            'descripcion_curso' : regCurso.descripcion_curso,
+            'icono_curso' : regCurso.iconoCurso.url, #Asumiendo que 'iconoCurso' es un campo de tipo ImageField
             'listaclases' : listafilas ,
         }
         return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
