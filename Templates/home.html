@@ -16,8 +16,7 @@
                <h1>
                     Hola {{ user.username | title }}.
                     <br />
-                    Bienvenid@ a Cyres Educativo
-                    <br />
+                    Te damos la bienvenida a Cyres Educativo
                </h1>
                <div class="container">
                     <div class="slide">
@@ -35,7 +34,7 @@
                <h1>
                     Hola.
                     <br />
-                    Bienvenid@ a Cyres Educativo
+                    Te damos la bienvenida a Cyres Educativo
                </h1>
                {% endif %}
 
@@ -89,7 +88,21 @@
           width: 100%;
           list-style: none;
       }
-      
+       
+      @media (max-width: 1500px) {
+        #saludo {
+            margin:10px auto;
+        }
+        .slide {
+            
+            padding: 30px;
+        }
+        h1{
+            font-size: 2rem;
+            width: 100%;
+        }
+    }
+
       @keyframes slide {
           0% {
               margin-left: 0;

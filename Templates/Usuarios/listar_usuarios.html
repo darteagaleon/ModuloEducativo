@@ -11,7 +11,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div id="contenedor">
-        <h1> Listar Usuarios </h1>
+        <h1> Listar usuarios </h1>
         <br>
         <form class="search" action="{% url 'filtrar_usuarios' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Usuario...">
@@ -55,14 +55,11 @@
 
                         <td id="visualizar">                     
                             <!-- <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
-                                <button class="subir"> <span>Visualizar</span>
-                                </button>
+                                <button type="button" class="btn visualizar">Visualizar</button>
                             </a> -->
                             <a href="{% url 'perfil_usuario_detalle' user_id=usuario.id %}">
                                 <button type="button" class="btn visualizar">Visualizar</button>
-                            </button>
                             </a>
-                            
                         </td>
                     </tr>
                     {% endfor %}

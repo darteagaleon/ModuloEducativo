@@ -27,6 +27,9 @@ body {
     width: calc(100 - 240px);
     left: 240px;
 }
+#tabla{
+    margin: 90px auto;
+}
 
 .folder-container {
     display: flex;
@@ -83,6 +86,11 @@ h1 {
     
 }
 
+@media (max-width: 1400px) {
+    body{
+        overflow-x: hidden;
+    }
+    }
 @keyframes h1 {
     0% {
         letter-spacing: -.2em;

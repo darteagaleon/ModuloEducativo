@@ -23,14 +23,13 @@ input {
     font-family: 'poppins', sans-serif;
     font-weight: 500 !important;
     width: 89%;
-    background-color: #c2c2c2;
+    background-color: #e7e7e7;
     border: none;
     border-radius: 10px;
     outline: none;
     padding: 10px;
     transition: all 0.3s ease;
     font-size: 20px;
-    color: #fff;
     margin-bottom: 5px;
 }
 #password1{
@@ -39,7 +38,7 @@ input {
 }
 
 #show{
-    background-color: #ecf4fc  ;
+    background-color: #e7e7e7;
     padding: 10px;
     border: none;
     border-radius:0 10px 10px 0;

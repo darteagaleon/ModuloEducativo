@@ -22,44 +22,30 @@
                             </p>
                             <p id="name">
                                 {{ usuario.username }} {{ perfil.apellido }}
-
                             </p>
                             <hr>
                         </div>
                         <div class="estado">
                             <p>
-                                Estado
-                            </p>
-                            <p id="estado_usuario">
-                                {% if perfil.estadousuario %} Activo {% else %} Inactivo {% endif %}
-
+                                Estado: {% if perfil.estadousuario %} Activo {% else %} Inactivo {% endif %}
                             </p>
                             <hr>
                         </div>
                         <div class="correo">
                             <p>
-                                Correo
-                            </p>
-                            <p id="email">
-                                {{ perfil.email }}
+                                Correo: {{ perfil.email }}
                             </p>
                             <hr>
                         </div>
                         <div class="cargo">
                             <p>
-                                Cargo
-                            </p>
-                            <p id="position">
-                                {{ perfil.cargo }}
+                                Cargo: {{ perfil.cargo }}
                             </p>
                             <hr>
                         </div>
                         <div class="tiempo-interaccion">
                             <p>
-                                Tiempo de interacción
-                            </p>
-                            <p id="time">
-                                18 Horas
+                                Ult. Conexion: 22/11/2023 - 10:50 pm
                             </p>
                             <hr>
                         </div>

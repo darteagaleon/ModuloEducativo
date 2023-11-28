@@ -7,36 +7,38 @@
 <link rel="stylesheet" href="{% static 'Css/V_evaluacion.css' %}">
 
 <body>
-    <div class="home_content">
-        <div class="text">
-            <div class="all">
-                <div class="tabla">
-                    <!-- este div se utiliza para mostrar el nombre de una clase dentro de una página web,-->
-                    <div class="titulo">
-                        <h1>{{ v_clases.nombre_clase }}</h1>
-                    </div>
-                    <!--este div se utiliza para mostrar la descripción de una clase o elemento en una página web.-->
-                    <div class="instrucciones">
-                        <h2>Descripción</h2>
-                        <div class="instrucciones2">
-                            <p id="parrafo">{{ v_clases.descripcion_clase }}</p>
-                        </div>
-                    </div>
-                    <!--este div se utiliza para mostrar la duración de una clase en minutos en una página web.-->
-                    <div class="duracion">
-                        <p>Duración: {{ v_clases.duracion_clase }} minutos</p>
-                    </div>
-                    <div class="contenido">
-                        <h2>Contenido</h2>
-                        <div class="contenido2">
-                            <a href="{% url 'marcar_clase_como_vista' v_clases.id user.id %}" target="_blank">Ver contenido y marcar como vista</a>
-                        </div>
-        
-                </div>
+<div class="contenedor">
+
+        <div class="card">
+            <div class="header">
+                <h1>
+                    {{ v_clases.nombre_clase }}
+                </h1>
             </div>
+            <div class="body">
+                <div class="content">
+                    <h2>Descripción</h2>
+                    <p class="message">{{ v_clases.descripcion_clase }}</p> 
+                    <h2>Duración</h2>
+                    <p class="message">{{ v_clases.duracion_clase }} minutos</p> 
+                </div>
+                <div class="ver-clase">
+                <a href="{% url 'marcar_clase_como_vista' v_clases.id user.id %}" target="_blank">
+                    <button class="clase-view">
+                        <i class='bx bx-show'></i>
+                            <span>Ver Clase</span>
+                    </button>
+                </a>
+                </div>
         </div>
     </div>
-    
+</div>
+<a href="{% url 'Modulos_Usuarios' %}" id="back2">
+    <button class="back">
+            <i class='bx bx-arrow-back'></i>
+            <span>Regresar</span>
+    </button>
+</a>
 </body>
 
 {% endblock %}
