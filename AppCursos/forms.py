@@ -34,6 +34,14 @@ class CursosForm(forms.ModelForm):
     class Meta:
         model = Cursos
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso','id_cargo']
+        labels = {
+            'nombre_curso': 'Nombre Curso',
+            'descripcion_curso': 'Descripción Curso', 
+            'estado_curso': 'Activo/Inactivo',
+            'duracion_curso': 'Duración Curso',
+            'iconoCurso': 'Iconos Curso',
+            'id_cargo':'Cargo',
+        }
         widgets = {
             'estado_curso': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
         }  
