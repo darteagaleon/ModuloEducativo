@@ -15,14 +15,14 @@ function solicitarPreguntas(clase_id) {
 function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
     let html = '<div class="tabla"><div class="titulo"><h1>'; 
-    html += 'Evaluacion del Modulo ' +data.nombre + '</h1></div>';
+    html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
     html += '<div class="descripcion"><p>'; 
     html += data.descripcion + '</p></div>';
     html += '<div class="instrucciones"><h2>Instrucciones</h2><div class="instrucciones2"><p id="parrafo">';
     html += data.instrucciones + '</p></div></div>';
     html += '<div class="duracion"><p>Duración: ' ;
     html += data.duracion +'  minutos</p></div>';
-    html += '<div class="numIntentos"><p>Número de intentos: ';
+    html += '<div class="numIntentos"><p>Intentos: ';
     html += data.intentos + '</p></div>';
     html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
 
