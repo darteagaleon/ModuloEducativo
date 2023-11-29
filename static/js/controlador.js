@@ -14,18 +14,28 @@ function solicitarPreguntas(clase_id) {
 
 function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
-    let html = '<div class="contenedor"><div class="card"><div class="header"><h1>'; 
+    let html = '<div class="tabla"><div class="titulo"><h1>'; 
     html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
     html += '<div class="body"><div class="content"><h2>Description</h2><p class="message">'; 
+    html += '<div class="descripcion"><p>'; 
     html += data.descripcion + '</p></div>';
-    html += '<h2>Instrucciones</h2><p class="message">';
-    html += data.instrucciones + '</p>';
-    html += '<h2>Duración</h2><p class="message"> ' ;
-    html += data.duracion +'  minutos</p>';
-    html += '<h2>Intentos</h2><p class="message"> ';
-    html += data.intentos + '</p>';
+    html += '<div class="instrucciones"><h2>Instrucciones</h2><div class="instrucciones2"><p id="parrafo">';
+    html += data.instrucciones + '</p></div></div>';
+    html += '<div class="duracion"><p>Duración: ' ;
+    html += data.duracion +'  minutos</p></div>';
+    html += '<div class="numIntentos"><p>Intentos: ';
     html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
 
+
+    // html += '<h2>Instrucciones</h2><p class="message">';
+    // html += data.instrucciones + '</p>';
+    // html += '<h2>Duración</h2><p class="message"> ' ;
+    // html += data.duracion +'  minutos</p>';
+    // html += '<h2>Intentos</h2><p class="message"> ';
+    // html += data.intentos + '</p>';
+    // html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
+
+  
     let contenedor=document.getElementsByClassName("text")[0];
     // let contenido = document.createElement("div");
     contenedor.innerHTML = html;
@@ -34,12 +44,9 @@ function mostrarPreguntas(data) {
     botonComenzar.addEventListener("click", function() {
         comenzarEvaluacion(data);
     });
-
 }
-
 let preguntaActual = 0; // Variable para rastrear la pregunta actual
 let respuestasCorrectas = 0; // Contador de respuestas correctas
-
 function mostrarPreguntaActual(data) {
     
     if (data && Array.isArray(data.listaPreguntas) && preguntaActual < data.listaPreguntas.length) {
@@ -55,10 +62,8 @@ function mostrarPreguntaActual(data) {
         html += '<div class="opcion"><label><input type="radio" name="opcion" value="d">';
         html += 'D. ' + pregunta.opcion_d + '</label></div>';
         html += '</div>'; // Cierre del div de pregunta
-
         let contenedor = document.getElementsByClassName("text")[0];
         contenedor.innerHTML = html;
-
         // Agregar evento para el botón de siguiente
         let botonSiguiente = document.createElement("button");
         botonSiguiente.innerHTML = "Siguiente";
@@ -71,26 +76,10 @@ function mostrarPreguntaActual(data) {
         mostrarResultados(data);
     }
 }
-// let contenedor = document.getElementsByClassName("text")[0];
-// contenedor.innerHTML = html;
-
-// // Agregar evento para el botón de siguiente
-// let botonSiguiente = document.createElement("button");
-// botonSiguiente.innerHTML = "Siguiente";
-// botonSiguiente.addEventListener("click", function() {
-//     evaluarRespuesta(data, pregunta);
-// });
-// contenedor.appendChild(botonSiguiente);
-// } else {
-// // Mostrar resultados finales
-// mostrarResultados(data);
-// }
 let respuestasUsuario = []; // Variable global para almacenar respuestas del usuario
-
 function evaluarRespuesta(data, pregunta) {
     let opciones = document.getElementsByName("opcion");
     let respuestaUsuario = null;
-
     opciones.forEach(function(opcion) {
         if (opcion.checked) {
             respuestaUsuario = opcion.value;
@@ -98,25 +87,19 @@ function evaluarRespuesta(data, pregunta) {
     });
     // Guardar la respuesta del usuario
     respuestasUsuario.push({ preguntaId: pregunta.id, respuesta: respuestaUsuario });
-
     if (respuestaUsuario === pregunta.respuesta_correcta.toString()) {
         respuestasCorrectas++;
     }
-
     // Incrementar el contador de pregunta actual
     preguntaActual++;
-
     // Mostrar la siguiente pregunta o los resultados finales
     mostrarPreguntaActual(data);
 }
-
 function mostrarResultados(data) {
     let contenedor = document.getElementsByClassName("text")[0];
-
     if (data && data.listaPreguntas) {
         // Calcular la puntuación mínima requerida
         let puntuacionMinimaRequerida = Math.ceil(data.listaPreguntas.length * 0.7);
-
         // Verificar si el usuario superó la puntuación mínima requerida
         if (respuestasCorrectas >= puntuacionMinimaRequerida) {
             contenedor.innerHTML += '<p>Felicidades, has superado la evaluación.</p>';
@@ -156,10 +139,6 @@ function comenzarEvaluacion(listaPreguntas) {
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
     
-
-
-
-
 /**
  * Consulta AJAX al servidor por método POST
  * @param {*} urlserver :Direccion de envio
@@ -187,14 +166,11 @@ function mensajeAjax(urlserver, datos, callBackFunction) {
             console.error('Error:', JSON.stringify(error));
         });
 }
-
-
 /**
  * Funcion para obtener el valor de una cookie
  * @param {*} name Nombre de la cookie
  * @returns el cvontenido de la cookie
  */
-
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {
@@ -210,6 +186,3 @@ function getCookie(name) {
     }
     return cookieValue;
 }
-
-
-
