@@ -33,7 +33,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* O ajusta la altura según tus necesidades */
+    height: 87vh; /* O ajusta la altura según tus necesidades */
 }
 #contenedor {
     background: #ecf0f3;
