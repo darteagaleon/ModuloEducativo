@@ -322,7 +322,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh; /* O ajusta la altura según tus necesidades */
+    height: 90vh; /* O ajusta la altura según tus necesidades */
 }
 
 
@@ -346,13 +346,13 @@ a {
     padding-bottom: 5px;
     text-align: center;
     width: 100%;
-  }
-  .header h1{
+}
+.header h1{
     /* border: 1px solid #ff0000;  */
     margin: 15px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    font-size: 10px;
+    font-size: 25px;
 
   }
   
@@ -369,10 +369,13 @@ a {
   .message {
     margin-top: 0.5rem;
     color: #333;
-    font-size: 1.5rem;
-    padding-left: 15px;
+    font-size: 15px;
+    padding-left: 25px;
     font-family: 'Latto', sans-serif;
     font-weight: 500;
+  }
+  .body h2{
+    font-size: 30px;
   }
   a{
     text-decoration: none;
@@ -417,47 +420,3 @@ a {
 
 
 
-/* boton regresar a la pagina anterior */
-.back {
-    align-items: center;
-    position: fixed;
-    top: 5%;
-    right: 5%;
-    display: flex;
-    height: 3em;
-    width: 150px;
-    padding: 10px;
-    font-size: 16px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 3px;
-    letter-spacing: 1px;
-    transition: all 0.4s linear;
-    cursor: pointer;
-    border: none;
-    background: linear-gradient(to right, #67b26b, #4ca2cb);
-    color: #fff;
-    transition: all 0.4s ease-in;
-    font-family: 'Poppins', sans-serif ;
-    font-weight: 500;
-}
-
-
-
-.back>i {
-
-    transition: all 0.4s ease-in;
-    width: 30px;
-}
-
-.back:hover>i {
-    font-weight: bold;
-    font-size: 1.2em;
-    transform: translateX(-5px);
-}
-
-.back:hover {
-    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
-    transform: translateY(-2px);
-
-}

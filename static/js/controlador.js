@@ -24,7 +24,8 @@ function mostrarPreguntas(data) {
     html += data.duracion +'  minutos</p>';
     html += '<h2>Intentos</h2><p class="message"> ';
     html += data.intentos + '</p></div>';
-    html += '<div class="ver-clase"><button class="clase-view"><i class="bx bx-show"></i><span>Ver Clase</span></button></div></div></div></div></div>';
+    html += '<div class="button"><button type="button" clase-view"><i class="bx bx-show"></i><span>Ver Clase</span></button></div></div>';
+    // html += '<div class="ver-clase"><button class="clase-view"><i class="bx bx-show"></i><span>Ver Clase</span></button></div>';
 
     let contenedor=document.getElementsByClassName("text")[0];
     // let contenido = document.createElement("div");
