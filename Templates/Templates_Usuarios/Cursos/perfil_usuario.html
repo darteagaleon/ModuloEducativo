@@ -49,6 +49,10 @@
                             </p>
                             <hr>
                         </div>
+                        <button class="subir" type="submit">
+                            <i class='bx bx-pencil'></i>
+                            <span>Editar</span>
+                        </button> 
                     </div>
                 </div>
                 <div class="content_cursos">
@@ -65,33 +69,45 @@
                             <li><a href="#">Curso 2</a></li>
                             <li><a href="#">Curso 3</a></li>
                         </ul>
+                        <hr>
                     </li>
-                </div>
-                <div class="cursos_culminados">
-                    <p>
-                        Cursos Culminados
-                    </p>
-                    <p id="position">
-                        curso 5, curso 6
-                    </p>
-                    <hr>
-                </div>
-                <div class="certificaciones">
-                    <p>
-                        Certificaciones
-                    </p>
-                    <p id="position">
-                        Certificacion curso 5
-                        Certificacion curso 6
-                    </p>
-                    <hr>
+                    <li>
+                        <div class="Icon-links">
+                            <span class="Link_name">Cursos culminados</span>
+                            <i class='bx bx-chevron-down Arrow'></i>
+                        </div>
+                        <ul class="Sub-menu">
+                            {% comment %} {% for curso in listacursos %}
+                            <li><a href="#">{{ curso.nombre_curso }}</a></li>
+                            {% endfor %} {% endcomment %}
+                            <li><a href="#">Curso 4</a></li>
+                            <li><a href="#">Curso 5</a></li>
+                            <li><a href="#">Curso 6</a></li>
+                        </ul>
+                        <hr>
+                    </li>
+                    <li>
+                        <div class="Icon-links">
+                            <span class="Link_name">Certificaciones</span>
+                            <i class='bx bx-chevron-down Arrow'></i>
+                        </div>
+                        <ul class="Sub-menu">
+                            {% comment %} {% for curso in listacursos %}
+                            <li><a href="#">{{ curso.nombre_curso }}</a></li>
+                            {% endfor %} {% endcomment %}
+                            <li><a href="#">Curso 4</a></li>
+                            <li><a href="#">Curso 5</a></li>
+                            <li><a href="#">Curso 6</a></li>
+                        </ul>
+                        <hr>
+                    </li>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 </body>
-<a href="{% url 'usuarios' %}" id="back2">
+
+<a href="{% url 'listar_usuarios' %}" id="back2">
     <button class="back">
         <div class="icon">
             <i class='bx bx-arrow-back'></i>
@@ -101,6 +117,7 @@
         </span>
     </button>
 </a>
+
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
