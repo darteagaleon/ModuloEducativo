@@ -23,7 +23,9 @@ function mostrarPreguntas(data) {
     html += '<div class="duracion"><p>Duración: ' ;
     html += data.duracion +'  minutos</p></div>';
     html += '<div class="numIntentos"><p>Intentos: ';
+    html += data.intentos + '</p>';
     html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
+
 
 
     // html += '<h2>Instrucciones</h2><p class="message">';
