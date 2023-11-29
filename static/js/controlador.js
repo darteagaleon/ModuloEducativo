@@ -16,7 +16,7 @@ function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
     let html = '<div class="contenedor"><div class="card"><div class="header"><h1>'; 
     html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
-    html += '<div class="body"><div class="content"><h2>Description</h2><p class="message">'; 
+    html += '<div class="body"><div class="content"><h2>Descripción</h2><p class="message">'; 
     html += data.descripcion + '</p></div>';
     html += '<h2>Instrucciones</h2><p class="message">';
     html += data.instrucciones + '</p>';
