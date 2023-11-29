@@ -427,6 +427,11 @@ a {
 
 }
 
+@media (max-width: 1400px){
+    .body{
+        overflow: auto;
+    }
+}
 /* ***********************************************preguntas*********************************************** */
 body {
     background-color: #ecf0f3;
