@@ -324,7 +324,7 @@ def crear_pregunta(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Guardado con éxito')
-            return redirect('ver_preguntas')
+            return redirect('ver_preguntas_detalle', evaluacion_id=form.cleaned_data['id_evaluacion'].id)
     else:
         form = PreguntasForm()
 
