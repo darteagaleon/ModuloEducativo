@@ -14,17 +14,17 @@ function solicitarPreguntas(clase_id) {
 
 function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
-    let html = '<div class="tabla"><div class="titulo"><h1>'; 
+    let html = '<div class="contenedor"><div class="card"><div class="header"><h1>'; 
     html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
-    html += '<div class="descripcion"><p>'; 
+    html += '<div class="body"><div class="content"><h2>Description</h2><p class="message">'; 
     html += data.descripcion + '</p></div>';
-    html += '<div class="instrucciones"><h2>Instrucciones</h2><div class="instrucciones2"><p id="parrafo">';
-    html += data.instrucciones + '</p></div></div>';
-    html += '<div class="duracion"><p>Duración: ' ;
-    html += data.duracion +'  minutos</p></div>';
-    html += '<div class="numIntentos"><p>Intentos: ';
+    html += '<h2>Instrucciones</h2><p class="message">';
+    html += data.instrucciones + '</p>';
+    html += '<h2>Duración</h2><p class="message"> ' ;
+    html += data.duracion +'  minutos</p>';
+    html += '<h2>Intentos</h2><p class="message"> ';
     html += data.intentos + '</p></div>';
-    html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
+    html += '<div class="ver-clase"><button class="clase-view"><i class="bx bx-show"></i><span>Ver Clase</span></button></div></div></div></div></div>';
 
     let contenedor=document.getElementsByClassName("text")[0];
     // let contenido = document.createElement("div");
