@@ -23,8 +23,8 @@ function mostrarPreguntas(data) {
     html += '<h2>Duración</h2><p class="message"> ' ;
     html += data.duracion +'  minutos</p>';
     html += '<h2>Intentos</h2><p class="message"> ';
-    html += data.intentos + '</p></div>';
-    html += '<div class="ver-clase"><button class="clase-view"><i class="bx bx-show"></i><span>Ver Clase</span></button></div></div></div></div></div>';
+    html += data.intentos + '</p>';
+    html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
 
     let contenedor=document.getElementsByClassName("text")[0];
     // let contenido = document.createElement("div");
@@ -71,6 +71,20 @@ function mostrarPreguntaActual(data) {
         mostrarResultados(data);
     }
 }
+// let contenedor = document.getElementsByClassName("text")[0];
+// contenedor.innerHTML = html;
+
+// // Agregar evento para el botón de siguiente
+// let botonSiguiente = document.createElement("button");
+// botonSiguiente.innerHTML = "Siguiente";
+// botonSiguiente.addEventListener("click", function() {
+//     evaluarRespuesta(data, pregunta);
+// });
+// contenedor.appendChild(botonSiguiente);
+// } else {
+// // Mostrar resultados finales
+// mostrarResultados(data);
+// }
 let respuestasUsuario = []; // Variable global para almacenar respuestas del usuario
 
 function evaluarRespuesta(data, pregunta) {
