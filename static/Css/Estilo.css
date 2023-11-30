@@ -391,10 +391,11 @@ home-section .home-content .bx-chevrons-right {
 }
 .bx-log-out {
     position: fixed;
-    left: 11vw;
+    left: 180px;
     /* border: rgb(102, 255, 0) 1px solid; */
 
 }
+
 
 
 

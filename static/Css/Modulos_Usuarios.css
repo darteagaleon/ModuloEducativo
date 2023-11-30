@@ -329,8 +329,8 @@ a {
 
 .card {
 
-    width: 45vw;
-    height: 95vh;
+    width:60vw;
+    height: 85vh;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -351,7 +351,7 @@ a {
 
 .header h1 {
     /* border: 1px solid #ff0000;  */
-    margin: 15px;
+    margin: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     font-size: 30px;
@@ -390,7 +390,7 @@ a {
   } */
 .subir {
     display: flex;
-    padding: 15px;
+    padding: 10px;
     font-size: 20px;
     align-items: center;
     justify-content: center;
@@ -432,10 +432,12 @@ a {
         overflow: auto;
     }
 }
+
 /* ***********************************************preguntas*********************************************** */
 body {
     background-color: #ecf0f3;
 }
+
 
 .pregunta-card {
     border-radius: 15px;
@@ -509,7 +511,7 @@ body {
 
 
 .pregunta input[type="radio"] {
-    /* display: none; Oculta el botón de radio */
+    /* display: none;  */
 }
 .pregunta.clicked {
     background-color: #4CAF50; /* Cambia el color de fondo al hacer clic */
@@ -517,3 +519,76 @@ body {
 }
 
 
+/**************** para el mensaje de paso o no paso la evaluacion********************* */
+.intentalo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d70000;
+    width: 45vw;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.congratulations{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #008000;
+    width: 45vw;
+    height: auto;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+
+
+.boton-reintentar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e27c00;
+    width: 20vw;
+    height: auto;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1px;
+    transition: all 0.4s linear;
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    transition: all 0.4s ease-in;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+
+.boton-reintentar>i {
+    transition: all 0.4s ease-in;
+    width: 30px;
+}
+
+.boton-reintentar:hover>i {
+    font-weight: bold;
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.boton-reintentar:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+
+}
