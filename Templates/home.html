@@ -1,178 +1,127 @@
-<!--que la plantilla extiende a otra platilla llamada 'Base.html'-->
 {% extends 'Layout/Base.html' %}
-<!--para cargar los archivos estaticos en la platilla-->
-
 {% load static %}
 
-<!--es un bloqueo de contenido -->
 {% block content %}
-
-<!-- crea una sección de contenido que muestra un mensaje de bienvenida centrado en la página web.-->
-<div class="contenido">
-          <div class="col-6 offset-3 text-center " id="saludo">
-               {% if request.user.is_authenticated %}
-
-               
-               <h1>
-                    Hola {{ user.username | title }}.
-                    <br />
-                    Te damos la bienvenida a Cyres Educativo
-               </h1>
-               <div class="container">
-                    <div class="slide">
-                         <ul>
-                              <li><img src="{% static 'img/slider_1.jpg' %}" alt=""></li>
-                              <li><img src="{% static 'img/slider_2.jpg' %}" alt=""></li>
-                              <li><img src="{% static 'img/slider_3.jpg' %}" alt=""></li>
-                              <li><img src="{% static 'img/slider_4.jpg' %}" alt=""></li>
-                         </ul>
-                    </div>
-               </div>
-               {% else %}
-               {% comment %}
-               <hr> {% endcomment %}
-               <h1>
-                    Hola.
-                    <br />
-                    Te damos la bienvenida a Cyres Educativo
-               </h1>
-               {% endif %}
-
-          </div>
-     </div>
-</div>
-<style>
-
-     body {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-          background-color: #ecf0f3;
-          overflow-y: hidden;
-      }
-      .contenido{
-          margin-top: 10vh;
-      }
-      .container {
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          top: -10vh;
-      }
-      
-      .slide img {
-          width: 100%;
-          height: auto;
-          object-fit: cover;
-      }
-      
-      .slide {
-          width: 100vw;
-          max-width: 1000px;
-          height: 520px;
-          overflow: hidden;
-          border-radius: 10px;
-      }
-      
-      .slide ul {
-          display: flex;
-          width: 400%;
-          padding: 0;
-          animation: slide 15s infinite cubic-bezier(0.55, 0.48, 0.37, 0.92);
-      }
-      
-      .slide ul li {
-          width: 100%;
-          list-style: none;
-      }
-       
-      @media (max-width: 1500px) {
-        #saludo {
-            margin:10px auto;
-        }
-        .slide {
-            
-            padding: 30px;
-        }
-        h1{
-            font-size: 2rem;
+    <body>
+        <div class="container">
+            <div class="contenido">
+                <div class="col-6 offset-3 text-center" id="saludo">
+                    {% if request.user.is_authenticated %}
+                        <h1>
+                            Hola {{ user.username | title }}.
+                            <br />
+                            Te damos la bienvenida a Cyres Educativo
+                        </h1>
+                        <div class="slider">
+                            <div class="slider-container">
+                                <figure aria-label="Texto imagen 1">
+                                    <img src="{% static 'img/slider_1.jpg' %}" alt="img-1" class="img-responsive">
+                                </figure>
+                                <figure aria-label="Texto imagen 2">
+                                    <img src="{% static 'img/slider_2.jpg' %}" alt="img-2" class="img-responsive">
+                                </figure>
+                                <figure aria-label="Texto imagen 3">
+                                    <img src="{% static 'img/slider_3.jpg' %}" alt="img-3" class="img-responsive">
+                                </figure>
+                                <figure aria-label="Texto imagen 4">
+                                    <img src="{% static 'img/slider_4.jpg' %}" alt="img-4" class="img-responsive">
+                                </figure>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </body>
+    <style>
+        .container {
             width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
         }
-    }
 
-      @keyframes slide {
-          0% {
-              margin-left: 0;
-          }
-      
-          20% {
-              margin-left: 0;
-          }
-      
-          25% {
-              margin-left: -100%;
-          }
-      
-          45% {
-              margin-left: -100%;
-          }
-      
-          50% {
-              margin-left: -200%;
-          }
-      
-          70% {
-              margin-left: -200%;
-          }
-      
-          75% {
-              margin-left: -300%;
-          }
-      
-          100% {
-              margin-left: -300%;
-          }
-      }
-      
-      .container {
-          animation: container 0.5s;
-      }
-      
-      @keyframes container {
-          0% {
-              transform: scale(.5);
-          }
-      
-          100% {
-              transform: scale(1);
-          }
-      }
-      
-      h1, .your-other-element {
-          animation: fadeIn 0.4s linear both;
-      }
-      
-      @keyframes fadeIn {
-          0% {
-              letter-spacing: -.2em;
-              transform: translateZ(-700px) translateY(-100px);
-              opacity: 0;
-          }
-      
-          40% {
-              opacity: .6;
-          }
-      
-          100% {
-              transform: translateZ(0) translateY(0);
-              opacity: 1;
-          }
-      }
-      
-</style>
+        body, html {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
 
+        #saludo h1 {
+            color: black;
+            font-size: 33px;
+            max-width: 100%;
+            margin: 20px auto;
+            line-height: 1.2em;
+        }
 
+        .slider {
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            border-radius:10px;
+        }
+
+        .slider-container {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            width: 400%;
+            height: 100%;
+            animation: slider 20s infinite alternate linear;
+        }
+
+        .slider-container > figure {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            user-select: none;
+        }
+
+        .slider-container > figure::before {
+            display: none;
+        }
+
+        .img-responsive {
+            width: 100%;
+            height: auto;
+        }
+
+        @keyframes slider {
+            0% { margin-left: 0; }
+            20% { margin-left: 0; }
+            25% { margin-left: -100%; }
+            45% { margin-left: -100%; }
+            50% { margin-left: -200%; }
+            70% { margin-left: -200%; }
+            75% { margin-left: -300%; }
+            100% { margin-left: -300%; }
+        }
+
+        h1 {
+            animation: fadeIn 0.4s linear both;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                letter-spacing: -.2em;
+                transform: translateZ(-700px) translateY(-100px);
+                opacity: 0;
+            }
+
+            40% {
+                opacity: .6;
+            }
+
+            100% {
+                transform: translateZ(0) translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
 {% endblock %}

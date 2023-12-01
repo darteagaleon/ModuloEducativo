@@ -10,56 +10,70 @@
 <!-- todo lo que se vaya a colocar en los html's deben ir adentro de esto -->
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
-        <br>
-        <h1> Material de Apoyo </h1>
-        <form class="search" action="{% url 'filtrar_material' %}" method="GET">
-            <input type="text" class="search-bar" name="search" placeholder="Buscar Material de apoyo...">
-            <input type="submit" class="btn search-btn" value="Buscar">
-        </form>
-
-        
-        <div class="table-responsive">
-            <table class="table table-hover" id="tablam">
+        <div id="contenedor" class="container-fluid">
+            <h1>
+                Material de Apoyo</h1>
+            <br>
+            <form class="search" action="{% url 'filtrar_material' %}" method="GET">
+                <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
+                <button class="search-icon"> <i class='bx bx-search-alt' style="font-size:27px; "></i></button> <br>
+                <!-- Enlace para ver todos los módulos -->
+            </form>
+            <hr>
+            {% comment %} <a href="{% url 'Listar_Material_Usuarios' %}"> {% endcomment %}
+                <button class="ver_todos">
+                    <span>Ver todos</span>
+                    <i class='bx bx-chevron-right'></i>
+                </button>
+            </a>
+            <table class="table table-hover mt-4 ">
                 <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Descripción</th>
-                        <th scope="col">Archivo</th>
+                    <tr id="cabecera">
+                        <th style="width: 200px;" scope="col">Nombre</th>
+                        <th style="width: 200px;" scope="col" id="estado">Estado</th>
+                        <th style="width: 200px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
                 </thead>
-
-                <tbody class="table-group-divider">
-                    
-                    {% for material in materiales %}
-                    
-                    <tr>
-                        <td>{{ material.NombreMaterialApoyo }}</td>
-                        <td>{{ material.DescripcionMaterialApoyo }}</td>
-                        <td>
-                            <a href="{{ material.Archivo }}" target="_blank">
-                                <button class="editar">
-                                    Visualizar
-                                </button>
-                        </td>
-                        {% if group_name == 'administrativos' %}
-                        <td>
-                            <a href="{% url 'editar_material' pk=material.pk %}">
-                                <button class="editar">
-                                    Editar
-                                </button>
-                            </a>
-                        </td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
             </table>
+            <div class="table-responsive ">
+                <table class="table table-hover mt-4 table-2">
+
+                    <tbody class=" overflow-hidden">
+                        {% for material in materiales %}
+                        <tr>
+                            <td id="nombre" style="width: 200px;">{{ material.NombreMaterialApoyo | title }}</td>
+                            <td id="nombre" style="width: 200px;">{{ material.DescripcionMaterialApoyo | title }}</td>
+                            <td id="visualizar" style="width: 200px;">
+                                <a href="{{ material.Archivo }}" target="_blank">
+                                    <button type="button" class="btn visualizar">Visualizar</button>
+                                </a>
+                            </td>
+                            {% if group_name == 'administrativos' %}
+                            <td id="visualizar" style="width: 200px;">
+                                <a href="{% url 'editar_material' pk=material.pk %}">
+                                    <button type="button" class="btn visualizar">
+                                        Editar
+                                    </button>
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <a href="{% url 'Material_Usuarios' %}" id="back2">
-            <div>
-                <button class="back">Regresar</button>
-            </div>  
-        </a>
-            
-        
+    </div>
+</div>
+
+<a href="{% url 'Material_Usuarios' %}" id="back2">
+    <button class="back">
+        <button class="back">
+            <i class='bx bx-arrow-back'></i>
+            <span>Regresar</span>
+        </button>
+    </button>
+</a>
+
+
 {% endblock %}

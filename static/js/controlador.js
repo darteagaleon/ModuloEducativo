@@ -1,5 +1,3 @@
-
-
 //Funcion para solicitar las preguntas de la evaluacion
 function solicitarPreguntas(clase_id) {
     let url = "http://localhost:8000/usuario/ejecutar_evaluacion/";
@@ -14,29 +12,18 @@ function solicitarPreguntas(clase_id) {
 
 function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
-    let html = '<div class="tabla"><div class="titulo"><h1>'; 
+    let html = '<div class="contenedor"><div class="card"><div class="header"><h1>'; 
     html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
     html += '<div class="body"><div class="content"><h2>Descripción</h2><p class="message">'; 
     html += data.descripcion + '</p></div>';
-    html += '<div class="instrucciones"><h2>Instrucciones</h2><div class="instrucciones2"><p id="parrafo">';
-    html += data.instrucciones + '</p></div></div>';
-    html += '<div class="duracion"><p>Duración: ' ;
-    html += data.duracion +'  minutos</p></div>';
-    html += '<div class="numIntentos"><p>Intentos: ';
+    html += '<h2>Instrucciones</h2><p class="message">';
+    html += data.instrucciones + '</p>';
+    html += '<h2>Duración</h2><p class="message"> ' ;
+    html += data.duracion +'  minutos</p>';
+    html += '<h2>Intentos</h2><p class="message"> ';
     html += data.intentos + '</p>';
     html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
 
-
-
-    // html += '<h2>Instrucciones</h2><p class="message">';
-    // html += data.instrucciones + '</p>';
-    // html += '<h2>Duración</h2><p class="message"> ' ;
-    // html += data.duracion +'  minutos</p>';
-    // html += '<h2>Intentos</h2><p class="message"> ';
-    // html += data.intentos + '</p>';
-    // html += '<div class="button"><button type="button" class="subir">Comenzar</button></div></div>';
-
-  
     let contenedor=document.getElementsByClassName("text")[0];
     // let contenido = document.createElement("div");
     contenedor.innerHTML = html;
@@ -45,42 +32,83 @@ function mostrarPreguntas(data) {
     botonComenzar.addEventListener("click", function() {
         comenzarEvaluacion(data);
     });
+
 }
+
 let preguntaActual = 0; // Variable para rastrear la pregunta actual
 let respuestasCorrectas = 0; // Contador de respuestas correctas
+
 function mostrarPreguntaActual(data) {
     
     if (data && Array.isArray(data.listaPreguntas) && preguntaActual < data.listaPreguntas.length) {
         let pregunta = data.listaPreguntas[preguntaActual];
-        let html = '<div class="tabla"><div class="nombre_pregunta"><h1>';
+        let html = '<div class="pregunta-card container-fluid"><div class="contenido-preguntas "><div class="pregunta-title"><h1>';
         html += pregunta.nombre_pregunta + '</h1></div>';
-        html += '<div class="opcion"><label><input type="radio" name="opcion" value="a">';
-        html += 'A. ' + pregunta.opcion_a + '</label></div>';
-        html += '<div class="opcion"><label><input type="radio" name="opcion" value="b">';
-        html += 'B. ' + pregunta.opcion_b + '</label></div>';
-        html += '<div class="opcion"><label><input type="radio" name="opcion" value="c">';
-        html += 'C. ' + pregunta.opcion_c + '</label></div>';
-        html += '<div class="opcion"><label><input type="radio" name="opcion" value="d">';
-        html += 'D. ' + pregunta.opcion_d + '</label></div>';
-        html += '</div>'; // Cierre del div de pregunta
+        html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="a">';
+        html += 'A. ' + pregunta.opcion_a + '</div></div>';
+        html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="b">';
+        html += 'B. ' + pregunta.opcion_b + '</div></div>';
+        html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="c">';
+        html += 'C. ' + pregunta.opcion_c + '</div></div>';
+        html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="d">';
+        html += 'D. ' + pregunta.opcion_d + '</div></div>';
+        html += '<button class="button-next">Siguiente</button>';
+        html += '</div></div>'; // Cierre del div de pregunta
+
         let contenedor = document.getElementsByClassName("text")[0];
         contenedor.innerHTML = html;
+
         // Agregar evento para el botón de siguiente
-        let botonSiguiente = document.createElement("button");
-        botonSiguiente.innerHTML = "Siguiente";
+        // let botonSiguiente = document.createElement(".button-next");
+        // botonSiguiente.innerHTML = "Siguiente";
+        // botonSiguiente.addEventListener("click", function() {
+        //     evaluarRespuesta(data, pregunta);
+        // });
+        // contenedor.appendChild(botonSiguiente);
+        let botonSiguiente = document.querySelector(".button-next");
         botonSiguiente.addEventListener("click", function() {
             evaluarRespuesta(data, pregunta);
         });
-        contenedor.appendChild(botonSiguiente);
+         // Agregar eventos para las preguntas para ppoder que saliera el color verde cuando se selecciona la respuesta 
+        // let infoElements = document.querySelectorAll(".pregunta");
+
+        // infoElements.forEach(function (info) {
+        //     info.addEventListener("click", function () {
+        //         // Eliminar la clase "clicked" de todos los elementos
+        //         infoElements.forEach(function (element) {
+        //             element.classList.remove("clicked");
+        //         });
+
+        //         // Agregar la clase "clicked" al elemento clicado
+        //         this.classList.add("clicked");
+        //     });
+        // });
     } else {
         // Mostrar resultados finales
         mostrarResultados(data);
-    }
 }
+
+}
+// let contenedor = document.getElementsByClassName("text")[0];
+// contenedor.innerHTML = html;
+
+// // Agregar evento para el botón de siguiente
+// let botonSiguiente = document.createElement("button");
+// botonSiguiente.innerHTML = "Siguiente";
+// botonSiguiente.addEventListener("click", function() {
+//     evaluarRespuesta(data, pregunta);
+// });
+// contenedor.appendChild(botonSiguiente);
+// } else {
+// // Mostrar resultados finales
+// mostrarResultados(data);
+// }
 let respuestasUsuario = []; // Variable global para almacenar respuestas del usuario
+
 function evaluarRespuesta(data, pregunta) {
     let opciones = document.getElementsByName("opcion");
     let respuestaUsuario = null;
+
     opciones.forEach(function(opcion) {
         if (opcion.checked) {
             respuestaUsuario = opcion.value;
@@ -88,34 +116,39 @@ function evaluarRespuesta(data, pregunta) {
     });
     // Guardar la respuesta del usuario
     respuestasUsuario.push({ preguntaId: pregunta.id, respuesta: respuestaUsuario });
+
     if (respuestaUsuario === pregunta.respuesta_correcta.toString()) {
         respuestasCorrectas++;
     }
+
     // Incrementar el contador de pregunta actual
     preguntaActual++;
+
     // Mostrar la siguiente pregunta o los resultados finales
     mostrarPreguntaActual(data);
 }
+
 function mostrarResultados(data) {
     let contenedor = document.getElementsByClassName("text")[0];
+
     if (data && data.listaPreguntas) {
         // Calcular la puntuación mínima requerida
         let puntuacionMinimaRequerida = Math.ceil(data.listaPreguntas.length * 0.7);
-        
+
         // Verificar si el usuario superó la puntuación mínima requerida
-        usuarioAproboExamen = respuestasCorrectas >= puntuacionMinimaRequerida;
-        if (usuarioAproboExamen) {
-            contenedor.innerHTML += '<p>Felicidades, has superado la evaluación.</p>';
-            contenedor.innerHTML += '<p>Respuestas correctas: ' + respuestasCorrectas + '</p>';
+        if (respuestasCorrectas >= puntuacionMinimaRequerida) {
+            contenedor.innerHTML += '<p class="congratulations" >Felicidades, has superado la evaluación.<br>Respuestas correctas:' + respuestasCorrectas + '</p>';
+            // contenedor.innerHTML += '<p class="congratulations-respuestas">Respuestas correctas: ' + respuestasCorrectas + '</p>';
         } else {
             if (data.intentos > 0) {
                 data.intentos--;
-                contenedor.innerHTML += '<p>¡Ups! No has alcanzado la puntuación mínima. Tienes ' + data.intentos + ' intentos restantes.</p>';
+                contenedor.innerHTML += '<p class="intentalo">¡Ups! No has alcanzado la puntuación mínima.<br> Tienes ' + data.intentos + ' intentos restantes.</p>';
                 
                  // Agregar botón para intentar de nuevo solo si hay intentos disponibles
-                 if (data.intentos > 0) {
+                if (data.intentos > 0) {
                     let botonIntentarDeNuevo = document.createElement("button");
-                    botonIntentarDeNuevo.innerHTML = "Intentar de nuevo";
+                    botonIntentarDeNuevo.innerHTML = "<i class='bx bx-revision'></i>Intentar de nuevo";
+                    botonIntentarDeNuevo.setAttribute("class", "boton-reintentar");
                     botonIntentarDeNuevo.addEventListener("click", function() {
                         // Reiniciar la evaluación
                         respuestasUsuario = [];
@@ -142,6 +175,10 @@ function comenzarEvaluacion(listaPreguntas) {
         // Se espera que el usuario de click en siguiente
         // Se evalua la pregunta y se muestra la siguiente pregunta
     
+
+
+
+
 /**
  * Consulta AJAX al servidor por método POST
  * @param {*} urlserver :Direccion de envio
@@ -169,11 +206,14 @@ function mensajeAjax(urlserver, datos, callBackFunction) {
             console.error('Error:', JSON.stringify(error));
         });
 }
+
+
 /**
  * Funcion para obtener el valor de una cookie
  * @param {*} name Nombre de la cookie
  * @returns el cvontenido de la cookie
  */
+
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== "") {

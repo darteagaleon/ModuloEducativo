@@ -50,31 +50,11 @@
 </div>
 <a href="{% url 'Cursos_Usuarios' %}" id="back2">
     <button class="back">
-        <div class="icon">
+        <button class="back">
             <i class='bx bx-arrow-back'></i>
-        </div>
-        <span>
-            Regresar
-        </span>
+            <span>Regresar</span>
+        </button>
     </button>
 </a>
 
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var infoElements = document.querySelectorAll(".pregunta");
-
-        infoElements.forEach(function (info) {
-            info.addEventListener("click", function () {
-                // Eliminar la clase "clicked" de todos los elementos
-                infoElements.forEach(function (element) {
-                    element.classList.remove("clicked");
-                });
-
-                // Agregar la clase "clicked" al elemento clicado
-                this.classList.add("clicked");
-            });
-        });
-    });
-</script>
 {% endblock %}
