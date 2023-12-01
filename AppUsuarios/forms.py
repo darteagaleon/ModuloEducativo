@@ -28,15 +28,9 @@ class CrearUsuariosForm(UserCreationForm):
     estadousuario = forms.BooleanField(
         required=False,
         initial=True,
-<<<<<<< HEAD
         label='Estado Usuario',
         widget=forms.CheckboxInput(attrs={'class': 'form-check-input'})
     )   
-=======
-        label='Estado usuario',
-        widget=forms.CheckboxInput(attrs={'class': 'form-check-input', 'value': 'False'})
-    )    
->>>>>>> 13aaa334b00a67a2d5a42234dcb43f796fb66495
     ROLES = (('usuario', 'Usuario'), ('administrador', 'Administrador'))
     rol = forms.ChoiceField(choices=ROLES, label='Rol')
     cargo = forms.ModelChoiceField(queryset=Cargo.objects.all(), required=True, label='Cargo')
