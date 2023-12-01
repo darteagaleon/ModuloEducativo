@@ -208,7 +208,9 @@ def crear_cargo(request):
         form = CargoForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'Cargos/crear_cargo.html', {'mensaje': 'Cargo creado exitosamente'})
+            messages.success(request, 'Cargo creado exitosamente')
+            return redirect('listar_cargos')
+            # return render(request, 'Cargos/crear_cargo.html', {'mensaje': 'Cargo creado exitosamente'})
     else:
         form = CargoForm()
     
@@ -297,8 +299,8 @@ def crear_usuario(request):
                 user.groups.add(Group.objects.get(name='usuarios'))
             elif form.cleaned_data['rol'] == 'administrador':
                 user.groups.add(Group.objects.get(name='administrativos'))
-
-            return redirect('home')
+            messages.success(request, 'Usuario creado exitosamente')
+            return redirect('listar_usuarios')
     else:
         form = CrearUsuariosForm()
 
