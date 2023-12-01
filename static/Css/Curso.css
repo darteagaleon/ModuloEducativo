@@ -33,7 +33,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 87vh; /* O ajusta la altura según tus necesidades */
+    height: 87vh;
 }
 #contenedor {
     background: #ecf0f3;
@@ -41,14 +41,10 @@ body {
     transition: all 0.3s ease;
     width: 50vw;
     max-width: 60vw;
-    
-    /* Ajusta el margen superior al 5% */
     border-radius: 20px;
     padding: 40px;
-    position: relative;
-    top: 5%;
+ 
     overflow: hidden;
-    /* Oculta el contenido que excede el contenedor */
 
 }
 
@@ -244,6 +240,8 @@ a {
     font-weight: 500;
     font-size: 20px;
     transition: all 0.4s linear;
+    width: 7.5vw;
+    margin: 5px;
 }
 .visualizar:hover{
     color: #fff6e5;
@@ -288,6 +286,7 @@ form>*:last-child {
 
 .table-responsive::-webkit-scrollbar-thumb {
     background: #075373;
+    padding:10px ;
     /* Cambiar el color del thumb en el .descripcion */
     border-radius: 6px;
 }
