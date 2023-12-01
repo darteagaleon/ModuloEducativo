@@ -12,11 +12,11 @@ class crear_cursos(forms.ModelForm):
         model = Cursos
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso','duracion_curso','iconoCurso' ,'id_cargo']
         labels = {
-            'nombre_curso': 'Nombre Curso',
-            'descripcion_curso': 'Descripción Curso', 
+            'nombre_curso': 'Nombre curso',
+            'descripcion_curso': 'Descripción curso', 
             'estado_curso': 'Activo/Inactivo',
-            'duracion_curso': 'Duración Curso',
-            'iconoCurso': 'Iconos Curso',
+            'duracion_curso': 'Duración curso',
+            'iconoCurso': 'Iconos curso',
             'id_cargo':'Cargo',
         }
         #se utiliza para personalizar la apariencia y el comportamiento de los campos del formulario en una aplicación Django.
@@ -35,11 +35,11 @@ class CursosForm(forms.ModelForm):
         model = Cursos
         fields = ['nombre_curso', 'descripcion_curso', 'estado_curso', 'duracion_curso', 'iconoCurso','id_cargo']
         labels = {
-            'nombre_curso': 'Nombre Curso',
-            'descripcion_curso': 'Descripción Curso', 
+            'nombre_curso': 'Nombre curso',
+            'descripcion_curso': 'Descripción curso', 
             'estado_curso': 'Activo/Inactivo',
-            'duracion_curso': 'Duración Curso',
-            'iconoCurso': 'Iconos Curso',
+            'duracion_curso': 'Duración curso',
+            'iconoCurso': 'Iconos curso',
             'id_cargo':'Cargo',
         }
         widgets = {
@@ -51,9 +51,9 @@ class ModulosForm(forms.ModelForm):
         model = Modulos
         fields = '__all__'
         labels = {
-            'nombre_modulo': 'Nombre Módulo',
+            'nombre_modulo': 'Nombre módulo',
             'estado_modulo': 'Activo/Inactivo',
-            'orden_modulo': 'Orden Módulo',
+            'orden_modulo': 'Orden módulo',
             'id_curso': 'Curso',
         }
         widgets = {
@@ -65,12 +65,12 @@ class ClasesForm(forms.ModelForm):
         model = Clases
         fields = '__all__'
         labels = {
-            'nombre_clase': 'Nombre Clase',
-            'duracion_clase': 'Duración Clase',
-            'contenido_clase': 'Contenido Clase',
-            'descripcion_clase': 'Descripción Clase',
+            'nombre_clase': 'Nombre clase',
+            'duracion_clase': 'Duración clase',
+            'contenido_clase': 'Contenido clase',
+            'descripcion_clase': 'Descripción clase',
             'estado_clase': 'Activo/Inactivo',
-            'orden_clase': 'Orden Clase',
+            'orden_clase': 'Orden clase',
             'id_modulo': 'Módulo',
         }
         widgets = {
@@ -82,11 +82,11 @@ class EvaluacionForm(forms.ModelForm):
         model = Evaluaciones
         fields = '__all__'
         labels = {
-            'nombre_evaluacion': 'Nombre Evaluación',
-            'numero_intentos': 'Número Intentos',
-            'descripcion_evaluacion': 'Descripción Evaluación',
-            'instrucciones_evaluacion': 'Instrucciones Evaluación',
-            'duracion_evaluacion_admin': 'Duración Evaluación',
+            'nombre_evaluacion': 'Nombre evaluación',
+            'numero_intentos': 'Número intentos',
+            'descripcion_evaluacion': 'Descripción evaluación',
+            'instrucciones_evaluacion': 'Instrucciones evaluación',
+            'duracion_evaluacion_admin': 'Duración evaluación',
             'estado_evaluacion': 'Activo/Inactivo',
             'id_modulo': 'Módulo',
         }
@@ -100,12 +100,12 @@ class PreguntasForm(forms.ModelForm):
         model= Preguntas
         fields = '__all__'
         labels = {
-            'nombre_pregunta': 'Nombre Pregunta',
+            'nombre_pregunta': 'Nombre pregunta',
             'opcion_a': 'Opción A',
             'opcion_b': 'Opción B',
             'opcion_c': 'Opción C',
             'opcion_d': 'Opción D',
-            'respuesta_correcta': 'Respuesta Correcta',
+            'respuesta_correcta': 'Respuesta correcta',
             'id_evaluacion': 'Evaluación',
         }
 
@@ -114,8 +114,8 @@ class MaterialApoyoForm(forms.ModelForm):
     class Meta:
         model = MaterialApoyo
         labels = {
-            'NombreMaterialApoyo': 'Nombre Material Apoyo',
-            'DescripcionMaterialApoyo': 'Descripción Material Apoyo',
+            'NombreMaterialApoyo': 'Nombre material apoyo',
+            'DescripcionMaterialApoyo': 'Descripción material apoyo',
             'Archivo': 'Archivo',
             'id_curso': 'Curso',
         }

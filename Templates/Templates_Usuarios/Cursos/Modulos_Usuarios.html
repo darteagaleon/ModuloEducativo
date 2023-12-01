@@ -23,21 +23,21 @@
                     {% for clase in listaclases %}
                         {% if clase.tipo == 'evaluacion' %}
                             <button class="evaluacion" {% if not clase.disponible %}disabled{% endif %} onclick="solicitarPreguntas({{ clase.id }})">
-                                <h3>{{ clase.titulo | title }}</h3>
+                                <h3>{{ clase.titulo }}</h3>
                             </button>
                         {% elif clase.tipo == 'modulo' %}
                             <div class="modulo-titulo">
-                                <h1>{{ clase.titulo | title }}</h1>
+                                <h1>{{ clase.titulo }}</h1>
                             </div>
                         {% else %}
                             <div class="clases">
                                 <div class="contenido-clases{% if not clase.disponible %}-invalida{% endif %}">
                                     {% if clase.disponible %}
                                         <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
-                                            <h3 class="nombre-clase">{{ clase.titulo | title }}</h3>
+                                            <h3 class="nombre-clase">{{ clase.titulo }}</h3>
                                         </a>
                                     {% else %}
-                                        <h3 class="nombre-clase">{{ clase.titulo | title }}<i class='bx bx-lock-alt'></i></h3>
+                                        <h3 class="nombre-clase">{{ clase.titulo }}<i class='bx bx-lock-alt'></i></h3>
                                     {% endif %}
                                 </div>
                             </div>

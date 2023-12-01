@@ -12,7 +12,7 @@
     <div class="text"><!--2 -->
         <div id="contenedor" class="container-fluid">
             <h1>
-                Material de Apoyo</h1>
+                Material de apoyo</h1>
             <br>
             <form class="search" action="{% url 'filtrar_material' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
@@ -41,8 +41,8 @@
                     <tbody class=" overflow-hidden">
                         {% for material in materiales %}
                         <tr>
-                            <td id="nombre" style="width: 200px;">{{ material.NombreMaterialApoyo | title }}</td>
-                            <td id="nombre" style="width: 200px;">{{ material.DescripcionMaterialApoyo | title }}</td>
+                            <td id="nombre" style="width: 200px;">{{ material.NombreMaterialApoyo }}</td>
+                            <td id="nombre" style="width: 200px;">{{ material.DescripcionMaterialApoyo  }}</td>
                             <td id="visualizar" style="width: 200px;">
                                 <a href="{{ material.Archivo }}" target="_blank">
                                     <button type="button" class="btn visualizar">Visualizar</button>

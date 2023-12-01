@@ -9,7 +9,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div id="contenedor"  class="container-fluid">
-            <h1> Listar Clases</h1>
+            <h1> Listar clases</h1>
             <form class="search" action="{% url 'filtrar_clases' %}" method="GET">
                 <input type="text" class="search-bar" name="search" placeholder="Buscar Clases...">
                 <button class="search-icon"> <i class='bx bx-search-alt'
@@ -38,7 +38,7 @@
                     {% for clase in listarclases %}<!--indica que se va a iniciar un bucle-->
                     <tr >
                         <!-- Esta líneas definen las celdas de datos de la tabla-->
-                        <td id="nombre">{{clase.nombre_clase | title}}</td>
+                        <td id="nombre">{{clase.nombre_clase}}</td>
                         {% if clase.estado_clase %}<!--Estas líneas verifican si el atributo -->
                         <td  id="estado">
                             <button type="button" class="btn btn-success text-white activo">Activo</button>
