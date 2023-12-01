@@ -101,8 +101,10 @@ function mostrarResultados(data) {
     if (data && data.listaPreguntas) {
         // Calcular la puntuación mínima requerida
         let puntuacionMinimaRequerida = Math.ceil(data.listaPreguntas.length * 0.7);
+        
         // Verificar si el usuario superó la puntuación mínima requerida
-        if (respuestasCorrectas >= puntuacionMinimaRequerida) {
+        usuarioAproboExamen = respuestasCorrectas >= puntuacionMinimaRequerida;
+        if (usuarioAproboExamen) {
             contenedor.innerHTML += '<p>Felicidades, has superado la evaluación.</p>';
             contenedor.innerHTML += '<p>Respuestas correctas: ' + respuestasCorrectas + '</p>';
         } else {
