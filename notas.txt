@@ -1,0 +1,64 @@
+usuario: admin
+contraseña: Cyres2023
+
+http://localhost:8000/accounts/login/?next=/
+
+**********************************************
+Curso SAP:
+
+Modulos -Clases
+1)
+Nombre módulo: Conceptos básicos de SAP
+
+1.1)
+-Nombre clase: Aplicativo SAP, una breve descripción.
+-Descripción clase: Con esta clase se busca dar un vistazo superficial de lo que es la herramienta SAP en el ámbito laboral.
+-Contenido: https://www.youtube.com/watch?v=MLFMEFMd1wY
+
+1.2)
+-Nombre clase:Zumaria
+-Descripción clase: La sumaria es una de las tareas mas importantes que desarrollamos en la compañía, pues permite tener un control de la facturación que se genera a nuestros clientes, que en ultimas son los soportes que nos permiten realizar los cobros.
+-Contenido: https://www.youtube.com/watch?v=Yg3eAoG6Mxg
+
+1.3)
+-Nombre clase:Estados de cuenta
+-Descripción clase:Mediante esta clase se da una breve explicación de la forma en que se revisan los estados de cliente de tres formas ya sea por código individual, cuando el cliente tiene varios códigos o por nit del cliente.
+-Contenido:https://www.youtube.com/watch?v=NAXEmdnQI30
+
+1.4)
+-Nombre clase: Ingresos y layout
+-Descripción clase: Mediante esta clase se da una breve explicación de la forma en que se deben realizar el cargue de los pagos que se ingresan al SAP para luego compensarlos del estado de cuenta de cada cliente.
+-Contenido: https://www.youtube.com/watch?v=YnWBvHEUXwQ
+
+2)
+Nombre módulo: Fundamentos de Cysoft
+
+2.1)
+-Nombre clase:Cysoft
+-Descripción clase:Mediante esta clase se da una breve explicación de la aplicación CYSOFT, la cual esta sincronizada con el SAP y permite visualizar información en tiempo real y el avance que se tiene con cada cliente.
+-Contenido: https://www.youtube.com/watch?v=1MdjXVB-5_k
+
+2.2)
+-Nombre clase:Ingresos manuales
+-Descripción clase: Esta es una explicación de la forma en que se hacen los ingresos de los pagos de los clientes de forma manual.
+-Contenido:https://www.youtube.com/watch?v=XhN5cmt3MVs
+
+2.3)
+-Nombre clase:Compensaciones de ingresos
+-Descripción clase:.............................................
+-Contenido: https://www.youtube.com/watch?v=PKOzQrHfK6s
+
+2.4)
+-Nombre clase: Compensaciones con mayor o menor valor pagado
+-Descripción clase: ............................................
+-Contenido:https://www.youtube.com/watch?v=V6Ov2Qp8GIU
+
+2.5)
+-Nombre clase: Compensaciones cuando un cliente tiene varios codigos.
+-Descripción clase: ............................................
+-Contenido: https://www.youtube.com/watch?v=pBqtBGm5PFc
+
+
+
+
+
