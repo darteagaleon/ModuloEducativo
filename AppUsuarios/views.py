@@ -80,7 +80,7 @@ def Modulos_Usuarios(request):
                 if nuevoModulo != '':  # Si no es la primera vez
                     reg = {
                         'tipo': 'evaluacion',
-                        'titulo': 'Evaluación del Módulo ' + nuevoModulo,
+                        'titulo': 'Evaluación del módulo ' + nuevoModulo,
                         'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
                         'disponible': True
                         
@@ -117,7 +117,7 @@ def Modulos_Usuarios(request):
         # Agregar la evaluación del último módulo
         reg = {
             'tipo': 'evaluacion',
-            'titulo': 'Evaluación del Módulo ' + nuevoModulo,
+            'titulo': 'Evaluación del módulo ' + nuevoModulo,
             'id': ultima_clase,  # El ID de la evaluación es el ID de la clase
             'disponible': True
         }

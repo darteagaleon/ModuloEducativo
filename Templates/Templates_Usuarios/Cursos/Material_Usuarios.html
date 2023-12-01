@@ -10,7 +10,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div class="container2"><!--2 -->
-            <h1> Listado de Cursos </h1>
+            <h1> Listado de cursos </h1>
         <form class="search" action="{% url 'Material_Usuarios' %}" method="GET">
             <input type="text" class="search-bar" name="search" placeholder="Buscar Módulos...">
             <button class="search-icon"> <i class='bx bx-search-alt' style="font-size:27px; "></i></button> <br>
@@ -33,7 +33,7 @@
                             
                         </div>
                         <div class="card-content">
-                            <h3>{{ curso.nombre_curso | title  }}</h3> <!-- Nombre del curso -->
+                            <h3>{{ curso.nombre_curso }}</h3> <!-- Nombre del curso -->
                             <div  >
                             <a href="{% url 'Listar_Material_Usuarios' curso_id=curso.id %}">
 									  <button type="button" class="btn visualizar">Visualizar</button>

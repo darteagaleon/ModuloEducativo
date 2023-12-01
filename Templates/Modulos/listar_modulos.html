@@ -9,7 +9,7 @@
 <div class="home_content"> <!--1 -->
     <div class="text"><!--2 -->
         <div id="contenedor" class="container-fluid">
-            <h1> Listar Módulos</h1>
+            <h1> Listar módulos</h1>
             <br>
             <!-- Formulario de búsqueda que permite a los usuarios ingresar un término de búsqueda y enviarlo a una vista -->
             <form class="search" action="{% url 'filtrar_modulos' %}" method="GET">
@@ -40,7 +40,7 @@
                         {% for modulos in listarm %} <!-- Inicia un bucle para listar los módulos -->
                         <tr style="width: 180px;">
                             <!-- Celdas de datos de la tabla -->
-                            <td id="nombre">{{ modulos.nombre_modulo | title }}</td>
+                            <td id="nombre">{{ modulos.nombre_modulo }}</td>
                             <!-- Verifica el estado del módulo y muestra el ícono correspondiente -->
                             {% if modulos.estado_modulo %}
                             <td  id="estado">
