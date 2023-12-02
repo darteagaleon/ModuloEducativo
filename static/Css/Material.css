@@ -47,24 +47,19 @@ body {
 
 }
 
-
 .card {
-    /* background-image: linear-gradient(135deg, #31636d 0%,#182d34 100%); */
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     width: 20vw;
-    height: auto;
-    max-height: 45vh;
-    min-width: 300px;
-    max-width: 400px;
+    padding: 20px;
     text-align: center;
     /* Alinea el contenido al centro */
     margin: 10px;
     /* Añade márgenes para separar las tarjetas */
 }
+
 
 /* Estilo para los botones */
 

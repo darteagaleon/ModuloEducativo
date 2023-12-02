@@ -21,28 +21,44 @@
             <div class="column-single">
                 <div class="modulos">
                     {% for clase in listaclases %}
-                        {% if clase.tipo == 'evaluacion' %}
-                            <button class="evaluacion" {% if not clase.disponible %}disabled{% endif %} onclick="solicitarPreguntas({{ clase.id }})">
-                                <h3>{{ clase.titulo }}</h3>
+                    {% if clase.tipo == 'evaluacion' %}
+                            {% if clase.disponible %}
+                            <button  class="evaluacion" onclick="solicitarPreguntas({{ clase.id }})">
+                                <h3 >{{ clase.titulo }}</h3 >
                             </button>
-                        {% elif clase.tipo == 'modulo' %}
-                            <div class="modulo-titulo">
-                                <h1>{{ clase.titulo }}</h1>
-                            </div>
-                        {% else %}
-                            <div class="clases">
-                                <div class="contenido-clases{% if not clase.disponible %}-invalida{% endif %}">
-                                    {% if clase.disponible %}
-                                        <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
-                                            <h3 class="nombre-clase">{{ clase.titulo }}</h3>
-                                        </a>
-                                    {% else %}
-                                        <h3 class="nombre-clase">{{ clase.titulo }}<i class='bx bx-lock-alt'></i></h3>
-                                    {% endif %}
-                                </div>
-                            </div>
+                            {% else %}
+                            <!-- <h1>{{ clase.titulo }}</h1> -->
+                            <button class="evaluacion-invalida " >
+                                    <h3 >No hay evaluaciones por el momento<i class='bx bx-lock-alt'></i>
+                                    </h3>
+                                </button>
                         {% endif %}
-                    {% endfor %}
+                    {% else %}
+                    <div class="modulo-titulo">
+                        {% if clase.tipo == 'modulo' %}
+                            <h1>{{ clase.titulo }}</h1>
+                        {% else %}
+                    </div>
+                        <div class="clases">
+                            <div class="contenido-clases">
+                                {% if clase.disponible %}
+                                <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
+                                        <h3 class="nombre-clase">
+                                        {{ clase.titulo }}
+                                    </h3>
+                                </a>
+                                {% else %}
+                            </div>
+                                <div class="contenido-clases-invalida">
+                                    <h3 class="nombre-clase">
+                                        {{ clase.titulo }}<i class='bx bx-lock-alt'></i>
+                                    </h3>
+                                </div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                {% endif %}
+                {% endfor %}
                 </div>
             </div>
         </div>
