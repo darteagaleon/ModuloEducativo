@@ -23,7 +23,7 @@
             <table class="table table-hover mt-4 ">
                 <thead>
                     <tr  id="cabecera">
-                        <th  style="width: 355px;" scope="col" >Nombre</th>
+                        <th  style="width: 280px;" scope="col" >Nombre</th>
                         <th  style="width: 100px;" scope="col" id="estado">Estado</th>
                         <th   style="width: 100px;" scope="col" id="visualizar">Visualizar</th>
                     </tr>
@@ -35,7 +35,7 @@
                     <tbody class=" overflow-hidden">
                         {% for curso in listarc %}
                         <tr >
-                            <td id="nombre">{{ curso.nombre_curso }}</td>
+                            <td id="nombre"  style="width: 355px;">{{ curso.nombre_curso }}</td>
                             {% if curso.estado_curso %}
                             <td  id="estado">
                                 <!-- <p class='status--active'>Activo</p> -->

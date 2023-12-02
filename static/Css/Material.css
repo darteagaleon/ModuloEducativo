@@ -55,7 +55,9 @@ body {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 300px;
+    width: 20vw;
+    height: auto;
+    max-height: 45vh;
     min-width: 300px;
     max-width: 400px;
     text-align: center;
@@ -74,13 +76,12 @@ body {
     border-radius: 5px;
     height: 50px;
     width: 50px;
-    margin: 0 auto 10px;
+    margin: 20px auto;
     /* Centra verticalmente y agrega espacio en la parte inferior */
 }
 
 .folder-icon::before {
     content: "\1F4C1";
-    /* Unicode para el ícono de carpeta */
     font-size: 30px;
     line-height: 50px;
 }
