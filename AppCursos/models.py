@@ -68,11 +68,11 @@ class Evaluaciones(models.Model):
 
 #Se crea el modelo de la tabla Preguntas de la empresa
 class Preguntas(models.Model):
-     nombre_pregunta=models.TextField(max_length=100)
-     opcion_a = models.CharField(max_length=100, null=True,blank=True)
-     opcion_b = models.CharField(max_length=100, null=True,blank=True)
-     opcion_c = models.CharField(max_length=100, null=True,blank=True)
-     opcion_d = models.CharField(max_length=100, null=True,blank=True)
+     nombre_pregunta=models.TextField(max_length=500)
+     opcion_a = models.CharField(max_length=200, null=True,blank=True)
+     opcion_b = models.CharField(max_length=200, null=True,blank=True)
+     opcion_c = models.CharField(max_length=200, null=True,blank=True)
+     opcion_d = models.CharField(max_length=200, null=True,blank=True)
      respuesta_correcta = models.CharField(max_length=1, choices=[('a', 'A'), ('b', 'B'), ('c', 'C'), ('d', 'D'),], null=True,blank=True)
 
      #Se crea la relacion a modulos

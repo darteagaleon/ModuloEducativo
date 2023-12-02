@@ -87,11 +87,11 @@ class EvaluacionForm(forms.ModelForm):
             'descripcion_evaluacion': 'Descripción evaluación',
             'instrucciones_evaluacion': 'Instrucciones evaluación',
             'duracion_evaluacion_admin': 'Duración evaluación',
-            'estado_evaluacion': 'Activo/Inactivo',
+            'finalizada': 'Activo/Inactivo',
             'id_modulo': 'Módulo',
         }
         widgets = {
-            'finalizada': forms.CheckboxInput(attrs={'class': 'form-check-input value="False"'}),
+            'finalizada': forms.CheckboxInput(attrs={'class': 'form-check-input value="TRUE"' }),
         }
         
 #este código define un formulario de Django llamado PreguntasForm que se utiliza para interactuar con el modelo de Preguntas.        
