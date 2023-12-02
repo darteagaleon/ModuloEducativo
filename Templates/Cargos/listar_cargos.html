@@ -39,7 +39,7 @@
                     {% for cargo in cargos %}<!--indica que se va a iniciar un bucle-->
                     <tr >
                             <!-- Esta líneas definen las celdas de datos de la tabla-->
-                            <td id="nombre">{{cargo.nombre_cargo | title }}</td>
+                            <td id="nombre">{{cargo.nombre_cargo }}</td>
                             {% if cargo.estado_cargo %}<!--Estas líneas verifican si el atributo -->
                             <td  id="estado">                                <button type="button" class="btn btn-success text-white activo">Activo</button>
                             </td>
