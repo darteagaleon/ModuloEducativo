@@ -9,56 +9,68 @@
         <h1 style="text-align: center;">{{ nombre_curso }}</h1>
         <div class="grid-container">
             <div class="column">
-                <div class="row">
+                <div class="img_content">
                     <img src="{{ icono_curso }}" alt="Icono del Curso" class="icono-curso">
                 </div>
                 <div class="descripcion">
-                    <div class="titulo">Descripción</div>
-                    <p>{{ descripcion_curso }}</p>
+                    <div class="tools">
+                        <div class="circle">
+                            <p class="title">Descripción</p>
+                        </div>
+                    </div>
+                    <div class="descripcion__content">
+                        <p class="content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam consectetur
+                            maiores amet tenetur blanditiis quia officiis porro possimus tempore quibusdam similique,
+                            doloribus vel ut numquam! Ea neque nobis quia omnis! Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Laboriosam error consequuntur itaque omnis explicabo voluptates nesciunt
+                            hic. Facilis eveniet iste dignissimos illum, et officia aperiam magni asperiores nulla,
+                            tempore sequi!
+                        </p>
+                    </div>
                 </div>
             </div>
-
+            <!-- {{ descripcion_curso }} -->
             <div class="column-single">
                 <div class="modulos">
                     {% for clase in listaclases %}
                     {% if clase.tipo == 'evaluacion' %}
-                            {% if clase.disponible %}
-                            <button  class="evaluacion" onclick="solicitarPreguntas({{ clase.id }})">
-                                <h3 >{{ clase.titulo }}</h3 >
-                            </button>
-                            {% else %}
-                            <!-- <h1>{{ clase.titulo }}</h1> -->
-                            <button class="evaluacion-invalida " >
-                                    <h3 >No hay evaluaciones por el momento<i class='bx bx-lock-alt'></i>
-                                    </h3>
-                                </button>
-                        {% endif %}
+                    {% if clase.disponible %}
+                    <button class="evaluacion" onclick="solicitarPreguntas({{ clase.id }})">
+                        <h3>{{ clase.titulo }}</h3>
+                    </button>
+                    {% else %}
+                    <!-- <h1>{{ clase.titulo }}</h1> -->
+                    <button class="evaluacion-invalida ">
+                        <h3>No hay evaluaciones por el momento<i class='bx bx-lock-alt'></i>
+                        </h3>
+                    </button>
+                    {% endif %}
                     {% else %}
                     <div class="modulo-titulo">
                         {% if clase.tipo == 'modulo' %}
-                            <h1>{{ clase.titulo }}</h1>
+                        <h1>{{ clase.titulo }}</h1>
                         {% else %}
                     </div>
-                        <div class="clases">
-                            <div class="contenido-clases">
-                                {% if clase.disponible %}
-                                <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
-                                        <h3 class="nombre-clase">
-                                        {{ clase.titulo }}
-                                    </h3>
-                                </a>
-                                {% else %}
-                            </div>
-                                <div class="contenido-clases-invalida">
-                                    <h3 class="nombre-clase">
-                                        {{ clase.titulo }}<i class='bx bx-lock-alt'></i>
-                                    </h3>
-                                </div>
-                            {% endif %}
-                            {% endif %}
+                    <div class="clases">
+                        <div class="contenido-clases">
+                            {% if clase.disponible %}
+                            <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
+                                <h3 class="nombre-clase">
+                                    {{ clase.titulo }}
+                                </h3>
+                            </a>
+                            {% else %}
                         </div>
-                {% endif %}
-                {% endfor %}
+                        <div class="contenido-clases-invalida">
+                            <h3 class="nombre-clase">
+                                {{ clase.titulo }}<i class='bx bx-lock-alt'></i>
+                            </h3>
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
