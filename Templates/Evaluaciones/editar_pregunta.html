@@ -35,7 +35,7 @@
         </div>
     </div>
 </div>
-<a href="{% url 'ver_preguntas_detalle' evaluacion_id=pregunta_id %}" ><!--nos dirije  a la URL correspondiente a la vista llamada 'listar_preguntas' -->
+<a href="{% url 'ver_preguntas_detalle' evaluacion_id=evaluacion.id %}"><!--nos dirije  a la URL correspondiente a la vista llamada 'listar_preguntas' -->
     <button class="back">
         <div class="icon">
             <i class='bx bx-arrow-back'></i>

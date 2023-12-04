@@ -354,9 +354,13 @@ def editar_preguntas(request, pregunta_id):
             form.save()
             messages.success(request, 'Editado con éxito')
             return redirect("ver_preguntas_detalle", evaluacion_id=editar_p.id_evaluacion.id)
+            print("-----------------------------------------")
+            print(evaluacion_id=editar_p.id_evaluacion.id)
     else:
         form = PreguntasForm(instance=editar_p)
-    context = {"form": form,"pregunta_id":pregunta_id}
+    context = {"form": form,"pregunta_id":pregunta_id, "evaluacion": editar_p.id_evaluacion}
+    print("-----------------------------------------")
+    print(context)
     return render(request, 'Evaluaciones/editar_pregunta.html', context)
 
 
