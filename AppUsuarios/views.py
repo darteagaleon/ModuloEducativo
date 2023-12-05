@@ -328,7 +328,8 @@ def editar_usuarios(request, user_id):
             user_form.save()  # Guardar el formulario del modelo User
             profile_form.save()  # Guardar el formulario del modelo Profile
             messages.success(request, f'Usuario {user.username} actualizado')
-            return redirect('listar_usuarios')
+            # return redirect('listar_usuarios')
+            return redirect('perfil_usuario_detalle', user_id=user.id)
                     
     else:
         user_form = EditarUsuariosForm(instance=user)
@@ -377,6 +378,3 @@ def Filtrar_Material_Usuario(request):
 
 
 
-# # vista para mostrar los dat-os del usuario
-# def perfil_usuario(request):
-#     return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html')

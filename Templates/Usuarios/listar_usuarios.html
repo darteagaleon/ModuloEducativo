@@ -53,16 +53,16 @@
                         {% endif %} 
                         <!-- <td scope="row" id="contenido-tabla">{{ usuario.estadousuario }}</td> -->
 
-                        <!-- <td id="visualizar">                     
-                            <a href="{% url 'perfil_usuario_detalle' user_id=usuario.id %}">
+                        <td id="visualizar">                     
+                            <a href="{% url 'perfil_usuario_detalle' user_id=usuario.user.id %}">
                                 <button type="button" class="btn visualizar">Visualizar</button>
                             </a>
-                        </td> -->
-                        <td id="visualizar">
+                        </td>
+                        <!-- <td id="visualizar">
                             <a href="{% url 'editar_usuarios' user_id=usuario.user.id %}">
                                 <button type="button" class="btn visualizar">Editar</button>
                             </a>
-                        </td>
+                        </td> -->
                     </tr>
                     {% endfor %}
                 </tbody>

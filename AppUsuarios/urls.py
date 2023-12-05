@@ -44,8 +44,8 @@ urlpatterns = [
     path('ejecutar_evaluacion/',login_required( views.ejecutar_evaluacion), name='ejecutar_evaluacion'),
     
     # para la visualizacion del perfil de los usuarios
-    # path('perfil_usuario_detalle/', login_required(views.perfil_usuario), name='perfil_usuario_detalle'),
-    path('perfil_usuario_detalle/<int:user_id>/', views.perfil_usuario, name='perfil_usuario_detalle'),
+    path('perfil_usuario_detalle/<int:user_id>',(views.perfil_usuario), name='perfil_usuario_detalle'),
+    
 ]
     
 

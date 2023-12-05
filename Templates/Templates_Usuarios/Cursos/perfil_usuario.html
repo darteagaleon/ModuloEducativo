@@ -49,10 +49,13 @@
                             </p>
                             <hr>
                         </div>
-                        <button class="subir" type="submit">
-                            <i class='bx bx-pencil'></i>
-                            <span>Editar</span>
-                        </button> 
+                        
+                        <a href="{% url 'editar_usuarios' usuario.id %}"> 
+                            <button class="subir" type="submit">
+                                <i class='bx bx-pencil'></i>
+                                <span>Editar</span>
+                            </button>
+                        </a>
                     </div>
                 </div>
                 <div class="content_cursos">
@@ -62,9 +65,9 @@
                             <i class='bx bx-chevron-down Arrow'></i>
                         </div>
                         <ul class="Sub-menu">
-                            {% comment %} {% for curso in listacursos %}
-                            <li><a href="#">{{ curso.nombre_curso }}</a></li>
-                            {% endfor %} {% endcomment %}
+                            {% for curso in listacursos %}
+                                <li><a href="#">{{ curso.nombre_curso }}</a></li>
+                            {% endfor %}
                             <li><a href="#">Curso 1</a></li>
                             <li><a href="#">Curso 2</a></li>
                             <li><a href="#">Curso 3</a></li>
@@ -77,9 +80,9 @@
                             <i class='bx bx-chevron-down Arrow'></i>
                         </div>
                         <ul class="Sub-menu">
-                            {% comment %} {% for curso in listacursos %}
-                            <li><a href="#">{{ curso.nombre_curso }}</a></li>
-                            {% endfor %} {% endcomment %}
+                            
+                            <li><a href="#"></a></li>
+                            
                             <li><a href="#">Curso 4</a></li>
                             <li><a href="#">Curso 5</a></li>
                             <li><a href="#">Curso 6</a></li>
