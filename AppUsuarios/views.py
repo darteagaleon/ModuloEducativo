@@ -348,9 +348,12 @@ def editar_usuarios(request, user_id):
 def perfil_usuario(request, user_id):
     usuario = get_object_or_404(User, id=user_id)
     perfil = get_object_or_404(Profile, user=usuario)
+
     
-    context = {'usuario': usuario, 'perfil': perfil}
+    context = {'usuario': usuario, 'perfil': perfil, }
     return render(request, 'Templates_Usuarios/Cursos/perfil_usuario.html', context)
+
+
 
 
 

@@ -45,7 +45,7 @@ urlpatterns = [
     
     # para la visualizacion del perfil de los usuarios
     path('perfil_usuario_detalle/<int:user_id>',(views.perfil_usuario), name='perfil_usuario_detalle'),
-    
+    # path('cursos_asignados_perfil/', (views.Cursos_asignados_perfil), name='cursos_asignados_perfil'),
 ]
     
 

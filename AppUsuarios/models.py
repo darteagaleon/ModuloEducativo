@@ -55,10 +55,15 @@ class Profile(models.Model):
      #Relacion a Cargo
      cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True, verbose_name='Cargo')
 
+     
      class Meta:
           verbose_name = 'perfil'
           verbose_name_plural = 'perfiles'
           ordering = ['-id'] #para que muestre arriba el ultimo creado
+
+@property
+def last_login(self):
+     return self.user.last_login
 
 def __str__(self):
      return self.user.username

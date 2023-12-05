@@ -45,7 +45,7 @@
                         </div>
                         <div class="tiempo-interaccion">
                             <p>
-                                Ult. Conexion: 22/11/2023 - 10:50 pm
+                                Ult. Conexion: {{ usuario.last_login|date:"d/m/Y H:i A" }}
                             </p>
                             <hr>
                         </div>
@@ -65,13 +65,15 @@
                             <i class='bx bx-chevron-down Arrow'></i>
                         </div>
                         <ul class="Sub-menu">
-                            {% for curso in listacursos %}
-                                <li><a href="#">{{ curso.nombre_curso }}</a></li>
-                            {% endfor %}
-                            <li><a href="#">Curso 1</a></li>
-                            <li><a href="#">Curso 2</a></li>
-                            <li><a href="#">Curso 3</a></li>
-                        </ul>
+                                {% if listacursos %}
+                                {% for curso in listacursos %}
+                                    <li><a href="#"></a></li>
+                                    <li>{{ curso.nombre_curso }}</li>
+                                {% endfor %}
+                                {% else %}
+                                    <li>No hay cursos asignados.</li>
+                                {% endif %}
+                            </ul>
                         <hr>
                     </li>
                     <li>
@@ -108,6 +110,7 @@
             </div>
         </div>
     </div>
+    
 </body>
 
 <a href="{% url 'listar_usuarios' %}" id="back2">
