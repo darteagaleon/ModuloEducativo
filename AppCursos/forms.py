@@ -108,7 +108,7 @@ class PreguntasForm(forms.ModelForm):
             'respuesta_correcta': 'Respuesta correcta',
             'id_evaluacion': 'Evaluación',
         }
-
+  
 #este código define un formulario de Django llamado MaterialApoyoForm que se utiliza para interactuar con el modelo de Material de apoyo.        
 class MaterialApoyoForm(forms.ModelForm):
     class Meta:

@@ -22,7 +22,13 @@ body {
     width: calc(100 - 240px);
     left: 240px;
 }
-
+.text {
+    height: 95.0vh;  /* 100% del alto de la ventana */
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* Centra horizontalmente */
+    /* background-color: blue; */
+}
 .card {
     display: flex;
     flex-direction: column;

@@ -9,39 +9,62 @@
         <h1 style="text-align: center;">{{ nombre_curso }}</h1>
         <div class="grid-container">
             <div class="column">
-                <div class="row">
+                <div class="img_content">
                     <img src="{{ icono_curso }}" alt="Icono del Curso" class="icono-curso">
                 </div>
                 <div class="descripcion">
-                    <div class="titulo">Descripción</div>
-                    <p>{{ descripcion_curso }}</p>
+                    <div class="tools">
+                        <div class="circle">
+                            <p class="title">Descripción</p>
+                        </div>
+                    </div>
+                    <div class="descripcion__content">
+                         {{ descripcion_curso }} 
+                    
+                    </div>
                 </div>
             </div>
-
+            
             <div class="column-single">
                 <div class="modulos">
                     {% for clase in listaclases %}
-                        {% if clase.tipo == 'evaluacion' %}
-                            <button class="evaluacion" {% if not clase.disponible %}disabled{% endif %} onclick="solicitarPreguntas({{ clase.id }})">
-                                <h3>{{ clase.titulo }}</h3>
-                            </button>
-                        {% elif clase.tipo == 'modulo' %}
-                            <div class="modulo-titulo">
-                                <h1>{{ clase.titulo }}</h1>
-                            </div>
+                    {% if clase.tipo == 'evaluacion' %}
+                    {% if clase.disponible %}
+                    <button class="evaluacion" onclick="solicitarPreguntas({{ clase.id }})">
+                        <h3>{{ clase.titulo }}</h3>
+                    </button>
+                    {% else %}
+                    <!-- <h1>{{ clase.titulo }}</h1> -->
+                    <button class="evaluacion-invalida ">
+                        <h3>No hay evaluaciones por el momento<i class='bx bx-lock-alt'></i>
+                        </h3>
+                    </button>
+                    {% endif %}
+                    {% else %}
+                    <div class="modulo-titulo">
+                        {% if clase.tipo == 'modulo' %}
+                        <h1>{{ clase.titulo }}</h1>
                         {% else %}
-                            <div class="clases">
-                                <div class="contenido-clases{% if not clase.disponible %}-invalida{% endif %}">
-                                    {% if clase.disponible %}
-                                        <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
-                                            <h3 class="nombre-clase">{{ clase.titulo }}</h3>
-                                        </a>
-                                    {% else %}
-                                        <h3 class="nombre-clase">{{ clase.titulo }}<i class='bx bx-lock-alt'></i></h3>
-                                    {% endif %}
-                                </div>
-                            </div>
+                    </div>
+                    <div class="clases">
+                        <div class="contenido-clases">
+                            {% if clase.disponible %}
+                            <a href="{% url 'ejecutar_clase' clase_id=clase.id %}">
+                                <h3 class="nombre-clase">
+                                    {{ clase.titulo }}
+                                </h3>
+                            </a>
+                            {% else %}
+                        </div>
+                        <div class="contenido-clases-invalida">
+                            <h3 class="nombre-clase">
+                                {{ clase.titulo }}<i class='bx bx-lock-alt'></i>
+                            </h3>
+                        </div>
                         {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>

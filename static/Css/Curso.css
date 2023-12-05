@@ -30,10 +30,11 @@ body {
 }
 
 .text {
+    height: 95.0vh;  /* 100% del alto de la ventana */
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 87vh;
+    justify-content: center;  /* Centra horizontalmente */
+    /* background-color: blue; */
 }
 #contenedor {
     background: #ecf0f3;

@@ -39,6 +39,7 @@ def Cursos_Usuarios(request):
 #Vista para listar modulos,clases y evaluaciones de un curso, asi como crear los registros de tabla Clase_Usuario
 def Modulos_Usuarios(request): 
     regUsuario=request.user
+    listafilas=[]
     if request.method == "POST":
         #Leer registro del Curso seleccionado
         pk_curso=request.POST['curso']
@@ -132,7 +133,11 @@ def Modulos_Usuarios(request):
             'icono_curso' : regCurso.iconoCurso.url, #Asumiendo que 'iconoCurso' es un campo de tipo ImageField
             'listaclases' : listafilas ,
         }
-        return render(request,'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+        return render(request, 'Templates_Usuarios/Cursos/Modulos_Usuarios.html', context)
+
+    
+        
+
         
 def ejecutar_clase(request, clase_id):
     #Mostrar el contenido de la clase

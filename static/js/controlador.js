@@ -12,7 +12,7 @@ function solicitarPreguntas(clase_id) {
 
 function mostrarPreguntas(data) {
     // Mostrar todas las preguntas de una en una
-    let html = '<div class="contenedor"><div class="card"><div class="header"><h1>'; 
+    let html = '<div class="contenedor "><div class="card"><div class="header"><h1>'; 
     html += 'Evaluación del Módulo ' +data.nombre + '</h1></div>';
     html += '<div class="body"><div class="content"><h2>Descripción</h2><p class="message">'; 
     html += data.descripcion + '</p></div>';
@@ -42,7 +42,7 @@ function mostrarPreguntaActual(data) {
     
     if (data && Array.isArray(data.listaPreguntas) && preguntaActual < data.listaPreguntas.length) {
         let pregunta = data.listaPreguntas[preguntaActual];
-        let html = '<div class="pregunta-card container-fluid"><div class="contenido-preguntas "><div class="pregunta-title"><h1>';
+        let html = '<div class="pregunta-card"><div class="contenido-preguntas  container-fluid "><div class="pregunta-title"><h1>';
         html += pregunta.nombre_pregunta + '</h1></div>';
         html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="a">';
         html += 'A. ' + pregunta.opcion_a + '</div></div>';
@@ -53,7 +53,7 @@ function mostrarPreguntaActual(data) {
         html += ' <div class="pregunta"><div class="opciones"><input type="radio" name="opcion" value="d">';
         html += 'D. ' + pregunta.opcion_d + '</div></div>';
         html += '<button class="button-next">Siguiente</button>';
-        html += '</div></div>'; // Cierre del div de pregunta
+        html += '</div></div></div></div></div></div>'; // Cierre del div de pregunta
 
         let contenedor = document.getElementsByClassName("text")[0];
         contenedor.innerHTML = html;
