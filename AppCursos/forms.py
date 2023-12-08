@@ -64,6 +64,7 @@ class ClasesForm(forms.ModelForm):
     class Meta:
         model = Clases
         fields = '__all__'
+        exclude = ['tipo']
         labels = {
             'nombre_clase': 'Nombre clase',
             'duracion_clase': 'Duración clase',

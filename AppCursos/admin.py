@@ -17,7 +17,7 @@ admin.site.register(Modulos,regModulos)
 
 # Se crea el modelo de la tabla Clases de la empresa
 class regClases(admin.ModelAdmin):
-     list_display=['id_modulo','nombre_clase','duracion_clase','contenido_clase','descripcion_clase', 'estado_clase', 'orden_clase']
+     list_display=['id_modulo','nombre_clase','duracion_clase','contenido_clase','descripcion_clase', 'estado_clase', 'orden_clase', 'tipo']
 
 admin.site.register(Clases,regClases)
 

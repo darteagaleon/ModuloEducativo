@@ -13,7 +13,7 @@ class Usuario_CargoAdmin(admin.ModelAdmin):
 admin.site.register(Usuario_Cargo, Usuario_CargoAdmin)
 
 class Clase_UsuarioAdmin(admin.ModelAdmin):
-     list_display=['id_usuario_cargo', 'id_modulo', 'id_clase', 'visto']
+     list_display=['id_usuario_cargo', 'id_modulo', 'id_clase', 'visto', 'tipo']
 admin.site.register(Clase_Usuario, Clase_UsuarioAdmin)
 
 
