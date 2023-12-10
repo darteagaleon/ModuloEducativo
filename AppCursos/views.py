@@ -211,6 +211,17 @@ def crear_clases(request):
         form = ClasesForm(request.POST)
         if form.is_valid():
             nueva_classe=form.save()
+            #Get id del modulo
+            modulo_id = form.cleaned_data['id_modulo'].id
+            #Verificar si existe registro tipo Evaluacion para este modulo
+            existe_evaluacion = Clases.objects.filter(id_modulo=modulo_id,tipo=False).exists()
+            #Si no existe, crearlo
+            if not existe_evaluacion:
+                nueva_evaluacion = Clases.objects.create(nombre_clase='Evaluacion',id_modulo_id=modulo_id,tipo=False)
+                print("-------------------------------------------------")
+                print(nueva_evaluacion)
+                nueva_evaluacion.save()
+                
             messages.success(request, 'Guardado con éxito')
 
             return redirect('ver_clases',clase_id=nueva_classe.id)

@@ -42,6 +42,7 @@ class Clases(models.Model):
      descripcion_clase = models.TextField(max_length=300)
      estado_clase= models.BooleanField(default=False)
      orden_clase = models.IntegerField(blank=True, null=True)
+     tipo=models.BooleanField(default=True)#Verdadero:Clase, Falso:Evaluacion
      #Se crea la relacion a modulos
      id_modulo= models.ForeignKey(Modulos, on_delete=models.CASCADE,null=False)
      def __str__(self):

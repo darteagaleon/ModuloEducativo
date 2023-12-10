@@ -65,8 +65,8 @@ def Modulos_Usuarios(request):
 
         #Consultar las clases del Curso
         #Listar los id de las clases del Curso
-        listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto')
-        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)
+        listaClasesUsuario=Clase_Usuario.objects.filter(id_usuario_cargo=regUsuarioCargo, id_modulo__in=listaModulos).values('id_clase', 'visto','tipo')
+        listaPkClases=listaClasesUsuario.values_list('id_clase' ,flat=True)#Convierte en una lista plana
         listaClases = Clases.objects.filter(id__in=listaPkClases).order_by('id_modulo', 'orden_clase')
         listafilas=[]
         #Recorrer la lista de clases para ensamblar el contexto
